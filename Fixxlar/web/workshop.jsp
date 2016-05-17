@@ -6,7 +6,7 @@
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="protectWorkshop.jsp"%>
+<%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,14 @@
         <title>Hello workshop</title>
     </head>
     <body>
-        <h1>Welcome <%=((User)session.getAttribute("loggedInUser")).getName()%></h1>
-        <a href="logout.jsp">Logout</a>
+        <h1>Welcome <%=((User) session.getAttribute("loggedInUser")).getName()%></h1>
+        <%
+            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
+            if (successChangePasswordMsg != null) {
+                out.println(successChangePasswordMsg + "<br/><br/>");
+            }
+        %>
+        <a href = "ChangePassword.jsp">Change Password</a><br/><br/>
+        <a href="Logout.jsp">Logout</a>
     </body>
 </html>

@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import util.ConnectionManager;
 
 public class UserDAO {
-    
+
     /**
-     * Retrieve user 
+     * Retrieve user
+     *
      * @param givenEmail email of the user
      * @return a user
      * @throws SQLException if an SQL error occurs
@@ -40,6 +41,22 @@ public class UserDAO {
         } finally {
             ConnectionManager.close(conn, pstmt, rs);
             return user;
+        }
+    }
+
+    public void updateUserPassword(String email, String passwordHash) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            pstmt = null;
+            pstmt = conn.prepareStatement("UPDATE user SET password = '"+ passwordHash +"' WHERE email = '" + email + "'");
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, pstmt);
         }
     }
 }

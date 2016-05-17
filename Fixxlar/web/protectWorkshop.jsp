@@ -13,10 +13,10 @@
     String userType = (String)session.getAttribute("loggedInUserType");
 
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("Login.jsp");
         return;
-    }  else if (user.getUserType().equals("admin")) {
-        response.sendRedirect("admin.jsp");
+    }  else if (user.getUserType().equals("Admin")) {
+        response.sendRedirect("Admin.jsp");
     }
 
 %>

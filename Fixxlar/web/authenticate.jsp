@@ -4,7 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
-<%@page import="entity.PasswordHash"%>
+<%@page import="entity.HashCode"%>
 <%@page import="entity.User"%>
 <%@page import="dao.UserDAO"%>
 <%
@@ -13,29 +13,30 @@
 
     UserDAO dao = new UserDAO();
     User user = dao.retrieveUser(email);
-    PasswordHash pwh = new PasswordHash();
+    HashCode hc = new HashCode();
     if (user != null) {
         String passwordHash = user.getPassword();
         //check password
-        if (pwh.check(passwordEntered,passwordHash)) {
+        
+        if (hc.check(passwordEntered,passwordHash)) {
             session.setAttribute("loggedInUser", user);
             String userType = user.getUserType();
             session.setAttribute("loggedInUserType", userType);
             if (userType.equals("admin")) {
-                response.sendRedirect("admin.jsp");
+                response.sendRedirect("Admin.jsp");
             } else {
-                response.sendRedirect("workshop.jsp");
+                response.sendRedirect("Workshop.jsp");
                 return;
             }
         } else {
             request.setAttribute("errMsg", "Invalid Email/Password");
-            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
             view.forward(request, response);
             return;
         }
     } else {
         request.setAttribute("errMsg", "Invalid Email/Password");
-        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
         view.forward(request, response);
         return;
     }

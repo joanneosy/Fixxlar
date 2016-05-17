@@ -12,10 +12,10 @@
     User user = (User) session.getAttribute("loggedInUser");
 
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("Login.jsp");
         return;
-    } else if (user.getUserType().equals("workshop")) {
-        response.sendRedirect("workshop.jsp");
+    } else if (user.getUserType().equals("Workshop")) {
+        response.sendRedirect("Workshop.jsp");
     }
 
 %>

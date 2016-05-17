@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="protectAdmin.jsp"%>
+<%@include file="ProtectAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +14,13 @@
     </head>
     <body>
         <h1>Admin</h1>
-        <a href="logout.jsp">Logout</a>
+        <%  
+            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
+            if (successChangePasswordMsg != null) {
+                out.println(successChangePasswordMsg + "<br/><br/>");
+            }
+        %>
+        <a href = "ChangePassword.jsp">Change Password</a><br/><br/>
+        <a href="Logout.jsp">Logout</a>
     </body>
 </html>

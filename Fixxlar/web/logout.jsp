@@ -8,5 +8,5 @@
 <!DOCTYPE html>
 <%
     session.invalidate();
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("Login.jsp");
 %>

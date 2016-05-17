@@ -13,17 +13,24 @@
     </head>
     <body>
         <h1>Hello</h1>
-        <form action = "authenticate.jsp" method= "post">
-            Email: <input type="text" name="email"/><br/>
-            Password: <input type="password" name="password"/><br/>
-            <input type="submit" value="Log In"/>
-        </form>
         
-         <%
+        <%
             String errMsg = (String) request.getAttribute("errMsg");
             if (errMsg != null) {
-                out.println(errMsg);
+                out.println(errMsg + "<br/><br/>");
+            }
+
+            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
+            if (successResetPasswordMsg != null) {
+                out.println(successResetPasswordMsg + "<br/><br/>");
             }
         %>
+        <a href = "ForgotPassword.jsp">Forgot Password</a><br/><br/>
+        <form action = "Authenticate.jsp" method= "post">
+            Email: <input type="email" name="email" required/><br/>
+            Password: <input type="password" name="password" required/><br/>
+            <input type="submit" value="Log In"/>
+        </form><br/>
+
     </body>
 </html>
