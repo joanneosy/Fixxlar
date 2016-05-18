@@ -60,7 +60,7 @@ public class ResetPasswordServlet extends HttpServlet {
             String hashCode = request.getQueryString().substring(9);
             ForgotPassword fp = new ForgotPassword();
             String email = fp.verifyHashCode(hashCode);
-
+            
             if (email != null) {
                 request.setAttribute("resetPasswordEmail", email);
                 RequestDispatcher view = request.getRequestDispatcher("ResetPassword.jsp");

@@ -46,21 +46,29 @@ public class ForgotPasswordServlet extends HttpServlet {
         String emailTo = request.getParameter("email");
         UserDAO uDao = new UserDAO();
         User user = uDao.retrieveUser(emailTo);
+        
+        //Check if the email exists in the database
         if (user != null) {
+            //Hash the email to generate hashCode for reset password link
             HashCode hc = new HashCode();
             String saltedHash = hc.getSaltedHash(emailTo);
             ForgotPassword fp = new ForgotPassword();
             fp.storeHashCode(emailTo, saltedHash);
-            //SEND EMAIL
+            
+            //Get URL
+            String url = request.getRequestURL().toString();
+            url = url.substring(0,url.lastIndexOf("/")+1);
+            
+            //Send email
             EmailDAO eDAO = new EmailDAO();
             Email email = new Email(emailTo, "fixxlar@gmail.com", "fixxlar123", "Reset Passord for Fixir",
                     "<h3>Reset Password</h3>\n"
                     + "Use the following link to reset your password! <br/>\n"
-                    + "<a href = \"http://localhost:8084/Fixxlar/ResetPassword?hashCode=" + saltedHash + "\">Reset your password</a><br/><br/>\n"
+                    + "<a href = \"" + url + "ResetPassword?hashCode=" + saltedHash + "\">Reset your password</a><br/><br/>\n"
                     + "If the link above does not work, click this: <br/>"
-                    + "http://localhost:8084/Fixxlar/ResetPassword?hashCode=" + saltedHash + "<br/><br/>"
+                    + url + "ResetPassword?hashCode=" + saltedHash + "<br/><br/>"
                     + "If you don’t use this link within 24 hours, it will expire. To get a new password reset link, "
-                    + "visit <a href = \"http://www.google.com\">here</a>\n" + "");
+                    + "visit <a href = \"" + url + "ForgotPassword.jsp\">here</a>\n" + "");
 
             eDAO.SendEmail(email);
             request.setAttribute("successResetPasswordMsg", "You will receive a password reset email soon.");

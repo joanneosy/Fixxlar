@@ -40,16 +40,17 @@ public class ForgotPassword {
             if (email != null) {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.MINUTE, 5);
                 String newTime = dateFormat.format(cal.getTime());
                 Timestamp now = Timestamp.valueOf(newTime);
                 if (now.after(expireDate)) {
-                    return null;
+                    email = null;
+                    return email;
                 } else {
                     return email;
                 }
             } else {
-                return null;
+                email = null;
+                return email;
             }
             
         } catch (Exception e) {
