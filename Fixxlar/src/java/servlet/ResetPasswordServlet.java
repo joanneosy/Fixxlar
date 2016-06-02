@@ -52,12 +52,13 @@ public class ResetPasswordServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+    // To handle the reset password link sent to the user
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             //getParameter decode the URL, and hence replaces + with a space
             //getQueryString return hashCode=.. and hence the need to substring to remove "hashCode"
-            String hashCode = request.getQueryString().substring(9);
+            String hashCode = request.getQueryString().substring(3);
             ForgotPassword fp = new ForgotPassword();
             String email = fp.verifyHashCode(hashCode);
             
@@ -84,6 +85,7 @@ public class ResetPasswordServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+    // To handle the request after user keys in new password
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

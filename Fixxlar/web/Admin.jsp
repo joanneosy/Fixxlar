@@ -21,6 +21,8 @@
             }
         %>
         <a href = "ChangePassword.jsp">Change Password</a><br/><br/>
+        
+        <a href = "AddWorkshop.jsp">Add Workshop</a><br/><br/>
         <a href="Logout.jsp">Logout</a>
     </body>
 </html>

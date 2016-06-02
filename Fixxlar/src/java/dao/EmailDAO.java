@@ -23,7 +23,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailDAO {
 
     // Get system properties
-    public void SendEmail(Email email) {
+    public void sendEmail(Email email) {
 
         Properties properties = System.getProperties();
         String emailFrom = email.getEmailFrom();

@@ -20,7 +20,7 @@
             Confirm New Password: <input type="password" name="confirmNewPassword" required/><br/>
             <input type="submit" value="Reset Password"/>
         </form><br/>
-
+        <a href="<%=(String)session.getAttribute("loggedInUserType")%>.jsp">Home</a>
         <%
             String errMsg = (String) request.getAttribute("errMsg");
             if (errMsg != null) {

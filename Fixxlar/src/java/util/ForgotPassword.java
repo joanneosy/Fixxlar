@@ -17,8 +17,8 @@ import java.util.Calendar;
 
 public class ForgotPassword {
     
-    //if hashCode is expired or does not exist in database, return null
-    //else return email
+    // if hashCode is expired or does not exist in database, return null
+    // else return email
     public String verifyHashCode(String givenHashCode) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -29,12 +29,12 @@ public class ForgotPassword {
             conn = ConnectionManager.getConnection();
             pstmt = null;
             rs = null;
-            pstmt = conn.prepareStatement("SELECT email, expireDate FROM `pwHashCode` WHERE hashCode =\"" + givenHashCode + "\"");
+            pstmt = conn.prepareStatement("SELECT Email, ExpireDate FROM `PwHashCode` WHERE HashCode =\"" + givenHashCode + "\"");
             System.out.println("pstmt: " + pstmt);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                email = rs.getString("email");
-                expireDate = rs.getTimestamp("expireDate");
+                email = rs.getString("Email");
+                expireDate = rs.getTimestamp("ExpireDate");
             }
             
             if (email != null) {
@@ -65,13 +65,15 @@ public class ForgotPassword {
         
         Connection connection = ConnectionManager.getConnection();
         PreparedStatement pStatement = null;
-        pStatement = connection.prepareStatement("INSERT INTO pwHashCode VALUES (?,?,?)");
+        pStatement = connection.prepareStatement("INSERT INTO PwHashCode VALUES (?,?,?)");
 
         try {
             pStatement.setString(1, hashCode);
             pStatement.setString(2, givenEmail);
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
+            
+            // hashCode expires after 24 hours
             cal.add(Calendar.HOUR, 24);
             String newTime = dateFormat.format(cal.getTime());
             Timestamp ts = Timestamp.valueOf(newTime);

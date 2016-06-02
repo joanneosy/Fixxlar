@@ -25,14 +25,15 @@ public class UserDAO {
             conn = ConnectionManager.getConnection();
             pstmt = null;
             rs = null;
-            pstmt = conn.prepareStatement("SELECT * FROM `user` WHERE email =\"" + givenEmail + "\"");
+            pstmt = conn.prepareStatement("SELECT * FROM `User` WHERE Email =\"" + givenEmail + "\"");
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                String email = rs.getString("email");
-                String name = rs.getString("name");
-                String password = rs.getString("password");
-                String userType = rs.getString("userType");
-                user = new User(email, name, password, userType);
+                int id = rs.getInt("UserID");
+                String email = rs.getString("Email");
+                String name = rs.getString("Name");
+                String password = rs.getString("Password");
+                String userType = rs.getString("UserType");
+                user = new User(id, email, name, password, userType);
             }
             //Return null if email does not exist in database
             return user;
@@ -44,6 +45,7 @@ public class UserDAO {
         }
     }
 
+    // Update user's password with the new pasword hash 
     public void updateUserPassword(String email, String passwordHash) {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -51,7 +53,7 @@ public class UserDAO {
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
-            pstmt = conn.prepareStatement("UPDATE user SET password = '"+ passwordHash +"' WHERE email = '" + email + "'");
+            pstmt = conn.prepareStatement("UPDATE User SET Password = '"+ passwordHash +"' WHERE Email = '" + email + "'");
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,4 +61,21 @@ public class UserDAO {
             ConnectionManager.close(conn, pstmt);
         }
     }
+    
+    public void addUser(String email, String name, String password, String userType) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            pstmt = null;
+            pstmt = conn.prepareStatement("INSERT INTO User VALUES (NULL,'" + email + "','" + password + "','" + name + "','" + userType + "');");
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, pstmt);
+        }
+    }
+    
 }

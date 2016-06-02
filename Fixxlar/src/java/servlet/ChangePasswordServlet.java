@@ -49,6 +49,9 @@ public class ChangePasswordServlet extends HttpServlet {
         String email = user.getEmail();
         String passwordStored = user.getPassword();
         HashCode hc = new HashCode();
+        
+        // Check if the old password matches the password stored in the database
+        // and if the new passwords match
         if (hc.check(oldPassword, passwordStored) && newPassword.equals(confirmPassword)) {
             try {
                 UserDAO uDAO = new UserDAO();

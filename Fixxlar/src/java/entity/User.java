@@ -10,6 +10,7 @@ package entity;
  * @author joanne.ong.2014
  */
 public class User {
+    private int id;
     private String email;
     private String name;
     private String password;
@@ -23,7 +24,8 @@ public class User {
      * @param password the password hash of the user
      * @param userType the type of user - admin/workshop
      */
-    public User(String email, String name, String password, String userType) {
+    public User(int id, String email, String name, String password, String userType) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
@@ -31,6 +33,15 @@ public class User {
     }
 
     //getter methods
+        /**
+     * Returns the email.
+     *
+     * @return the email
+     */
+    public int getId() {
+        return id;
+    }
+    
     /**
      * Returns the email.
      *
