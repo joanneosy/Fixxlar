@@ -43,10 +43,15 @@ public class ForgotPasswordServlet extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
 
+        String back = request.getParameter("back");
+        if (back != null) {
+            response.sendRedirect("Login.jsp");
+            return;
+        }
         String emailTo = request.getParameter("email");
         UserDAO uDao = new UserDAO();
         User user = uDao.retrieveUser(emailTo);
-        
+
         //Check if the email exists in the database
         if (user != null) {
             //Hash the email to generate hashCode for reset password link
@@ -54,11 +59,11 @@ public class ForgotPasswordServlet extends HttpServlet {
             String saltedHash = hc.getSaltedHash(emailTo);
             ForgotPassword fp = new ForgotPassword();
             fp.storeHashCode(emailTo, saltedHash);
-            
+
             //Get URL
             String url = request.getRequestURL().toString();
-            url = url.substring(0,url.lastIndexOf("/")+1);
-            
+            url = url.substring(0, url.lastIndexOf("/") + 1);
+
             //Send email
             EmailDAO eDAO = new EmailDAO();
             Email email = new Email(emailTo, "fixxlar@gmail.com", "fixxlar123", "Reset Passord for Fixir",
