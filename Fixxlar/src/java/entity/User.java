@@ -12,7 +12,6 @@ package entity;
 public class User {
     private int id;
     private String email;
-    private String name;
     private String password;
     private String userType;
 
@@ -24,10 +23,9 @@ public class User {
      * @param password the password hash of the user
      * @param userType the type of user - admin/workshop
      */
-    public User(int id, String email, String name, String password, String userType) {
+    public User(int id, String email, String password, String userType) {
         this.id = id;
         this.email = email;
-        this.name = name;
         this.password = password;
         this.userType = userType;
     }
@@ -50,15 +48,7 @@ public class User {
     public String getEmail() {
         return email;
     }
-    
-    /**
-     * Returns the name.
-     *
-     * @return the name of the user
-     */
-    public String getName() {
-        return name;
-    }
+   
 
     /**
      * Returns the password.

@@ -14,7 +14,7 @@
         <title>Hello workshop</title>
     </head>
     <body>
-        <h1>Welcome <%=((User) session.getAttribute("loggedInUser")).getName()%></h1>
+        <h1>Welcome</h1>
         <%
             String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
             if (successChangePasswordMsg != null) {

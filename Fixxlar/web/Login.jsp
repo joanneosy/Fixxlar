@@ -52,7 +52,7 @@
         </form><br/>-->
        
 
-            <form id="form-signin" class="form-signin" action = "Authenticate.jsp" method= "post">
+            <form id="form-signin" class="form-signin" action = "Authenticate" method= "post">
               <section>
                 <div class="input-group">
                   <input type="email" class="form-control" name="email" placeholder="abc@email.com">

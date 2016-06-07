@@ -29,7 +29,7 @@ public class ForgotPassword {
             conn = ConnectionManager.getConnection();
             pstmt = null;
             rs = null;
-            pstmt = conn.prepareStatement("SELECT Email, ExpireDate FROM `PwHashCode` WHERE HashCode =\"" + givenHashCode + "\"");
+            pstmt = conn.prepareStatement("SELECT Email, ExpireDate FROM `pw_hashcode` WHERE hashCode =\"" + givenHashCode + "\"");
             System.out.println("pstmt: " + pstmt);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -65,7 +65,7 @@ public class ForgotPassword {
         
         Connection connection = ConnectionManager.getConnection();
         PreparedStatement pStatement = null;
-        pStatement = connection.prepareStatement("INSERT INTO PwHashCode VALUES (?,?,?)");
+        pStatement = connection.prepareStatement("INSERT INTO pw_hashcode VALUES (?,?,?)");
 
         try {
             pStatement.setString(1, hashCode);

@@ -8,7 +8,6 @@ package servlet;
 import dao.UserDAO;
 import dao.WorkshopDAO;
 import entity.HashCode;
-import entity.User;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Joanne
  */
-@WebServlet(name = "AddWorkshop", urlPatterns = {"/AddWorkshop"})
-public class AddWorkshopServlet extends HttpServlet {
+@WebServlet(name = "EditWorkshopServlet", urlPatterns = {"/EditWorkshop"})
+public class EditWorkshopServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,12 +40,10 @@ public class AddWorkshopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-
+        int userID = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
         String[] carBrandsArr = request.getParameterValues("carBrands");
         String description = request.getParameter("description");
         String website = request.getParameter("website");
@@ -60,6 +57,11 @@ public class AddWorkshopServlet extends HttpServlet {
         String specialize = request.getParameter("specialize");
         String category = request.getParameter("category");
         String remark = request.getParameter("remark");
+        String isActiveStr = request.getParameter("isActive");
+        byte isActive = 1;
+        if (isActiveStr == null) {
+            isActive = 0;
+        }
         String carBrands = "";
 
         ArrayList<String> errMsg = new ArrayList<String>();
@@ -68,19 +70,11 @@ public class AddWorkshopServlet extends HttpServlet {
             errMsg.add("No car brands selected.");
         } else {
             carBrands = carBrandsArr[0];
-            for (int i = 1; i < carBrandsArr.length; i++) {
+            for (int i=1; i<carBrandsArr.length; i++) {
                 carBrands += "," + carBrandsArr[i];
             }
         }
 
-        if (!password.equals(confirmPassword)) {
-            errMsg.add("Passwords do not match.");
-        } else {
-            HashCode hc = new HashCode();
-            password = hc.getSaltedHash(password);
-        }
-
-        UserDAO uDAO = new UserDAO();
         WorkshopDAO wDAO = new WorkshopDAO();
         String[] latLong = wDAO.getLatLong(address);
         if (latLong == null) {
@@ -90,27 +84,20 @@ public class AddWorkshopServlet extends HttpServlet {
             longitude = Double.parseDouble(latLong[1]);
         }
 
-        if (uDAO.retrieveUser(email) != null) {
-            errMsg.add("User exists.");
-        }
-
         if (errMsg.size() == 0) {
-            wDAO.addWorkshop(email, name, description, website, address, openingHour, openingHourFormat,
-                    latitude, longitude, contact, contact2, location, specialize, category, carBrands, remark);
-            Workshop ws = wDAO.retrieveWorkshop(email);
-            int userID = ws.getId();
-            uDAO.addUser(userID, email, password, "Workshop");
-            request.setAttribute("successMsg", "Workshop successfully added!");
-            RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
+            wDAO.updateWorkshop(userID, email, name, description, website, address, openingHour, openingHourFormat, latitude,
+            longitude, contact, contact2, location, specialize, category, carBrands, remark, isActive); 
+            request.setAttribute("successMsg", "Workshop successfully edited!");
+            RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
             view.forward(request, response);
         } else {
             request.setAttribute("errMsg", errMsg);
-            RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + userID);
             view.forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -124,10 +111,8 @@ public class AddWorkshopServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-
         } catch (Exception ex) {
-            Logger.getLogger(AddWorkshopServlet.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditWorkshopServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -144,10 +129,8 @@ public class AddWorkshopServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-
         } catch (Exception ex) {
-            Logger.getLogger(AddWorkshopServlet.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditWorkshopServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

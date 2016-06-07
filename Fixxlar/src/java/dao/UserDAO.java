@@ -25,15 +25,14 @@ public class UserDAO {
             conn = ConnectionManager.getConnection();
             pstmt = null;
             rs = null;
-            pstmt = conn.prepareStatement("SELECT * FROM `User` WHERE Email =\"" + givenEmail + "\"");
+            pstmt = conn.prepareStatement("SELECT * FROM `webapp_users` WHERE email =\"" + givenEmail + "\"");
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("UserID");
-                String email = rs.getString("Email");
-                String name = rs.getString("Name");
-                String password = rs.getString("Password");
-                String userType = rs.getString("UserType");
-                user = new User(id, email, name, password, userType);
+                int id = rs.getInt("id");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String userType = rs.getString("userType");
+                user = new User(id, email, password, userType);
             }
             //Return null if email does not exist in database
             return user;
@@ -53,7 +52,7 @@ public class UserDAO {
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
-            pstmt = conn.prepareStatement("UPDATE User SET Password = '"+ passwordHash +"' WHERE Email = '" + email + "'");
+            pstmt = conn.prepareStatement("UPDATE pw_hashcode SET password = '"+ passwordHash +"' WHERE email = '" + email + "'");
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,14 +61,14 @@ public class UserDAO {
         }
     }
     
-    public void addUser(String email, String name, String password, String userType) {
+    public void addUser(int id, String email, String password, String userType) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
-            pstmt = conn.prepareStatement("INSERT INTO User VALUES (NULL,'" + email + "','" + password + "','" + name + "','" + userType + "');");
+            pstmt = conn.prepareStatement("INSERT INTO webapp_users VALUES (" + id + ",'" + email + "','" + password + "','" + userType + "');");
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
