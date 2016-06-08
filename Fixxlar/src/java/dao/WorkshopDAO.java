@@ -131,7 +131,7 @@ public class WorkshopDAO {
             pstmt = null;
             pstmt = conn.prepareStatement("INSERT INTO shops VALUES (NULL,'" + email + "','" + name + "','" + description + "','" + website + "','"
                     + address + "','" + openingHour + "','" + openingHourFormat + "','" + latitude + "','" + longitude + "','" + contact + "','"
-                    + contact2 + "','" + location + "','" + specialize + "','" + category + "','" + carBrands + "','" + remark + "');");
+                    + contact2 + "','" + location + "','" + specialize + "','" + category + "','" + carBrands + "','" + remark + "'," + 1 + ");");
             pstmt.executeUpdate();
 
         } catch (Exception e) {
@@ -141,18 +141,27 @@ public class WorkshopDAO {
         }
     }
 
-    public ArrayList<Workshop> retrieveAllWorkshops() {
+    public ArrayList<Workshop> retrieveAllWorkshops(String orderBy, String givenIsActive) {
         ArrayList<Workshop> allWorkshops = new ArrayList<Workshop>();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         PreparedStatement pstmt2 = null;
         ResultSet rs2 = null;
+        String stmt = "SELECT * FROM shops";
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
             rs = null;
-            pstmt = conn.prepareStatement("SELECT * FROM shops");
+            
+            if (!givenIsActive.equals("")) {
+                stmt += " where is_active = " + givenIsActive;
+            }
+            if (!orderBy.equals("")) {
+                stmt += " order by " + orderBy; 
+            }
+            
+            pstmt = conn.prepareStatement(stmt);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 int userID = rs.getInt("id");
@@ -222,8 +231,14 @@ public class WorkshopDAO {
             pstmt = conn.prepareStatement("SELECT * FROM car_brands");
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                String brandName = rs.getString("name");
-                carBrands.add(brandName);
+                String name = rs.getString("name");
+                String model = rs.getString("model");
+                int year = rs.getInt("year");
+                if (year == 0) {
+                    carBrands.add(name + " " + model);
+                } else {
+                    carBrands.add(name + " " + model + " " + year);
+                }
             }
 
         } catch (Exception e) {
