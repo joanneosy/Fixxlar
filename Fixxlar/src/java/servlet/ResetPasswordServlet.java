@@ -5,8 +5,8 @@
  */
 package servlet;
 
+import util.HashCode;
 import dao.UserDAO;
-import entity.HashCode;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -60,7 +60,7 @@ public class ResetPasswordServlet extends HttpServlet {
             //getQueryString return hashCode=.. and hence the need to substring to remove "hashCode"
             String hashCode = request.getQueryString().substring(3);
             ForgotPassword fp = new ForgotPassword();
-            String email = fp.verifyHashCode(hashCode);
+            String email = fp.verifyPwHashCode(hashCode);
             
             if (email != null) {
                 request.setAttribute("resetPasswordEmail", email);
@@ -96,7 +96,7 @@ public class ResetPasswordServlet extends HttpServlet {
             try {
                 UserDAO uDAO = new UserDAO();
                 HashCode hc = new HashCode();
-                password = hc.getSaltedHash(password);
+                password = hc.generateSaltedHash(password);
                 uDAO.updateUserPassword(email, password);
                 request.setAttribute("successResetPasswordMsg", "Log in with your new password!");
                 RequestDispatcher view = request.getRequestDispatcher("Login.jsp");

@@ -7,7 +7,6 @@ package servlet;
 
 import dao.UserDAO;
 import dao.WorkshopDAO;
-import entity.HashCode;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,7 +75,7 @@ public class EditWorkshopServlet extends HttpServlet {
         }
 
         WorkshopDAO wDAO = new WorkshopDAO();
-        String[] latLong = wDAO.getLatLong(address);
+        String[] latLong = wDAO.retrieveLatLong(address);
         if (latLong == null) {
             errMsg.add("Invalid address.");
         } else {

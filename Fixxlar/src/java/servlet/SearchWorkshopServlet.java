@@ -5,28 +5,30 @@
  */
 package servlet;
 
-import util.HashCode;
-import dao.UserDAO;
-import entity.User;
+import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.FSDirectory;
+import util.Search;
+import static util.Search.INDEX_DIRECTORY;
 
 /**
  *
  * @author Joanne
  */
-@WebServlet(name = "AuthenticateServlet", urlPatterns = {"/Authenticate"})
-public class AuthenticateServlet extends HttpServlet {
+@WebServlet(name = "SearchWorkshopServlet", urlPatterns = {"/SearchWorkshop"})
+public class SearchWorkshopServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,41 +40,28 @@ public class AuthenticateServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-        String email = request.getParameter("email");
-        String passwordEntered = request.getParameter("password");
 
-        UserDAO dao = new UserDAO();
-        User user = dao.retrieveUser(email);
-        HashCode hc = new HashCode();
-        if (user != null) {
-            String passwordHash = user.getPassword();
-            //check password
-
-            if (hc.check(passwordEntered, passwordHash)) {
-                session.setAttribute("loggedInUser", user);
-                String userType = user.getUserType();
-                session.setAttribute("loggedInUserType", userType);
-                if (userType.equals("admin")) {
-                    response.sendRedirect("Admin.jsp");
-                } else {
-                    response.sendRedirect("Workshop.jsp");
-                    return;
-                }
-            } else {
-                request.setAttribute("errMsg", "Invalid Email/Password");
-                RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
-                view.forward(request, response);
-                return;
-            }
-        } else {
-            request.setAttribute("errMsg", "Invalid Email/Password");
-            RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
-            view.forward(request, response);
-            return;
+        String keyword = request.getParameter("search");
+        Search search = new Search();
+        int noOfColumns = search.createIndex("shops");
+        TopDocs hits = search.search(keyword+"*", noOfColumns);
+        IndexReader reader = IndexReader.open(FSDirectory.open(INDEX_DIRECTORY), true);
+        IndexSearcher searcher = new IndexSearcher(reader);
+        ArrayList<Workshop> workshops = new ArrayList<Workshop>();
+        for (int i = 0; i < hits.totalHits; i++) {
+            Document doc = searcher.doc(hits.scoreDocs[i].doc);//get the next  document
+            System.out.println(doc.get("1") + " " + doc.get("2") + " " + doc.get("3"));
+            Workshop ws = new Workshop(Integer.parseInt(doc.get("1")), doc.get("2"), doc.get("3"), doc.get("4"), doc.get("5"), doc.get("6"), doc.get("7"),
+                    doc.get("8"), Double.parseDouble(doc.get("9")), Double.parseDouble(doc.get("10")), doc.get("11"), doc.get("12"), doc.get("13"), doc.get("14"), doc.get("15"), doc.get("16"),
+                    doc.get("17"), Byte.parseByte(doc.get("18")));
+            workshops.add(ws);
         }
+
+        request.setAttribute("workshops", workshops);
+        RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,11 +76,7 @@ public class AuthenticateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(AuthenticateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -105,11 +90,7 @@ public class AuthenticateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(AuthenticateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

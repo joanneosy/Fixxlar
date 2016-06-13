@@ -5,8 +5,8 @@
  */
 package servlet;
 
+import util.HashCode;
 import dao.UserDAO;
-import entity.HashCode;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,7 +55,7 @@ public class ChangePasswordServlet extends HttpServlet {
         if (hc.check(oldPassword, passwordStored) && newPassword.equals(confirmPassword)) {
             try {
                 UserDAO uDAO = new UserDAO();
-                newPassword = hc.getSaltedHash(newPassword);
+                newPassword = hc.generateSaltedHash(newPassword);
                 uDAO.updateUserPassword(email, newPassword);
                 request.setAttribute("successChangePasswordMsg", "Your password has been changed!");
                 String redirectTo = user.getUserType() + ".jsp";

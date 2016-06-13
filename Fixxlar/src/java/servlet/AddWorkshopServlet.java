@@ -5,9 +5,9 @@
  */
 package servlet;
 
+import util.HashCode;
 import dao.UserDAO;
 import dao.WorkshopDAO;
-import entity.HashCode;
 import entity.User;
 import entity.Workshop;
 import java.io.IOException;
@@ -77,12 +77,12 @@ public class AddWorkshopServlet extends HttpServlet {
             errMsg.add("Passwords do not match.");
         } else {
             HashCode hc = new HashCode();
-            password = hc.getSaltedHash(password);
+            password = hc.generateSaltedHash(password);
         }
 
         UserDAO uDAO = new UserDAO();
         WorkshopDAO wDAO = new WorkshopDAO();
-        String[] latLong = wDAO.getLatLong(address);
+        String[] latLong = wDAO.retrieveLatLong(address);
         if (latLong == null) {
             errMsg.add("Invalid address.");
         } else {

@@ -19,7 +19,7 @@ public class ForgotPassword {
     
     // if hashCode is expired or does not exist in database, return null
     // else return email
-    public String verifyHashCode(String givenHashCode) throws SQLException {
+    public String verifyPwHashCode(String givenHashCode) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -61,7 +61,7 @@ public class ForgotPassword {
         }
     }
     
-    public void storeHashCode(String givenEmail, String hashCode) throws SQLException {
+    public void storePwHashCode(String givenEmail, String hashCode) throws SQLException {
         
         Connection connection = ConnectionManager.getConnection();
         PreparedStatement pStatement = null;

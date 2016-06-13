@@ -252,7 +252,7 @@ public class WorkshopDAO {
     //Convert address to latitude and longitude 
     //Latitude = String[0]
     //Longitude = String[1]
-    public String[] getLatLong(String address) throws Exception {
+    public String[] retrieveLatLong(String address) throws Exception {
         int responseCode = 0;
         String api = "http://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=true";
         URL url = new URL(api);

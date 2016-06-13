@@ -39,7 +39,12 @@
             </select>   
             <input type="submit" value="Go!">
         </form>
-
+        
+        <form action="SearchWorkshop" method="post">
+            Search:
+            <input type="text" name="search"/>
+            <input type="submit" value="Go!">
+        </form>
         
 
             <%

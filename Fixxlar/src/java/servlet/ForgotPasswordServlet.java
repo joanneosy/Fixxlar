@@ -5,10 +5,10 @@
  */
 package servlet;
 
+import util.HashCode;
 import dao.EmailDAO;
 import dao.UserDAO;
 import entity.Email;
-import entity.HashCode;
 import entity.User;
 import is203.JWTUtility;
 import java.io.IOException;
@@ -56,9 +56,9 @@ public class ForgotPasswordServlet extends HttpServlet {
         if (user != null) {
             //Hash the email to generate hashCode for reset password link
             HashCode hc = new HashCode();
-            String saltedHash = hc.getSaltedHash(emailTo);
+            String saltedHash = hc.generateSaltedHash(emailTo);
             ForgotPassword fp = new ForgotPassword();
-            fp.storeHashCode(emailTo, saltedHash);
+            fp.storePwHashCode(emailTo, saltedHash);
 
             //Get URL
             String url = request.getRequestURL().toString();
@@ -66,7 +66,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 
             //Send email
             EmailDAO eDAO = new EmailDAO();
-            Email email = new Email(emailTo, "fixxlar@gmail.com", "fixxlar123", "Reset Passord for Fixir",
+            Email email = new Email(emailTo, "fixxlar@gmail.com", "fixxlarfyp", "Reset Passord for Fixir",
                     "<h3>Reset Password</h3>\n"
                     + "Use the following link to reset your password! <br/>\n"
                     + "<a href = \"" + url + "ResetPassword?hc=" + saltedHash + "\">Reset your password</a><br/><br/>\n"

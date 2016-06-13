@@ -1,4 +1,4 @@
-package entity;
+package util;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -18,7 +18,7 @@ public class HashCode {
     // Computes a salted PBKDF2 hash of given plaintext
     // suitable for storing in a database. 
     // Empty are not supported. 
-    public String getSaltedHash(String toHash) throws Exception {
+    public String generateSaltedHash(String toHash) throws Exception {
         byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
         // store the salt with the password
         return Base64.encodeBase64String(salt) + "$" + hash(toHash, salt);
@@ -48,17 +48,5 @@ public class HashCode {
         return Base64.encodeBase64String(key.getEncoded());
     }
     
-    /*public static void main(String[] args) throws Exception{
-        String stored = getSaltedHash("abc123");
-        System.out.println("Password: " + stored);
-        System.out.println("Check: " + check("abc123", stored));
-        
-        String stored2 = getSaltedHash("fixxlar123");
-        System.out.println("Password: " + stored2);
-        System.out.println("Check: " + check("fixxlar123", stored2));
-        
-        String stored3 = getSaltedHash("jojo123");
-        System.out.println("Password: " + stored3);
-        System.out.println("Check: " + check("jojo123", stored3));
-    }*/
+
 }
