@@ -39,14 +39,28 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        
         HttpSession session = request.getSession(true);
+        
+        String home = request.getParameter("home");
+        if (home != null) {
+//        if (request.getParameter("home") != null) {
+            String homePage = (String)session.getAttribute("loggedInUserType") + ".jsp";
+            response.sendRedirect(homePage);
+//            response.sendRedirect("Login.jsp");
+            return;
+        }
         
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmNewPassword");
         User user = (User)session.getAttribute("loggedInUser");
         String email = user.getEmail();
+        if (oldPassword.equals("") || newPassword.equals("") || confirmPassword.equals("")) {
+            request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
+            request.setAttribute("email", email);
+            RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
+            view.forward(request, response);
+        }
         String passwordStored = user.getPassword();
         HashCode hc = new HashCode();
         
