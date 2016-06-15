@@ -26,9 +26,9 @@ public class EmailDAO {
     public void sendEmail(Email email) {
 
         Properties properties = System.getProperties();
-        String emailFrom = email.getEmailFrom();
+        final String emailFrom = email.getEmailFrom();
         String emailTo = email.getEmailTo();
-        String password = email.getPassword();
+        final String password = email.getPassword();
         String subject = email.getSubject();
         String content = email.getContent();
 

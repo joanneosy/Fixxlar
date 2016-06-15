@@ -52,7 +52,7 @@ public class UserDAO {
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
-            pstmt = conn.prepareStatement("UPDATE pw_hashcode SET password = '"+ passwordHash +"' WHERE email = '" + email + "'");
+            pstmt = conn.prepareStatement("UPDATE webapp_users SET password = '"+ passwordHash +"' WHERE email = '" + email + "'");
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
