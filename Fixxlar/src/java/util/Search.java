@@ -42,7 +42,7 @@ public class Search {
         int noOfColumns = -1;
         try {
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT count(*) AS NoOfColumns FROM information_schema.`COLUMNS` C WHERE table_name = '" + tableName + "'");
+            pstmt = conn.prepareStatement("SELECT count(*) AS NoOfColumns FROM information_schema.`COLUMNS` C WHERE table_schema = 'fyp' and table_name = '" + tableName + "'");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 noOfColumns = rs.getInt("NoOfColumns");
@@ -105,7 +105,7 @@ public class Search {
         return null;
     }
 
-    public static void main(String[] args) throws SQLException, IOException {
+    /*public static void main(String[] args) throws SQLException, IOException {
 
         Search obj = new Search();
 
@@ -126,5 +126,5 @@ public class Search {
         //using logical operator
         //obj.search("def OR abc", no);
         //obj.search("AbC AND bukit", no);
-    }
+    }*/
 }

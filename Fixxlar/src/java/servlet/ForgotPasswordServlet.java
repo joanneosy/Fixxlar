@@ -43,11 +43,6 @@ public class ForgotPasswordServlet extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
 
-        String back = request.getParameter("back");
-        if (back != null) {
-            response.sendRedirect("Login.jsp");
-            return;
-        }
         String emailTo = request.getParameter("email");
         UserDAO uDao = new UserDAO();
         User user = uDao.retrieveUser(emailTo);

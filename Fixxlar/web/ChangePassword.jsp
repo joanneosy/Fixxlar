@@ -6,6 +6,8 @@
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="ProtectUsers.jsp"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -64,7 +66,7 @@
                                 </div>
                             </section>
                             <section class="log-in">
-                                <input type="submit" class="btn btn-greensea" name="home" value="Home"/>
+                                <a href="<%=(String)session.getAttribute("loggedInUserType") + ".jsp"%>" class="btn btn-greensea">Home</a>
                                 <input type="submit" class="btn btn-greensea" value="Reset Password"/>
                             </section>
                         </form>

@@ -48,11 +48,11 @@ public class UserDAO {
     public void updateUserPassword(String email, String passwordHash) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        
+
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
-            pstmt = conn.prepareStatement("UPDATE webapp_users SET password = '"+ passwordHash +"' WHERE email = '" + email + "'");
+            pstmt = conn.prepareStatement("UPDATE webapp_users SET password = '" + passwordHash + "' WHERE email = '" + email + "'");
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,11 +60,11 @@ public class UserDAO {
             ConnectionManager.close(conn, pstmt);
         }
     }
-    
+
     public void addUser(int id, String email, String password, String userType) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        
+
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
@@ -76,5 +76,5 @@ public class UserDAO {
             ConnectionManager.close(conn, pstmt);
         }
     }
-    
+
 }

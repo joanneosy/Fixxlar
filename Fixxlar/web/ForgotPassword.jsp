@@ -21,50 +21,50 @@
         <title>Forgot Password</title>
     </head>    
     <body class="bg-1">
-    <!-- Wrap all page content here -->
-    <div id="wrap">
-      <!-- Make page fluid -->
-      <div class="row">
-        <!-- Page content -->
-        <div id="content" class="col-md-12 full-page login">
-          <div class="inside-block">
-            <img src="images/Logo.png" alt class="logo">
-            <h1>Reset Password</h1>
+        <!-- Wrap all page content here -->
+        <div id="wrap">
+            <!-- Make page fluid -->
+            <div class="row">
+                <!-- Page content -->
+                <div id="content" class="col-md-12 full-page login">
+                    <div class="inside-block">
+                        <img src="images/Logo.png" alt class="logo">
+                        <h1>Reset Password</h1>
 
-        <%
-            String errMsg = (String) request.getAttribute("errMsg");
-            if (errMsg != null) {
-                out.println(errMsg);
-            }
-        %>
-        <!--<a href = "ForgotPassword.jsp">Forgot Password</a><br/><br/>
-        <form action = "Authenticate.jsp" method= "post">
-            Email: <input type="email" name="email" required/><br/>
-            Password: <input type="password" name="password" required/><br/>
-            <input type="submit" value="Log In"/>
-        </form><br/>-->
-       
+                        <%
+                            String errMsg = (String) request.getAttribute("errMsg");
+                            if (errMsg != null) {
+                                out.println(errMsg);
+                            }
+                        %>
+                        <!--<a href = "ForgotPassword.jsp">Forgot Password</a><br/><br/>
+                        <form action = "Authenticate.jsp" method= "post">
+                            Email: <input type="email" name="email" required/><br/>
+                            Password: <input type="password" name="password" required/><br/>
+                            <input type="submit" value="Log In"/>
+                        </form><br/>-->
 
-            <form id="form-signin" class="form-signin" action = "ForgotPassword" method= "post">
-              <section>
-                <div class="input-group">
-                  <input type="email" class="form-control" name="email" placeholder="email@domain.com">
-                  <div class="input-group-addon"><i class="fa fa-user"></i></div>
+
+                        <form id="form-signin" class="form-signin" action = "ForgotPassword" method= "post">
+                            <section>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" name="email" placeholder="email@domain.com">
+                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                </div>
+                            </section>
+                            <section class="log-in">
+                                <a href="Login.jsp" class="btn btn-greensea">Back</a>
+                                <input type="submit" class="btn btn-greensea" value="Reset Password"/>
+                            </section>
+                        </form>
+                    </div>
                 </div>
-              </section>
-              <section class="log-in">
-                <input type="submit" class="btn btn-greensea" name="back" value="Back"/>
-                <input type="submit" class="btn btn-greensea" value="Reset Password"/>
-              </section>
-            </form>
-          </div>
+                <!-- /Page content -->  
+            </div>
         </div>
-        <!-- /Page content -->  
-      </div>
-    </div>
-    <!-- Wrap all page content end -->
-  </body>
-    
-    
-    
+        <!-- Wrap all page content end -->
+    </body>
+
+
+
 </html>
