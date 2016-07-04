@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <%
     // check if user is authenticated
+    /*
     User user = (User) session.getAttribute("loggedInUser");
     String userType = (String)session.getAttribute("loggedInUserType");
 
@@ -18,6 +19,7 @@
     }  else if (user.getUserType().equals("Admin")) {
         response.sendRedirect("Admin.jsp");
     }
+            */
 
 %>
 

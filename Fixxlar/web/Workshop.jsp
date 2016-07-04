@@ -54,25 +54,12 @@
                 <jsp:include page="include/topbar.jsp"/>
                 <!-- Top and leftbar end -->
 
-
-
-
-
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
 
-
-
-
-
-
-
-
-
                     <!-- page header -->
                     <div class="pageheader">
-
-
+                        
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Dashboard <span>// overview </span></h2>
 
 
@@ -88,18 +75,9 @@
 
                     </div>
                     <!-- /page header -->
-
-
-
-
-
-
+                    
                     <!-- content main container -->
                     <div class="main">
-
-
-
-
                         <!-- row -->
                         <div class="row">
 
@@ -134,23 +112,10 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                <small>New Request</small>
-                                                                <h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">0</h2>
+                                                                New Requests
+                                                                <h2 class="media-heading animate-number" data-value="7" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
-
-                                                        <div class="progress-list">
-                                                            <div class="details">
-                                                                <div class="title">This month plan %</div>
-                                                            </div>
-                                                            <div class="status pull-right bg-transparent-black-1">
-                                                                <span class="animate-number" data-value="83" data-animation-duration="1500">0</span>%
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                            <div class="progress progress-little progress-transparent-black">
-                                                                <div class="progress-bar animate-progress-bar" data-percentage="83%"></div>
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                     <div class="back">
@@ -173,23 +138,10 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                <small>Ongoing Request</small>
-                                                                <h2 class="media-heading animate-number" data-value="19214" data-animation-duration="1500">0</h2>
+                                                                Ongoing Requests
+                                                                <h2 class="media-heading animate-number" data-value="5" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
-
-                                                        <div class="progress-list">
-                                                            <div class="details">
-                                                                <div class="title">This month plan %</div>
-                                                            </div>
-                                                            <div class="status pull-right bg-transparent-black-1">
-                                                                <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                            <div class="progress progress-little progress-transparent-black">
-                                                                <div class="progress-bar animate-progress-bar" data-percentage="100%"></div>
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                     <div class="back">
@@ -213,23 +165,12 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                <small>Completed Request</small>
-                                                                <h2 class="media-heading animate-number" data-value="169541" data-animation-duration="1500">0</h2>
+                                                                Completed Requests
+                                                                <h2 class="media-heading animate-number" data-value="23" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div>
 
-                                                        <div class="progress-list">
-                                                            <div class="details">
-                                                                <div class="title">This month plan %</div>
-                                                            </div>
-                                                            <div class="status pull-right bg-transparent-black-1">
-                                                                <span class="animate-number" data-value="42" data-animation-duration="1500">0</span>%
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                            <div class="progress progress-little progress-transparent-black">
-                                                                <div class="progress-bar animate-progress-bar" data-percentage="42%"></div>
-                                                            </div>
-                                                        </div>
+
 
                                                     </div>
                                                     <div class="back">
@@ -240,7 +181,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                             <div class="card-container col-lg-3 col-sm-6 col-xs-12">
                                                 <div class="card card-slategray hover">
@@ -252,24 +192,10 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                <small>Visits</small>
-                                                                <h2 class="media-heading animate-number" data-value="9634" data-animation-duration="1500">0</h2>
+                                                                Page Visits
+                                                                <h2 class="media-heading animate-number" data-value="11" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
-
-                                                        <div class="progress-list">
-                                                            <div class="details">
-                                                                <div class="title">This month plan %</div>
-                                                            </div>
-                                                            <div class="status pull-right bg-transparent-black-1">
-                                                                <span class="animate-number" data-value="25" data-animation-duration="1500">0</span>%
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                            <div class="progress progress-little progress-transparent-black">
-                                                                <div class="progress-bar animate-progress-bar" data-percentage="25%"></div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                     <div class="back">
                                                         <a href="#">
@@ -279,29 +205,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                         <!-- /cards -->
-
                                     </div>
                                     <!-- /tile body -->
-
-
-
-
                                 </section>
                                 <!-- /tile -->
-
-
-
-
-
                             </div>
-                            <!-- /col 12 -->
-
-
-
+                            <!-- /col 12 -->        
                         </div>
                         <!-- /row -->
 
@@ -310,7 +221,7 @@
                         <!-- row -->
                         <div class="row">
                             <!-- col 8 -->
-                            <div class="col-lg-8 col-md-12">
+                            <div class="col-lg-12 col-md-12">
 
 
                                 <!-- tile -->
@@ -321,7 +232,7 @@
 
                                     <!-- tile header -->
                                     <div class="tile-header">
-                                        <h1><strong>Projects</strong> Progress</h1>
+                                        <h1><strong>NEW</strong> Requests</h1>
                                         <div class="search">
                                             <input type="text" placeholder="Search...">
                                         </div>
@@ -341,17 +252,19 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="sortable sort-numeric sort-asc">ID</th>
-                                                        <th class="sortable sort-alpha">Project</th>
-                                                        <th class="sortable">Priority</th>
-                                                        <th class="sortable sort-amount">Status</th>
-                                                        <th class="text-right">Chart</th>
+                                                        <th class="sortable sort-alpha">Service</th>
+                                                        <th class="sortable sort-alpha">Customer Name</th>
+                                                        <th class="sortable">Attachment</th>
+                                                        <th class="sortable sort-amount">Car Make</th>
+                                                        <th class="text-left">Year of Manufacture</th>
+                                                        <th class="text-left">Date Time</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>Graphic Layout for client</td>
-                                                        <td class="color-red priority">High priority</td>
+                                                        <td>Gearbox</td>
+                                                        <td>Joanne Ong</td>
                                                         <td class="progress-cell">
                                                             <div class="progress-info">
                                                                 <div class="percent"><span class="animate-number" data-value="50" data-animation-duration="1500">0</span>%</div>
@@ -360,12 +273,14 @@
                                                                 <div class="progress-bar progress-bar-transparent-white animate-progress-bar" data-percentage="50%"></div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right"><span id="projectbar1">87,85,42,90,70,55,82,68</span></td>
+                                                        <td class="text-left">Toyota Camry</td>
+                                                        <td class="text-left">1992</td>
+                                                        <td class="text-left">01/07/2016 19:04</td>
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
-                                                        <td>Make website responsive</td>
-                                                        <td class="color-green priority">Low priority</td>
+                                                        <td>Piston Change</td>
+                                                        <td>John Koh</td>
                                                         <td class="progress-cell">
                                                             <div class="progress-info">
                                                                 <div class="percent"><span class="animate-number" data-value="13" data-animation-duration="1500">0</span>%</div>
@@ -374,12 +289,14 @@
                                                                 <div class="progress-bar progress-bar-transparent-white animate-progress-bar" data-percentage="13%"></div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right"><span id="projectbar2">87,99,52,93,42,86,51,93</span></td>
+                                                        <td class="text-left">Toyota Camry</td>
+                                                        <td class="text-left">1992</td>
+                                                        <td class="text-left">01/07/2016 19:04</td>
                                                     </tr>
                                                     <tr>
                                                         <td>3</td>
-                                                        <td>Clean css/html/js code</td>
-                                                        <td class="color-red priority">High priority</td>
+                                                        <td>Tyre Change</td>
+                                                        <td>Joshua Huang</td>
                                                         <td class="progress-cell">
                                                             <div class="progress-info">
                                                                 <div class="percent"><span class="animate-number" data-value="76" data-animation-duration="1500">0</span>%</div>
@@ -388,12 +305,14 @@
                                                                 <div class="progress-bar progress-bar-transparent-white animate-progress-bar" data-percentage="76%"></div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right"><span id="projectbar3">74,77,82,91,69,63,46,42</span></td>
+                                                        <td class="text-left">Toyota Camry</td>
+                                                        <td class="text-left">1992</td>
+                                                        <td class="text-left">01/07/2016 19:04</td>
                                                     </tr>
                                                     <tr>
                                                         <td>4</td>
-                                                        <td>Database Optimization</td>
-                                                        <td class="color-orange priority">Normal priority</td>
+                                                        <td>New PaintJob</td>
+                                                        <td>Melvin Lee</td>
                                                         <td class="progress-cell">
                                                             <div class="progress-info">
                                                                 <div class="percent"><span class="animate-number" data-value="38" data-animation-duration="1500">0</span>%</div>
@@ -402,12 +321,14 @@
                                                                 <div class="progress-bar progress-bar-transparent-white animate-progress-bar" data-percentage="38%"></div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right"><span id="projectbar4">52,45,76,74,77,57,65,86</span></td>
+                                                        <td class="text-left">Toyota Camry</td>
+                                                        <td class="text-left">1992</td>
+                                                        <td class="text-left">01/07/2016 19:04</td>
                                                     </tr>
                                                     <tr>
                                                         <td>5</td>
-                                                        <td>Database Migration</td>
-                                                        <td class="color-green priority">Low priority</td>
+                                                        <td>Faulty Signal Lights</td>
+                                                        <td>Desmond</td>
                                                         <td class="progress-cell">
                                                             <div class="progress-info">
                                                                 <div class="percent"><span class="animate-number" data-value="9" data-animation-duration="1500">0</span>%</div>
@@ -416,12 +337,14 @@
                                                                 <div class="progress-bar progress-bar-transparent-white animate-progress-bar" data-percentage="9%"></div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right"><span id="projectbar5">53,70,47,96,62,49,69,55</span></td>
+                                                        <td class="text-left">Toyota Camry</td>
+                                                        <td class="text-left">1992</td>
+                                                        <td class="text-left">01/07/2016 19:04</td>
                                                     </tr>
                                                     <tr>
                                                         <td>6</td>
-                                                        <td>Email server backup</td>
-                                                        <td class="color-orange priority">Normal priority</td>
+                                                        <td>Rear Bumper</td>
+                                                        <td>Tan Ah Beng</td>
                                                         <td class="progress-cell">
                                                             <div class="progress-info">
                                                                 <div class="percent"><span class="animate-number" data-value="29" data-animation-duration="1500">0</span>%</div>
@@ -430,12 +353,16 @@
                                                                 <div class="progress-bar progress-bar-transparent-white animate-progress-bar" data-percentage="29%"></div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right"><span id="projectbar6">69,80,85,96,67,58,75,82</span></td>
+                                                        <td class="text-left">Toyota Camry</td>
+                                                        <td class="text-left">1992</td>
+                                                        <td class="text-left">01/07/2016 19:04</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    
+                                    
                                     <!-- /tile body -->
 
 
@@ -457,539 +384,357 @@
 
                                 </section>
                                 <!-- /tile -->
-
-
                             </div>
                             <!-- /col 8 -->
+                        </div>
+                        <!-- /row -->
 
+                        <!-- row -->
+                        <div class="row">
 
-                            <!-- col 4 -->
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                </section>
-                                <!-- /tile -->
-
-
-
-                                <!-- tile -->
-                                <section class="tile transparent">
-
-
-
-
-                                    <!-- tile header -->
-                                    <div class="tile-header color redbrown rounded-top-corners text-center">               
-                                        <button class="btn pull-left btn-black-transparent" type="button"><i class="fa fa-caret-square-o-down"></i></button>
-                                        <h2><strong>Todo</strong> List</h2>
-                                        <div class="controls">
-                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
-                                            <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
-                                            <a href="#" class="remove"><i class="fa fa-times"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- /tile header -->
-
-                                    <!-- tile body -->
-                                    <div class="tile-body color transparent-black rounded-bottom-corners">
-                                        <input type="text" placeholder="Add new todo..." class="form-control w100p bottommargin">
-                                        <ul class="nolisttypes" id="todolist">
-                                            <li>
-                                                <div class="checkbox check-transparent">
-                                                    <input type="checkbox" value="1" id="todo-01">
-                                                    <label for="todo-01">Overhaul TOYATA SHF1234F</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkbox check-transparent">
-                                                    <input type="checkbox" value="1" id="todo-02">
-                                                    <label for="todo-02">Order Gearbox</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkbox check-transparent">
-                                                    <input type="checkbox" value="1" id="todo-03">
-                                                    <label for="todo-03">Company Dinner</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkbox check-transparent">
-                                                    <input type="checkbox" value="1" id="todo-04">
-                                                    <label for="todo-04">Inventory Stock Take</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkbox check-transparent">
-                                                    <input type="checkbox" value="1" id="todo-05">
-                                                    <label for="todo-05">Tow Vehicle FBF3642Y</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkbox check-transparent">
-                                                    <input type="checkbox" value="1" id="todo-06">
-                                                    <label for="todo-06">Upload new Jobs</label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /tile body -->
-
-
-
-                                </section>
-                <!-- /tile -->
-              </div>
-              <!-- /col 4 -->
-              
-              
-            </div>
-            <!-- /row -->
+                        </div>
+                        <!-- /row -->
+                        
+                        <div class="main vertical-mail">
             
-                       <!-- row -->
+            
+
+
+            <!-- row -->
             <div class="row">
 
+              <%--
+              <div class="col-md-2">
 
-              <div class="col-lg-4 col-md-5 col-sm-6">
-                
-
-                <!-- tile -->
-                <section class="tile transparent">
-
-
-                  <!-- tile header -->
-                  <div class="tile-header color bg-transparent-black-5 rounded-top-corners">
-                    <ul class="chat-nav main-nav inline">
-                      <li><h3><strong>Inbox</strong> <span class="badge badge-red">3</span></h3></li>
-                      <li class="pull-right">
-                        <button type="button" class="btn btn-transparent-white btn-sm dropdown-toggle" data-toggle="dropdown">
-                          More <i class="fa fa-caret-down"></i>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Action</a></li>
-                          <li><a href="#">Another action</a></li>
-                          <li><a href="#">Something else here</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">Separated link</a></li>
-                        </ul>
-                      </li>
+                <ul class="navigation" id="mail-navigation">
+                  <li class="mark"><i class="fa fa-envelope-o"></i></li>
+                  <li class="compose"><a href="#" class="btn btn-red">Compose Mail</a></li>
+                  <li class="folders heading">
+                    <h5><i class="fa fa-folder"></i> Folders <a href="#" class="pull-right"><i class="fa fa-plus"></i></a></h5>
+                    <ul>
+                      <li class="active"><a href="#"><span class="badge badge-red">5</span>Inbox</a></li>
+                      <li><a href="#">Sent</a></li>
+                      <li><a href="#">Draft</a></li>
+                      <li><a href="#">Trash</a></li>
+                      <li class="divider"></li>
+                      <li class="other"><a href="#">Private</a></li>
+                      <li class="other"><a href="#">Work</a></li>
                     </ul>
-                  </div>
-                  <!-- /tile header -->
-
-
-                  <!-- tile body -->
-                  <div class="tile-body color transparent-black rounded-bottom-corners nopadding">
-                    
-                    <ul class="chat-inbox" id="chat-inbox">
-                      <li><input type="text" class="form-control" placeholder="Search..."></li>
-                      <li>
-                        <a href="#" class="active">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/ici-avatar.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Ing. Imrich Kamarel <span class="time">12:44</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/arnold-avatar.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Arnold Karlsberg <span class="time">yesterday</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="unread">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/george-avatar.jpg">
-                              <span class="badge badge-red">1</span>
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">George McCain <span class="time">31.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="unread">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/peter-avatar.jpg">
-                              <span class="badge badge-red">2</span>
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Peter Kay <span class="time">28.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/random-avatar1.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Lucius Cashmere <span class="time">27.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/random-avatar2.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Jesse Phoenix <span class="time">25.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/random-avatar3.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Dell MacApple <span class="time">23.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/random-avatar4.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Roger Flopple <span class="time">18.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/random-avatar5.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Bobby Socks <span class="time">17.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left">
-                              <img class="media-object img-circle" src="assets/images/random-avatar6.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Nico Vulture <span class="time">16.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="media">
-                            <div class="pull-left" href="#">
-                              <img class="media-object img-circle" src="assets/images/random-avatar7.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading">Silk Teddy <span class="time">12.3.2014</span></p>
-                              <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                              <div class="chat-actions">
-                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
+                  </li>
+                  <li class="labels heading">
+                    <h5><i class="fa fa-tags"></i> Labels <a href="#" class="pull-right"><i class="fa fa-plus"></i></a></h5>
+                    <ul>
+                      <li class="tag"><a href="#">Family <span class="label label-cyan"></span></a></li>
+                      <li class="tag"><a href="#">Work <span class="label label-red"></span></a></li>
+                      <li class="tag"><a href="#">Shop <span class="label label-orange"></span></a></li>
+                      <li class="tag"><a href="#">Themeforest <span class="label label-amethyst"></span></a></li>
+                      <li class="tag"><a href="#">Google <span class="label label-green"></span></a></li>
+                      <li class="tag"><a href="#">Facebook <span class="label label-hotpink"></span></a></li>
                     </ul>
+                </ul>
+!--%>
+              </div>              
 
-                  </div>
-                  <!-- /tile body -->
-                
+              <div class="col-md-3">
 
-                </section>
-                <!-- /tile -->
-
-                
+                <ul class="inbox" id="mail-inbox">
+                  <li class="heading"><h1>Inbox</h1></li>
+                  <li class="search"><i class="fa fa-search"></i> <input type="text" placeholder="Search in inbox..." /></li>
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" value="1" checked id="msg01">
+                      <label for="msg01"></label>
+                    </div>
+                    <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Lucius</strong> Cashmere (5)</h5>
+                      <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">today, 4:23pm</span>
+                      <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                      <div class="mail-label bg-red"></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg02">
+                      <label for="msg02"></label>
+                    </div>
+                    <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Jesse</strong> Phoenix</h5>
+                      <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 7:58am</span>
+                      <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                      <div class="mail-label bg-red"></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="msg active">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg03">
+                      <label for="msg03"></label>
+                    </div>
+                    <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Dell</strong> MacApple</h5>
+                      <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 9:24am</span>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg04">
+                      <label for="msg04"></label>
+                    </div>
+                    <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Roger</strong> Flopple (3)</h5>
+                      <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 11:12am</span>
+                      <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                      <div class="mail-label bg-cyan"></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <%--
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg05">
+                      <label for="msg05"></label>
+                    </div>
+                    <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Nico</strong> Vulture (8)</h5>
+                      <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 01:28pm</span>
+                      <div class="mail-label bg-red"></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg06">
+                      <label for="msg06"></label>
+                    </div>
+                    <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Bobby</strong> Socks (2)</h5>
+                      <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 01:33pm</span>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg07">
+                      <label for="msg07"></label>
+                    </div>
+                    <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Silk</strong> Teddy</h5>
+                      <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 04:18pm</span>
+                      <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg08">
+                      <label for="msg08"></label>
+                    </div>
+                    <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Rodney</strong> Hacksaw</h5>
+                      <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 05:12pm</span>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li class="msg">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg09">
+                      <label for="msg09"></label>
+                    </div>
+                    <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Paul</strong> Corduroy</h5>
+                      <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 05:35pm</span>
+                      <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                      <div class="mail-label bg-orange"></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  --%>
+                  <li class="msg last">
+                    <div class="checkbox check-transparent">
+                      <input type="checkbox" id="msg10">
+                      <label for="msg10"></label>
+                    </div>
+                    <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                    <div>
+                      <h5><strong>Tex</strong> Montreal (4)</h5>
+                      <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <span class="delivery-time">yesterday, 07:12pm</span>
+                      <div class="mail-label bg-greensea"></div>
+                      <div class="mail-actions">
+                        <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                        <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="pagination pull-right">
+                    <span>1-5 of 154</span>
+                    <div class="btn-group btn-group-sm">
+                      <button type="button" class="btn btn-default"><i class="fa fa-angle-left"></i></button>
+                      <button type="button" class="btn btn-default"><i class="fa fa-angle-right"></i></button>
+                    </div>
+                  </li>
+                </ul>
               </div>
 
 
-              <div class="col-lg-8 col-md-7 col-sm-6">
-
-                
-                <!-- tile -->
-                <section class="tile transparent">
-
-
-                  <!-- tile header -->
-                  <div class="tile-header color bg-transparent-black-5 rounded-corners">
-                    <ul class="chat-nav side-nav inline">
-                      <li><h3><strong>Ing. Imrich</strong> Kamarel</h3></li>
-                      <li class="pull-right">
-                        <div class="btn-group btn-group-sm">
-                          <button type="button" class="btn btn-transparent-white"><i class="fa fa-plus"></i> New Message</button>
-                          <button type="button" class="btn btn-transparent-white dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-cog"></i> Actions <i class="fa fa-caret-down"></i>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                          </ul>
-                          <input type="text" class="form-control input-sm" placeholder="Search..." id="chat-search">
-                          <button type="button" class="btn btn-transparent-white" id="initialize-search"><i class="fa fa-search"></i></button>
-                        </div>
-                      </li>
-                    </ul>
+              <div class="col-md-9">
+                <div class="mail-content" id="mail-content">
+                    <%--
+                  <div class="quick-navigation">
+                    <button type="button" class="btn btn-default pull-left prev"><i class="fa fa-angle-left"></i></button>
+                    <h3><strong>Inbox</strong> (3/154)</h3>
+                    <button type="button" class="btn btn-default pull-right next"><i class="fa fa-angle-right"></i></button>
                   </div>
-                  <!-- /tile header -->
+                    --%>
+                  <div class="message">
+                    <div class="header">
+                      <h1><strong>Mail Message</strong> Subject</h1>
 
-
-                  <!-- tile body -->
-                  <div class="tile-body transparent nopadding">
-                    
-                    <div class="chat-content" id="chat-content">
-                      <ul class="chat-list">
-
-                        <li class="conversation-divider"><span>Conversation started at 26.03.2014</span></li>
-
-                        <li class="message receive">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/ici-avatar.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">Ing. Imrich Kamarel</a> <span class="time">26.3.2014 18:36</span></p>
-                              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                          </div>
-                        </li>
-                        <li class="message sent">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/profile-photo.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">John Douey</a> <span class="time">26.3.2014 18:38</span></p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            </div>
-                          </div>
-                        </li>
-
-                        <li class="conversation-divider"><span>29.03.2014</span></li>
-
-                        <li class="message receive">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/ici-avatar.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">Ing. Imrich Kamarel</a> <span class="time">29.3.2014 12:20</span></p>
-                              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                          </div>
-                        </li>
-                        <li class="message sent">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/profile-photo.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">John Douey</a> <span class="time">29.3.2014 12:25</span></p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            </div>
-                          </div>
-                        </li>
-                        <li class="message sent">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/profile-photo.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">John Douey</a> <span class="time">29.3.2014 13:15</span></p>
-                              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                          </div>
-                        </li>
-
-                        <li class="conversation-divider"><span>31.03.2014</span></li>
-
-                        <li class="message receive">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/ici-avatar.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">Ing. Imrich Kamarel</a> <span class="time">31.3.2014 09:12</span></p>
-                              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                          </div>
-                        </li>
-                        <li class="message sent">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/profile-photo.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">John Douey</a> <span class="time">31.3.2014 09:15</span></p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            </div>
-                          </div>
-                        </li>
-                        <li class="message receive">
-                          <div class="media">
-                            <div class="pull-left user-avatar">
-                              <img class="media-object img-circle" src="assets/images/ici-avatar.jpg">
-                            </div>
-                            <div class="media-body">
-                              <p class="media-heading"><a href="#">Ing. Imrich Kamarel</a> <span class="time">31.3.2014 09:18</span></p>
-                              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                          </div>
-                        </li>
-
+                      <ul class="message-info">
+                        <li>From: <em>Dell MacApple</em></li>
+                        <li>To: <em>me, admin@minoral.com</em></li>
+                        <li>Date: <em>10.02.2014, 9:24am</em></li>
+                        <li><i class="fa fa-paperclip"></i> <em>(1 file, 12.9 KB)</em></li>
                       </ul>
-                    </div>
 
-                  </div>
-                  <!-- /tile body -->
-
-
-
-
-                  <!-- tile footer -->
-                  <div class="tile-footer transparent nopadding">
-                    
-                    <div class="chat-reply" id="chat-reply">
-                      <textarea placeholder="Post a reply..." class="form-control"></textarea>
-                      <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>
-                        <button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>
-                        <button type="button" class="btn btn-transparent-white last pull-right">Reply</button>
-                        <div class="checkbox check-transparent pull-right">
-                          <input type="checkbox" value="1" id="send-by-enter">
-                          <label for="send-by-enter">Press Enter to send</label>
+                      <div class="actions">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-default"><i class="fa fa-reply"></i></button>
+                          <button type="button" class="btn btn-default"><i class="fa fa-mail-reply-all"></i></button>
+                          <button type="button" class="btn btn-default"><i class="fa fa-share"></i></button>
                         </div>
+
+                        <button type="button" class="btn btn-default pull-right"><i class="fa fa-trash-o"></i></button>
+
                       </div>
                     </div>
 
+                    <div class="content">
+
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      </p>
+<%--
+                      <blockquote class="filled withoutHeader">
+                        <p><i class="fa fa-quote-left pull-left"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                      </blockquote>
+--%>
+                      <h4 class="filled"><i class="icon-tags"></i> Attachments</h4>
+                      <div class="filled">
+                        <ul class="attachments">
+                          <li><span class="label label-warning">zip</span> <em>zipped_file.zip (2,9MB) <span class="att-actions"><i class="fa fa-eye att-show"></i><i class="fa fa-share att-forward"></i><i class="fa fa-download att-download"></i></span></em></li>
+                          <li><span class="label label-success">doc</span> <em>word_document.docx (1,2MB) <span class="att-actions"><i class="fa fa-eye att-show"></i><i class="fa fa-share att-forward"></i><i class="fa fa-download att-download"></i></span></em></li>
+                          <li><span class="label label-primary">xls</span> <em>excel_document.xlsx (459KB) <span class="att-actions"><i class="fa fa-eye att-show"></i><i class="fa fa-share att-forward"></i><i class="fa fa-download att-download"></i></span></em></li>
+                          
+                        </ul>
+                      </div>
+                    <%--
+                      <h4 class="filled"><i class="icon-mail-reply"></i> Reply</h4>
+                    --%>
+                      <div style="text-align:right">
+                          <%--
+                        <form>
+                          <div id="message-wysiwyg"></div>
+                          --%>
+                          <br>
+                          <button type="submit" class="btn btn-greensea">Reply</button>
+                          <%--
+                        </form>
+                          --%>
+                      </div>
+                      
+
+                    </div>
+
                   </div>
-                  <!-- /tile footer -->
-                
-
-                </section>
-                <!-- /tile -->
+                </div>
 
 
-                
               </div>
+
 
               
             </div>
             <!-- /row -->
+
+
+
           </div>
-          <!-- /content container -->
+        </div>
+        <!-- /content container -->
+    </div>
+    <!-- Page content end -->
 
 
+
+
+                <jsp:include page="include/rightbar.jsp"/>
+
+
+
+
+
+
+            </div>
+            <!-- Make page fluid-->
 
 
 
 
         </div>
-        <!-- Page content end -->
+        <!-- Wrap all page content end -->
 
 
 
-
-        <jsp:include page="include/rightbar.jsp"/>
-
-
-        
-
-
-
-      </div>
-      <!-- Make page fluid-->
-
-
-
-
-    </div>
-    <!-- Wrap all page content end -->
-
-
-
-    <section class="videocontent" id="video"></section>
+        <section class="videocontent" id="video"></section>
 
 
 
@@ -1098,6 +843,6 @@
             })
 
         </script>
->>>>>>> 4c7df257037d39be75abbdddcc48b0c26ef7b16f
+        >>>>>>> 4c7df257037d39be75abbdddcc48b0c26ef7b16f
     </body>
 </html>
