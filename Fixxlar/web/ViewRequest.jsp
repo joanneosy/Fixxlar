@@ -168,12 +168,12 @@
                                         <table class="table table-custom table-sortable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 40px;">
+<!--                                                    <th style="width: 40px;">
                                             <div class="checkbox check-transparent">
                                                 <input type="checkbox" value="1" id="allchck2">
                                                 <label for="allchck2"></label>
                                             </div>
-                                            </th>
+                                            </th>-->
                                             <th class="sortable sort-numeric">DateTime</th>
                                             <th class="sortable sort-asc">Name</th>
                                             <th class="sortable sort-asc">Car Make Model</th>
@@ -187,12 +187,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>
+<!--                                                    <td>
                                                         <div class="checkbox check-transparent">
                                                             <input type="checkbox" value="1" id="chck04">
                                                             <label for="chck04"></label>
                                                         </div>
-                                                    </td>
+                                                    </td>-->
                                                     <td>DateTime</td>
                                                     <td>Otto</td>
                                                     <td>Honda Civic</td>
@@ -303,12 +303,12 @@
                                             </div><!-- /.modal -->
                                             </tr>
                                             <tr>
-                                                    <td>
+<!--                                                    <td>
                                                         <div class="checkbox check-transparent">
                                                             <input type="checkbox" value="1" id="chck04">
                                                             <label for="chck04"></label>
                                                         </div>
-                                                    </td>
+                                                    </td>-->
                                                     <td>DateTime</td>
                                                     <td>Bob</td>
                                                     <td>Toyota Corolla</td>
@@ -419,12 +419,12 @@
                                             </div><!-- /.modal -->
                                             </tr>
                                             <tr>
-                                                    <td>
+<!--                                                    <td>
                                                         <div class="checkbox check-transparent">
                                                             <input type="checkbox" value="1" id="chck04">
                                                             <label for="chck04"></label>
                                                         </div>
-                                                    </td>
+                                                    </td>-->
                                                     <td>DateTime</td>
                                                     <td>Nigel</td>
                                                     <td>Nissan Sunny </td>
