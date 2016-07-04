@@ -15,7 +15,7 @@
             <li>
                 <a href="index.html">
                     <i class="fa fa-tachometer"></i> Dashboard
-                    <span class="badge badge-red">1</span>
+                    <!--<span class="badge badge-red">1</span>-->
                 </a>
             </li>
 

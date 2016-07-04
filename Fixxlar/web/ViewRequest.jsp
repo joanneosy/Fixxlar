@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="css/jquery.videobackground.css">
         <link rel="stylesheet" href="css/bootstrap-checkbox.css">
 
+        <link rel="stylesheet" href="css/custom.css">
         <link href="css/minimal.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -50,7 +51,7 @@
         <div id="wrap">
             <!-- Make page fluid -->
             <div class="row">
-                
+
                 <!-- Top and side nav bar -->
                 <jsp:include page="include/topbar.jsp"/>
                 <!-- Top and side nav bar -->
@@ -130,7 +131,7 @@
                                         <div class="row">
 
                                             <div class="col-sm-4 col-xs-6">
-                                                <div class="input-group table-options">
+<!--                                                <div class="input-group table-options">
                                                     <select class="chosen-select form-control">
                                                         <option>Bulk Action</option>
                                                         <option>Delete Selected</option>
@@ -140,7 +141,7 @@
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-default" type="button">Apply</button>
                                                     </span>
-                                                </div>
+                                                </div>-->
                                             </div>
 
                                             <div class="col-sm-8 col-xs-6 text-right">
@@ -175,7 +176,7 @@
                                             </th>
                                             <th class="sortable sort-numeric">DateTime</th>
                                             <th class="sortable sort-asc">Name</th>
-                                            <th class="sortable sort-asc">Car Make</th>
+                                            <th class="sortable sort-asc">Car Make Model</th>
                                             <th class="sortable sort-numeric">Year</th>
                                             <th class="sortable sort-asc">Services</th>
                                             <th class="sortable sort-asc">Email</th>
@@ -197,45 +198,355 @@
                                                     <td>Honda Civic</td>
                                                     <td>2000</td>
                                                     <td>Service A</td>
-                                                    <td>@mdo</td>
+                                                    <td>otto@gmail.com</td>
                                                     <td>91234567</td>
-                                                    <td class="text-center"><a href="#" class="check-toggler checked"></a></td>
-                                                    <td class="text-center"><button class="btn btn-default btn-xs" type="button">Quote</button></td>
-                                                </tr>
-                                                <tr>
+                                                    <!--Picture Attachment-->
+                                                    <td class="text-center"><a href="#myModal1" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                    <!-- Modal -->
+                                            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog-img">
+                                                    <div class="modal-content">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Honda Civic - 2000</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                        </div>
+                                                    </div> <!--/.modal-content--> 
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+
+                                            <!--Quote-->
+                                            <td class="text-center"><button href="#myModal2" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">New Request - Otto Tan</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <img class="img-thumbnail-small"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                            </div>
+                                                            <div class="line-across"></div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Name:</b> Otto Tan</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Date & Time:</b> DateTime</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Email:</b> otto@gmail.com</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Contact No:</b> 91234567</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Model:</b> Honda Civic</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Year:</b> 2000</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>License Plate:</b> SAB 1234 A</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Color:</b> Black</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Type:</b> Manual</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Mileage:</b> 9999</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Service Request:</b> Service A</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Urgency:</b> xxxx</p>
+                                                            </div>
+
+                                                            <div>
+                                                                <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form name="quote" action="quote">
+                                                                Quotation Amount: <input type="text"/>
+                                                                <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                            </tr>
+                                            <tr>
                                                     <td>
                                                         <div class="checkbox check-transparent">
-                                                            <input type="checkbox" value="1" id="chck05">
-                                                            <label for="chck05"></label>
+                                                            <input type="checkbox" value="1" id="chck04">
+                                                            <label for="chck04"></label>
                                                         </div>
                                                     </td>
                                                     <td>DateTime</td>
-                                                    <td>Otto</td>
-                                                    <td>Honda Civic</td>
-                                                    <td>2000</td>
-                                                    <td>Service A</td>
-                                                    <td>@mdo</td>
-                                                    <td>91234567</td>
-                                                    <td class="text-center"><a href="#" class="check-toggler"></a></td>
-                                                    <td class="text-center"><button class="btn btn-default btn-xs" type="button">Quote</button></td>
-                                                </tr>
-                                                <tr>
+                                                    <td>Bob</td>
+                                                    <td>Toyota Corolla</td>
+                                                    <td>2005</td>
+                                                    <td>Service B</td>
+                                                    <td>bob@gmail.com</td>
+                                                    <td>92345678</td>
+                                                    <!--Picture Attachment-->
+                                                    <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                    <!-- Modal -->
+                                            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog-img">
+                                                    <div class="modal-content">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Toyota Corolla - 2005</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img class="img-responsive"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                        </div>
+                                                    </div> <!--/.modal-content--> 
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+
+                                            <!--Quote-->
+                                            <td class="text-center"><button href="#myModal4" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">New Request - Bob Lim</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <img class="img-thumbnail-small"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                            </div>
+                                                            <div class="line-across"></div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Name:</b> Bob Lim</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Date & Time:</b> DateTime</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Email:</b> bob@gmail.com</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Contact No:</b> 92345678</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Model:</b> Toyota Corolla</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Year:</b> 2005</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>License Plate:</b> Szz 6789 C</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Color:</b> Black</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Type:</b> Auto</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Mileage:</b> 1111</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Service Request:</b> Service B</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Urgency:</b> xxxx</p>
+                                                            </div>
+
+                                                            <div>
+                                                                <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form name="quote" action="quote">
+                                                                Quotation Amount: <input type="text"/>
+                                                                <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                            </tr>
+                                            <tr>
                                                     <td>
                                                         <div class="checkbox check-transparent">
-                                                            <input type="checkbox" value="1" id="chck06">
-                                                            <label for="chck06"></label>
+                                                            <input type="checkbox" value="1" id="chck04">
+                                                            <label for="chck04"></label>
                                                         </div>
                                                     </td>
                                                     <td>DateTime</td>
-                                                    <td>Otto</td>
-                                                    <td>Honda Civic</td>
-                                                    <td>2000</td>
-                                                    <td>Service A</td>
-                                                    <td>@mdo</td>
-                                                    <td>91234567</td>
-                                                    <td class="text-center"><a href="#" class="check-toggler checked"></a></td>
-                                                    <td class="text-center"><button class="btn btn-default btn-xs" type="button">Quote</button></td>
-                                                </tr>
+                                                    <td>Nigel</td>
+                                                    <td>Nissan Sunny </td>
+                                                    <td>2016</td>
+                                                    <td>Service C</td>
+                                                    <td>nigel@gmail.com</td>
+                                                    <td>91212121</td>
+                                                    <!--Picture Attachment-->
+                                                    <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                    <!-- Modal -->
+                                            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog-img">
+                                                    <div class="modal-content">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Nissan Sunny - 2016</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img class="img-responsive"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                        </div>
+                                                    </div> <!--/.modal-content--> 
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+
+                                            <!--Quote-->
+                                            <td class="text-center"><button href="#myModal6" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">New Request - Nigel Tan</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <img class="img-thumbnail-small"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
+                                                            </div>
+                                                            <div class="line-across"></div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Name:</b> Nigel Tan</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Date & Time:</b> DateTime</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Email:</b> nigel@gmail.com</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Contact No:</b> 91212121</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Model:</b> Nissan Sunny</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Year:</b> 2016</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>License Plate:</b> SXY 2322 A</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Color:</b> Silver</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Vehicle Type:</b> Manual</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Mileage:</b> 9999</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Service Request:</b> Service C</p>
+                                                            </div>
+
+                                                            <div class="col-xs-6">
+                                                                <p><b>Urgency:</b> xxxx</p>
+                                                            </div>
+
+                                                            <div>
+                                                                <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                            </div>
+                                                            <!--<p class="text-center">Date Time</p>-->
+                                                            <!--                                                            <p class="text-center">otto@gmail.com</p>
+                                                                                                                        <p class="text-center">91234567</p>
+                                                                                                                        <p class="text-center">Honda Civic</p>
+                                                                                                                        <p class="text-center">2000</p>
+                                                                                                                        <p class="text-center">SAB 1234 A</p>
+                                                                                                                        <p class="text-center">Black</p>
+                                                                                                                        <p class="text-center">Manual</p>
+                                                                                                                        <p class="text-center">Service A</p>
+                                                                                                                        <p class="text-center">Service Desc</p>
+                                                                                                                        <p class="text-center">Mileage</p>
+                                                                                                                        <p class="text-center">Urgency</p>-->
+                                                            <!--<p class="text-center">Photos</p>-->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form name="quote" action="quote">
+                                                                Quotation Amount: <input type="text"/>
+                                                                <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                            </tr>
                                             </tbody>
                                         </table>
 
@@ -248,7 +559,7 @@
                                         <div class="row">  
 
                                             <div class="col-sm-4">
-                                                <div class="input-group table-options">
+<!--                                                <div class="input-group table-options">
                                                     <select class="chosen-select form-control">
                                                         <option>Bulk Action</option>
                                                         <option>Delete Selected</option>
@@ -258,7 +569,7 @@
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-default" type="button">Apply</button>
                                                     </span>
-                                                </div>
+                                                </div>-->
                                             </div>
 
                                             <div class="col-sm-4 text-center">
@@ -382,6 +693,39 @@
                 })
 
             })
+
+
+            ////             Get the modal
+            //            var modal = document.getElementById('myModal');
+            //
+            //// Get the button that opens the modal
+            //            var btn = document.getElementById("myBtn");
+            //
+            //// Get the <span> element that closes the modal
+            //            var span = document.getElementsByClassName("close")[0];
+            //
+            //// When the user clicks the button, open the modal
+            //            btn.onclick = function () {
+            //                modal.style.display = "block";
+            //            }
+            //
+            //// When the user clicks on <span> (x), close the modal
+            //            span.onclick = function () {
+            //                modal.style.display = "none";
+            //            }
+            //
+            //// When the user clicks anywhere outside of the modal, close it
+            //            window.onclick = function (event) {
+            //                if (event.target == modal) {
+            //                    modal.style.display = "none";
+            //                }
+            //            }
+            $(window).load(function () {
+                [modal].click(function () {
+                    $(this).modal('show');
+                });
+            });
+
         </script>
     </body>
 </html>
