@@ -6,7 +6,7 @@
     <!-- Branding -->
     <div class="navbar-header col-md-2">
         <a class="navbar-brand" href="index.html">
-            <strong>FIXER</strong>
+            <strong>FIXIR</strong>
         </a>
         <div class="sidebar-collapse">
             <a href="#">
