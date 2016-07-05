@@ -4,7 +4,6 @@
     Author     : joanne.ong.2014
 --%>
 
-<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>

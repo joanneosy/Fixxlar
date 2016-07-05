@@ -5,7 +5,7 @@
  */
 package util;
 
-import entity.User;
+import entity.WebUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

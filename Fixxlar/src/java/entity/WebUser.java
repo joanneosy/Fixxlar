@@ -9,7 +9,7 @@ package entity;
  *
  * @author joanne.ong.2014
  */
-public class User {
+public class WebUser {
     private int id;
     private String email;
     private String password;
@@ -23,7 +23,7 @@ public class User {
      * @param password the password hash of the user
      * @param userType the type of user - admin/workshop
      */
-    public User(int id, String email, String password, String userType) {
+    public WebUser(int id, String email, String password, String userType) {
         this.id = id;
         this.email = email;
         this.password = password;

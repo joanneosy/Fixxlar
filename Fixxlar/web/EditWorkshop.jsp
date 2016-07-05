@@ -40,7 +40,7 @@
             if (category.equals("null")) { category = ""; }
             String remark = ws.getRemark();
             if (remark.equals("null")) { remark = ""; }
-            byte isActive = ws.getIsActive();
+            int status = ws.getStatus();
         %>
         <h1>Edit <%=ws.getName()%></h1>
         <form action = "EditWorkshop" method= "post">
@@ -60,7 +60,7 @@
             Remark: <input type="text" name="remark" value="<%=remark%>"/><br/>
             Active: 
             <%
-                if (isActive == 1) {
+                if (status == 1) {
                     out.println("<input type=\"checkbox\" name=\"isActive\" value=\"1\" checked>Active<br>");
                 } else {
                     out.println("<input type=\"checkbox\" name=\"isActive\" value=\"1\" >Active<br>");

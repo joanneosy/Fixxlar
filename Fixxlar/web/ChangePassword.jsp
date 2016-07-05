@@ -4,9 +4,9 @@
     Author     : Joanne
 --%>
 
-<%@page import="entity.User"%>
+<%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectUsers.jsp"%>
+<%@include file="ProtectWebUsers.jsp"%>
 
 <!DOCTYPE html>
 <html>

@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import dao.UserDAO;
+import dao.WebUserDAO;
 import dao.WorkshopDAO;
 import entity.Workshop;
 import java.io.IOException;
@@ -56,10 +56,10 @@ public class EditWorkshopServlet extends HttpServlet {
         String specialize = request.getParameter("specialize");
         String category = request.getParameter("category");
         String remark = request.getParameter("remark");
-        String isActiveStr = request.getParameter("isActive");
-        byte isActive = 1;
-        if (isActiveStr == null) {
-            isActive = 0;
+        String statusStr = request.getParameter("isActive");
+        int status = 1;
+        if (statusStr == null) {
+            status = 0;
         }
         String carBrands = "";
 
@@ -85,7 +85,7 @@ public class EditWorkshopServlet extends HttpServlet {
 
         if (errMsg.size() == 0) {
             wDAO.updateWorkshop(userID, email, name, description, website, address, openingHour, openingHourFormat, latitude,
-            longitude, contact, contact2, location, specialize, category, carBrands, remark, isActive); 
+            longitude, contact, contact2, location, specialize, category, carBrands, remark, status); 
             request.setAttribute("successMsg", "Workshop successfully edited!");
             RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
             view.forward(request, response);

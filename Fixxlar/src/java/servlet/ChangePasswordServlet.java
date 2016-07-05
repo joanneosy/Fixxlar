@@ -6,8 +6,8 @@
 package servlet;
 
 import util.HashCode;
-import dao.UserDAO;
-import entity.User;
+import dao.WebUserDAO;
+import entity.WebUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -44,7 +44,7 @@ public class ChangePasswordServlet extends HttpServlet {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmNewPassword");
-        User user = (User)session.getAttribute("loggedInUser");
+        WebUser user = (WebUser)session.getAttribute("loggedInUser");
         String email = user.getEmail();
         if (oldPassword.equals("") || newPassword.equals("") || confirmPassword.equals("")) {
             request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
@@ -59,7 +59,7 @@ public class ChangePasswordServlet extends HttpServlet {
         // and if the new passwords match
         if (hc.check(oldPassword, passwordStored) && newPassword.equals(confirmPassword)) {
             try {
-                UserDAO uDAO = new UserDAO();
+                WebUserDAO uDAO = new WebUserDAO();
                 newPassword = hc.generateSaltedHash(newPassword);
                 uDAO.updateUserPassword(email, newPassword);
                 request.setAttribute("successChangePasswordMsg", "Your password has been changed!");
