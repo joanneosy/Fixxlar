@@ -253,7 +253,7 @@
 
             <li class="dropdown divided user" id="current-user">
                 <div class="profile-photo">
-                    <img src="assets/images/joshua-avatar.jpg" alt />
+                    <img src="./images/joshua.jpg" alt />
                 </div>
                 <a class="dropdown-toggle options" data-toggle="dropdown" href="#">
                     Joshua Huang<i class="fa fa-caret-down"></i>

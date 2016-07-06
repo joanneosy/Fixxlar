@@ -587,7 +587,7 @@ ul.inbox > li.msg.active { background-color: rgba(0, 0, 0, 0.3); border: 1px sol
 /************* PROFILE PAGE **************/
 /*****************************************/
 .user-card h3 { text-align: center; }
-.user-card h5 { text-align: center; font-size: 12px; color: rgba(0, 0, 0, 0.3); font-family: "Roboto", "Arial", sans-serif; }
+.user-card h5 { text-align: center; font-size: 12px; color: #f2f2f2; font-family: "Roboto", "Arial", sans-serif; }
 .user-card .profile-controls { text-align: center; }
 .user-card .profile-controls .profile-photo { width: 120px; border: 5px solid white; position: relative; z-index: 99; -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); }
 .user-card .profile-controls > li { vertical-align: middle; padding: 0; }

@@ -32,7 +32,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body class="bg-3">
         <!--<h1>Welcome</h1>-->
         <%            
             String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
@@ -40,9 +40,7 @@
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
         %>
-    </body>
-    <body class="bg-3">
-
+    
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
         <!--/Preloader -->
