@@ -4,6 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
@@ -31,6 +32,7 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
     </head>
     <body>
         <!--<h1>Welcome</h1>-->
@@ -145,11 +147,20 @@
 
                                             <div class="col-sm-8 col-xs-6 text-right">
 
+                                                <!--                                                <div class="btn-group btn-group-xs table-options">
+                                                                                                    <button type="button active" class="btn btn-default" href="#New">New</button>
+                                                                                                    <button type="button" class="btn btn-default" href="#Ongoing">Ongoing</button>
+                                                                                                    <button type="button" class="btn btn-default" href="#Completed">Completed</button>
+                                                                                                    <button type="button" class="btn btn-default" href="#All">All</button>
+                                                                                                </div>-->
                                                 <div class="btn-group btn-group-xs table-options">
-                                                    <button type="button" class="btn btn-default">New</button>
-                                                    <button type="button" class="btn btn-default">Ongoing</button>
-                                                    <button type="button" class="btn btn-default">Completed</button>
-                                                    <button type="button" class="btn btn-default">All</button>
+                                                    <ul class="nav nav-pills">
+                                                        <li class="active"><a href="#New" data-toggle="pill">New</a></li>
+                                                        <li><a href="#Pending" data-toggle="pill">Pending</a></li>
+                                                        <li><a href="#Ongoing" data-toggle="pill">Ongoing</a></li>
+                                                        <li><a href="#Completed" data-toggle="pill">Completed</a></li>
+                                                        <li><a href="#All" data-toggle="pill">All</a></li>
+                                                    </ul>
                                                 </div>
 
                                             </div>
@@ -163,378 +174,836 @@
 
                                     <!-- tile body -->
                                     <div class="tile-body no-vpadding">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade active in" id="New">
+                                                <table class="table table-custom table-sortable sortable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--                                                    <th style="width: 40px;">
+                                                                                                        <div class="checkbox check-transparent">
+                                                                                                            <input type="checkbox" value="1" id="allchck2">
+                                                                                                            <label for="allchck2"></label>
+                                                                                                        </div>
+                                                                                                        </th>-->
+                                                            <th class="sortable">DateTime</th>
+                                                            <th class="sortable">Name</th>
+                                                            <th class="sortable">Car Make Model</th>
+                                                            <th class="sortable">Year of Manufacture</th>
+                                                            <th class="sortable">Services</th>
+                                                            <th class="sortable">Email</th>
+                                                            <th class="sortable">Phone</th>
+                                                            <th>Attachment</th>
+                                                            <th>Quote</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <!--                                                    <td>
+                                                                                                                    <div class="checkbox check-transparent">
+                                                                                                                        <input type="checkbox" value="1" id="chck04">
+                                                                                                                        <label for="chck04"></label>
+                                                                                                                    </div>
+                                                                                                                </td>-->
+                                                            <td>01/07/2016 19:04</td>
+                                                            <td>Otto</td>
+                                                            <td>Honda Civic</td>
+                                                            <td>2000</td>
+                                                            <td>Gearbox</td>
+                                                            <td>otto@gmail.com</td>
+                                                            <td>91234567</td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="#myModal1" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                        <table class="table table-custom table-sortable">
-                                            <thead>
-                                                <tr>
-                                                    <!--                                                    <th style="width: 40px;">
-                                                                                                <div class="checkbox check-transparent">
-                                                                                                    <input type="checkbox" value="1" id="allchck2">
-                                                                                                    <label for="allchck2"></label>
-                                                                                                </div>
-                                                                                                </th>-->
-                                                    <th class="sortable sort-numeric">DateTime</th>
-                                                    <th class="sortable sort-asc">Name</th>
-                                                    <th class="sortable sort-asc">Car Make Model</th>
-                                                    <th class="sortable sort-numeric">Year of Manufacture</th>
-                                                    <th class="sortable sort-asc">Services</th>
-                                                    <th class="sortable sort-asc">Email</th>
-                                                    <th class="sortable sort-numeric">Phone</th>
-                                                    <th>Attachment</th>
-                                                    <th>Quote</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <!--                                                    <td>
-                                                                                                            <div class="checkbox check-transparent">
-                                                                                                                <input type="checkbox" value="1" id="chck04">
-                                                                                                                <label for="chck04"></label>
-                                                                                                            </div>
-                                                                                                        </td>-->
-                                                    <td>01/07/2016 19:04</td>
-                                                    <td>Otto</td>
-                                                    <td>Honda Civic</td>
-                                                    <td>2000</td>
-                                                    <td>Gearbox</td>
-                                                    <td>otto@gmail.com</td>
-                                                    <td>91234567</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal1" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                            <!-- Modal -->
+                                                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Honda Civic - 2000</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal2" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
 
                                                     <!-- Modal -->
-                                            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog-img">
-                                                    <div class="modal-content">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Honda Civic - 2000</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                        </div>
-                                                    </div> <!--/.modal-content--> 
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Otto Tan</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
 
-                                            <!--Quote-->
-                                            <td class="text-center"><button href="#myModal2" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Otto Tan</p>
+                                                                    </div>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <h4 class="modal-title">New Request - Otto Tan</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="text-center">
-                                                                <img class="img-thumbnail-small"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
-                                                            </div>
-                                                            <div class="line-across"></div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Name:</b> Otto Tan</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> otto@gmail.com</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Date & Time:</b> 01/07/2016 19:04</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 91234567</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Email:</b> otto@gmail.com</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Honda Civic</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Contact No:</b> 91234567</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2000</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Model:</b> Honda Civic</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> SAB 1234 A</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Year:</b> 2000</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Black</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>License Plate:</b> SAB 1234 A</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Manual</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Color:</b> Black</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 9999</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Type:</b> Manual</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Gearbox</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Mileage:</b> 9999</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Service Request:</b> Gearbox</p>
-                                                            </div>
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    </tr> 
+                                                    </tbody>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Urgency:</b> xxxx</p>
-                                                            </div>
-
-                                                            <div>
-                                                                <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form name="quote" action="quote">
-                                                                Quotation Amount: <input type="text"/>
-                                                                <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                            </form>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-                                            </tr>
-                                            <tr>
-                                                <!--                                                    <td>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="Pending">
+                                                <table class="table table-custom table-sortable sortable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--                                                    <th style="width: 40px;">
                                                                                                         <div class="checkbox check-transparent">
-                                                                                                            <input type="checkbox" value="1" id="chck04">
-                                                                                                            <label for="chck04"></label>
+                                                                                                            <input type="checkbox" value="1" id="allchck2">
+                                                                                                            <label for="allchck2"></label>
                                                                                                         </div>
-                                                                                                    </td>-->
-                                                <td>01/07/2016 19:04</td>
-                                                <td>Bob</td>
-                                                <td>Toyota Corolla</td>
-                                                <td>2005</td>
-                                                <td>Tyre Change</td>
-                                                <td>bob@gmail.com</td>
-                                                <td>92345678</td>
-                                                <!--Picture Attachment-->
-                                                <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                                                                        </th>-->
+                                                            <th class="sortable">DateTime</th>
+                                                            <th class="sortable">Name</th>
+                                                            <th class="sortable">Car Make Model</th>
+                                                            <th class="sortable">Year of Manufacture</th>
+                                                            <th class="sortable">Services</th>
+                                                            <th class="sortable">Email</th>
+                                                            <th class="sortable">Phone</th>
+                                                            <th>Attachment</th>
+                                                            <th>Quote</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                    </tbody>
 
-                                                <!-- Modal -->
-                                            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog-img">
-                                                    <div class="modal-content">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Toyota Corolla - 2005</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <img class="img-responsive"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                        </div>
-                                                    </div> <!--/.modal-content--> 
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-
-                                            <!--Quote-->
-                                            <td class="text-center"><button href="#myModal4" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <h4 class="modal-title">New Request - Bob Lim</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="text-center">
-                                                                <img class="img-thumbnail-small"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
-                                                            </div>
-                                                            <div class="line-across"></div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Name:</b> Bob Lim</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Date & Time:</b> 01/07/2016 19:04</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Email:</b> bob@gmail.com</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Contact No:</b> 92345678</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Model:</b> Toyota Corolla</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Year:</b> 2005</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>License Plate:</b> Szz 6789 C</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Color:</b> Black</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Type:</b> Auto</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Mileage:</b> 1111</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Service Request:</b> Tyre Change</p>
-                                                            </div>
-
-                                                            <div class="col-xs-6">
-                                                                <p><b>Urgency:</b> xxxx</p>
-                                                            </div>
-
-                                                            <div>
-                                                                <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form name="quote" action="quote">
-                                                                Quotation Amount: <input type="text"/>
-                                                                <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                            </form>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-                                            </tr>
-                                            <tr>
-                                                <!--                                                    <td>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="Ongoing">
+                                                <table class="table table-custom table-sortable sortable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--                                                    <th style="width: 40px;">
                                                                                                         <div class="checkbox check-transparent">
-                                                                                                            <input type="checkbox" value="1" id="chck04">
-                                                                                                            <label for="chck04"></label>
+                                                                                                            <input type="checkbox" value="1" id="allchck2">
+                                                                                                            <label for="allchck2"></label>
                                                                                                         </div>
-                                                                                                    </td>-->
-                                                <td>01/07/2016 19:04</td>
-                                                <td>Nigel</td>
-                                                <td>Nissan Sunny </td>
-                                                <td>2016</td>
-                                                <td>Piston Change</td>
-                                                <td>nigel@gmail.com</td>
-                                                <td>91212121</td>
-                                                <!--Picture Attachment-->
-                                                <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                                                                        </th>-->
+                                                            <th class="sortable">DateTime</th>
+                                                            <th class="sortable">Name</th>
+                                                            <th class="sortable">Car Make Model</th>
+                                                            <th class="sortable">Year of Manufacture</th>
+                                                            <th class="sortable">Services</th>
+                                                            <th class="sortable">Email</th>
+                                                            <th class="sortable">Phone</th>
+                                                            <th>Attachment</th>
+                                                            <th>Quote</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <!--                                                    <td>
+                                                                                                                    <div class="checkbox check-transparent">
+                                                                                                                        <input type="checkbox" value="1" id="chck04">
+                                                                                                                        <label for="chck04"></label>
+                                                                                                                    </div>
+                                                                                                                </td>-->
+                                                            <td>01/07/2016 19:04</td>
+                                                            <td>Bob</td>
+                                                            <td>Toyota Corolla</td>
+                                                            <td>2005</td>
+                                                            <td>Tyre Change</td>
+                                                            <td>bob@gmail.com</td>
+                                                            <td>92345678</td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                                <!-- Modal -->
-                                            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog-img">
-                                                    <div class="modal-content">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Nissan Sunny - 2016</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <img class="img-responsive"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                        </div>
-                                                    </div> <!--/.modal-content--> 
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
+                                                            <!-- Modal -->
+                                                    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Toyota Corolla - 2005</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
 
-                                            <!--Quote-->
-                                            <td class="text-center"><button href="#myModal6" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal4" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <h4 class="modal-title">New Request - Nigel Tan</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="text-center">
-                                                                <img class="img-thumbnail-small"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
-                                                            </div>
-                                                            <div class="line-across"></div>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Bob Lim</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Name:</b> Nigel Tan</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Bob Lim</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Date & Time:</b> 01/07/2016 19:04</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Email:</b> nigel@gmail.com</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> bob@gmail.com</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Contact No:</b> 91212121</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 92345678</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Model:</b> Nissan Sunny</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Toyota Corolla</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Year:</b> 2016</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2005</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>License Plate:</b> SXY 2322 A</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> Szz 6789 C</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Color:</b> Silver</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Black</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Vehicle Type:</b> Manual</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Auto</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Mileage:</b> 9999</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 1111</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Service Request:</b> Piston Change</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Tyre Change</p>
+                                                                    </div>
 
-                                                            <div class="col-xs-6">
-                                                                <p><b>Urgency:</b> xxxx</p>
-                                                            </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
 
-                                                            <div>
-                                                                <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form name="quote" action="quote">
-                                                                Quotation Amount: <input type="text"/>
-                                                                <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                            </form>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="Completed">
+                                                <table class="table table-custom table-sortable sortable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--                                                    <th style="width: 40px;">
+                                                                                                        <div class="checkbox check-transparent">
+                                                                                                            <input type="checkbox" value="1" id="allchck2">
+                                                                                                            <label for="allchck2"></label>
+                                                                                                        </div>
+                                                                                                        </th>-->
+                                                            <th class="sortable">DateTime</th>
+                                                            <th class="sortable">Name</th>
+                                                            <th class="sortable">Car Make Model</th>
+                                                            <th class="sortable">Year of Manufacture</th>
+                                                            <th class="sortable">Services</th>
+                                                            <th class="sortable">Email</th>
+                                                            <th class="sortable">Phone</th>
+                                                            <th>Attachment</th>
+                                                            <th>Quote</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                        <!--                                                    <td>
+                                                                                                                <div class="checkbox check-transparent">
+                                                                                                                    <input type="checkbox" value="1" id="chck04">
+                                                                                                                    <label for="chck04"></label>
+                                                                                                                </div>
+                                                                                                            </td>-->
+                                                        <td>01/07/2016 19:04</td>
+                                                        <td>Nigel</td>
+                                                        <td>Nissan Sunny </td>
+                                                        <td>2016</td>
+                                                        <td>Piston Change</td>
+                                                        <td>nigel@gmail.com</td>
+                                                        <td>91212121</td>
+                                                        <!--Picture Attachment-->
+                                                        <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                        <!-- Modal -->
+                                                    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Nissan Sunny - 2016</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal6" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Nigel Tan</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Nigel Tan</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> nigel@gmail.com</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 91212121</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Nissan Sunny</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2016</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> SXY 2322 A</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Silver</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Manual</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 9999</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Piston Change</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="All">
+                                                <table class="table table-custom table-sortable sortable">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--                                                    <th style="width: 40px;">
+                                                                                                        <div class="checkbox check-transparent">
+                                                                                                            <input type="checkbox" value="1" id="allchck2">
+                                                                                                            <label for="allchck2"></label>
+                                                                                                        </div>
+                                                                                                        </th>-->
+                                                            <th class="sortable">DateTime</th>
+                                                            <th class="sortable">Name</th>
+                                                            <th class="sortable">Car Make Model</th>
+                                                            <th class="sortable">Year of Manufacture</th>
+                                                            <th class="sortable">Services</th>
+                                                            <th class="sortable">Email</th>
+                                                            <th class="sortable">Phone</th>
+                                                            <th>Attachment</th>
+                                                            <th>Quote</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <!--                                                    <td>
+                                                                                                                    <div class="checkbox check-transparent">
+                                                                                                                        <input type="checkbox" value="1" id="chck04">
+                                                                                                                        <label for="chck04"></label>
+                                                                                                                    </div>
+                                                                                                                </td>-->
+                                                            <td>01/07/2016 19:04</td>
+                                                            <td>Otto</td>
+                                                            <td>Honda Civic</td>
+                                                            <td>2000</td>
+                                                            <td>Gearbox</td>
+                                                            <td>otto@gmail.com</td>
+                                                            <td>91234567</td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="#myModal1" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                            <!-- Modal -->
+                                                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Honda Civic - 2000</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal2" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Otto Tan</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Otto Tan</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> otto@gmail.com</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 91234567</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Honda Civic</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2000</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> SAB 1234 A</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Black</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Manual</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 9999</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Gearbox</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    </tr>
+                                                    <tr>
+                                                        <!--                                                    <td>
+                                                                                                                <div class="checkbox check-transparent">
+                                                                                                                    <input type="checkbox" value="1" id="chck04">
+                                                                                                                    <label for="chck04"></label>
+                                                                                                                </div>
+                                                                                                            </td>-->
+                                                        <td>01/07/2016 19:04</td>
+                                                        <td>Bob</td>
+                                                        <td>Toyota Corolla</td>
+                                                        <td>2005</td>
+                                                        <td>Tyre Change</td>
+                                                        <td>bob@gmail.com</td>
+                                                        <td>92345678</td>
+                                                        <!--Picture Attachment-->
+                                                        <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                        <!-- Modal -->
+                                                    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Toyota Corolla - 2005</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal4" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Bob Lim</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Bob Lim</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> bob@gmail.com</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 92345678</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Toyota Corolla</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2005</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> Szz 6789 C</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Black</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Auto</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 1111</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Tyre Change</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    </tr>
+                                                    <tr>
+                                                        <!--                                                    <td>
+                                                                                                                <div class="checkbox check-transparent">
+                                                                                                                    <input type="checkbox" value="1" id="chck04">
+                                                                                                                    <label for="chck04"></label>
+                                                                                                                </div>
+                                                                                                            </td>-->
+                                                        <td>01/07/2016 19:04</td>
+                                                        <td>Nigel</td>
+                                                        <td>Nissan Sunny </td>
+                                                        <td>2016</td>
+                                                        <td>Piston Change</td>
+                                                        <td>nigel@gmail.com</td>
+                                                        <td>91212121</td>
+                                                        <!--Picture Attachment-->
+                                                        <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                        <!-- Modal -->
+                                                    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Nissan Sunny - 2016</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal6" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Nigel Tan</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Nigel Tan</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> nigel@gmail.com</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 91212121</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Nissan Sunny</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2016</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> SXY 2322 A</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Silver</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Manual</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 9999</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Piston Change</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div><!--tab-content-->
+
 
                                     </div>
                                     <!-- /tile body -->
@@ -643,6 +1112,8 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap-dropdown-multilevel.js"></script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
@@ -652,6 +1123,7 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="js/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="js/sorttable.js"></script>
 
         <script src="js/minimal.min.js"></script>
 
@@ -676,9 +1148,8 @@
                 //check toggling
                 $('.check-toggler').on('click', function () {
                     $(this).toggleClass('checked');
-                })
-
-            })
+                });
+            });
 
 
             ////             Get the modal
@@ -706,11 +1177,25 @@
             //                    modal.style.display = "none";
             //                }
             //            }
-            $(window).load(function () {
-                [modal].click(function () {
-                    $(this).modal('show');
-                });
-            });
+//            $(window).load(function () {
+//                [modal].click(function () {
+//                    $(this).modal('show');
+//                });
+//            });
+
+//            jQuery(document).ready(function () {
+//                jQuery('.nav-pills a').on('click', function (e) {
+//                    var currentAttrValue = jQuery(this).attr('href');
+//
+//                    // Show/Hide Tabs
+//                    jQuery(currentAttrValue).show().siblings().hide();
+//
+//                    // Change/remove current tab to active
+//                    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+//
+//                    e.preventDefault();
+//                });
+//            });
 
         </script>
     </body>

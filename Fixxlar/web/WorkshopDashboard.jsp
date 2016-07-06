@@ -182,7 +182,7 @@
                                             </div>
 
                                             <div class="card-container col-lg-3 col-sm-6 col-xs-12">
-                                                <div class="card card-slategray hover">
+                                                <div class="card1 card-slategray hover">
                                                     <div class="front"> 
 
                                                         <div class="media">                   
@@ -191,17 +191,17 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                Page Visits
+                                                                Average Rating
                                                                 <h2 class="media-heading animate-number" data-value="11" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
                                                     </div>
-                                                    <div class="back">
+<!--                                                    <div class="back">
                                                         <a href="#">
                                                             <i class="fa fa-bar-chart-o fa-4x"></i>
                                                             <span>Check Summary</span>
                                                         </a>
-                                                    </div>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -922,6 +922,5 @@
         })
 
     </script>
-    >>>>>>> 4c7df257037d39be75abbdddcc48b0c26ef7b16f
 </body>
 </html>
