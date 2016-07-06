@@ -13,7 +13,7 @@
         <ul class="menu">
 
             <li>
-                <a href="Workshop.jsp">
+                <a href="WorkshopDashboard.jsp">
                     <i class="fa fa-tachometer"></i> Dashboard
                     <!--<span class="badge badge-red">1</span>-->
                 </a>
