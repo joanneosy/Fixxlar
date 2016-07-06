@@ -6,7 +6,7 @@
 
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectWorkshop.jsp"%>
+<%--<%@include file="ProtectWorkshop.jsp"%>--%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -157,7 +157,7 @@
                                                     <ul class="nav nav-pills">
                                                         <li class="active"><a href="#New" data-toggle="pill">New</a></li>
                                                         <li><a href="#Pending" data-toggle="pill">Pending</a></li>
-                                                        <li><a href="#Ongoing" data-toggle="pill">Ongoing</a></li>
+                                                        <li><a href="#Valet" data-toggle="pill">Pending-Valet</a></li>
                                                         <li><a href="#Completed" data-toggle="pill">Completed</a></li>
                                                         <li><a href="#All" data-toggle="pill">All</a></li>
                                                     </ul>
@@ -307,7 +307,8 @@
                                                                         Quotation Amount: <input type="text"/>
                                                                         <button type="submit" class="btn btn-primary">Submit Quote</button>
                                                                     </form>
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                                 </div>
                                                             </div><!-- /.modal-content -->
                                                         </div><!-- /.modal-dialog -->
@@ -335,16 +336,126 @@
                                                             <th class="sortable">Email</th>
                                                             <th class="sortable">Phone</th>
                                                             <th>Attachment</th>
-                                                            <th>Quote</th>
+                                                            <th>Details</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        
+                                                        <tr>
+                                                            <td class="text-left">01/07/2016 19:04</td>
+                                                            <td>Joanne Ong</td>
+                                                            <td class="text-left">Toyota Camry</td>
+                                                            <td class="text-left">1992</td>
+                                                            <td>Gearbox</td>
+                                                            <td>joanne@gmail.com</td>
+                                                            <td>98765432</td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="#myModal9" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                            <!-- Modal -->
+                                                    <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Toyota Camry - 1992</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal10" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Joanne Ong</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Joanne Ong</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> joanne@gmail.com</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 98765432</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Toyota Camry</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 1992</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> Saz 3233 C</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Red</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Auto</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 2222</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Tyre Change</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+<!--                                                                    <form name="quote" action="quote">
+                                                                        Quotation Amount: <input type="text" placeholder="$100"/>
+                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                    </form>-->
+                                                                    Quotation Amount: $100
+                                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    </tr>
                                                     </tbody>
 
                                                 </table>
                                             </div>
-                                            <div class="tab-pane fade" id="Ongoing">
+                                            <div class="tab-pane fade" id="Valet">
                                                 <table class="table table-custom table-sortable sortable">
                                                     <thead>
                                                         <tr>
@@ -363,6 +474,7 @@
                                                             <th class="sortable">Phone</th>
                                                             <th>Attachment</th>
                                                             <th>Quote</th>
+                                                            <th class="sortable">Amount Quoted</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -473,15 +585,135 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <form name="quote" action="quote">
-                                                                        Quotation Amount: <input type="text"/>
-                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                        Quotation Amount: <input type="text" placeholder="$250"/>
+                                                                        <button type="submit" class="btn btn-primary" >Submit Quote</button>
                                                                     </form>
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                                 </div>
                                                             </div><!-- /.modal-content -->
                                                         </div><!-- /.modal-dialog -->
                                                     </div><!-- /.modal -->
-                                                        </tr>
+                                                    <td>-</td>
+                                                    </tr>
+                                                    <tr>
+                                                            <!--                                                    <td>
+                                                                                                                    <div class="checkbox check-transparent">
+                                                                                                                        <input type="checkbox" value="1" id="chck04">
+                                                                                                                        <label for="chck04"></label>
+                                                                                                                    </div>
+                                                                                                                </td>-->
+                                                            <td>01/07/2016 19:04</td>
+                                                            <td>Bryan</td>
+                                                            <td>Toyota Corolla</td>
+                                                            <td>2005</td>
+                                                            <td>Tyre Change</td>
+                                                            <td>bryan@gmail.com</td>
+                                                            <td>98787876</td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="#myModa19" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                            <!-- Modal -->
+                                                    <div class="modal fade" id="myModa19" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Toyota Corolla - 2005</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="#myModal20" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal20" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - Bryan Lim</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name:</b> Bryan Lim</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email:</b> bryan@gmail.com</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No:</b> 98787876</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model:</b> Toyota Corolla</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year:</b> 2005</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate:</b> Szz 6789 C</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color:</b> Black</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type:</b> Auto</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage:</b> 1111</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request:</b> Tyre Change</p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency:</b> xxxx</p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                        Quotation Amount: $450
+<!--                                                                    <form name="quote" action="quote">
+                                                                        <button type="submit" class="btn btn-primary" >Submit Quote</button>
+                                                                    </form>-->
+                                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    <td>$450</td>
+                                                    </tr>
                                                     </tbody>
 
                                                 </table>
@@ -504,28 +736,28 @@
                                                             <th class="sortable">Email</th>
                                                             <th class="sortable">Phone</th>
                                                             <th>Attachment</th>
-                                                            <th>Quote</th>
+                                                            <th>Details</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                        <!--                                                    <td>
-                                                                                                                <div class="checkbox check-transparent">
-                                                                                                                    <input type="checkbox" value="1" id="chck04">
-                                                                                                                    <label for="chck04"></label>
-                                                                                                                </div>
-                                                                                                            </td>-->
-                                                        <td>01/07/2016 19:04</td>
-                                                        <td>Nigel</td>
-                                                        <td>Nissan Sunny </td>
-                                                        <td>2016</td>
-                                                        <td>Piston Change</td>
-                                                        <td>nigel@gmail.com</td>
-                                                        <td>91212121</td>
-                                                        <!--Picture Attachment-->
-                                                        <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                            <!--                                                    <td>
+                                                                                                                    <div class="checkbox check-transparent">
+                                                                                                                        <input type="checkbox" value="1" id="chck04">
+                                                                                                                        <label for="chck04"></label>
+                                                                                                                    </div>
+                                                                                                                </td>-->
+                                                            <td>01/07/2016 19:04</td>
+                                                            <td>Nigel</td>
+                                                            <td>Nissan Sunny </td>
+                                                            <td>2016</td>
+                                                            <td>Piston Change</td>
+                                                            <td>nigel@gmail.com</td>
+                                                            <td>91212121</td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                                        <!-- Modal -->
+                                                            <!-- Modal -->
                                                     <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog-img">
                                                             <div class="modal-content">
@@ -545,7 +777,7 @@
                                                     </div><!-- /.modal -->
 
                                                     <!--Quote-->
-                                                    <td class="text-center"><button href="#myModal6" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+                                                    <td class="text-center"><button href="#myModal6" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -614,11 +846,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form name="quote" action="quote">
-                                                                        Quotation Amount: <input type="text"/>
+                                                                        Final Amount: $500
+<!--                                                                    <form name="quote" action="quote">
                                                                         <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                    </form>
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </form>-->
+                                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                                 </div>
                                                             </div><!-- /.modal-content -->
                                                         </div><!-- /.modal-dialog -->
