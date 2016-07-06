@@ -7,9 +7,9 @@ package servlet;
 
 import util.HashCode;
 import dao.EmailDAO;
-import dao.UserDAO;
+import dao.WebUserDAO;
 import entity.Email;
-import entity.User;
+import entity.WebUser;
 import is203.JWTUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,8 +44,8 @@ public class ForgotPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String emailTo = request.getParameter("email");
-        UserDAO uDao = new UserDAO();
-        User user = uDao.retrieveUser(emailTo);
+        WebUserDAO uDao = new WebUserDAO();
+        WebUser user = uDao.retrieveUser(emailTo);
 
         //Check if the email exists in the database
         if (user != null) {

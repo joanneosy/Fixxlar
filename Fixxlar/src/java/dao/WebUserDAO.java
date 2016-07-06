@@ -1,13 +1,13 @@
 package dao;
 
-import entity.User;
+import entity.WebUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import util.ConnectionManager;
 
-public class UserDAO {
+public class WebUserDAO {
 
     /**
      * Retrieve user
@@ -16,11 +16,11 @@ public class UserDAO {
      * @return a user
      * @throws SQLException if an SQL error occurs
      */
-    public User retrieveUser(String givenEmail) throws SQLException {
+    public WebUser retrieveUser(String givenEmail) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        User user = null;
+        WebUser user = null;
         try {
             conn = ConnectionManager.getConnection();
             pstmt = null;
@@ -32,7 +32,7 @@ public class UserDAO {
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 String userType = rs.getString("userType");
-                user = new User(id, email, password, userType);
+                user = new WebUser(id, email, password, userType);
             }
             //Return null if email does not exist in database
             return user;

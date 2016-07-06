@@ -4,9 +4,8 @@
     Author     : joanne.ong.2014
 --%>
 
-<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@include file="ProtectWorkshop.jsp"%>--%>
+<%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -78,14 +77,14 @@
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> View Request</h2>
 
 
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li>You are here</li>
-                                <li><a href="index.html">Minimal</a></li>
-                                <li><a href="#">Example Pages</a></li>
-                                <li class="active">Blank Page</li>
-                            </ol>
-                        </div>
+                        <!--                        <div class="breadcrumbs">
+                                                    <ol class="breadcrumb">
+                                                        <li>You are here</li>
+                                                        <li><a href="index.html">Minimal</a></li>
+                                                        <li><a href="#">Example Pages</a></li>
+                                                        <li class="active">Blank Page</li>
+                                                    </ol>
+                                                </div>-->
 
 
                     </div>
@@ -131,17 +130,17 @@
                                         <div class="row">
 
                                             <div class="col-sm-4 col-xs-6">
-<!--                                                <div class="input-group table-options">
-                                                    <select class="chosen-select form-control">
-                                                        <option>Bulk Action</option>
-                                                        <option>Delete Selected</option>
-                                                        <option>Copy Selected</option>
-                                                        <option>Archive Selected</option>
-                                                    </select>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button">Apply</button>
-                                                    </span>
-                                                </div>-->
+                                                <!--                                                <div class="input-group table-options">
+                                                                                                    <select class="chosen-select form-control">
+                                                                                                        <option>Bulk Action</option>
+                                                                                                        <option>Delete Selected</option>
+                                                                                                        <option>Copy Selected</option>
+                                                                                                        <option>Archive Selected</option>
+                                                                                                    </select>
+                                                                                                    <span class="input-group-btn">
+                                                                                                        <button class="btn btn-default" type="button">Apply</button>
+                                                                                                    </span>
+                                                                                                </div>-->
                                             </div>
 
                                             <div class="col-sm-8 col-xs-6 text-right">
@@ -168,36 +167,36 @@
                                         <table class="table table-custom table-sortable">
                                             <thead>
                                                 <tr>
-<!--                                                    <th style="width: 40px;">
-                                            <div class="checkbox check-transparent">
-                                                <input type="checkbox" value="1" id="allchck2">
-                                                <label for="allchck2"></label>
-                                            </div>
-                                            </th>-->
-                                            <th class="sortable sort-numeric">DateTime</th>
-                                            <th class="sortable sort-asc">Name</th>
-                                            <th class="sortable sort-asc">Car Make Model</th>
-                                            <th class="sortable sort-numeric">Year</th>
-                                            <th class="sortable sort-asc">Services</th>
-                                            <th class="sortable sort-asc">Email</th>
-                                            <th class="sortable sort-numeric">Phone</th>
-                                            <th>Attachment</th>
-                                            <th>Quote</th>
-                                            </tr>
+                                                    <!--                                                    <th style="width: 40px;">
+                                                                                                <div class="checkbox check-transparent">
+                                                                                                    <input type="checkbox" value="1" id="allchck2">
+                                                                                                    <label for="allchck2"></label>
+                                                                                                </div>
+                                                                                                </th>-->
+                                                    <th class="sortable sort-numeric">DateTime</th>
+                                                    <th class="sortable sort-asc">Name</th>
+                                                    <th class="sortable sort-asc">Car Make Model</th>
+                                                    <th class="sortable sort-numeric">Year of Manufacture</th>
+                                                    <th class="sortable sort-asc">Services</th>
+                                                    <th class="sortable sort-asc">Email</th>
+                                                    <th class="sortable sort-numeric">Phone</th>
+                                                    <th>Attachment</th>
+                                                    <th>Quote</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-<!--                                                    <td>
-                                                        <div class="checkbox check-transparent">
-                                                            <input type="checkbox" value="1" id="chck04">
-                                                            <label for="chck04"></label>
-                                                        </div>
-                                                    </td>-->
-                                                    <td>DateTime</td>
+                                                    <!--                                                    <td>
+                                                                                                            <div class="checkbox check-transparent">
+                                                                                                                <input type="checkbox" value="1" id="chck04">
+                                                                                                                <label for="chck04"></label>
+                                                                                                            </div>
+                                                                                                        </td>-->
+                                                    <td>01/07/2016 19:04</td>
                                                     <td>Otto</td>
                                                     <td>Honda Civic</td>
                                                     <td>2000</td>
-                                                    <td>Service A</td>
+                                                    <td>Gearbox</td>
                                                     <td>otto@gmail.com</td>
                                                     <td>91234567</td>
                                                     <!--Picture Attachment-->
@@ -244,7 +243,7 @@
                                                             </div>
 
                                                             <div class="col-xs-6">
-                                                                <p><b>Date & Time:</b> DateTime</p>
+                                                                <p><b>Date & Time:</b> 01/07/2016 19:04</p>
                                                             </div>
 
                                                             <div class="col-xs-6">
@@ -280,7 +279,7 @@
                                                             </div>
 
                                                             <div class="col-xs-6">
-                                                                <p><b>Service Request:</b> Service A</p>
+                                                                <p><b>Service Request:</b> Gearbox</p>
                                                             </div>
 
                                                             <div class="col-xs-6">
@@ -303,23 +302,23 @@
                                             </div><!-- /.modal -->
                                             </tr>
                                             <tr>
-<!--                                                    <td>
-                                                        <div class="checkbox check-transparent">
-                                                            <input type="checkbox" value="1" id="chck04">
-                                                            <label for="chck04"></label>
-                                                        </div>
-                                                    </td>-->
-                                                    <td>DateTime</td>
-                                                    <td>Bob</td>
-                                                    <td>Toyota Corolla</td>
-                                                    <td>2005</td>
-                                                    <td>Service B</td>
-                                                    <td>bob@gmail.com</td>
-                                                    <td>92345678</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                <!--                                                    <td>
+                                                                                                        <div class="checkbox check-transparent">
+                                                                                                            <input type="checkbox" value="1" id="chck04">
+                                                                                                            <label for="chck04"></label>
+                                                                                                        </div>
+                                                                                                    </td>-->
+                                                <td>01/07/2016 19:04</td>
+                                                <td>Bob</td>
+                                                <td>Toyota Corolla</td>
+                                                <td>2005</td>
+                                                <td>Tyre Change</td>
+                                                <td>bob@gmail.com</td>
+                                                <td>92345678</td>
+                                                <!--Picture Attachment-->
+                                                <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                                    <!-- Modal -->
+                                                <!-- Modal -->
                                             <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog-img">
                                                     <div class="modal-content">
@@ -360,7 +359,7 @@
                                                             </div>
 
                                                             <div class="col-xs-6">
-                                                                <p><b>Date & Time:</b> DateTime</p>
+                                                                <p><b>Date & Time:</b> 01/07/2016 19:04</p>
                                                             </div>
 
                                                             <div class="col-xs-6">
@@ -396,7 +395,7 @@
                                                             </div>
 
                                                             <div class="col-xs-6">
-                                                                <p><b>Service Request:</b> Service B</p>
+                                                                <p><b>Service Request:</b> Tyre Change</p>
                                                             </div>
 
                                                             <div class="col-xs-6">
@@ -419,23 +418,23 @@
                                             </div><!-- /.modal -->
                                             </tr>
                                             <tr>
-<!--                                                    <td>
-                                                        <div class="checkbox check-transparent">
-                                                            <input type="checkbox" value="1" id="chck04">
-                                                            <label for="chck04"></label>
-                                                        </div>
-                                                    </td>-->
-                                                    <td>DateTime</td>
-                                                    <td>Nigel</td>
-                                                    <td>Nissan Sunny </td>
-                                                    <td>2016</td>
-                                                    <td>Service C</td>
-                                                    <td>nigel@gmail.com</td>
-                                                    <td>91212121</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                <!--                                                    <td>
+                                                                                                        <div class="checkbox check-transparent">
+                                                                                                            <input type="checkbox" value="1" id="chck04">
+                                                                                                            <label for="chck04"></label>
+                                                                                                        </div>
+                                                                                                    </td>-->
+                                                <td>01/07/2016 19:04</td>
+                                                <td>Nigel</td>
+                                                <td>Nissan Sunny </td>
+                                                <td>2016</td>
+                                                <td>Piston Change</td>
+                                                <td>nigel@gmail.com</td>
+                                                <td>91212121</td>
+                                                <!--Picture Attachment-->
+                                                <td class="text-center"><a href="#myModal5" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                                    <!-- Modal -->
+                                                <!-- Modal -->
                                             <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog-img">
                                                     <div class="modal-content">
@@ -476,7 +475,7 @@
                                                             </div>
 
                                                             <div class="col-xs-6">
-                                                                <p><b>Date & Time:</b> DateTime</p>
+                                                                <p><b>Date & Time:</b> 01/07/2016 19:04</p>
                                                             </div>
 
                                                             <div class="col-xs-6">
@@ -512,7 +511,7 @@
                                                             </div>
 
                                                             <div class="col-xs-6">
-                                                                <p><b>Service Request:</b> Service C</p>
+                                                                <p><b>Service Request:</b> Piston Change</p>
                                                             </div>
 
                                                             <div class="col-xs-6">
@@ -522,19 +521,6 @@
                                                             <div>
                                                                 <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
                                                             </div>
-                                                            <!--<p class="text-center">Date Time</p>-->
-                                                            <!--                                                            <p class="text-center">otto@gmail.com</p>
-                                                                                                                        <p class="text-center">91234567</p>
-                                                                                                                        <p class="text-center">Honda Civic</p>
-                                                                                                                        <p class="text-center">2000</p>
-                                                                                                                        <p class="text-center">SAB 1234 A</p>
-                                                                                                                        <p class="text-center">Black</p>
-                                                                                                                        <p class="text-center">Manual</p>
-                                                                                                                        <p class="text-center">Service A</p>
-                                                                                                                        <p class="text-center">Service Desc</p>
-                                                                                                                        <p class="text-center">Mileage</p>
-                                                                                                                        <p class="text-center">Urgency</p>-->
-                                                            <!--<p class="text-center">Photos</p>-->
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form name="quote" action="quote">
@@ -559,17 +545,17 @@
                                         <div class="row">  
 
                                             <div class="col-sm-4">
-<!--                                                <div class="input-group table-options">
-                                                    <select class="chosen-select form-control">
-                                                        <option>Bulk Action</option>
-                                                        <option>Delete Selected</option>
-                                                        <option>Copy Selected</option>
-                                                        <option>Archive Selected</option>
-                                                    </select>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button">Apply</button>
-                                                    </span>
-                                                </div>-->
+                                                <!--                                                <div class="input-group table-options">
+                                                                                                    <select class="chosen-select form-control">
+                                                                                                        <option>Bulk Action</option>
+                                                                                                        <option>Delete Selected</option>
+                                                                                                        <option>Copy Selected</option>
+                                                                                                        <option>Archive Selected</option>
+                                                                                                    </select>
+                                                                                                    <span class="input-group-btn">
+                                                                                                        <button class="btn btn-default" type="button">Apply</button>
+                                                                                                    </span>
+                                                                                                </div>-->
                                             </div>
 
                                             <div class="col-sm-4 text-center">

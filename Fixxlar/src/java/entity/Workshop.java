@@ -30,11 +30,11 @@ public class Workshop {
     private String category;
     private String carBrands;
     private String remark;
-    private byte isActive;
+    private int status;
 
     public Workshop(int id, String email, String name, String description, String website, String address, String openingHour,
             String openingHourFormat, double latitude, double longitude, String contact, String contact2, String location,
-            String specialize, String category, String carBrands, String remark, byte isActive) {
+            String specialize, String category, String carBrands, String remark, int status) {
         this.email = email;
         this.name = name;
         this.address = address;
@@ -52,7 +52,7 @@ public class Workshop {
         this.specialize = specialize;
         this.category = category;
         this.remark = remark;
-        this.isActive = isActive;
+        this.status = status;
     }
 
     public int getId() {
@@ -123,7 +123,7 @@ public class Workshop {
         return category;
     }
 
-    public byte getIsActive() {
-        return isActive;
+    public int getStatus() {
+        return status;
     }
 }

@@ -5,15 +5,12 @@
  */
 package servlet;
 
-import util.HashCode;
-import dao.WebUserDAO;
+import dao.QuotationRequestDAO;
+import dao.WorkshopDAO;
 import entity.WebUser;
+import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joanne
  */
-@WebServlet(name = "AuthenticateServlet", urlPatterns = {"/Authenticate"})
-public class AuthenticateServlet extends HttpServlet {
+@WebServlet(name = "AddOfferServlet", urlPatterns = {"/AddOffer"})
+public class AddOfferServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,41 +35,23 @@ public class AuthenticateServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
-        String email = request.getParameter("email");
-        String passwordEntered = request.getParameter("password");
 
-        WebUserDAO dao = new WebUserDAO();
-        WebUser user = dao.retrieveUser(email);
-        HashCode hc = new HashCode();
-        if (user != null) {
-            String passwordHash = user.getPassword();
-            //check password
-
-            if (hc.check(passwordEntered, passwordHash)) {
-                session.setAttribute("loggedInUser", user);
-                String userType = user.getUserType();
-                session.setAttribute("loggedInUserType", userType);
-                if (userType.equals("Admin")) {
-                    response.sendRedirect("Admin.jsp");
-                } else {
-                    response.sendRedirect("Workshop.jsp");
-                    return;
-                }
-            } else {
-                request.setAttribute("errMsg", "Invalid Email/Password");
-                RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
-                view.forward(request, response);
-                return;
-            }
-        } else {
-            request.setAttribute("errMsg", "Invalid Email/Password");
-            RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
-            view.forward(request, response);
-            return;
-        }
+        int quotationRequestId = Integer.parseInt(request.getParameter("id"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        String description = request.getParameter("description");
+        WebUser user = (WebUser) session.getAttribute("loggedInUser");
+        String email = user.getEmail();
+        WorkshopDAO wDAO = new WorkshopDAO();
+        Workshop ws = wDAO.retrieveWorkshop(email);
+        int workshopId = ws.getId();
+        QuotationRequestDAO qrDAO = new QuotationRequestDAO();
+        qrDAO.addOffer(quotationRequestId, workshopId, price, description);
+        
+        //Error message? success message?
+        response.sendRedirect("ViewQuotationRequest.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,11 +66,7 @@ public class AuthenticateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(AuthenticateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -105,11 +80,7 @@ public class AuthenticateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(AuthenticateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

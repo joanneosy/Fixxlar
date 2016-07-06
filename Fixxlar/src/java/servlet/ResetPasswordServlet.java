@@ -6,7 +6,7 @@
 package servlet;
 
 import util.HashCode;
-import dao.UserDAO;
+import dao.WebUserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -94,7 +94,7 @@ public class ResetPasswordServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirmPassword");
         if (password.equals(confirmPassword)) {
             try {
-                UserDAO uDAO = new UserDAO();
+                WebUserDAO uDAO = new WebUserDAO();
                 HashCode hc = new HashCode();
                 password = hc.generateSaltedHash(password);
                 uDAO.updateUserPassword(email, password);

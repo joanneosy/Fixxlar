@@ -6,9 +6,9 @@
 package servlet;
 
 import util.HashCode;
-import dao.UserDAO;
+import dao.WebUserDAO;
 import dao.WorkshopDAO;
-import entity.User;
+import entity.WebUser;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -80,7 +80,7 @@ public class AddWorkshopServlet extends HttpServlet {
             password = hc.generateSaltedHash(password);
         }
 
-        UserDAO uDAO = new UserDAO();
+        WebUserDAO uDAO = new WebUserDAO();
         WorkshopDAO wDAO = new WorkshopDAO();
         String[] latLong = wDAO.retrieveLatLong(address);
         if (latLong == null) {

@@ -62,9 +62,9 @@
                     <th>ID</th>
                     <th>Email</th>
                     <th>Name</th>
+                    <th>Address</th>
                     <th>Description</th>
                     <th>Website</th>
-                    <th>Address</th>
                     <th>Opening Hours</th>
                     <th>Contact Number</th>
                     <th>Location</th>
@@ -102,8 +102,8 @@
                         }
                         out.println("</td>");
                         out.println("<td>" + w.getRemark() + "</td>");
-                        byte isActive = w.getIsActive();
-                        if (isActive == 0) {
+                        int status = w.getStatus();
+                        if (status == 0) {
                             out.println("<td>Inactive</td>");
                         } else {
                             out.println("<td>Active</td>");

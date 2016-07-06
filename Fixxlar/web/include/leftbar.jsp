@@ -13,7 +13,7 @@
         <ul class="menu">
 
             <li>
-                <a href="index.html">
+                <a href="Workshop.jsp">
                     <i class="fa fa-tachometer"></i> Dashboard
                     <!--<span class="badge badge-red">1</span>-->
                 </a>
@@ -25,17 +25,17 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="form-elements.html">
+                        <a href="Calendar.jsp">
                             <i class="fa fa-caret-right"></i> Calendar
                         </a>
                     </li>
                     <li>
-                        <a href="validation-elements.html">
+                        <a href="Inbox.jsp">
                             <i class="fa fa-caret-right"></i> Inbox
                         </a>
                     </li>
                     <li>
-                        <a href="form-wizard.html">
+                        <a href="Personalise.jsp">
                             <i class="fa fa-caret-right"></i> Personalise
                         </a>
                     </li>
@@ -48,30 +48,30 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="ui-elements.html">
+                        <a href="ViewRequest.jsp#New">
                             <i class="fa fa-caret-right"></i> View New Requests
                         </a>
                     </li>
                     <li>
-                        <a href="typography.html">
+                        <a href="ViewRequest.jsp#Ongoing">
                             <i class="fa fa-caret-right"></i> View Ongoing Requests
                         </a>
                     </li>
                     <li>
-                        <a href="tiles.html">
-                            <i class="fa fa-caret-right"></i> View Pending Requests
+                        <a href="ViewRequest.jsp#Completed">
+                            <i class="fa fa-caret-right"></i> View Completed Requests
                         </a>
                     </li>
                 </ul>
             </li>
 
             <li>
-                <a href="buttons.html">
+                <a href="Summary.jsp">
                     <i class="fa fa-tint"></i> Summary Report
                 </a>
             </li>
             <li>
-                <a href="grid.html">
+                <a href="Analytics.jsp">
                     <i class="fa fa-th"></i> Analytics
                 </a>
             </li>
@@ -83,12 +83,12 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="tables.html">
+                        <a href="Email.jsp">
                             <i class="fa fa-caret-right"></i> Send Email
                         </a>
                     </li>
                     <li>
-                        <a href="datatables.html">
+                        <a href="Inbox.jsp">
                             <i class="fa fa-caret-right"></i> Inbox
                         </a>
                     </li>
@@ -126,7 +126,7 @@
 
     </li>
 
-    <li class="settings" id="general-settings">
+<!--    <li class="settings" id="general-settings">
         <a href="#" class="sidebar-toggle underline" data-toggle="#general-settings">General Settings <i class="fa fa-angle-up"></i></a>
 
         <div class="form-group">
@@ -155,7 +155,7 @@
             </div>
         </div>
 
-    </li>
+    </li>-->
 
 
 </ul>

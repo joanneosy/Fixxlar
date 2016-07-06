@@ -4,22 +4,22 @@
     Author     : joanne.ong.2014
 --%>
 
-<%@page import="entity.User"%>
+<%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     // check if user is authenticated
     /*
-    User user = (User) session.getAttribute("loggedInUser");
+    WebUser user = (WebUser) session.getAttribute("loggedInUser");
     String userType = (String)session.getAttribute("loggedInUserType");
 
     if (user == null) {
         response.sendRedirect("Login.jsp");
         return;
-    }  else if (user.getUserType().equals("Admin")) {
+    }  else if (userType.equals("Admin")) {
         response.sendRedirect("Admin.jsp");
     }
-            */
+       */     
 
 %>
 
