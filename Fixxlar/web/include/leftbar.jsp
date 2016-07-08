@@ -53,13 +53,23 @@
                         </a>
                     </li>
                     <li>
-                        <a href="ViewRequest.jsp#Ongoing">
-                            <i class="fa fa-caret-right"></i> View Ongoing Requests
+                        <a href="ViewRequest.jsp#Pending">
+                            <i class="fa fa-caret-right"></i> View Pending Requests
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ViewRequest.jsp#Valet">
+                            <i class="fa fa-caret-right"></i> View Pending Valet Requests
                         </a>
                     </li>
                     <li>
                         <a href="ViewRequest.jsp#Completed">
                             <i class="fa fa-caret-right"></i> View Completed Requests
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ViewRequest.jsp#All">
+                            <i class="fa fa-caret-right"></i> View All Requests
                         </a>
                     </li>
                 </ul>

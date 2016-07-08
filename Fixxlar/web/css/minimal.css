@@ -2503,7 +2503,7 @@ a.submit:hover { text-decoration: none; }
 .nav.nav-tabs > li.disabled > a, .nav.nav-tabs > li.disabled > a:hover, .nav.nav-tabs > li.disabled > a:focus, .nav.nav-pills > li.disabled > a, .nav.nav-pills > li.disabled > a:hover, .nav.nav-pills > li.disabled > a:focus { color: rgba(255, 255, 255, 0.15); }
 .nav.nav-tabs > .open > a, .nav.nav-pills > .open > a { color: rgba(255, 255, 255, 0.8); background-color: transparent; border: 1px solid transparent; }
 .nav.nav-tabs > .open .dropdown-menu, .nav.nav-pills > .open .dropdown-menu { border: 1px solid rgba(0, 0, 0, 0.05); }
-.nav.nav-tabs > li > a, .nav.nav-pills > li > a { font-weight: 700; font-size: 14px; color: rgba(255, 255, 255, 0.4); margin-right: 0; margin-left: 0; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; }
+.nav.nav-tabs > li > a, .nav.nav-pills > li > a { font-weight: 700; font-size: 12px; color: rgba(255, 255, 255, 0.4); margin-right: 0; margin-left: 0; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; }
 .nav.nav-tabs > li > a:hover, .nav.nav-pills > li > a:hover { color: rgba(255, 255, 255, 0.8); background-color: transparent; border: 1px solid transparent; }
 .nav.nav-tabs > li > a i, .nav.nav-pills > li > a i { font-size: 14px; }
 .nav.nav-tabs > li.tab-title .search-result, .nav.nav-pills > li.tab-title .search-result { padding: 5px 15px; margin: 0; color: rgba(255, 255, 255, 0.5); font-size: 18px; line-height: 30px; }

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectWorkshop.jsp"%>
+<%--<%@include file="ProtectWorkshop.jsp"%>--%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,13 +34,13 @@
     </head>
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
-        <%            
+        <%
             String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
             if (successChangePasswordMsg != null) {
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
         %>
-    
+
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
         <!--/Preloader -->
@@ -137,14 +137,14 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                Ongoing Requests
+                                                                Pending-Valet Requests
                                                                 <h2 class="media-heading animate-number" data-value="5" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
 
                                                     </div>
                                                     <div class="back">
-                                                        <a href="ViewRequest.jsp#Ongoing">
+                                                        <a href="ViewRequest.jsp#Valet">
                                                             <i class="fa fa-bar-chart-o fa-4x"></i>
                                                             <span>More Information</span>
                                                         </a>
@@ -192,16 +192,16 @@
 
                                                             <div class="media-body">
                                                                 Average Rating
-                                                                <h2 class="media-heading animate-number" data-value="11" data-animation-duration="1500">0</h2>
+                                                                <h2 class="media-heading animate-number" data-value="4.2" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
                                                     </div>
-<!--                                                    <div class="back">
-                                                        <a href="#">
-                                                            <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                            <span>Check Summary</span>
-                                                        </a>
-                                                    </div>-->
+                                                    <!--                                                    <div class="back">
+                                                                                                            <a href="#">
+                                                                                                                <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                                <span>Check Summary</span>
+                                                                                                            </a>
+                                                                                                        </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -247,15 +247,15 @@
                                     <!-- tile body -->
                                     <div class="tile-body no-vpadding">
                                         <div class="table-responsive">
-                                            <table class="table table-custom table-sortable nomargin">
+                                            <table class="table table-custom1 table-sortable1 tablesorter" id="myTable">
                                                 <thead>
                                                     <tr>
-                                                        <th class="sortable sort-numeric sort-asc">ID</th>
-                                                        <th class="sortable sort-numeric">Date Time</th>
-                                                        <th class="sortable sort-alpha">Customer Name</th>
-                                                        <th class="sortable sort-alpha">Car Make</th>
-                                                        <th class="sortable sort-numeric">Year of Manufacture</th>
-                                                        <th class="sortable sort-alpha">Service</th>
+                                                        <th class="sortable">ID</th>
+                                                        <th class="sortable">Date Time</th>
+                                                        <th class="sortable">Customer Name</th>
+                                                        <th class="sortable">Car Make</th>
+                                                        <th class="sortable">Year of Manufacture</th>
+                                                        <th class="sortable">Service</th>
                                                         <th class="text-center">Attachment</th>
                                                     </tr>
                                                 </thead>
@@ -814,6 +814,7 @@
 
 
     <section class="videocontent" id="video"></section>
+</body>
 
 
 
@@ -831,7 +832,14 @@
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
     <script src="js/minimal.min.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
 
+    <script>
+        $(document).ready(function(){
+            $('#myTable').tablesorter();
+        });
+    </script>
     <script>
         $(function () {
             // Initialize card flip
@@ -842,11 +850,11 @@
             });
 
             // sortable table
-            $('.table.table-sortable th.sortable').click(function () {
-                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                $(this).addClass(o);
-            });
+//            $('.table.table-sortable th.sortable').click(function () {
+//                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+//                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+//                $(this).addClass(o);
+//            });
 
             //todo's
             $('#todolist li label').click(function () {
@@ -919,8 +927,9 @@
                 $("#chat-content").getNiceScroll().resize();
             });
 
-        })
+        });
+
 
     </script>
-</body>
+    
 </html>
