@@ -513,7 +513,7 @@
                 </ul>
 !--%>
                             </div>              
-
+                                    
                             <div class="col-md-3">
 
                                 <ul class="inbox" id="mail-inbox">
@@ -703,16 +703,16 @@
                                 </ul>
                             </div>
 
-
+                            <%--
                             <div class="col-md-9">
                                 <div class="mail-content" id="mail-content">
-                                    <%--
+                                    
                                   <div class="quick-navigation">
                                     <button type="button" class="btn btn-default pull-left prev"><i class="fa fa-angle-left"></i></button>
                                     <h3><strong>Inbox</strong> (3/154)</h3>
                                     <button type="button" class="btn btn-default pull-right next"><i class="fa fa-angle-right"></i></button>
                                   </div>
-                                    --%>
+                                    
                                     <div class="message">
                                         <div class="header">
                                             <h1><strong>Mail Message</strong> Subject</h1>
@@ -745,7 +745,7 @@
                                                                   <blockquote class="filled withoutHeader">
                                                                     <p><i class="fa fa-quote-left pull-left"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                                                                   </blockquote>
-                                            --%>
+                                            
                                             <h4 class="filled"><i class="icon-tags"></i> Attachments</h4>
                                             <div class="filled">
                                                 <ul class="attachments">
@@ -757,12 +757,12 @@
                                             </div>
                                             <%--
                                               <h4 class="filled"><i class="icon-mail-reply"></i> Reply</h4>
-                                            --%>
+                                            
                                             <div style="text-align:right">
                                                 <%--
                                               <form>
                                                 <div id="message-wysiwyg"></div>
-                                                --%>
+                                                
                                                 <br>
                                                 <button type="submit" class="btn btn-greensea">Reply</button>
                                                 <%--
@@ -780,7 +780,7 @@
                             </div>
 
 
-
+                            --%>
                         </div>
                         <!-- /row -->
 
