@@ -64,16 +64,16 @@
                     out.println("<td>" + qr.getName() + "</td>");
                     out.println("<td>" + qr.getDetails() + "</td>");
                     out.println("<td>" + qr.getDescription() + "</td>");
-                    out.println("<td>" + qr.getVehicleId() + "</td>");
+                    out.println("<td>" + qr.getVehicle().getId() + "</td>");
                     out.println("<td>" + qr.getMileage() + "</td>");
                     out.println("<td>" + qr.getUrgency() + "</td>");
                     out.println("<td>" + qr.getAmenities());
                     out.println("<td>" + qr.getAddress());
                     out.println("<td>" + qr.getPhotos() + "</td>");
-                    out.println("<td>" + vDAO.getVehicle(qr.getVehicleId()).getMake() + "</td>");
-                    out.println("<td>" + vDAO.getVehicle(qr.getVehicleId()).getModel() + "</td>");
-                    out.println("<td>" + vDAO.getVehicle(qr.getVehicleId()).getYear() + "</td>");
-                    out.println("<td>" + vDAO.getVehicle(qr.getVehicleId()).getPlateNumber() + "</td>");
+                    out.println("<td>" + qr.getVehicle().getMake() + "</td>");
+                    out.println("<td>" + qr.getVehicle().getModel() + "</td>");
+                    out.println("<td>" + qr.getVehicle().getYear() + "</td>");
+                    out.println("<td>" + qr.getVehicle().getPlateNumber() + "</td>");
                     out.println("<td>" + qr.getDate() + "</td>");
                     int status = qr.getStatus();
                     if (status == 1) {

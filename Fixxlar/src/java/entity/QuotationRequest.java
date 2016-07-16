@@ -33,18 +33,18 @@ public class QuotationRequest {
     private int workshopId;
     private double price;
     private int offerId;
-    private int customerId;
+    private Customer customer;
+    private Vehicle vehicle;
 
-
-    public QuotationRequest(int id, String name, String details, String description, int vehicleId, String mileage, String urgency,
+    public QuotationRequest(int id, String name, String details, String description, Vehicle vehicle, String mileage, String urgency,
             String amenities, double latitude, double longitude, String address, String photos, Timestamp date, int status, 
-            int workshopId, double price, int offerId, int customerId) {
+            int workshopId, double price, int offerId, Customer customer) {
         this.details = details;
         this.name = name;
         this.address = address;
         this.id = id;
         this.description = description;
-        this.vehicleId = vehicleId;
+        this.vehicle = vehicle;
         this.mileage = mileage;
         this.urgency = urgency;
         this.amenities = amenities;
@@ -56,7 +56,7 @@ public class QuotationRequest {
         this.workshopId = workshopId;
         this.price = price;
         this.offerId = offerId;
-        this.customerId = customerId;
+        this.customer = customer;
                
 
     }
@@ -73,8 +73,8 @@ public class QuotationRequest {
         return details;
     }
 
-    public int getVehicleId() {
-        return vehicleId;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     public String getDescription() {
@@ -129,8 +129,8 @@ public class QuotationRequest {
         return offerId;
     }
     
-    public int getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 }
 
