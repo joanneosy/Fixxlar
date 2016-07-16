@@ -17,14 +17,17 @@ public class Vehicle {
     private int year;
     private String plateNumber;
     private int customerID;
+    private String colour;
+    private String control;
     
-    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID) {
+    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String color, String control) {
         this.id = id;
         this.make = make;
         this.model = model;
         this.year = year;
         this.plateNumber = plateNumber;
         this.customerID = customerID;
+        this.colour = colour;
     }
     
     public int getId() {
@@ -49,5 +52,13 @@ public class Vehicle {
     
     public int getCustomerID() {
         return customerID;
+    }
+    
+    public String getColour() {
+        return colour;
+    }
+    
+    public String getControl() {
+        return control;
     }
 }
