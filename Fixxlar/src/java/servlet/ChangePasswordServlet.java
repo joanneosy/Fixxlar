@@ -46,27 +46,21 @@ public class ChangePasswordServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirmNewPassword");
         WebUser user = (WebUser)session.getAttribute("loggedInUser");
         String email = user.getEmail();
-        if (oldPassword.equals("") || newPassword.equals("") || confirmPassword.equals("")) {
+        WebUserDAO uDAO = new WebUserDAO();
+        if (!newPassword.equals(confirmPassword)) {
             request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
             request.setAttribute("email", email);
             RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
             view.forward(request, response);
         }
-        String passwordStored = user.getPassword();
-        HashCode hc = new HashCode();
+        boolean isSuccess = uDAO.updateUserPassword(user.getStaffId(), user.getToken(), oldPassword, newPassword);
         
-        // Check if the old password matches the password stored in the database
-        // and if the new passwords match
-        if (hc.check(oldPassword, passwordStored) && newPassword.equals(confirmPassword)) {
+        if (isSuccess) {
             try {
-                WebUserDAO uDAO = new WebUserDAO();
-                newPassword = hc.generateSaltedHash(newPassword);
-                uDAO.updateUserPassword(email, newPassword);
                 request.setAttribute("successChangePasswordMsg", "Your password has been changed!");
-                String redirectTo = user.getUserType() + ".jsp";
+                String redirectTo = session.getAttribute("loggedInUserType") + ".jsp";
                 RequestDispatcher view = request.getRequestDispatcher(redirectTo);
                 view.forward(request, response);
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

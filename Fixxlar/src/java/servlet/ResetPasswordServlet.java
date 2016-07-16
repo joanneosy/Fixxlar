@@ -95,9 +95,6 @@ public class ResetPasswordServlet extends HttpServlet {
         if (password.equals(confirmPassword)) {
             try {
                 WebUserDAO uDAO = new WebUserDAO();
-                HashCode hc = new HashCode();
-                password = hc.generateSaltedHash(password);
-                uDAO.updateUserPassword(email, password);
                 request.setAttribute("successResetPasswordMsg", "Log in with your new password!");
                 RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
                 view.forward(request, response);

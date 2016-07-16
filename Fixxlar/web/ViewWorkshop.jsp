@@ -51,7 +51,7 @@
                 ArrayList<Workshop> allWorkshops = (ArrayList<Workshop>) request.getAttribute("workshops");
                 if (allWorkshops == null) {
                     WorkshopDAO wDAO = new WorkshopDAO();
-                    allWorkshops = wDAO.retrieveAllWorkshops("", "");
+                    allWorkshops = wDAO.retrieveAllWorkshops(user.getStaffId(), user.getToken());
                 }
                 if (allWorkshops.size() == 0) {
                     out.println("No workshop found. Try again.<br/>");
@@ -68,9 +68,9 @@
                     <th>Opening Hours</th>
                     <th>Contact Number</th>
                     <th>Location</th>
-                    <th>Specialize</th>
+                    <th>Brands Carried</th>
                     <th>Category</th>
-                    <th>Car Brands</th>
+                    <th>Specialize</th>
                     <th>Remark</th>
                     <th>Active</th>
                     <th>Edit</th>
@@ -93,10 +93,10 @@
                         }
                         out.println("</td>");
                         out.println("<td>" + w.getLocation() + "</td>");
-                        out.println("<td>" + w.getSpecialize() + "</td>");
+                        out.println("<td>" + w.getBrandsCarried() + "</td>");
                         out.println("<td>" + w.getCategory() + "</td>");
                         out.println("<td>");
-                        String[] carBrands = w.getCarBrands().split(",");
+                        String[] carBrands = w.getSpecialize().split(",");
                         for (String s : carBrands) {
                             out.println(s + ", ");
                         }

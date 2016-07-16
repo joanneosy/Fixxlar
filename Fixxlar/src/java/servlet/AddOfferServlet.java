@@ -44,12 +44,13 @@ public class AddOfferServlet extends HttpServlet {
         String description = request.getParameter("description");
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         String email = user.getEmail();
+        int staffId = user.getStaffId();
+        String token = user.getToken();
         WorkshopDAO wDAO = new WorkshopDAO();
-        Workshop ws = wDAO.retrieveWorkshop(email);
+        Workshop ws = wDAO.retrieveWorkshop(email, staffId, token);
         int workshopId = ws.getId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        qrDAO.addOffer(quotationRequestId, workshopId, price, description);
-        
+        qrDAO.addOffer(user.getStaffId(), user.getToken(), quotationRequestId, workshopId, price, description);
         //Error message? success message?
         response.sendRedirect("ViewQuotationRequest.jsp");
     }

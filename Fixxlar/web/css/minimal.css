@@ -470,8 +470,12 @@ table tbody.files > tr > td .preview canvas, table tbody.files > tr > td .previe
 .vertical-mail ul.navigation > li > ul > li.tag a, .horizontal-mail ul.navigation > li > ul > li.tag a { font-size: 12px; padding-right: 33px; }
 .vertical-mail ul.navigation > li > ul > li.tag a span.label, .horizontal-mail ul.navigation > li > ul > li.tag a span.label { position: absolute; right: 20px; display: inline-block; width: 5px; height: 15px; top: 50%; margin-top: -7px; padding: 0; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; }
 
-ul.inbox { list-style-type: none; margin: 0; height: 100%; overflow: auto; background-color: rgba(255, 255, 255, 0.15); -webkit-border-radius: 0 4px 4px 0; -moz-border-radius: 0 4px 4px 0; -ms-border-radius: 0 4px 4px 0; -o-border-radius: 0 4px 4px 0; border-radius: 0 4px 4px 0; -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); padding: 0 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
+ul.inbox { list-style-type: none; margin: 0; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.3); -webkit-border-radius: 0 4px 4px 0; -moz-border-radius: 0 4px 4px 0; -ms-border-radius: 0 4px 4px 0; -o-border-radius: 0 4px 4px 0; border-radius: 0 4px 4px 0; -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); padding: 0 20px; border: 1px solid rgba(255, 255, 255, 0.1); }
 ul.inbox > li.heading h1 { text-align: center; color: white; }
+ul.inbox > li.heading h2 { text-align: center; color: white; }
+ul.inbox > li.heading h3 { text-align: center; color: white; }
+ul.inbox > li.heading h4 { text-align: center; color: white; }
+ul.inbox > li.heading h5 { text-align: center; color: white; }
 ul.inbox > li.search { margin: 20px 0; text-align: center; }
 ul.inbox > li.search i { line-height: 28px; margin-right: 5px; color: rgba(255, 255, 255, 0.7); }
 ul.inbox > li.search input { font-family: "Ubuntu Mono", sans-serif; font-size: 16px; color: white; background: none; border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.6); -webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear; -webkit-appearance: none !important; -webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0; -webkit-font-smoothing: antialiased; padding: 0 !important; line-height: 18px; min-height: 26px; }
@@ -1569,7 +1573,7 @@ select.form-control.input-lg + .chosen-container .chosen-choices .search-field i
 .tile .tile-body .inner-container.inline { display: inline-block; }
 .tile .tile-body.example [class^="col-"] { padding: 10px 15px; background-color: white; color: #717171; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; }
 .tile .tile-body.example .row { margin: 0; margin-bottom: 10px; }
-.tile .tile-footer { padding: 10px 15px; }
+.tile .tile-footer { padding: 35px 15px; }
 .tile [class^="tile-"] { position: relative; background-color: transparent; }
 .tile [class^="tile-"].border-top { border-top: 1px solid rgba(0, 0, 0, 0.05); }
 .tile [class^="tile-"].paddingtop { padding: 15px 0 0 0; }

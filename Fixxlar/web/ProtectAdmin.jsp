@@ -10,12 +10,14 @@
 <%
     // check if user is authenticated
     WebUser user = (WebUser) session.getAttribute("loggedInUser");
-
+    String userType = (String) session.getAttribute("loggedInUserType");
     if (user == null) {
         response.sendRedirect("Login.jsp");
         return;
-    } else if (user.getUserType().equals("Workshop")) {
+    } else if (userType.equals("Workshop")) {
         response.sendRedirect("Workshop.jsp");
-    }
+    } else if (userType.equals("Groomer")) {
+        response.sendRedirect("Groomer.jsp");
+    } 
 
 %>

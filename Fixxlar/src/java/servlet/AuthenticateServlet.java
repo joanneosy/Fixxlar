@@ -45,28 +45,22 @@ public class AuthenticateServlet extends HttpServlet {
         String passwordEntered = request.getParameter("password");
 
         WebUserDAO dao = new WebUserDAO();
-        WebUser user = dao.retrieveUser(email);
-        HashCode hc = new HashCode();
+        WebUser user = dao.authenticateUser(email, passwordEntered);
         if (user != null) {
-            String passwordHash = user.getPassword();
-            //check password
-
-            if (hc.check(passwordEntered, passwordHash)) {
-                session.setAttribute("loggedInUser", user);
-                String userType = user.getUserType();
-                session.setAttribute("loggedInUserType", userType);
-                if (userType.equals("Admin")) {
-                    response.sendRedirect("Admin.jsp");
-                } else {
-                    response.sendRedirect("Workshop.jsp");
-                    return;
-                }
-            } else {
-                request.setAttribute("errMsg", "Invalid Email/Password");
-                RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
-                view.forward(request, response);
+            session.setAttribute("loggedInUser", user);
+            int userType = user.getUserType();
+            if (userType == 1) {
+                session.setAttribute("loggedInUserType", "Workshop");
+                response.sendRedirect("Workshop.jsp");
+            } else if (userType == 2) {
+                session.setAttribute("loggedInUserType", "Admin");
+                response.sendRedirect("Admin.jsp");
                 return;
+            } else if (userType == 3) {
+                session.setAttribute("loggedInUserType", "Groomer");
+                response.sendRedirect("Groomer.jsp");
             }
+
         } else {
             request.setAttribute("errMsg", "Invalid Email/Password");
             RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
