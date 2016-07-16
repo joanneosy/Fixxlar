@@ -9,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import entity.CarBrand;
 import entity.Workshop;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,120 +44,343 @@ import util.ConnectionManager;
  * @author Fixxlar
  */
 public class WorkshopDAO {
-    
+
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public Workshop retrieveWorkshop(String givenEmail) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        Workshop workshop = null;
-        try {
-            conn = ConnectionManager.getConnection();
-            pstmt = null;
-            rs = null;
-            pstmt = conn.prepareStatement("SELECT * FROM `shops` WHERE email =\"" + givenEmail + "\"");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int userID = rs.getInt("id");
-                String email = rs.getString("email");
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                String website = rs.getString("website");
-                String address = rs.getString("address");
-                String openingHour = rs.getString("opening_hour_full");
-                String openingHourFormat = rs.getString("opening_hour_format");
-                double latitude = rs.getDouble("latitude");
-                double longitude = rs.getDouble("longitude");
-                String contact = rs.getString("contact");
-                String contact2 = rs.getString("contact2");
-                String location = rs.getString("location");
-                String specialize = rs.getString("specialize");
-                String category = rs.getString("category");
-                String carBrands = rs.getString("brand_carried");
-                String remark = rs.getString("remark");
-                int status = rs.getByte("is_active");
+    public Workshop retrieveWorkshop(String givenEmail, int staffId, String token) throws UnsupportedEncodingException, IOException {
+        Workshop ws = null;
+        String url = "http://119.81.43.85/erp/workshop/get_shop_by_id_or_email";
 
-                workshop = new Workshop(userID, email, name, description, website, address, openingHour, openingHourFormat,
-                        latitude, longitude, contact, contact2, location, specialize, category, carBrands, remark, status);
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("email", givenEmail));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+
+        JsonElement shopElement = jobj.get("payload");
+        JsonObject shop = null;
+        if (shopElement.isJsonNull()) {
+            return ws;
+        } else {
+            shop = shopElement.getAsJsonObject().getAsJsonObject("shop");
+            JsonElement attElement = shop.get("id");
+            int id = 0;
+            if (!attElement.isJsonNull()) {
+                id = attElement.getAsInt();
             }
-
-            //Return null if email does not exist in database
-            return workshop;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, pstmt, rs);
-            return workshop;
-        }
-    }
-
-    public Workshop retrieveWorkshop(int givenID) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        Workshop workshop = null;
-        try {
-            conn = ConnectionManager.getConnection();
-            pstmt = null;
-            rs = null;
-            pstmt = conn.prepareStatement("SELECT * FROM `shops` WHERE id =" + givenID);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int userID = rs.getInt("id");
-                String email = rs.getString("email");
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                String website = rs.getString("website");
-                String address = rs.getString("address");
-                String openingHour = rs.getString("opening_hour_full");
-                String openingHourFormat = rs.getString("opening_hour_format");
-                double latitude = rs.getDouble("latitude");
-                double longitude = rs.getDouble("longitude");
-                String contact = rs.getString("contact");
-                String contact2 = rs.getString("contact2");
-                String location = rs.getString("location");
-                String specialize = rs.getString("specialize");
-                String category = rs.getString("category");
-                String carBrands = rs.getString("brand_carried");
-                String remark = rs.getString("remark");
-                int status = rs.getInt("is_active");
-
-                workshop = new Workshop(userID, email, name, description, website, address, openingHour, openingHourFormat,
-                        latitude, longitude, contact, contact2, location, specialize, category, carBrands, remark, status);
+            attElement = shop.get("name");
+            String name = "";
+            if (!attElement.isJsonNull()) {
+                name = attElement.getAsString();
             }
-
-            //Return null if email does not exist in database
-            return workshop;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, pstmt, rs);
-            return workshop;
+            attElement = shop.get("email");
+            String email = "";
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
+            attElement = shop.get("description");
+            String description = "";
+            if (!attElement.isJsonNull()) {
+                description = attElement.getAsString();
+            }
+            attElement = shop.get("website");
+            String website = "";
+            if (!attElement.isJsonNull()) {
+                website = attElement.getAsString();
+            }
+            attElement = shop.get("address");
+            String address = "";
+            if (!attElement.isJsonNull()) {
+                address = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hour_full");
+            String openingHour = "";
+            if (!attElement.isJsonNull()) {
+                openingHour = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hour_format");
+            String openingHourFormat = "";
+            if (!attElement.isJsonNull()) {
+                openingHourFormat = attElement.getAsString();
+            }
+            attElement = shop.get("latitude");
+            double latitude = 0.0;
+            if (!attElement.isJsonNull()) {
+                latitude = attElement.getAsDouble();
+            }
+            attElement = shop.get("longitude");
+            double longitude = 0.0;
+            if (!attElement.isJsonNull()) {
+                longitude = attElement.getAsDouble();
+            }
+            attElement = shop.get("contact");
+            String contact = "";
+            if (!attElement.isJsonNull()) {
+                contact = attElement.getAsString();
+            }
+            attElement = shop.get("contact2");
+            String contact2 = "";
+            if (!attElement.isJsonNull()) {
+                contact2 = attElement.getAsString();
+            }
+            attElement = shop.get("location");
+            String location = "";
+            if (!attElement.isJsonNull()) {
+                location = attElement.getAsString();
+            }
+            attElement = shop.get("specialize");
+            String specialize = "";
+            if (!attElement.isJsonNull()) {
+                specialize = attElement.getAsString();
+            }
+            attElement = shop.get("category");
+            String category = "";
+            if (!attElement.isJsonNull()) {
+                category = attElement.getAsString();
+            }
+            attElement = shop.get("brand_carried");
+            String brandsCarried = "";
+            if (!attElement.isJsonNull()) {
+                brandsCarried = attElement.getAsString();
+            }
+            attElement = shop.get("remark");
+            String remark = "";
+            if (!attElement.isJsonNull()) {
+                remark = attElement.getAsString();
+            }
+            attElement = shop.get("status");
+            int status = 0;
+            if (!attElement.isJsonNull()) {
+                status = attElement.getAsInt();
+            }
+            ws = new Workshop(id, email, name, description, website, address, openingHour, openingHourFormat,
+                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, status);
         }
+        return ws;
     }
 
-    public void addWorkshop(String email, String name, String description, String website, String address, String openingHour, String openingHourFormat, double latitude,
-            double longitude, String contact, String contact2, String location, String specialize, String category, String carBrands, String remark) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public Workshop retrieveWorkshop(int givenID, int staffId, String token) throws IOException {
+        Workshop ws = null;
+        String url = "http://119.81.43.85/erp/workshop/get_shop_by_id_or_email";
 
-        try {
-            conn = ConnectionManager.getConnection();
-            pstmt = null;
-            pstmt = conn.prepareStatement("INSERT INTO shops VALUES (NULL,'" + email + "','" + name + "','" + description + "','" + website + "','"
-                    + address + "','" + openingHour + "','" + openingHourFormat + "','" + latitude + "','" + longitude + "','" + contact + "','"
-                    + contact2 + "','" + location + "','" + specialize + "','" + category + "','" + carBrands + "','" + remark + "'," + 1 + ");");
-            pstmt.executeUpdate();
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, pstmt);
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("id", givenID + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
         }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+
+        JsonElement shopElement = jobj.get("payload");
+        JsonObject shop = null;
+        if (shopElement.isJsonNull()) {
+            return ws;
+        } else {
+            shop = shopElement.getAsJsonObject().getAsJsonObject("shop");
+            JsonElement attElement = shop.get("id");
+            int id = 0;
+            if (!attElement.isJsonNull()) {
+                id = attElement.getAsInt();
+            }
+            attElement = shop.get("name");
+            String name = "";
+            if (!attElement.isJsonNull()) {
+                name = attElement.getAsString();
+            }
+            attElement = shop.get("email");
+            String email = "";
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
+            attElement = shop.get("description");
+            String description = "";
+            if (!attElement.isJsonNull()) {
+                description = attElement.getAsString();
+            }
+            attElement = shop.get("website");
+            String website = "";
+            if (!attElement.isJsonNull()) {
+                website = attElement.getAsString();
+            }
+            attElement = shop.get("address");
+            String address = "";
+            if (!attElement.isJsonNull()) {
+                address = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hour_full");
+            String openingHour = "";
+            if (!attElement.isJsonNull()) {
+                openingHour = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hour_format");
+            String openingHourFormat = "";
+            if (!attElement.isJsonNull()) {
+                openingHourFormat = attElement.getAsString();
+            }
+            attElement = shop.get("latitude");
+            double latitude = 0.0;
+            if (!attElement.isJsonNull()) {
+                latitude = attElement.getAsDouble();
+            }
+            attElement = shop.get("longitude");
+            double longitude = 0.0;
+            if (!attElement.isJsonNull()) {
+                longitude = attElement.getAsDouble();
+            }
+            attElement = shop.get("contact");
+            String contact = "";
+            if (!attElement.isJsonNull()) {
+                contact = attElement.getAsString();
+            }
+            attElement = shop.get("contact2");
+            String contact2 = "";
+            if (!attElement.isJsonNull()) {
+                contact2 = attElement.getAsString();
+            }
+            attElement = shop.get("location");
+            String location = "";
+            if (!attElement.isJsonNull()) {
+                location = attElement.getAsString();
+            }
+            attElement = shop.get("specialize");
+            String specialize = "";
+            if (!attElement.isJsonNull()) {
+                specialize = attElement.getAsString();
+            }
+            attElement = shop.get("category");
+            String category = "";
+            if (!attElement.isJsonNull()) {
+                category = attElement.getAsString();
+            }
+            attElement = shop.get("brand_carried");
+            String brandsCarried = "";
+            if (!attElement.isJsonNull()) {
+                brandsCarried = attElement.getAsString();
+            }
+            attElement = shop.get("remark");
+            String remark = "";
+            if (!attElement.isJsonNull()) {
+                remark = attElement.getAsString();
+            }
+            attElement = shop.get("status");
+            int status = 0;
+            if (!attElement.isJsonNull()) {
+                status = attElement.getAsInt();
+            }
+            ws = new Workshop(id, email, name, description, website, address, openingHour, openingHourFormat,
+                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, status);
+        }
+        return ws;
     }
 
-    public ArrayList<Workshop> retrieveAllWorkshops(String orderBy, String givenIsActive) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> addWorkshop(String email, String name, String description, String website, String address, String openingHour, String openingHourFormat, double latitude,
+            double longitude, String contact, String contact2, String location, String specialize, String category, String brandsCarried,
+            String remark, int staffId, String token) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/workshop/get_shop_by_id_or_email";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("name", name));
+        urlParameters.add(new BasicNameValuePair("description", description));
+        urlParameters.add(new BasicNameValuePair("website", website));
+        urlParameters.add(new BasicNameValuePair("address", address));
+        urlParameters.add(new BasicNameValuePair("opening_hour_full", openingHour));
+        urlParameters.add(new BasicNameValuePair("opening_hour_format", openingHourFormat));
+        urlParameters.add(new BasicNameValuePair("latitude", latitude + ""));
+        urlParameters.add(new BasicNameValuePair("longitude", longitude + ""));
+        urlParameters.add(new BasicNameValuePair("contact", contact));
+        urlParameters.add(new BasicNameValuePair("contact2", contact2));
+        urlParameters.add(new BasicNameValuePair("location", location));
+        urlParameters.add(new BasicNameValuePair("specialize", specialize));
+        urlParameters.add(new BasicNameValuePair("category", category));
+        urlParameters.add(new BasicNameValuePair("brand_carried", brandsCarried));
+        urlParameters.add(new BasicNameValuePair("remark", remark));
+        urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("status", 1 + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        String errorMessage = null;
+        ArrayList<String> errors = new ArrayList<String>();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            errorMessage = jobj.get("error_message").getAsString();
+            errors.add(errorMessage);
+            JsonElement fields = jobj.get("payload");
+            if (!fields.isJsonNull()) {
+                JsonArray arr = fields.getAsJsonObject().get("error_field").getAsJsonArray();
+            for (int i = 0; i < arr.size(); i++) {
+                String f = arr.get(i).getAsString();
+                errors.add(f);
+            }
+            }
+        }
+
+        return errors;
+
+    }
+
+    public ArrayList<Workshop> retrieveAllWorkshops(int staffId, String token) throws UnsupportedEncodingException, IOException {
         ArrayList<Workshop> allWorkshops = new ArrayList<Workshop>();
         String url = "http://119.81.43.85/erp/workshop/get_all_shop";
 
@@ -167,8 +391,8 @@ public class WorkshopDAO {
         post.setHeader("User-Agent", USER_AGENT);
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("user_id", "337"));
-        urlParameters.add(new BasicNameValuePair("token", "1c21fa2b0e16cc95e4f3c837b36c812d9588e465a2d770c77b73c9e4744cb60fff61accec3ad0b37e649adf08fe551f4d4c70eff4e9233922ac4c256428589e696f055593e3393fbd2f335358985f815d7f984055b8ff2d977482dfc0bf4c915057b819fb6079edef02a88bde1d3241b7dfaaaf7bac9d4a74a3deb4ef838ac0529026ec97f88ab379a2e0c15340a857a775b0ac7f59b7a74586131084e1cbf66764f37a479e8621bd788d95c4d1f6d82a7ea2fa760a482cdf8b6f593f3d742a073b71a219197f49122fc1784fa4f4b7ed84371d33b4bf2e25a3dfa23a2b1501cf35b5434cb0a1678a7053efa43b0a533bcd288b3134cf0f81cae2f43e8ff14d72579f90a6ca86014ceab4992b5d352bb24bdc570ab8eabcfcd35b46a6c023df46bce56d51ea582d30da14bc84928d346346f1c93312fbd3ee784024f05da80a59ba8f9b733962b30165780af8697f3399a9994eac0c170029308efa00be5d0343e80c5390f3d91d82380003beea5d51b770e0a03c706c4f9ffec142c15f2a6de6cd392f3aa11b4cab14814205471e4abe371e3843aae412321fb8cde228eb66dfe812585f3324e192289a405e59297d7e1d9301bf49328f174a0e4b90df82064075b43d3c2539b3c09ff2f24d9dbbe00f913170696c912a84fef61563cc5f2b5e0a6b858441db2bb26b23ebeb1947ab235d9149e5eb46d09d154024d0c8a217a"));
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -189,102 +413,229 @@ public class WorkshopDAO {
 
         for (int i = 0; i < arr.size(); i++) {
             JsonElement workshop = arr.get(i);
-            JsonObject workshopObj = workshop.getAsJsonObject();
-            JsonElement attElement = workshopObj.get("id");
-            int id = attElement.getAsInt();
-            attElement = workshopObj.get("name");
-            String name = attElement.getAsString();
-            attElement = workshopObj.get("email");
+            JsonObject shop = workshop.getAsJsonObject();
+            JsonElement attElement = shop.get("id");
+            int id = 0;
+            if (!attElement.isJsonNull()) {
+                id = attElement.getAsInt();
+            }
+            attElement = shop.get("name");
+            String name = "";
+            if (!attElement.isJsonNull()) {
+                name = attElement.getAsString();
+            }
+            attElement = shop.get("email");
             String email = "";
-            //String email = attElement.getAsString();
-            attElement = workshopObj.get("description");
-            String description = attElement.getAsString();
-            attElement = workshopObj.get("website");
-            String website = attElement.getAsString();
-            attElement = workshopObj.get("address");
-            String address = attElement.getAsString();
-            attElement = workshopObj.get("opening_hour_full");
-            String openingHour = attElement.getAsString();
-            attElement = workshopObj.get("opening_hour_format");
-            String openingHourFormat = attElement.getAsString();
-            attElement = workshopObj.get("latitude");
-            double latitude = attElement.getAsDouble();
-            attElement = workshopObj.get("longitude");
-            double longitude = attElement.getAsDouble();
-            attElement = workshopObj.get("contact");
-            String contact = attElement.getAsString();
-            attElement = workshopObj.get("contact2");
-            String contact2 = attElement.getAsString();
-            attElement = workshopObj.get("location");
-            String location = attElement.getAsString();
-            attElement = workshopObj.get("specialize");
-            String specialize = attElement.getAsString();
-            attElement = workshopObj.get("category");
-            String category = attElement.getAsString();
-            attElement = workshopObj.get("brand_carried");
-            String carBrands = attElement.getAsString();
-            attElement = workshopObj.get("remark");
-            String remark = attElement.getAsString();
-            attElement = workshopObj.get("status");
-            int status = 1;
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
+            attElement = shop.get("description");
+            String description = "";
+            if (!attElement.isJsonNull()) {
+                description = attElement.getAsString();
+            }
+            attElement = shop.get("website");
+            String website = "";
+            if (!attElement.isJsonNull()) {
+                website = attElement.getAsString();
+            }
+            attElement = shop.get("address");
+            String address = "";
+            if (!attElement.isJsonNull()) {
+                address = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hour_full");
+            String openingHour = "";
+            if (!attElement.isJsonNull()) {
+                openingHour = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hour_format");
+            String openingHourFormat = "";
+            if (!attElement.isJsonNull()) {
+                openingHourFormat = attElement.getAsString();
+            }
+            attElement = shop.get("latitude");
+            double latitude = 0.0;
+            if (!attElement.isJsonNull()) {
+                latitude = attElement.getAsDouble();
+            }
+            attElement = shop.get("longitude");
+            double longitude = 0.0;
+            if (!attElement.isJsonNull()) {
+                longitude = attElement.getAsDouble();
+            }
+            attElement = shop.get("contact");
+            String contact = "";
+            if (!attElement.isJsonNull()) {
+                contact = attElement.getAsString();
+            }
+            attElement = shop.get("contact2");
+            String contact2 = "";
+            if (!attElement.isJsonNull()) {
+                contact2 = attElement.getAsString();
+            }
+            attElement = shop.get("location");
+            String location = "";
+            if (!attElement.isJsonNull()) {
+                location = attElement.getAsString();
+            }
+            attElement = shop.get("specialize");
+            String specialize = "";
+            if (!attElement.isJsonNull()) {
+                specialize = attElement.getAsString();
+            }
+            attElement = shop.get("category");
+            String category = "";
+            if (!attElement.isJsonNull()) {
+                category = attElement.getAsString();
+            }
+            attElement = shop.get("brand_carried");
+            String brandsCarried = "";
+            if (!attElement.isJsonNull()) {
+                brandsCarried = attElement.getAsString();
+            }
+            attElement = shop.get("remark");
+            String remark = "";
+            if (!attElement.isJsonNull()) {
+                remark = attElement.getAsString();
+            }
+            attElement = shop.get("status");
+            int status = 0;
+            if (!attElement.isJsonNull()) {
+                status = attElement.getAsInt();
+            }
             //int status = attElement.getAsInt();
             Workshop ws = new Workshop(id, email, name, description, website, address, openingHour, openingHourFormat,
-                    latitude, longitude, contact, contact2, location, specialize, category, carBrands, remark, status);
+                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, status);
 
             allWorkshops.add(ws);
         }
         return allWorkshops;
     }
 
-    public void updateWorkshop(int userID, String email, String name, String description, String website, String address, String openingHour, String openingHourFormat, double latitude,
-            double longitude, String contact, String contact2, String location, String specialize, String category, String carBrands, String remark, int status) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public ArrayList<String> updateWorkshop(int id, String email, String name, String description, String website, String address, String openingHour, String openingHourFormat, double latitude,
+            double longitude, String contact, String contact2, String location, String specialize, String category, String brandsCarried,
+            String remark, int status, int staffId, String token) throws UnsupportedEncodingException, IOException {
 
-        try {
-            conn = ConnectionManager.getConnection();
-            pstmt = null;
-            pstmt = conn.prepareStatement("UPDATE shops SET name = '" + name + "', email = '" + email + "', description = '" + description + "', website = '"
-                    + website + "', address = '" + address + "', opening_hour_full = '" + openingHour + "', opening_hour_format = '"
-                    + openingHourFormat + "', latitude = '" + latitude + "', longitude = '" + longitude + "', contact = '" + contact + "', contact2 = '"
-                    + contact2 + "', location = '" + location + "', specialize = '" + specialize + "', category = '" + category + "', brand_carried = '"
-                    + carBrands + "', remark = '" + remark + "', is_active = " + status + " WHERE id = " + userID + ";");
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, pstmt);
+        String url = "http://119.81.43.85/erp/workshop/edit_shop";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("id", id + ""));
+        urlParameters.add(new BasicNameValuePair("name", name));
+        urlParameters.add(new BasicNameValuePair("description", description));
+        urlParameters.add(new BasicNameValuePair("website", website));
+        urlParameters.add(new BasicNameValuePair("address", address));
+        urlParameters.add(new BasicNameValuePair("opening_hour_full", openingHour));
+        urlParameters.add(new BasicNameValuePair("opening_hour_format", openingHourFormat));
+        urlParameters.add(new BasicNameValuePair("latitude", latitude + ""));
+        urlParameters.add(new BasicNameValuePair("longitude", longitude + ""));
+        urlParameters.add(new BasicNameValuePair("contact", contact));
+        urlParameters.add(new BasicNameValuePair("contact2", contact2));
+        urlParameters.add(new BasicNameValuePair("location", location));
+        urlParameters.add(new BasicNameValuePair("specialize", specialize));
+        urlParameters.add(new BasicNameValuePair("category", category));
+        urlParameters.add(new BasicNameValuePair("brand_carried", brandsCarried));
+        urlParameters.add(new BasicNameValuePair("remark", remark));
+        urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("status", 1 + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
         }
-    }
 
-    public ArrayList<String> retrieveAllCarBrands() {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        ArrayList<String> carBrands = new ArrayList<String>();
-        try {
-            conn = ConnectionManager.getConnection();
-            pstmt = null;
-            rs = null;
-            pstmt = conn.prepareStatement("SELECT * FROM car_brands");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String model = rs.getString("model");
-                int year = rs.getInt("year");
-                if (year == 0) {
-                    carBrands.add(name + " " + model);
-                } else {
-                    carBrands.add(name + " " + model + " " + year);
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        String errorMessage = null;
+        ArrayList<String> errors = new ArrayList<String>();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            errorMessage = jobj.get("error_message").getAsString();
+            errors.add(errorMessage);
+            JsonElement fields = jobj.get("payload");
+            JsonArray arr;
+            if (!fields.isJsonNull()) {
+                arr = fields.getAsJsonObject().get("error_field").getAsJsonArray();
+
+                for (int i = 0; i < arr.size(); i++) {
+                    String f = arr.get(i).getAsString();
+                    errors.add(f);
                 }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, pstmt, rs);
-            return carBrands;
         }
+
+        return errors;
+    }
+
+    public ArrayList<String> retrieveAllCarBrands(int staffId, String token) throws UnsupportedEncodingException, IOException {
+        ArrayList<String> carBrands = new ArrayList<String>();
+        String url = "http://119.81.43.85/erp/avalible_car/get_all_avalible_car";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+
+        JsonElement brandsElement = jobj.get("payload");
+        JsonObject brands = null;
+        if (brandsElement.isJsonNull()) {
+            return carBrands;
+        } else {
+            brands = brandsElement.getAsJsonObject();
+            JsonArray brandsArr = brands.getAsJsonArray("available_cars");
+            for (int i = 0; i < brandsArr.size(); i++) {
+                JsonElement brandArr = brandsArr.get(i);
+                JsonObject brandObj = brandArr.getAsJsonObject();
+                JsonElement attElement = brandObj.get("car_brand");
+                String brand = "";
+                if (!attElement.isJsonNull()) {
+                    brand = attElement.getAsString();
+                    if (!carBrands.contains(brand)) {
+                        carBrands.add(brand);
+                    }
+                }
+
+            }
+        }
+        return carBrands;
     }
 
     //Convert address to latitude and longitude 
@@ -315,5 +666,9 @@ public class WorkshopDAO {
             }
         }
         return null;
+    }
+
+    public static void main(String[] args) throws IOException {
+
     }
 }

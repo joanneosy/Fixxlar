@@ -44,6 +44,23 @@ public class ForgotPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String emailTo = request.getParameter("email");
+        EmailDAO eDAO = new EmailDAO();
+        boolean isSuccess = eDAO.sendEmail(emailTo);
+
+        if (isSuccess) {
+            request.setAttribute("successResetPasswordMsg", "You will receive a password reset email soon.");
+            RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
+            view.forward(request, response);
+            return;
+        } else {
+            request.setAttribute("errMsg", "Invalid Email");
+            RequestDispatcher view = request.getRequestDispatcher("ForgotPassword.jsp");
+            view.forward(request, response);
+            return;
+        }
+        
+        
+        /*String emailTo = request.getParameter("email");
         WebUserDAO uDao = new WebUserDAO();
         WebUser user = uDao.retrieveUser(emailTo);
 
@@ -80,7 +97,8 @@ public class ForgotPasswordServlet extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("ForgotPassword.jsp");
             view.forward(request, response);
             return;
-        }
+        }*/
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

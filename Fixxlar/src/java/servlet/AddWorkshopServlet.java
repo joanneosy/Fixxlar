@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,7 +48,7 @@ public class AddWorkshopServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
-        String[] carBrandsArr = request.getParameterValues("carBrands");
+        String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
         String website = request.getParameter("website");
         String openingHour = request.getParameter("openingHour");
@@ -57,19 +58,21 @@ public class AddWorkshopServlet extends HttpServlet {
         String contact = request.getParameter("contact");
         String contact2 = request.getParameter("contact2");
         String location = request.getParameter("location");
-        String specialize = request.getParameter("specialize");
+        String brandsCarried = request.getParameter("brandsCarried");
         String category = request.getParameter("category");
         String remark = request.getParameter("remark");
-        String carBrands = "";
+        String wsStaffName = request.getParameter("staffName");
+        String wsStaffHpNo = request.getParameter("staffHpNo");
+        String specialize = "";
 
         ArrayList<String> errMsg = new ArrayList<String>();
 
-        if (carBrandsArr == null) {
+        if (specializeArr == null) {
             errMsg.add("No car brands selected.");
         } else {
-            carBrands = carBrandsArr[0];
-            for (int i = 1; i < carBrandsArr.length; i++) {
-                carBrands += "," + carBrandsArr[i];
+            specialize = specializeArr[0];
+            for (int i = 1; i < specializeArr.length; i++) {
+                specialize += "," + specializeArr[i];
             }
         }
 
@@ -95,14 +98,24 @@ public class AddWorkshopServlet extends HttpServlet {
         }
 
         if (errMsg.size() == 0) {
-            wDAO.addWorkshop(email, name, description, website, address, openingHour, openingHourFormat,
-                    latitude, longitude, contact, contact2, location, specialize, category, carBrands, remark);
-            Workshop ws = wDAO.retrieveWorkshop(email);
-            int userID = ws.getId();
-            uDAO.addUser(userID, email, password, "Workshop");
-            request.setAttribute("successMsg", "Workshop successfully added!");
-            RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
-            view.forward(request, response);
+            HttpSession session = request.getSession(true);
+            WebUser user = (WebUser) session.getAttribute("loggedInUser");
+            int staffId = user.getStaffId();
+            String token = user.getToken();
+            ArrayList<String> addErrMsg = wDAO.addWorkshop(email, name, description, website, address, openingHour, openingHourFormat,
+                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, staffId, token);
+            if (addErrMsg.size() == 0) {
+                Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());
+                int wsId = ws.getId();
+                uDAO.addMasterUser(staffId, token, wsStaffName, email, wsStaffHpNo, wsId, password);
+                request.setAttribute("successMsg", "Workshop successfully added!");
+                RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
+                view.forward(request, response);
+            } else {
+                request.setAttribute("errMsg", addErrMsg);
+                RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
+                view.forward(request, response);
+            }
         } else {
             request.setAttribute("errMsg", errMsg);
             RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");

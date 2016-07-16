@@ -31,11 +31,14 @@ public class QuotationRequest {
     private Timestamp date;
     private int status;
     private int workshopId;
+    private double price;
+    private int offerId;
+    private int customerId;
 
 
     public QuotationRequest(int id, String name, String details, String description, int vehicleId, String mileage, String urgency,
             String amenities, double latitude, double longitude, String address, String photos, Timestamp date, int status, 
-            int workshopId) {
+            int workshopId, double price, int offerId, int customerId) {
         this.details = details;
         this.name = name;
         this.address = address;
@@ -51,6 +54,10 @@ public class QuotationRequest {
         this.date = date;
         this.status = status;
         this.workshopId = workshopId;
+        this.price = price;
+        this.offerId = offerId;
+        this.customerId = customerId;
+               
 
     }
 
@@ -112,6 +119,18 @@ public class QuotationRequest {
     
     public int getWorkshopId() {
         return workshopId;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+    
+    public int getOfferId() {
+        return offerId;
+    }
+    
+    public int getCustomerId() {
+        return customerId;
     }
 }
 

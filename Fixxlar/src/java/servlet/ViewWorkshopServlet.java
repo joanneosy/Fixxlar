@@ -6,6 +6,7 @@
 package servlet;
 
 import dao.WorkshopDAO;
+import entity.WebUser;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,9 +41,14 @@ public class ViewWorkshopServlet extends HttpServlet {
 
         String orderBy = request.getParameter("orderBy");
         String isActive = request.getParameter("isActive");
-
+      
+        HttpSession session = request.getSession(true);
+        WebUser user = (WebUser) session.getAttribute("loggedInUser");
+        int staffId = user.getStaffId();
+        String token = user.getToken();
+        
         WorkshopDAO wDAO = new WorkshopDAO();
-        ArrayList<Workshop> allWorkshops = wDAO.retrieveAllWorkshops(orderBy, isActive);
+        ArrayList<Workshop> allWorkshops = wDAO.retrieveAllWorkshops(staffId, token);
         request.setAttribute("workshops", allWorkshops);
         RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
         view.forward(request, response);

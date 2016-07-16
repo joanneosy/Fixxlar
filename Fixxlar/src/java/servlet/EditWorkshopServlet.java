@@ -7,6 +7,7 @@ package servlet;
 
 import dao.WebUserDAO;
 import dao.WorkshopDAO;
+import entity.WebUser;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,11 +41,11 @@ public class EditWorkshopServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        int userID = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String[] carBrandsArr = request.getParameterValues("carBrands");
+        String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
         String website = request.getParameter("website");
         String openingHour = request.getParameter("openingHour");
@@ -53,7 +55,7 @@ public class EditWorkshopServlet extends HttpServlet {
         String contact = request.getParameter("contact");
         String contact2 = request.getParameter("contact2");
         String location = request.getParameter("location");
-        String specialize = request.getParameter("specialize");
+        String brandsCarried = request.getParameter("brandsCarried");
         String category = request.getParameter("category");
         String remark = request.getParameter("remark");
         String statusStr = request.getParameter("isActive");
@@ -61,16 +63,16 @@ public class EditWorkshopServlet extends HttpServlet {
         if (statusStr == null) {
             status = 0;
         }
-        String carBrands = "";
+        String specialize = "";
 
         ArrayList<String> errMsg = new ArrayList<String>();
 
-        if (carBrandsArr == null) {
+        if (specializeArr == null) {
             errMsg.add("No car brands selected.");
         } else {
-            carBrands = carBrandsArr[0];
-            for (int i=1; i<carBrandsArr.length; i++) {
-                carBrands += "," + carBrandsArr[i];
+            specialize = specializeArr[0];
+            for (int i = 1; i < specializeArr.length; i++) {
+                specialize += "," + specializeArr[i];
             }
         }
 
@@ -82,16 +84,26 @@ public class EditWorkshopServlet extends HttpServlet {
             latitude = Double.parseDouble(latLong[0]);
             longitude = Double.parseDouble(latLong[1]);
         }
-
+        
         if (errMsg.size() == 0) {
-            wDAO.updateWorkshop(userID, email, name, description, website, address, openingHour, openingHourFormat, latitude,
-            longitude, contact, contact2, location, specialize, category, carBrands, remark, status); 
-            request.setAttribute("successMsg", "Workshop successfully edited!");
-            RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
-            view.forward(request, response);
+            HttpSession session = request.getSession(true);
+            WebUser user = (WebUser) session.getAttribute("loggedInUser");
+            int staffId = user.getStaffId();
+            String token = user.getToken();
+            ArrayList<String> addErrMsg = wDAO.updateWorkshop(id, email, name, description, website, address, openingHour, openingHourFormat,
+                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, status, staffId, token);
+            if (addErrMsg.size() == 0) {
+                request.setAttribute("successMsg", "Workshop successfully edited!");
+                RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
+                view.forward(request, response);
+            } else {
+                request.setAttribute("errMsg", addErrMsg);
+                RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + id);
+                view.forward(request, response);
+            }
         } else {
             request.setAttribute("errMsg", errMsg);
-            RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + userID);
+            RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + id);
             view.forward(request, response);
         }
     }

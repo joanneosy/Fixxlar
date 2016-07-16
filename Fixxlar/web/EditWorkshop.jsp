@@ -4,6 +4,7 @@
     Author     : Joanne
 --%>
 
+<%@page import="entity.CarBrand"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
@@ -21,9 +22,9 @@
     </head>
     <body>
         <%
-            int userID = Integer.parseInt(request.getParameter("id"));
+            int wsId = Integer.parseInt(request.getParameter("id"));
             WorkshopDAO wDAO = new WorkshopDAO();
-            Workshop ws = wDAO.retrieveWorkshop(userID);
+            Workshop ws = wDAO.retrieveWorkshop(wsId, user.getStaffId(), user.getToken());
             String website = ws.getWebsite();
             if (website.equals("null")) { website = ""; }
             String description = ws.getDescription();
@@ -34,8 +35,8 @@
             if (contact2.equals("null")) { contact2 = ""; }
             String location = ws.getLocation();
             if (location.equals("null")) { location = ""; }
-            String specialize = ws.getSpecialize();
-            if (specialize.equals("null")) { specialize = ""; }
+            String brandsCarried = ws.getBrandsCarried();
+            if (brandsCarried.equals("null")) { brandsCarried = ""; }
             String category = ws.getCategory();
             if (category.equals("null")) { category = ""; }
             String remark = ws.getRemark();
@@ -45,7 +46,7 @@
         <h1>Edit <%=ws.getName()%></h1>
         <form action = "EditWorkshop" method= "post">
             ID: <input type="text" name="id" value="<%=ws.getId()%>" readonly/><br/>
-            Email: <input type="email" name="email" value="<%=ws.getEmail()%>" readonly/><br/>
+            Email: <input type="email" name="email" value="<%=ws.getEmail()%>" required/><br/>
             Company Name: <input type="text" name="name" value="<%=ws.getName()%>" required/><br/>
             Address <input type="text" name="address" value="<%=ws.getAddress()%>" required/><br/>
             Website: <input type="text" name="website" value="<%=website%>" /><br/>
@@ -55,7 +56,7 @@
             Contact Number: <input type="text" name="contact" value="<%=ws.getContact()%>" required/><br/>
             Another Contact Number: <input type="text" name="contact2" value="<%=contact2%>"/><br/>
             Location: <input type="text" name="location" value="<%=location%>"/><br/>
-            Specialize: <input type="text" name="specialize" value="<%=specialize%>"/><br/>
+            Brands Carried <input type="text" name="brandsCarried" value="<%=brandsCarried%>"/><br/>
             Category: <input type="text" name="category" value="<%=category%>"/><br/>
             Remark: <input type="text" name="remark" value="<%=remark%>"/><br/>
             Active: 
@@ -67,15 +68,15 @@
                 }
             %>
 
-            Car brands: <br/>
+            Specialize: <br/>
             <%
-                String[] carBrandsID = ws.getCarBrands().split(",");
-                ArrayList<String> carBrands = wDAO.retrieveAllCarBrands();
+                String[] carBrandsID = ws.getSpecialize().split(",");
+                ArrayList<String> carBrands = wDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
                 for (String s : carBrands) {
                     if (Arrays.asList(carBrandsID).contains(s)) {
-                        out.println("<input type=\"checkbox\" name=\"carBrands\" value=\"" + s + "\" checked>" + s + "<br>");
+                        out.println("<input type=\"checkbox\" name=\"specialize\" value=\"" + s + "\" checked>" + s + "<br>");
                     } else {
-                        out.println("<input type=\"checkbox\" name=\"carBrands\" value=\"" + s + "\">" + s + "<br>");
+                        out.println("<input type=\"checkbox\" name=\"specialize\" value=\"" + s + "\">" + s + "<br>");
                     }
                 }
             %>

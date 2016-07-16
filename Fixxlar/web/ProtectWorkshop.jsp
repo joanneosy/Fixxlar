@@ -16,8 +16,10 @@
     if (user == null) {
         response.sendRedirect("Login.jsp");
         return;
-    }  else if (userType.equals("Admin")) {
+    } else if (userType.equals("Admin")) {
         response.sendRedirect("Admin.jsp");
+    } else if (userType.equals("Groomer")) {
+        response.sendRedirect("Groomer.jsp");
     }
            
 

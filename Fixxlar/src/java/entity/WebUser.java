@@ -10,24 +10,19 @@ package entity;
  * @author joanne.ong.2014
  */
 public class WebUser {
-    private int id;
+    private int staffId;
     private String email;
     private String password;
-    private String userType;
+    private int userType;
+    private int refStaffId;
+    private String token;
 
-    /**
-     * Creates an user with the specified email, name, password and user type
-     *
-     * @param email the email of the user
-     * @param name the name of the user
-     * @param password the password hash of the user
-     * @param userType the type of user - admin/workshop
-     */
-    public WebUser(int id, String email, String password, String userType) {
-        this.id = id;
+    public WebUser(int staffId, String email, int userType, int refStaffId, String token) {
+        this.staffId = staffId;
         this.email = email;
-        this.password = password;
         this.userType = userType;
+        this.refStaffId = refStaffId;
+        this.token = token;
     }
 
     //getter methods
@@ -36,8 +31,8 @@ public class WebUser {
      *
      * @return the email
      */
-    public int getId() {
-        return id;
+    public int getStaffId() {
+        return staffId;
     }
     
     /**
@@ -48,24 +43,21 @@ public class WebUser {
     public String getEmail() {
         return email;
     }
-   
-
-    /**
-     * Returns the password.
-     *
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
+ 
     /**
      * Returns the user type.
      *
      * @return the user type
      */
-    public String getUserType() {
+    public int getUserType() {
         return userType;
     }
 
+    public int getRefStaffId() {
+        return refStaffId;
+    }
+    
+    public String getToken() {
+        return token;
+    }
 }

@@ -4,6 +4,7 @@
     Author     : Joanne
 --%>
 
+<%@page import="entity.CarBrand"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -33,16 +34,17 @@
             Contact Number: <input type="text" name="contact" required/><br/>
             Another Contact Number: <input type="text" name="contact2" /><br/>
             Location: <input type="text" name="location" /><br/>
-            Specialize: <input type="text" name="specialize" /><br/>
+            Brands Carried <input type="text" name="brandsCarried" /><br/>
             Category: <input type="text" name="category" /><br/>
             Remark: <input type="text" name="remark" /><br/>
 
             <br/>
-            Car brands: <br/>
-            <%                WorkshopDAO wDAO = new WorkshopDAO();
-                ArrayList<String> carBrands = wDAO.retrieveAllCarBrands();
-                for (String s : carBrands) {
-                    out.println("<input type=\"checkbox\" name=\"carBrands\" value=\"" + s + "\">" + s + "<br>");
+            Specialize: <br/>
+            <%                
+                WorkshopDAO wDAO = new WorkshopDAO();
+                ArrayList<String> carBrands = wDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
+                for (String cb : carBrands) {
+                    out.println("<input type=\"checkbox\" name=\"specialize\" value=\"" + cb + "\">"  + cb + "<br>");
                 }
             %>
             <input type="submit" value="Add Workshop"><br/><br/>

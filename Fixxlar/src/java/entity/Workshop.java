@@ -28,19 +28,19 @@ public class Workshop {
     private String location;
     private String specialize;
     private String category;
-    private String carBrands;
+    private String brandsCarried;
     private String remark;
     private int status;
 
     public Workshop(int id, String email, String name, String description, String website, String address, String openingHour,
             String openingHourFormat, double latitude, double longitude, String contact, String contact2, String location,
-            String specialize, String category, String carBrands, String remark, int status) {
+            String specialize, String category, String brandsCarried, String remark, int status) {
         this.email = email;
         this.name = name;
         this.address = address;
         this.id = id;
         this.description = description;
-        this.carBrands = carBrands;
+        this.brandsCarried = brandsCarried;
         this.website = website;
         this.openingHour = openingHour;
         this.openingHourFormat = openingHourFormat;
@@ -111,8 +111,8 @@ public class Workshop {
         return specialize;
     }
 
-    public String getCarBrands() {
-        return carBrands;
+    public String getBrandsCarried() {
+        return brandsCarried;
     }
 
     public String getRemark() {
