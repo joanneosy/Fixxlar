@@ -4,8 +4,15 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="entity.Vehicle"%>
+<%@page import="entity.Customer"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="entity.QuotationRequest"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.QuotationRequestDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@include file="ProtectWorkshop.jsp"%>--%>
+<%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,8 +29,8 @@
         <link rel="stylesheet" href="css/jquery.videobackground.css">
         <link rel="stylesheet" href="css/bootstrap-checkbox.css">
 
-        <link rel="stylesheet" href="css/custom.css">
         <link href="css/minimal.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -231,9 +238,9 @@
 
                                     <!-- tile header -->
                                     <div class="tile-header">
-                                        <h1><strong>NEW</strong> Requests</h1>
+                                        <h1 style="margin-right: 20px;"><strong>NEW</strong> Requests</h1>
                                         <div class="search">
-                                            <input type="text" placeholder="Search...">
+                                            <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                         </div>
                                         <div class="controls">
                                             <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
@@ -247,37 +254,72 @@
                                     <!-- tile body -->
                                     <div class="tile-body no-vpadding">
                                         <div class="table-responsive">
-                                            <table class="table table-custom1 table-sortable1 tablesorter" id="myTable">
+                                            <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable">
                                                 <thead>
                                                     <tr>
-                                                        <th class="sortable">ID</th>
-                                                        <th class="sortable">Date Time</th>
-                                                        <th class="sortable">Customer Name</th>
-                                                        <th class="sortable">Car Make</th>
-                                                        <th class="sortable">Service</th>
-                                                        <th class="text-center">Attachment</th>
+                                                        <th class="sortable">DateTime</th>
+                                                        <th class="sortable">Name</th>
+                                                        <th class="sortable">No. Plate</th>
+                                                        <th class="sortable">Services</th>
+                                                        <th class="sortable">Email</th>
+                                                        <th class="sortable">Phone</th>
+                                                        <th>Attachment</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <!--Loop per new request-->
+                                                    <%
+                                                        QuotationRequestDAO qDAO = new QuotationRequestDAO();
+                                                        ArrayList<QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
+                                                        int i = 1;
+                                                        for (QuotationRequest qr : qList) {
+                                                            Timestamp timeStamp = qr.getDate();
+                                                            String dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                            String serviceName = qr.getName();
+                                                            String address = qr.getAddress();
+                                                            String serviceAmenities = qr.getAmenities();
+                                                            String serviceDescription = qr.getDescription();
+                                                            String serviceDetails = qr.getDetails();
+                                                            int serviceId = qr.getId();
+                                                            String serviceMileage = qr.getMileage();
+                                                            String photo = qr.getPhotos();
+                                                            int serviceStatus = qr.getStatus();
+                                                            String serviceUrgency = qr.getUrgency();
+
+                                                            Customer cust = qr.getCustomer();
+                                                            String custName = cust.getName();
+                                                            String custEmail = cust.getEmail();
+                                                            String custPhone = cust.getHandphone();
+
+                                                            Vehicle vehicle = qr.getVehicle();
+                                                            String carPlate = vehicle.getPlateNumber();
+                                                            String carModel = vehicle.getModel();
+                                                            String carMake = vehicle.getMake();
+                                                            int carYear = vehicle.getYear();
+                                                            String carColor = vehicle.getColour();
+                                                            String carControl = vehicle.getControl();
+
+                                                    %>
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td class="text-left">01/07/2016 19:04</td>
-                                                        <td>Joanne Ong</td>
-                                                        <td class="text-left">Toyota Camry</td>
-                                                        <td>Gearbox</td>
+                                                        <td><% out.print(dateTime);%></td>
+                                                        <td><% out.print(custName);%></td>
+                                                        <td><% out.print(carPlate);%></td>
+                                                        <td><% out.print(serviceName);%></td>
+                                                        <td><% out.print(custEmail);%></td>
+                                                        <td><% out.print(custPhone);%></td>
                                                         <!--Picture Attachment-->
-                                                        <td class="text-center"><a href="#myModal1" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                        <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
                                                         <!-- Modal -->
-                                                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog-img">
                                                         <div class="modal-content">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Toyota Camry - 1992</h4>
+                                                                <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
+                                                                <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -288,150 +330,17 @@
                                                 </div><!-- /.modal -->
 
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td class="text-left">01/07/2016 19:04</td>
-                                                    <td>John Koh</td>
-                                                    <td class="text-left">Toyota Camry</td>
-                                                    <td>Piston Change</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal2" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                                    <!-- Modal -->
-                                                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog-img">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Toyota Camry - 1992</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                            </div>
-                                                        </div> <!--/.modal-content--> 
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
+                                                <%
+                                                        i++;
+                                                    }
+                                                %>
 
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td class="text-left">01/07/2016 19:04</td>
-                                                    <td>Joshua Huang</td>
-                                                    <td class="text-left">Toyota Camry</td>
-                                                    <td>Tyre Change</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                    <!-- Modal -->
-                                                <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog-img">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Toyota Camry - 1992</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                            </div>
-                                                        </div> <!--/.modal-content--> 
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td class="text-left">01/07/2016 19:04</td>
-                                                    <td>Melvin Lee</td>
-                                                    <td class="text-left">Toyota Camry</td>
-                                                    <td>New PaintJob</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                    <!-- Modal -->
-                                                <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog-img">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Toyota Camry - 1992</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                            </div>
-                                                        </div> <!--/.modal-content--> 
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td class="text-left">01/07/2016 19:04</td>
-                                                    <td>Desmond</td>
-                                                    <td class="text-left">Toyota Camry</td>
-                                                    <td>Faulty Signal Lights</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                    <!-- Modal -->
-                                                <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog-img">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Toyota Camry - 1992</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                            </div>
-                                                        </div> <!--/.modal-content--> 
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td class="text-left">01/07/2016 19:04</td>
-                                                    <td>Tan Ah Beng</td>
-                                                    <td class="text-left">Toyota Camry</td>
-                                                    <td>Rear Bumper</td>
-                                                    <!--Picture Attachment-->
-                                                    <td class="text-center"><a href="#myModal3" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                    <!-- Modal -->
-                                                <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog-img">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Toyota Camry - 1992</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                            </div>
-                                                        </div> <!--/.modal-content--> 
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
-                                                </tr>
                                                 </tbody>
+
                                             </table>
                                         </div>
+
                                     </div>
 
 
@@ -688,6 +597,47 @@
         });
 
 
+    </script>
+    <script>
+        (function (document) {
+            'use strict';
+
+            var LightTableFilter = (function (Arr) {
+
+                var _input;
+
+                function _onInputEvent(e) {
+                    _input = e.target;
+                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                    Arr.forEach.call(tables, function (table) {
+                        Arr.forEach.call(table.tBodies, function (tbody) {
+                            Arr.forEach.call(tbody.rows, _filter);
+                        });
+                    });
+                }
+
+                function _filter(row) {
+                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                }
+
+                return {
+                    init: function () {
+                        var inputs = document.getElementsByClassName('light-table-filter');
+                        Arr.forEach.call(inputs, function (input) {
+                            input.oninput = _onInputEvent;
+                        });
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function () {
+                if (document.readyState === 'complete') {
+                    LightTableFilter.init();
+                }
+            });
+
+        })(document);
     </script>
     
 </html>
