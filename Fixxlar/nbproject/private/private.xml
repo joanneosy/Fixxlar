@@ -3,30 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/profilepage.jsp</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/css/bootstrap-responsive.css</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/css/minimal.css</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/include/topbar.jsp</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/js/jquery.js</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/js/jquery.star-rating-svg.js</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/css/star-rating-svg.css</file>
-            <file>file:/C:/Users/Joshymantou/Desktop/Fixxlar/Fixxlar/web/Workshop.jsp</file>
-=======
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/EditWorkshopServlet.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/web/ViewWorkshop.jsp</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/web/Admin.jsp</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/web/AddWorkshop.jsp</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/entity/Workshop.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/WorkshopDAO.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/EditWorkshopServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/web/ViewQuotationRequest.jsp</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/web/AddWorkshop.jsp</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AuthenticateServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/WebUserDAO.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/web/Admin.jsp</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/QuotationRequestDAO.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/VehicleDAO.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/entity/Customer.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/entity/Vehicle.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/CustomerDAO.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/ViewWorkshopServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AddOfferServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/web/EditWorkshop.jsp</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/ChangePasswordServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/entity/QuotationRequest.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AddWorkshopServlet.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/entity/WebUser.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/ChangePasswordServlet.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/web/EditWorkshop.jsp</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/WebUserDAO.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/ViewWorkshopServlet.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AuthenticateServlet.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AddOfferServlet.java</file>
->>>>>>> e30b0da999d1f7b0ed6e75db984d05fbced98660
+            <file>file:/Users/smu/Fixxlar/Fixxlar/web/ViewWorkshop.jsp</file>
         </group>
     </open-files>
 </project-private>

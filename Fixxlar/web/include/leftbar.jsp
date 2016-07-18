@@ -1,0 +1,195 @@
+
+<ul class="nav navbar-nav side-nav" id="sidebar">
+
+    <li class="collapsed-content"> 
+        <ul>
+            <li class="search"> Collapsed search pasting here at 768px </li>
+        </ul>
+    </li>
+
+    <li class="navigation" id="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation <i class="fa fa-angle-up"></i></a>
+
+        <ul class="menu"> 
+            
+ 
+            <li>
+                <a href="Workshop.jsp">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                    <!--<span class="badge badge-red">1</span>-->
+                </a>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-list"></i> Profile <b class="fa fa-plus dropdown-plus"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="Calendar.jsp">
+                            <i class="fa fa-caret-right"></i> Calendar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Inbox.jsp">
+                            <i class="fa fa-caret-right"></i> Inbox
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Personalise.jsp">
+                            <i class="fa fa-caret-right"></i> Personalise
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-pencil"></i> Request <b class="fa fa-plus dropdown-plus"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="ViewRequest.jsp#New">
+                            <i class="fa fa-caret-right"></i> New Requests
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ViewRequest.jsp#Waiting_for_Response">
+                            <i class="fa fa-caret-right"></i> Waiting for Response
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ViewRequest.jsp#Send_Final_Quote">
+                            <i class="fa fa-caret-right"></i> Send Final Quote
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ViewRequest.jsp#Final_Quote_Accepted">
+                            <i class="fa fa-caret-right"></i> Final Quote Accepted
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ViewRequest.jsp#All">
+                            <i class="fa fa-caret-right"></i> View All Requests
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-pencil"></i> Manage Service <b class="fa fa-plus dropdown-plus"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="ManageService.jsp#Ongoing_Service">
+                            <i class="fa fa-caret-right"></i> Ongoing Service
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ManageService.jsp#Completed_Service">
+                            <i class="fa fa-caret-right"></i> Completed Service
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ManageService.jsp#All">
+                            <i class="fa fa-caret-right"></i> View All Requests
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="Summary.jsp">
+                    <i class="fa fa-tint"></i> Summary Report
+                </a>
+            </li>
+            <li>
+                <a href="Analytics.jsp">
+                    <i class="fa fa-th"></i> Analytics
+                </a>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-th-large"></i> Mailbox <b class="fa fa-plus dropdown-plus"></b>
+                    <span class="label label-greensea">mails</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="Email.jsp">
+                            <i class="fa fa-caret-right"></i> Send Email
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Inbox.jsp">
+                            <i class="fa fa-caret-right"></i> Inbox
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+
+        </ul>
+
+    </li>
+
+<!--    <li class="summary" id="order-summary">
+        <a href="#" class="sidebar-toggle underline" data-toggle="#order-summary">Orders Summary <i class="fa fa-angle-up"></i></a>
+
+        <div class="media">
+            <a class="pull-right" href="#">
+                <span id="sales-chart"></span>
+            </a>
+            <div class="media-body">
+                This week sales
+                <h3 class="media-heading">26, 149</h3>
+            </div>
+        </div>
+
+        <div class="media">
+            <a class="pull-right" href="#">
+                <span id="balance-chart"></span>
+            </a>
+            <div class="media-body">
+                This week balance
+                <h3 class="media-heading">318, 651</h3>
+            </div>
+        </div>
+
+    </li>-->
+
+<!--    <li class="settings" id="general-settings">
+        <a href="#" class="sidebar-toggle underline" data-toggle="#general-settings">General Settings <i class="fa fa-angle-up"></i></a>
+
+        <div class="form-group">
+            <label class="col-xs-8 control-label">Switch ON</label>
+            <div class="col-xs-4 control-label">
+                <div class="onoffswitch greensea">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-on" checked="">
+                    <label class="onoffswitch-label" for="switch-on">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-8 control-label">Switch OFF</label>
+            <div class="col-xs-4 control-label">
+                <div class="onoffswitch greensea">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-off">
+                    <label class="onoffswitch-label" for="switch-off">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </li>-->
+
+
+</ul>

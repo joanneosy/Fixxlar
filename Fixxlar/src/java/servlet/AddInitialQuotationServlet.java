@@ -22,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joanne
  */
-@WebServlet(name = "AddOfferServlet", urlPatterns = {"/AddOffer"})
-public class AddOfferServlet extends HttpServlet {
+@WebServlet(name = "AddInitialQuotationServlet", urlPatterns = {"/AddInitialQuotation"})
+public class AddInitialQuotationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,6 +42,7 @@ public class AddOfferServlet extends HttpServlet {
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double price = Double.parseDouble(request.getParameter("price"));
         String description = request.getParameter("description");
+        int isQuotation = Integer.parseInt(request.getParameter("isQuotation"));
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         String email = user.getEmail();
         int staffId = user.getStaffId();
@@ -50,7 +51,7 @@ public class AddOfferServlet extends HttpServlet {
         Workshop ws = wDAO.retrieveWorkshop(email, staffId, token);
         int workshopId = ws.getId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        qrDAO.addOffer(user.getStaffId(), user.getToken(), quotationRequestId, workshopId, price, description);
+        qrDAO.addInitialQuotation(user.getStaffId(), user.getToken(), quotationRequestId, workshopId, price, description, isQuotation);
         //Error message? success message?
         response.sendRedirect("ViewQuotationRequest.jsp");
     }

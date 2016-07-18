@@ -4,6 +4,9 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="entity.Vehicle"%>
 <%@page import="entity.Customer"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -41,8 +44,7 @@
     </head>
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
-        <%
-            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
+        <%            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
             if (successChangePasswordMsg != null) {
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
@@ -270,9 +272,12 @@
                                                     <!--Loop per new request-->
                                                     <%
                                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
-                                                        ArrayList<QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
-                                                        int i = 1;
-                                                        for (QuotationRequest qr : qList) {
+                                                        HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
+                                                        Iterator it = qList.entrySet().iterator();
+                                                        while (it.hasNext()) {
+                                                            Map.Entry pair = (Map.Entry) it.next();
+                                                            QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                            int i = 1;
                                                             Timestamp timeStamp = qr.getDate();
                                                             String dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
                                                             String serviceName = qr.getName();
@@ -369,275 +374,275 @@
                             <!-- /col 8 -->
 
 
-                        <div class="main vertical-mail">        
-                                    
-                            <div class="col-md-4">
+                            <div class="main vertical-mail">        
 
-                                <ul class="inbox" id="mail-inbox">
-                                    <li class="heading"><h3>Inbox</h3></li>
-                                    <%--
-                                    <li class="search"><i class="fa fa-search"></i> <input type="text" placeholder="Search in inbox..." /></li>
-                                    --%>
-                                    <li class="msg">
-                                        <div class="checkbox check-transparent">
-                                            <input type="checkbox" value="1" checked id="msg01">
-                                            <label for="msg01"></label>
-                                        </div>
-                                        <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
-                                        <div>
-                                            <h5><strong>Lucius</strong> Cashmere (5)</h5>
-                                            <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            <span class="delivery-time">today, 4:23pm</span>
-                                            <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
-                                            <div class="mail-label bg-red"></div>
-                                            <div class="mail-actions">
-                                                <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
-                                                <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                                <div class="col-md-4">
+
+                                    <ul class="inbox" id="mail-inbox">
+                                        <li class="heading"><h3>Inbox</h3></li>
+                                            <%--
+                                            <li class="search"><i class="fa fa-search"></i> <input type="text" placeholder="Search in inbox..." /></li>
+                                            --%>
+                                        <li class="msg">
+                                            <div class="checkbox check-transparent">
+                                                <input type="checkbox" value="1" checked id="msg01">
+                                                <label for="msg01"></label>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="msg">
-                                        <div class="checkbox check-transparent">
-                                            <input type="checkbox" id="msg02">
-                                            <label for="msg02"></label>
-                                        </div>
-                                        <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
-                                        <div>
-                                            <h5><strong>Jesse</strong> Phoenix</h5>
-                                            <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            <span class="delivery-time">yesterday, 7:58am</span>
-                                            <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
-                                            <div class="mail-label bg-red"></div>
-                                            <div class="mail-actions">
-                                                <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
-                                                <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                                            <div>
+                                                <h5><strong>Lucius</strong> Cashmere (5)</h5>
+                                                <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                <span class="delivery-time">today, 4:23pm</span>
+                                                <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                                                <div class="mail-label bg-red"></div>
+                                                <div class="mail-actions">
+                                                    <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                                                    <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="msg last">
-                                        <div class="checkbox check-transparent">
-                                            <input type="checkbox" id="msg10">
-                                            <label for="msg10"></label>
-                                        </div>
-                                        <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
-                                        <div>
-                                            <h5><strong>Tex</strong> Montreal (4)</h5>
-                                            <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            <span class="delivery-time">yesterday, 07:12pm</span>
-                                            <div class="mail-label bg-greensea"></div>
-                                            <div class="mail-actions">
-                                                <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
-                                                <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                                        </li>
+                                        <li class="msg">
+                                            <div class="checkbox check-transparent">
+                                                <input type="checkbox" id="msg02">
+                                                <label for="msg02"></label>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="pagination pull-right">
-                                        <span>1-3 of 154</span>
-                                        <div class="btn-group btn-group-sm">
-                                            <button type="button" class="btn btn-default"><i class="fa fa-angle-left"></i></button>
-                                            <button type="button" class="btn btn-default"><i class="fa fa-angle-right"></i></button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-
-                           
+                                            <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
+                                            <div>
+                                                <h5><strong>Jesse</strong> Phoenix</h5>
+                                                <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                <span class="delivery-time">yesterday, 7:58am</span>
+                                                <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
+                                                <div class="mail-label bg-red"></div>
+                                                <div class="mail-actions">
+                                                    <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                                                    <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                         <!-- /row -->
+                                        </li>
 
-                                        </div>
-
-                                    </div>
+                                        <li class="msg last">
+                                            <div class="checkbox check-transparent">
+                                                <input type="checkbox" id="msg10">
+                                                <label for="msg10"></label>
+                                            </div>
+                                            <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
+                                            <div>
+                                                <h5><strong>Tex</strong> Montreal (4)</h5>
+                                                <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                <span class="delivery-time">yesterday, 07:12pm</span>
+                                                <div class="mail-label bg-greensea"></div>
+                                                <div class="mail-actions">
+                                                    <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
+                                                    <a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="pagination pull-right">
+                                            <span>1-3 of 154</span>
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default"><i class="fa fa-angle-left"></i></button>
+                                                <button type="button" class="btn btn-default"><i class="fa fa-angle-right"></i></button>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
 
+
                             </div>
-                            <!-- /wrap -->
+                        </div>
+                        <!-- /row -->
+
+                    </div>
+
                 </div>
-                <!-- /content container -->
             </div>
-            <!-- Page content end -->
-
-
-
-
-            <jsp:include page="include/rightbar.jsp"/>
-
-
-
-
-
 
         </div>
-        <!-- Make page fluid-->
-
-
-
-
+        <!-- /wrap -->
     </div>
-    <!-- Wrap all page content end -->
+    <!-- /content container -->
+</div>
+<!-- Page content end -->
 
 
 
-    <section class="videocontent" id="video"></section>
+
+<jsp:include page="include/rightbar.jsp"/>
+
+
+
+
+
+
+</div>
+<!-- Make page fluid-->
+
+
+
+
+</div>
+<!-- Wrap all page content end -->
+
+
+
+<section class="videocontent" id="video"></section>
 </body>
 
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-dropdown-multilevel.js"></script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
-    <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
-    <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
-    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-    <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
-    <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-dropdown-multilevel.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+<script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+<script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
+<script type="text/javascript" src="js/jquery.videobackground.js"></script>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
-    <script src="js/minimal.min.js"></script>
-    
-    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
+<script src="js/minimal.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $('#myTable').tablesorter();
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').tablesorter();
+    });
+</script>
+<script>
+    $(function () {
+        // Initialize card flip
+        $('.card.hover').hover(function () {
+            $(this).addClass('flip');
+        }, function () {
+            $(this).removeClass('flip');
         });
-    </script>
-    <script>
-        $(function () {
-            // Initialize card flip
-            $('.card.hover').hover(function () {
-                $(this).addClass('flip');
-            }, function () {
-                $(this).removeClass('flip');
-            });
 
-            // sortable table
+        // sortable table
 //            $('.table.table-sortable th.sortable').click(function () {
 //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
 //                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
 //                $(this).addClass(o);
 //            });
 
-            //todo's
-            $('#todolist li label').click(function () {
-                $(this).toggleClass('done');
-            });
-
-
-        })
-
-        $(function () {
-
-            var contentHeight = $('#content').height();
-            var chatInboxHeight = contentHeight - 178;
-            var chatContentHeight = contentHeight - 178 - 200;
-
-            var setChatHeight = function () {
-                $('#chat-inbox').css('height', chatInboxHeight);
-                $('#chat-content').css('height', chatContentHeight);
-            };
-
-            setChatHeight();
-
-            $(window).resize(function () {
-                contentHeight = $('#content').height();
-                chatInboxHeight = contentHeight - 178;
-                chatContentHeight = contentHeight - 178 - 200;
-
-                setChatHeight();
-            });
-
-            $("#chat-inbox").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $("#chat-content").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $('#chat-inbox .chat-actions > span').tooltip({
-                placement: 'top',
-                trigger: 'hover',
-                html: true,
-                container: 'body'
-            });
-
-            $('#initialize-search').click(function () {
-                $('#chat-search').toggleClass('active').focus();
-            });
-
-            $(document).click(function (e) {
-                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                    $('#chat-search').removeClass('active');
-                }
-            });
-
-            $(window).mouseover(function () {
-                $("#chat-inbox").getNiceScroll().resize();
-                $("#chat-content").getNiceScroll().resize();
-            });
-
+        //todo's
+        $('#todolist li label').click(function () {
+            $(this).toggleClass('done');
         });
 
 
-    </script>
-    <script>
-        (function (document) {
-            'use strict';
+    })
 
-            var LightTableFilter = (function (Arr) {
+    $(function () {
 
-                var _input;
+        var contentHeight = $('#content').height();
+        var chatInboxHeight = contentHeight - 178;
+        var chatContentHeight = contentHeight - 178 - 200;
 
-                function _onInputEvent(e) {
-                    _input = e.target;
-                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                    Arr.forEach.call(tables, function (table) {
-                        Arr.forEach.call(table.tBodies, function (tbody) {
-                            Arr.forEach.call(tbody.rows, _filter);
-                        });
+        var setChatHeight = function () {
+            $('#chat-inbox').css('height', chatInboxHeight);
+            $('#chat-content').css('height', chatContentHeight);
+        };
+
+        setChatHeight();
+
+        $(window).resize(function () {
+            contentHeight = $('#content').height();
+            chatInboxHeight = contentHeight - 178;
+            chatContentHeight = contentHeight - 178 - 200;
+
+            setChatHeight();
+        });
+
+        $("#chat-inbox").niceScroll({
+            cursorcolor: '#000000',
+            zindex: 999999,
+            bouncescroll: true,
+            cursoropacitymax: 0.4,
+            cursorborder: '',
+            cursorborderradius: 0,
+            cursorwidth: '5px'
+        });
+
+        $("#chat-content").niceScroll({
+            cursorcolor: '#000000',
+            zindex: 999999,
+            bouncescroll: true,
+            cursoropacitymax: 0.4,
+            cursorborder: '',
+            cursorborderradius: 0,
+            cursorwidth: '5px'
+        });
+
+        $('#chat-inbox .chat-actions > span').tooltip({
+            placement: 'top',
+            trigger: 'hover',
+            html: true,
+            container: 'body'
+        });
+
+        $('#initialize-search').click(function () {
+            $('#chat-search').toggleClass('active').focus();
+        });
+
+        $(document).click(function (e) {
+            if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                $('#chat-search').removeClass('active');
+            }
+        });
+
+        $(window).mouseover(function () {
+            $("#chat-inbox").getNiceScroll().resize();
+            $("#chat-content").getNiceScroll().resize();
+        });
+
+    });
+
+
+</script>
+<script>
+    (function (document) {
+        'use strict';
+
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
                     });
                 }
+            };
+        })(Array.prototype);
 
-                function _filter(row) {
-                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                }
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
 
-                return {
-                    init: function () {
-                        var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function (input) {
-                            input.oninput = _onInputEvent;
-                        });
-                    }
-                };
-            })(Array.prototype);
+    })(document);
+</script>
 
-            document.addEventListener('readystatechange', function () {
-                if (document.readyState === 'complete') {
-                    LightTableFilter.init();
-                }
-            });
-
-        })(document);
-    </script>
-    
 </html>
