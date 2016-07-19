@@ -16,13 +16,15 @@ public class WebUser {
     private int userType;
     private int refStaffId;
     private String token;
+    private int shopId;
 
-    public WebUser(int staffId, String email, int userType, int refStaffId, String token) {
+    public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId) {
         this.staffId = staffId;
         this.email = email;
         this.userType = userType;
         this.refStaffId = refStaffId;
         this.token = token;
+        this.shopId = shopId;
     }
 
     //getter methods
@@ -59,5 +61,9 @@ public class WebUser {
     
     public String getToken() {
         return token;
+    }
+    
+    public int getShopId() {
+        return shopId;
     }
 }

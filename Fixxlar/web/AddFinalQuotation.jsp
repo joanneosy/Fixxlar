@@ -9,16 +9,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Diagnostic Price</title>
+        <title>Add Final Quotation</title>
     </head>
     <body>
         
-        <h1>Add Diagnostic Price</h1>
+        <h1>Add Final Quotation</h1>
         <%
+            String successMsg = (String) request.getAttribute("isSuccess");
+            if (successMsg != null) {
+                out.println(successMsg + "<br/>");
+            }
             int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         %>
         <form action = "AddFinalQuotation" method= "post">
-            Price: <input type="text" name="price" required/><br/>
+            Price: <input type="number" name="price" required/><br/>
             <input type="hidden" name="id" value="<%=quotationRequestId%>"><br/>
             <input type="submit" value="Add Final Quotation"><br/><br/>
         </form><br/>

@@ -15,14 +15,17 @@
         
         <h1>Add Diagnostic Price</h1>
         <%
+            String successMsg = (String) request.getAttribute("isSuccess");
+            if (successMsg != null) {
+                out.println(successMsg + "<br/>");
+            }
             int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         %>
-        <form action = "AddInitialQuotation" method= "post">
-            Price: <input type="text" name="price" required/><br/>
+        <form action = "AddDiagnosticPrice" method= "post">
+            Price: <input type="number" name="price" required/><br/>
             Description: <input type="text" name="description" /><br/>
             <input type="hidden" name="id" value="<%=quotationRequestId%>"><br/>
-            <input type="hidden" name="isQuotation" value="2"><br/>
-            <input type="submit" value="Add Offer"><br/><br/>
+            <input type="submit" value="Add Diagnostic Price"><br/><br/>
         </form><br/>
     </body>
 </html>

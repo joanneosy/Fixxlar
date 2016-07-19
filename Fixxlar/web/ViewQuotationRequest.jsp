@@ -4,6 +4,9 @@
     Author     : Joanne
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="entity.WebUser"%>
 <%@page import="dao.CustomerDAO"%>
 <%@page import="dao.VehicleDAO"%>
@@ -25,15 +28,12 @@
             WorkshopDAO wDAO = new WorkshopDAO();
             String email = ((WebUser) session.getAttribute("loggedInUser")).getEmail();
             String userType = (String) session.getAttribute("loggedInUserType");
-            Workshop ws = wDAO.retrieveWorkshop(email);
-            int id = 0;
-            if (userType.equals("Workshop")) {
-                id = ws.getId();
-            }
+            WebUser user = (WebUser) session.getAttribute("loggedInUser");
+            String token = user.getToken();
+            int staffId = user.getStaffId();
+
             QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-            ArrayList<QuotationRequest> allQuotationRequests = qrDAO.retrieveAllQuotationRequests(id, 0, "", "", "", "");
-            VehicleDAO vDAO = new VehicleDAO();
-            CustomerDAO cDAO = new CustomerDAO();
+            HashMap<Integer, QuotationRequest> allQuotationRequests = qrDAO.retrieveAllQuotationRequests(staffId, token, 0, 0, "", "requested_datetime", "desc");
         %>
         <table style="width:100%" border="1">
             <tr>
@@ -57,8 +57,11 @@
                 <th>Change</th>
             </tr>
 
-            <%                
-                for (QuotationRequest qr : allQuotationRequests) {
+            <%
+                Iterator it = allQuotationRequests.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    QuotationRequest qr = (QuotationRequest) pair.getValue();
                     out.println("<tr>");
                     out.println("<td align=\"center\"> " + qr.getId() + "</td>");
                     out.println("<td>" + qr.getName() + "</td>");
@@ -67,8 +70,8 @@
                     out.println("<td>" + qr.getVehicle().getId() + "</td>");
                     out.println("<td>" + qr.getMileage() + "</td>");
                     out.println("<td>" + qr.getUrgency() + "</td>");
-                    out.println("<td>" + qr.getAmenities());
-                    out.println("<td>" + qr.getAddress());
+                    out.println("<td>" + qr.getAmenities() + "</td>");
+                    out.println("<td>" + qr.getAddress() + "</td>");
                     out.println("<td>" + qr.getPhotos() + "</td>");
                     out.println("<td>" + qr.getVehicle().getMake() + "</td>");
                     out.println("<td>" + qr.getVehicle().getModel() + "</td>");
@@ -79,22 +82,36 @@
                     if (status == 1) {
                         out.println("<td>New</td>");
                     } else if (status == 2) {
-                        out.println("<td>Ongoing</td>");
+                        out.println("<td>Waiting for response</td>");
                     } else if (status == 3) {
-                        out.println("<td>Completed</td>");
+                        out.println("<td>Give final quotation</td>");
                     } else if (status == 4) {
-                        out.println("<td>Cancelled</td>");
+                        out.println("<td>Waiting for final quotation acceptance</td>");
+                    } else if (status == 5) {
+                        out.println("<td>Quote given for non valet request</td>");
+                    } else if (status == 6) {
+                        out.println("<td>Final quotation accepted / Ongoing service</td>"); //what about giving estimated completion time / duration
+                    } else if (status == 7) {
+                        out.println("<td>Completed service</td>");
+                    } else if (status == 8) {
+                        out.println("<td>Offer declined</td>");
+                    } else {
+                        out.println("<td>Others</td>");
                     }
                     out.println("<td>" + qr.getWorkshopId() + "</td>");
                     if (userType.equals("Admin")) {
-                        out.println("<td><a href = \"EditQuotationRequest.jsp?id=" + qr.getId() + "\">Edit</a></td>");
+                        out.println("<td><a href = \"ViewOneQuotationRequest.jsp?id=" + qr.getId() + "\">View</a></td>");
                     } else if (userType.equals("Workshop") && status == 1) {
-                        out.println("<td><a href = \"AddOffer.jsp?id=" + qr.getId() + "\">Give Quotation</a></td>");
-                    } else if (userType.equals("Workshop") && status == 2) {
-                        out.println("<td><a href = \"EditQuotation?status=2&id=" + qr.getId() + "\">Complete</a></td>");
+                        out.println("<td><a href = \"AddInitialQuotation.jsp?id=" + qr.getId() + "\">Give Quotation</a></td>");
+                    } else if (userType.equals("Workshop") && (status == 2 || status == 4 || status == 5 || status == 6)) {
+                        out.println("<td><a href = \"ViewOneQuotationRequest?&id=" + qr.getId() + "\">View</a></td>");
                     } else if (userType.equals("Workshop") && status == 3) {
-                        out.println("<td><a href = \"ViewOneQuotationRequest.jsp?&id=" + qr.getId() + "\">View Details</a></td>");
-                    } 
+                        out.println("<td><a href = \"AddFinalQuotation.jsp?&id=" + qr.getId() + "\">View Details</a></td>");
+                    } else if (userType.equals("Workshop") && status == 6) {
+                        out.println("<td><a href = \"CompleteRequest.jsp?&id=" + qr.getId() + "\">Complete Request</a></td>");
+                    } else {
+                        out.println("<td>Others</td>");
+                    }
                     out.println("</tr>");
                 }
             %>

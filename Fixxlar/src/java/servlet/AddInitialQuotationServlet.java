@@ -11,6 +11,7 @@ import entity.WebUser;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,20 +41,25 @@ public class AddInitialQuotationServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
-        double price = Double.parseDouble(request.getParameter("price"));
+        double minPrice = Double.parseDouble(request.getParameter("minPrice"));
+        double maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
         String description = request.getParameter("description");
-        int isQuotation = Integer.parseInt(request.getParameter("isQuotation"));
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
-        String email = user.getEmail();
         int staffId = user.getStaffId();
         String token = user.getToken();
-        WorkshopDAO wDAO = new WorkshopDAO();
-        Workshop ws = wDAO.retrieveWorkshop(email, staffId, token);
-        int workshopId = ws.getId();
+        int workshopId = user.getShopId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        qrDAO.addInitialQuotation(user.getStaffId(), user.getToken(), quotationRequestId, workshopId, price, description, isQuotation);
+        boolean isSuccess = qrDAO.addInitialQuotation(staffId, token, quotationRequestId, workshopId, minPrice, maxPrice, description);
         //Error message? success message?
-        response.sendRedirect("ViewQuotationRequest.jsp");
+        if (isSuccess) {
+            request.setAttribute("isSuccess", "Success!");
+            RequestDispatcher view = request.getRequestDispatcher("AddInitialQuotation.jsp?id=" + quotationRequestId);
+            view.forward(request, response);
+        } else {
+            request.setAttribute("isSuccess", "Failed!");
+            RequestDispatcher view = request.getRequestDispatcher("AddInitialQuotation.jsp?id=" + quotationRequestId);
+            view.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

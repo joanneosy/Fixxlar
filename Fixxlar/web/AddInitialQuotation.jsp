@@ -11,16 +11,21 @@
         <title>Add Offer</title>
     </head>
     <body>
-        
+
         <h1>Add Offer</h1>
+
         <%
+            String successMsg = (String) request.getAttribute("isSuccess");
+            if (successMsg != null) {
+                out.println(successMsg + "<br/>");
+            }
             int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         %>
         <form action = "AddInitialQuotation" method= "post">
-            Price: <input type="text" name="price" required/><br/>
+            Min Price: <input type="number" name="minPrice" required/><br/>
+            Max Price: <input type="number" name="maxPrice" required/><br/>
             Description: <input type="text" name="description" /><br/>
             <input type="hidden" name="id" value="<%=quotationRequestId%>"><br/>
-            <input type="hidden" name="isQuotation" value="1"><br/>
             <input type="submit" value="Add Offer"><br/><br/>
         </form><br/>
     </body>

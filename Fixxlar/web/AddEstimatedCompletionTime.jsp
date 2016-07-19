@@ -14,6 +14,10 @@
         
         <h1>Add Estimated Completion Time</h1>
         <%
+            String successMsg = (String) request.getAttribute("isSuccess");
+            if (successMsg != null) {
+                out.println(successMsg + "<br/>");
+            }
             int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         %>
         <form action = "AddEstimatedCompletionTime" method= "post">

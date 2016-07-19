@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joanne
  */
-@WebServlet(name = "AddFinalQuotationServlet", urlPatterns = {"/AddFinalQuotation"})
-public class AddFinalQuotationServlet extends HttpServlet {
+@WebServlet(name = "AddDiagnosticPriceServlet", urlPatterns = {"/AddDiagnosticPrice"})
+public class AddDiagnosticPriceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,24 +38,25 @@ public class AddFinalQuotationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         HttpSession session = request.getSession(true);
 
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double price = Double.parseDouble(request.getParameter("price"));
+        String description = (String)request.getParameter("description");
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
+        int workshopId = user.getShopId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        boolean isSuccess = qrDAO.addFinalQuotation(staffId, token, quotationRequestId, price);
+        boolean isSuccess = qrDAO.addDiagnosticPrice(staffId, token, quotationRequestId, workshopId, price, description);
         //Error message? success message?
         if (isSuccess) {
             request.setAttribute("isSuccess", "Success!");
-            RequestDispatcher view = request.getRequestDispatcher("AddFinalQuotation.jsp?id=" + quotationRequestId);
+            RequestDispatcher view = request.getRequestDispatcher("AddDiagnosticPrice.jsp?id=" + quotationRequestId);
             view.forward(request, response);
         } else {
             request.setAttribute("isSuccess", "Failed!");
-            RequestDispatcher view = request.getRequestDispatcher("AddFinalQuotation.jsp?id=" + quotationRequestId);
+            RequestDispatcher view = request.getRequestDispatcher("AddDiagnosticPrice.jsp?id=" + quotationRequestId);
             view.forward(request, response);
         }
     }

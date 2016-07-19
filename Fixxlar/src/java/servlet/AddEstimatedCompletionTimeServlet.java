@@ -43,14 +43,11 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double time = Double.parseDouble(request.getParameter("time"));
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
-        String email = user.getEmail();
         int staffId = user.getStaffId();
         String token = user.getToken();
-        WorkshopDAO wDAO = new WorkshopDAO();
-        Workshop ws = wDAO.retrieveWorkshop(email, staffId, token);
-        int workshopId = ws.getId();
+        int workshopId = user.getShopId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        qrDAO.addEstimatedCompletionTime(user.getStaffId(), user.getToken(), quotationRequestId, workshopId, time);
+        qrDAO.addEstimatedCompletionTime(staffId, token, quotationRequestId, workshopId, time);
         //Error message? success message?
         response.sendRedirect("ViewQuotationRequest.jsp");
     }

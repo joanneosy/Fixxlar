@@ -103,7 +103,13 @@ public class WebUserDAO {
             if (!attElement.isJsonNull()) {
                 token = attElement.getAsString();
             }
-            webUser = new WebUser(staffId, email, userType, refStaffId, token);
+            
+            int shopId = 0;
+            attElement = user.get("shop_id");
+            if (attElement != null || !attElement.isJsonNull()) {
+                shopId = attElement.getAsInt();
+            }
+            webUser = new WebUser(staffId, email, userType, refStaffId, token, shopId);
         }
         return webUser;
     }
