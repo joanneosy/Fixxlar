@@ -57,10 +57,10 @@ public class EmailDAO {
         // Setup mail server
         //outlook
         /*properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.smtp.host", "smtp-mail.outlook.com"); // smtp.gmail.com?
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.auth", "true");*/
+         properties.put("mail.smtp.host", "smtp-mail.outlook.com"); // smtp.gmail.com?
+         properties.put("mail.smtp.port", "587");
+         properties.put("mail.smtp.starttls.enable", "true");
+         properties.put("mail.smtp.auth", "true");*/
         //gmail
         properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.host", "smtp.gmail.com");
@@ -162,7 +162,8 @@ public class EmailDAO {
             System.out.println("messages.length---" + messages.length);
 
             for (int i = 0, n = messages.length; i < n; i++) {
-                Message message = messages[i];
+                Email mail = new Email()
+                Message message = messages[i]
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());

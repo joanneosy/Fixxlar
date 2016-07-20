@@ -11,58 +11,59 @@ package entity;
  */
 public class Email {
 
-    private String emailTo;
-    private String emailFrom;
-    private String password;
+    private String sentDate;
     private String subject;
-    private String content;
+    private String content
+    private String address;
 
-    public Email(String emailTo, String emailFrom, String password, String subject, String content) {
-        this.emailTo = emailTo;
-        this.emailFrom = emailFrom;
-        this.password = password;
+    public Email(String sentDate, String subject, String content, String address) {
+        this.sentDate = sentDate;
         this.subject = subject;
         this.content = content;
+        this.address = address;
     }
 
-    public String getEmailTo() {
-        return emailTo;
+    /**
+     * @return the sentDate
+     */
+    public String getSentDate() {
+        return sentDate;
     }
 
-    public String getEmailFrom() {
-        return emailFrom;
+    /**
+     * @param sentDate the sentDate to set
+     */
+    public void setSentDate(String sentDate) {
+        this.sentDate = sentDate;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
+    /**
+     * @return the subject
+     */
     public String getSubject() {
         return subject;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setEmailTo(String emailTo) {
-        this.emailTo = emailTo;
-    }
-
-    public void setEmailFrom(String emailFrom) {
-        this.emailFrom = emailFrom;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    /**
+     * @param subject the subject to set
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    /**
+     * @return the content
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
+     * @param content the content to set
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    
 }

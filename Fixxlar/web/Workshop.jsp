@@ -4,6 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="dao.FetchEmailDAO"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
@@ -14,6 +15,8 @@
 <%@page import="entity.QuotationRequest"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.QuotationRequestDAO"%>
+<%@page import="dao.EmailDAO"%>
+<%@page import="javax.mail.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
@@ -377,7 +380,14 @@
                             <div class="main vertical-mail">        
 
                                 <div class="col-md-4">
-
+                                    <%-- Instantiate EmailDAO object to call methods --%>
+                                    <%
+                                        FetchEmailDAO email = new FetchEmailDAO();
+                                        Message[] emailArr = email.fetchEmail();
+                                    
+                                    %>
+                                    <%-- /instantiate fetchemailDAO --%>
+                                    
                                     <ul class="inbox" id="mail-inbox">
                                         <li class="heading"><h3>Inbox</h3></li>
                                             <%--
@@ -391,8 +401,8 @@
                                             <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
                                             <div>
                                                 <h5><strong>Lucius</strong> Cashmere (5)</h5>
-                                                <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <span class="delivery-time">today, 4:23pm</span>
+                                                <h5><strong>Subject:</strong> <%out.print(emailArr[0].getSubject()); %></h5>
+                                                <span class="delivery-time"><%out.print(emailArr[0].getSentDate()); %></span>
                                                 <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
                                                 <div class="mail-label bg-red"></div>
                                                 <div class="mail-actions">
@@ -409,8 +419,8 @@
                                             <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
                                             <div>
                                                 <h5><strong>Jesse</strong> Phoenix</h5>
-                                                <p><strong>Mail Message Subject</strong>, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <span class="delivery-time">yesterday, 7:58am</span>
+                                                <h5><strong>Subject:</strong> <%out.print(emailArr[1].getSubject()); %>;</h5>
+                                                <span class="delivery-time"><%out.print(emailArr[1].getSentDate()); %></span>
                                                 <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
                                                 <div class="mail-label bg-red"></div>
                                                 <div class="mail-actions">
@@ -428,8 +438,8 @@
                                             <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
                                             <div>
                                                 <h5><strong>Tex</strong> Montreal (4)</h5>
-                                                <p>Mail Message Subject, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <span class="delivery-time">yesterday, 07:12pm</span>
+                                                <h5><strong>Subject:</strong> <%out.print(emailArr[2].getSubject()); %>;</h5>
+                                                <span class="delivery-time"><%out.print(emailArr[2].getSentDate()); %></span>
                                                 <div class="mail-label bg-greensea"></div>
                                                 <div class="mail-actions">
                                                     <a href="#" class="reply"><i class="fa fa-reply"></i></a> 
@@ -438,7 +448,7 @@
                                             </div>
                                         </li>
                                         <li class="pagination pull-right">
-                                            <span>1-3 of 154</span>
+                                            <span>1-3 of <%=emailArr.length  %></span>
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" class="btn btn-default"><i class="fa fa-angle-left"></i></button>
                                                 <button type="button" class="btn btn-default"><i class="fa fa-angle-right"></i></button>
