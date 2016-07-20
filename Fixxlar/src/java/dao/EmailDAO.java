@@ -62,6 +62,7 @@ public class EmailDAO {
          properties.put("mail.smtp.starttls.enable", "true");
          properties.put("mail.smtp.auth", "true");*/
         //gmail
+        
         properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
@@ -99,6 +100,7 @@ public class EmailDAO {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+        
     }
 
     public static boolean sendEmail(String email) throws UnsupportedEncodingException, IOException {
@@ -162,8 +164,8 @@ public class EmailDAO {
             System.out.println("messages.length---" + messages.length);
 
             for (int i = 0, n = messages.length; i < n; i++) {
-                Email mail = new Email()
-                Message message = messages[i]
+                Email mail = new Email();
+                Message message = messages[i];
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + message.getSubject());
@@ -183,7 +185,7 @@ public class EmailDAO {
             e.printStackTrace();
         }
     }
-
+/*
     public static void main(String[] args) {
 
         String host = "pop.gmail.com";// change accordingly
@@ -194,5 +196,5 @@ public class EmailDAO {
         viewEmails(host, mailStoreType, username, password);
 
     }
-
+*/
 }

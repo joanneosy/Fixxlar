@@ -13,7 +13,7 @@ public class Email {
 
     private String sentDate;
     private String subject;
-    private String content
+    private String content;
     private String address;
 
     public Email(String sentDate, String subject, String content, String address) {
@@ -21,6 +21,10 @@ public class Email {
         this.subject = subject;
         this.content = content;
         this.address = address;
+    }
+
+    public Email() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -63,6 +67,18 @@ public class Email {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getEmailFrom() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getEmailTo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getPassword() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

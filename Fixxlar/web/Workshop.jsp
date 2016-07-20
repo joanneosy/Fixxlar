@@ -400,7 +400,10 @@
                                             </div>
                                             <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
                                             <div>
-                                                <h5><strong>Lucius</strong> Cashmere (5)</h5>
+                                                <h5><strong><% Address[] senderArr0 = emailArr[0].getFrom();
+                                                for (Address a: senderArr0) {
+                                                    out.print(a.toString());
+                                                }%></strong> Phoenix</h5>
                                                 <h5><strong>Subject:</strong> <%out.print(emailArr[0].getSubject()); %></h5>
                                                 <span class="delivery-time"><%out.print(emailArr[0].getSentDate()); %></span>
                                                 <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
@@ -418,7 +421,10 @@
                                             </div>
                                             <a href="#" class="mail-favourite"><i class="fa fa-star-o"></i></a>
                                             <div>
-                                                <h5><strong>Jesse</strong> Phoenix</h5>
+                                                <h5><strong><% Address[] senderArr1 = emailArr[1].getFrom();
+                                                for (Address a: senderArr1) {
+                                                    out.print(a.toString());
+                                                }%></strong> Phoenix</h5>
                                                 <h5><strong>Subject:</strong> <%out.print(emailArr[1].getSubject()); %>;</h5>
                                                 <span class="delivery-time"><%out.print(emailArr[1].getSentDate()); %></span>
                                                 <div class="mail-attachment"><i class="fa fa-paperclip"></i></div>
@@ -437,7 +443,10 @@
                                             </div>
                                             <a href="#" class="mail-favourite active"><i class="fa fa-star-o"></i></a>
                                             <div>
-                                                <h5><strong>Tex</strong> Montreal (4)</h5>
+                                                <h5><strong><% Address[] senderArr2 = emailArr[2].getFrom();
+                                                for (Address a: senderArr2) {
+                                                    out.print(a.toString());
+                                                }%></strong> Phoenix</h5>
                                                 <h5><strong>Subject:</strong> <%out.print(emailArr[2].getSubject()); %>;</h5>
                                                 <span class="delivery-time"><%out.print(emailArr[2].getSentDate()); %></span>
                                                 <div class="mail-label bg-greensea"></div>
