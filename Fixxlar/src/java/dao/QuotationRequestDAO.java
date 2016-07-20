@@ -46,6 +46,47 @@ import util.ConnectionManager;
 public class QuotationRequestDAO {
 
     private static final String USER_AGENT = "Mozilla/5.0";
+    
+    
+    public HashMap<Integer, Integer> retrieveStatusSize(int staffId, String token, int givenWsId, int givenStatus,
+            String givenCarModel, String orderBy, String order) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
+        HashMap<Integer, Integer> statusSize = new HashMap<Integer, Integer>();
+        int statusArr[] = {1,3,5};
+        for (int i = 0; i < 3; i++) {
+            int sta = statusArr[i];
+            String url = "http://119.81.43.85/erp/quotation_request/get_quotation_request_info";
+
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+            List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+            urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+            urlParameters.add(new BasicNameValuePair("token", token));
+            urlParameters.add(new BasicNameValuePair("workshop_id", givenWsId + ""));
+            urlParameters.add(new BasicNameValuePair("status", sta + "")); 
+            urlParameters.add(new BasicNameValuePair("order_by", orderBy));
+            urlParameters.add(new BasicNameValuePair("asc_of_desc", order));
+            urlParameters.add(new BasicNameValuePair("car_model", givenCarModel));
+            post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+            HttpResponse response = client.execute(post);
+            BufferedReader rd = new BufferedReader(
+                    new InputStreamReader(response.getEntity().getContent()));
+
+            StringBuffer result = new StringBuffer();
+            String line = "";
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            String str = result.toString();
+            JsonParser jsonParser = new JsonParser();
+            JsonElement element = jsonParser.parse(str);
+            JsonObject jobj = element.getAsJsonObject();
+            JsonArray arr = jobj.getAsJsonObject("payload").getAsJsonArray("quotation_request_info");
+            int arrSize = arr.size();
+            statusSize.put(i, arrSize);//To be changed to the status
+        }
+        return statusSize;
+    }
 
     public static QuotationRequest retrieveQuotationRequest(int staffId, String token, int givenID) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
         QuotationRequest qr = null;
@@ -297,7 +338,12 @@ public class QuotationRequestDAO {
         JsonElement element = jsonParser.parse(str);
         JsonObject jobj = element.getAsJsonObject();
         JsonArray arr = jobj.getAsJsonObject("payload").getAsJsonArray("quotation_request_info");
-        for (int i = 0; i < arr.size(); i++) {
+        int arrSize = arr.size();
+        if (arrSize > 20) {
+            arrSize = 20;
+        }
+        for (int i = 0; i < arrSize; i++) {
+//        for (int i = 0; i < arr.size(); i++) {
             JsonElement qrElement = arr.get(i);
             JsonObject qrObj = qrElement.getAsJsonObject();
             JsonElement attElement = qrObj.get("service_id");

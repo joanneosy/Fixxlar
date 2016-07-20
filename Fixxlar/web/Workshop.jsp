@@ -52,6 +52,14 @@
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
         %>
+        <%
+            QuotationRequestDAO qDAO = new QuotationRequestDAO();
+            HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "", "requested_datetime", "desc");
+            HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
+            int newSize = statusSize.get(0);
+            int sendFinalSize = statusSize.get(1);
+            int finalAcceptSize = statusSize.get(2); 
+        %>   
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -124,7 +132,7 @@
 
                                                             <div class="media-body">
                                                                 New Requests
-                                                                <h2 class="media-heading animate-number" data-value="7" data-animation-duration="1500">0</h2>
+                                                                <h2 class="media-heading animate-number" data-value="<%=newSize%>" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
 
@@ -149,14 +157,14 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                Pending-Valet Requests
-                                                                <h2 class="media-heading animate-number" data-value="5" data-animation-duration="1500">0</h2>
+                                                                Send Final Quote
+                                                                <h2 class="media-heading animate-number" data-value="<%=sendFinalSize%>" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div> 
 
                                                     </div>
                                                     <div class="back">
-                                                        <a href="ViewRequest.jsp#Valet">
+                                                        <a href="ViewRequest.jsp#Send_Final_Quote">
                                                             <i class="fa fa-bar-chart-o fa-4x"></i>
                                                             <span>More Information</span>
                                                         </a>
@@ -176,8 +184,8 @@
                                                             </span>
 
                                                             <div class="media-body">
-                                                                Completed Requests
-                                                                <h2 class="media-heading animate-number" data-value="23" data-animation-duration="1500">0</h2>
+                                                                Final Quote Accepted
+                                                                <h2 class="media-heading animate-number" data-value="<%=finalAcceptSize%>" data-animation-duration="1500">0</h2>
                                                             </div>
                                                         </div>
 
@@ -185,7 +193,7 @@
 
                                                     </div>
                                                     <div class="back">
-                                                        <a href="ViewRequest.jsp#Completed">
+                                                        <a href="ViewRequest.jsp#Final_Quote_Accepted">
                                                             <i class="fa fa-bar-chart-o fa-4x"></i>
                                                             <span>More Information</span>
                                                         </a>
@@ -266,31 +274,35 @@
                                                         <th class="sortable">Name</th>
                                                         <th class="sortable">No. Plate</th>
                                                         <th class="sortable">Services</th>
-                                                        <th class="sortable">Email</th>
+                                                        <!--<th class="sortable">Email</th>-->
                                                         <th class="sortable">Phone</th>
                                                         <th>Attachment</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id='tableBody'>
                                                     <!--Loop per new request-->
                                                     <%
-                                                        QuotationRequestDAO qDAO = new QuotationRequestDAO();
-                                                        HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
                                                         Iterator it = qList.entrySet().iterator();
                                                         while (it.hasNext()) {
                                                             Map.Entry pair = (Map.Entry) it.next();
                                                             QuotationRequest qr = (QuotationRequest) pair.getValue();
                                                             int i = 1;
                                                             Timestamp timeStamp = qr.getDate();
-                                                            String dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                             String dateTime = "01-01-1990 00:00:00";
+                                                            if (timeStamp != null) {
+                                                                dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                            }
                                                             String serviceName = qr.getName();
+                                                            if(serviceName.indexOf("-") > -1) {
+                                                                serviceName = serviceName.substring(0, serviceName.indexOf("-"));
+                                                            }
                                                             String address = qr.getAddress();
                                                             String serviceAmenities = qr.getAmenities();
                                                             String serviceDescription = qr.getDescription();
                                                             String serviceDetails = qr.getDetails();
                                                             int serviceId = qr.getId();
                                                             String serviceMileage = qr.getMileage();
-                                                            String photo = qr.getPhotos();
+                                                            String carPhoto = qr.getPhotos();
                                                             int serviceStatus = qr.getStatus();
                                                             String serviceUrgency = qr.getUrgency();
 
@@ -313,7 +325,7 @@
                                                         <td><% out.print(custName);%></td>
                                                         <td><% out.print(carPlate);%></td>
                                                         <td><% out.print(serviceName);%></td>
-                                                        <td><% out.print(custEmail);%></td>
+                                                        <!--<td><% out.print(custEmail);%></td>-->
                                                         <td><% out.print(custPhone);%></td>
                                                         <!--Picture Attachment-->
                                                         <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
@@ -327,7 +339,7 @@
                                                                 <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
+                                                                <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -357,14 +369,14 @@
 
                                     <!-- tile footer -->
                                     <div class="tile-footer text-center">
-                                        <ul class="pagination pagination-sm nomargin pagination-custom">
-                                            <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                        <ul class="pagination pagination-sm nomargin pagination-custom pager" id='myPager'>
+<!--                                            <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
                                             <li class="active"><a href="#">1</a></li>
                                             <li><a href="#">2</a></li>
                                             <li><a href="#">3</a></li>
                                             <li><a href="#">4</a></li>
                                             <li><a href="#">5</a></li>
-                                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>-->
                                         </ul>
                                     </div>
                                     <!-- /tile footer -->
@@ -384,7 +396,7 @@
                                     <%
                                         FetchEmailDAO email = new FetchEmailDAO();
                                         Message[] emailArr = email.fetchEmail();
-                                    
+                                        String test ="";
                                     %>
                                     <%-- /instantiate fetchemailDAO --%>
                                     
@@ -521,6 +533,7 @@
 <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
 <script type="text/javascript" src="js/jquery.videobackground.js"></script>
 <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="js/jquery.bootpag.js"></script>
 
 <script src="js/minimal.min.js"></script>
 
@@ -553,7 +566,7 @@
         });
 
 
-    })
+    });
 
     $(function () {
 
@@ -662,6 +675,115 @@
         });
 
     })(document);
+</script>
+<script>
+    $.fn.pageMe = function (opts) {
+        var $this = this,
+                defaults = {
+                    perPage: 5,
+                    showPrevNext: false,
+                    hidePageNumbers: false
+                },
+        settings = $.extend(defaults, opts);
+
+        var listElement = $this;
+        var perPage = settings.perPage;
+        var children = listElement.children();
+        var pager = $('.pager');
+
+        if (typeof settings.childSelector != "undefined") {
+            children = listElement.find(settings.childSelector);
+        }
+
+        if (typeof settings.pagerSelector != "undefined") {
+            pager = $(settings.pagerSelector);
+        }
+
+        var numItems = children.size();
+        var numPages = Math.ceil(numItems / perPage);
+
+        pager.data("curr", 0);
+
+        if (settings.showPrevNext) {
+            $('<li><a href="#" class="prev_link">«</a></li>').appendTo(pager);
+        }
+
+        var curr = 0;
+        while (numPages > curr && (settings.hidePageNumbers == false)) {
+            $('<li><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo(pager);
+            curr++;
+        }
+
+        if (settings.showPrevNext) {
+            $('<li><a href="#" class="next_link">»</a></li>').appendTo(pager);
+        }
+
+        pager.find('.page_link:first').addClass('active');
+        pager.find('.prev_link').hide();
+        if (numPages <= 1) {
+            pager.find('.next_link').hide();
+        }
+        pager.children().eq(1).addClass("active");
+
+        children.hide();
+        children.slice(0, perPage).show();
+
+        pager.find('li .page_link').click(function () {
+            var clickedPage = $(this).html().valueOf() - 1;
+            goTo(clickedPage, perPage);
+            return false;
+        });
+        pager.find('li .prev_link').click(function () {
+            previous();
+            return false;
+        });
+        pager.find('li .next_link').click(function () {
+            next();
+            return false;
+        });
+
+        function previous() {
+            var goToPage = parseInt(pager.data("curr")) - 1;
+            goTo(goToPage);
+        }
+
+        function next() {
+            goToPage = parseInt(pager.data("curr")) + 1;
+            goTo(goToPage);
+        }
+
+        function goTo(page) {
+            var startAt = page * perPage,
+                    endOn = startAt + perPage;
+
+            children.css('display', 'none').slice(startAt, endOn).show();
+
+            if (page >= 1) {
+                pager.find('.prev_link').show();
+            }
+            else {
+                pager.find('.prev_link').hide();
+            }
+
+            if (page < (numPages - 1)) {
+                pager.find('.next_link').show();
+            }
+            else {
+                pager.find('.next_link').hide();
+            }
+
+            pager.data("curr", page);
+            pager.children().removeClass("active");
+            pager.children().eq(page + 1).addClass("active");
+
+        }
+    };
+
+    $(document).ready(function () {
+
+        $('#tableBody').pageMe({pagerSelector: '#myPager', showPrevNext: true, hidePageNumbers: false, perPage: 4});
+
+    });
 </script>
 
 </html>
