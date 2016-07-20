@@ -6,9 +6,7 @@
 package servlet;
 
 import dao.QuotationRequestDAO;
-import dao.WorkshopDAO;
 import entity.WebUser;
-import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -29,8 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joanne
  */
-@WebServlet(name = "AddEstimatedCompletionTimeServlet", urlPatterns = {"/AddEstimatedCompletionTime"})
-public class AddEstimatedCompletionTimeServlet extends HttpServlet {
+@WebServlet(name = "CompleteServiceServlet", urlPatterns = {"/CompleteService"})
+public class CompleteServiceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,21 +42,14 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-                
         HttpSession session = request.getSession(true);
 
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
-        String estTimeStr = request.getParameter("dateTime").replace("T", " ") + ":00";
-        /*Timestamp estTime = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:00");
-        Date parsedDate = dateFormat.parse(estTimeStr);
-        estTime = new java.sql.Timestamp(parsedDate.getTime());*/
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
-        int workshopId = user.getShopId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        boolean isSuccess = qrDAO.addEstimatedCompletionTime(staffId, token, quotationRequestId, workshopId, estTimeStr);
+        boolean isSuccess = qrDAO.completeService(staffId, token, quotationRequestId);
         //Error message? success message?
         if (isSuccess) {
             request.setAttribute("isSuccess", "Success!");
@@ -66,7 +57,7 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
             view.forward(request, response);
         } else {
             request.setAttribute("isSuccess", "Failed!");
-            RequestDispatcher view = request.getRequestDispatcher("AddEstimatedCompletionTime.jsp?id" + quotationRequestId);
+            RequestDispatcher view = request.getRequestDispatcher("ViewQuotationRequest.jsp");
             view.forward(request, response);
         }
     }
@@ -86,7 +77,7 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(AddEstimatedCompletionTimeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompleteServiceServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -104,7 +95,7 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(AddEstimatedCompletionTimeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompleteServiceServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

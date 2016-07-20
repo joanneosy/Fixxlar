@@ -21,7 +21,7 @@
             int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         %>
         <form action = "AddEstimatedCompletionTime" method= "post">
-            Estimated Completion Time: <input type="text" name="time" required/><br/>
+            Estimated Completion Time: <input type="datetime-local" name="dateTime" required/><br/>
             <input type="hidden" name="id" value="<%=quotationRequestId%>"><br/>
             <input type="submit" value="Add Estimated Completion Time"><br/><br/>
         </form><br/>

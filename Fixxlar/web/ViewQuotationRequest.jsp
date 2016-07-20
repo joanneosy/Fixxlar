@@ -25,8 +25,12 @@
     <body>
         <h1>All requests</h1>
         <%
+            String successMsg = (String) request.getAttribute("isSuccess");
+            if (successMsg != null) {
+                out.println(successMsg + "<br/>");
+            }
+            
             WorkshopDAO wDAO = new WorkshopDAO();
-            String email = ((WebUser) session.getAttribute("loggedInUser")).getEmail();
             String userType = (String) session.getAttribute("loggedInUserType");
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             String token = user.getToken();
@@ -108,7 +112,7 @@
                     } else if (userType.equals("Workshop") && status == 3) {
                         out.println("<td><a href = \"AddFinalQuotation.jsp?&id=" + qr.getId() + "\">View Details</a></td>");
                     } else if (userType.equals("Workshop") && status == 6) {
-                        out.println("<td><a href = \"CompleteRequest.jsp?&id=" + qr.getId() + "\">Complete Request</a></td>");
+                        out.println("<td><a href = \"CompleteService?&id=" + qr.getId() + "\">Complete Request</a></td>");
                     } else {
                         out.println("<td>Others</td>");
                     }

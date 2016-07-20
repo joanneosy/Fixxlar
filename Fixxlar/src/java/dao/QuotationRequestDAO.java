@@ -474,9 +474,9 @@ public class QuotationRequestDAO {
         return allQuotationRequests;
     }
 
-    public boolean completeRequest(int staffId, String token, int serviceId) throws UnsupportedEncodingException, IOException {
+    public boolean completeService(int staffId, String token, int serviceId) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/quotation_request/complete_service";
-
+ 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
@@ -584,7 +584,6 @@ public class QuotationRequestDAO {
         }
 
         String str = result.toString();
-        System.out.println(str);
         JsonParser jsonParser = new JsonParser();
         JsonElement element = jsonParser.parse(str);
         JsonObject jobj = element.getAsJsonObject();
@@ -635,8 +634,8 @@ public class QuotationRequestDAO {
         }
     }
 
-    public boolean addEstimatedCompletionTime(int staffId, String token, int quotationRequestId, int workshopId, double time) throws UnsupportedEncodingException, IOException {
-        String url = "";
+    public boolean addEstimatedCompletionTime(int staffId, String token, int quotationRequestId, int workshopId, String time) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/quotation_request/update_estimated_completion_time";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -648,7 +647,7 @@ public class QuotationRequestDAO {
         urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("service_id", quotationRequestId + ""));
-        urlParameters.add(new BasicNameValuePair("time", time + ""));
+        urlParameters.add(new BasicNameValuePair("estimated_completion_time", time));
         urlParameters.add(new BasicNameValuePair("shop_id", workshopId + ""));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
