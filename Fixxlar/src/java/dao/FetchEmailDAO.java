@@ -31,7 +31,7 @@ public class FetchEmailDAO {
             msgArr = inbox.getMessages();
 
             //System.out.println(msgArr.length);
-            for (int i = 0; i < msgArr.length; i++) {
+            /*for (int i = 0; i < msgArr.length; i++) {
                 Message msg = msgArr[i];
                 Address[] in = msg.getFrom();
                 for (Address address : in) {
@@ -44,8 +44,8 @@ public class FetchEmailDAO {
                 System.out.println("SENT DATE:" + msg.getSentDate());
                 System.out.println("SUBJECT:" + msg.getSubject());
                 System.out.println("CONTENT:" + bp.getContent());
-                */
-            }
+                
+            }*/
             return msgArr;
         } catch (Exception mex) {
             mex.printStackTrace();

@@ -304,7 +304,7 @@ public class QuotationRequestDAO {
     public HashMap<Integer, QuotationRequest> retrieveAllQuotationRequests(int staffId, String token, int givenWsId, int givenStatus,
             String givenCarModel, String orderBy, String order) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
 
-        HashMap<Integer, QuotationRequest> allQuotationRequests = new HashMap<>();
+        HashMap<Integer, QuotationRequest> allQuotationRequests = new HashMap<Integer, QuotationRequest>();
         String url = "http://119.81.43.85/erp/quotation_request/get_quotation_request_info";
 
         HttpClient client = new DefaultHttpClient();
@@ -410,13 +410,13 @@ public class QuotationRequestDAO {
 
             attElement = qrObj.get("offer_id");
             int offerId = 0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 offerId = attElement.getAsInt();
             }
 
             attElement = qrObj.get("service_final_price");
             double finalQuotationPrice = 0.0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 finalQuotationPrice = attElement.getAsDouble();
             }
 
@@ -435,7 +435,7 @@ public class QuotationRequestDAO {
 
             attElement = qrObj.get("shop_id");
             int wsId = 0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 wsId = attElement.getAsInt();
             }
             attElement = qrObj.get("vehicle_id");
@@ -506,7 +506,7 @@ public class QuotationRequestDAO {
 
             attElement = qrObj.get("service_status");
             int status = 0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 status = attElement.getAsInt();
             }
 

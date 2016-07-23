@@ -106,7 +106,7 @@ public class WebUserDAO {
             
             int shopId = 0;
             attElement = user.get("shop_id");
-            if (attElement != null || !attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 shopId = attElement.getAsInt();
             }
             webUser = new WebUser(staffId, email, userType, refStaffId, token, shopId);
