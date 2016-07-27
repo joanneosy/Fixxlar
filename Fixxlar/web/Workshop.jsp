@@ -54,7 +54,7 @@
         %>
         <%
             QuotationRequestDAO qDAO = new QuotationRequestDAO();
-            HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "", "requested_datetime", "desc");
+            HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "requested_datetime", "desc");
             HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
             int newSize = statusSize.get(0);
             int sendFinalSize = statusSize.get(1);
@@ -287,7 +287,7 @@
                                                             Map.Entry pair = (Map.Entry) it.next();
                                                             QuotationRequest qr = (QuotationRequest) pair.getValue();
                                                             int i = 1;
-                                                            Timestamp timeStamp = qr.getDate();
+                                                            Timestamp timeStamp = qr.getRequestedDate();
                                                              String dateTime = "01-01-1990 00:00:00";
                                                             if (timeStamp != null) {
                                                                 dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
@@ -303,7 +303,7 @@
                                                             int serviceId = qr.getId();
                                                             String serviceMileage = qr.getMileage();
                                                             String carPhoto = qr.getPhotos();
-                                                            int serviceStatus = qr.getStatus();
+                                                            int serviceStatus = qr.getOffer().getStatus();
                                                             String serviceUrgency = qr.getUrgency();
 
                                                             Customer cust = qr.getCustomer();

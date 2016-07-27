@@ -206,7 +206,7 @@
                                         <div class="tab-content">
                                             <%                                                int i = 1;
                                                 QuotationRequestDAO qDAO = new QuotationRequestDAO();
-                                                HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "", "requested_datetime", "desc");
+                                                HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "requested_datetime", "desc");
 
 
                                             %>
@@ -235,7 +235,7 @@
                                                                     Map.Entry pair = (Map.Entry) it.next();
                                                                     QuotationRequest qr = (QuotationRequest) pair.getValue();
                                                                     int id = qr.getId();
-                                                                    Timestamp timeStamp = qr.getDate();
+                                                                    Timestamp timeStamp = qr.getRequestedDate();
                                                                     String dateTime = "01-01-1990 00:00:00";
                                                                     if (timeStamp != null) {
                                                                         dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
@@ -248,7 +248,7 @@
                                                                     int serviceId = qr.getId();
                                                                     String serviceMileage = qr.getMileage();
                                                                     String carPhoto = qr.getPhotos();
-                                                                    int serviceStatus = qr.getStatus();
+                                                                    int serviceStatus = qr.getOffer().getStatus();
                                                                     String serviceUrgency = qr.getUrgency();
 
                                                                     Customer cust = qr.getCustomer();
@@ -440,13 +440,13 @@
                                                     <tbody>
                                                         <!--Loop per new request-->
                                                         <%
-                                                            qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 2, "", "requested_datetime", "desc");
+                                                            qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 2, "requested_datetime", "desc");
                                                             it = qList.entrySet().iterator();
                                                             while (it.hasNext()) {
                                                                 Map.Entry pair = (Map.Entry) it.next();
                                                                 QuotationRequest qr = (QuotationRequest) pair.getValue();
                                                                 int id = qr.getId();
-                                                                Timestamp timeStamp = qr.getDate();
+                                                                Timestamp timeStamp = qr.getRequestedDate();
                                                                 String dateTime = "01-01-1990 00:00:00";
                                                                 if (timeStamp != null) {
                                                                     dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
@@ -459,7 +459,7 @@
                                                                 int serviceId = qr.getId();
                                                                 String serviceMileage = qr.getMileage();
                                                                 String carPhoto = qr.getPhotos();
-                                                                int serviceStatus = qr.getStatus();
+                                                                int serviceStatus = qr.getOffer().getStatus();
                                                                 String serviceUrgency = qr.getUrgency();
 
                                                                 Customer cust = qr.getCustomer();
@@ -617,14 +617,14 @@
                                                 <tbody>
                                                     <!--Loop per new request-->
                                                     <%
-                                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 3, "", "requested_datetime", "desc");
+                                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 3, "requested_datetime", "desc");
                                                         it = qList.entrySet().iterator();
 
                                                         while (it.hasNext()) {
                                                             Map.Entry pair = (Map.Entry) it.next();
                                                             QuotationRequest qr = (QuotationRequest) pair.getValue();
                                                             int id = qr.getId();
-                                                            Timestamp timeStamp = qr.getDate();
+                                                            Timestamp timeStamp = qr.getRequestedDate();
                                                             String dateTime = "01-01-1990 00:00:00";
                                                             if (timeStamp != null) {
                                                                 dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
@@ -637,7 +637,7 @@
                                                             int serviceId = qr.getId();
                                                             String serviceMileage = qr.getMileage();
                                                             String carPhoto = qr.getPhotos();
-                                                            int serviceStatus = qr.getStatus();
+                                                            int serviceStatus = qr.getOffer().getStatus();
                                                             String serviceUrgency = qr.getUrgency();
 
                                                             Customer cust = qr.getCustomer();
@@ -818,14 +818,14 @@
                                 <tbody>
                                     <!--Loop per new request-->
                                     <%
-                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "", "requested_datetime", "desc");
+                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "requested_datetime", "desc");
                                         it = qList.entrySet().iterator();
 
                                         while (it.hasNext()) {
                                             Map.Entry pair = (Map.Entry) it.next();
                                             QuotationRequest qr = (QuotationRequest) pair.getValue();
                                             int id = qr.getId();
-                                            Timestamp timeStamp = qr.getDate();
+                                            Timestamp timeStamp = qr.getRequestedDate();
                                             String dateTime = "01-01-1990 00:00:00";
                                             if (timeStamp != null) {
                                                 dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
@@ -838,7 +838,7 @@
                                             int serviceId = qr.getId();
                                             String serviceMileage = qr.getMileage();
                                             String carPhoto = qr.getPhotos();
-                                            int serviceStatus = qr.getStatus();
+                                            int serviceStatus = qr.getOffer().getStatus();
                                             String serviceUrgency = qr.getUrgency();
 
                                             Customer cust = qr.getCustomer();

@@ -44,12 +44,12 @@ public class CompleteServiceServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
 
-        int quotationRequestId = Integer.parseInt(request.getParameter("id"));
+        int offerId = Integer.parseInt(request.getParameter("id"));
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        boolean isSuccess = qrDAO.completeService(staffId, token, quotationRequestId);
+        boolean isSuccess = qrDAO.completeService(staffId, token, offerId);
         //Error message? success message?
         if (isSuccess) {
             request.setAttribute("isSuccess", "Success!");

@@ -81,8 +81,8 @@
                     out.println("<td>" + qr.getVehicle().getModel() + "</td>");
                     out.println("<td>" + qr.getVehicle().getYear() + "</td>");
                     out.println("<td>" + qr.getVehicle().getPlateNumber() + "</td>");
-                    out.println("<td>" + qr.getDate() + "</td>");
-                    int status = qr.getStatus();
+                    out.println("<td>" + qr.getRequestedDate() + "</td>");
+                    int status = qr.getOffer().getStatus();
                     if (status == 1) {
                         out.println("<td>New</td>");
                     } else if (status == 2) {
@@ -110,9 +110,9 @@
                     } else if (userType.equals("Workshop") && (status == 2 || status == 4 || status == 5 || status == 6)) {
                         out.println("<td><a href = \"ViewOneQuotationRequest?&id=" + qr.getId() + "\">View</a></td>");
                     } else if (userType.equals("Workshop") && status == 3) {
-                        out.println("<td><a href = \"AddFinalQuotation.jsp?&id=" + qr.getId() + "\">View Details</a></td>");
+                        out.println("<td><a href = \"AddFinalQuotation.jsp?&id=" + qr.getOffer().getId() + "\">View Details</a></td>");
                     } else if (userType.equals("Workshop") && status == 6) {
-                        out.println("<td><a href = \"CompleteService?&id=" + qr.getId() + "\">Complete Request</a></td>");
+                        out.println("<td><a href = \"CompleteService?&id=" + qr.getOffer().getId() + "\">Complete Request</a></td>");
                     } else {
                         out.println("<td>Others</td>");
                     }

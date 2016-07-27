@@ -47,7 +47,7 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
                 
         HttpSession session = request.getSession(true);
 
-        int quotationRequestId = Integer.parseInt(request.getParameter("id"));
+        int offerId = Integer.parseInt(request.getParameter("id"));
         String estTimeStr = request.getParameter("dateTime").replace("T", " ") + ":00";
         /*Timestamp estTime = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:00");
@@ -56,9 +56,8 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
-        int workshopId = user.getShopId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-        boolean isSuccess = qrDAO.addEstimatedCompletionTime(staffId, token, quotationRequestId, workshopId, estTimeStr);
+        boolean isSuccess = qrDAO.addEstimatedCompletionTime(staffId, token, offerId, estTimeStr);
         //Error message? success message?
         if (isSuccess) {
             request.setAttribute("isSuccess", "Success!");
@@ -66,7 +65,7 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
             view.forward(request, response);
         } else {
             request.setAttribute("isSuccess", "Failed!");
-            RequestDispatcher view = request.getRequestDispatcher("AddEstimatedCompletionTime.jsp?id" + quotationRequestId);
+            RequestDispatcher view = request.getRequestDispatcher("AddEstimatedCompletionTime.jsp?id" + offerId);
             view.forward(request, response);
         }
     }
