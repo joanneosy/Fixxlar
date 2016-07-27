@@ -63,6 +63,18 @@
 .table.table-custom1 > tbody > tr > th.progress-cell .progress, .table.table-custom1 > tbody > tr > td.progress-cell .progress { margin: 0; margin-top: 7px; }
 .table.table-custom1 > tbody > tr:first-child > th, .table.table-custom1 > tbody > tr:first-child > td { border-top: 0; }
 
+/*DateTimeForm*/
+[class^="tile"][class*="transparent-"] .dt{
+    background-color: transparent;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    color: black;
+}
+[class^="tile"][class*="transparent-"] .dt:focus{
+    background-color: rgba(255, 235, 59, 0.3);
+}
+/*DateTimeForm*/
+
 
 
 /* The Modal (background) */

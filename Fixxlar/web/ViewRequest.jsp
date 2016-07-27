@@ -144,7 +144,7 @@
                                     <div class="tile-widget bg-transparent-white-2">
                                         <div class="row">
 
-                                            <div class="col-sm-4 col-xs-6">
+                                            <div class="col-sm-2 col-xs-6">
                                                 <div class="search" id="requestSearch">
                                                     <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                 </div>
@@ -161,7 +161,7 @@
                                                                                                 </div>-->
                                             </div>
 
-                                            <div class="col-sm-8 col-xs-6 text-right">
+                                            <div class="col-sm-10 col-xs-6 text-right">
 
                                                 <!--                                                <div class="btn-group btn-group-xs table-options">
                                                                                                     <button type="button active" class="btn btn-default" href="#New">New</button>
@@ -176,6 +176,7 @@
                                                         <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
                                                         <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
                                                         <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
+                                                        <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
                                                         <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
                                                         <!--<li><a href="#All" data-toggle="pill">All</a></li>-->
                                                     </ul>
@@ -189,6 +190,7 @@
                                                         <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
                                                         <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
                                                         <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
+                                                        <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
                                                         <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
                                                         <!--<li><a href="#All" data-toggle="pill">All</a></li>-->
                                                     </ul>
@@ -218,6 +220,7 @@
                                                     <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable1">
                                                         <thead>
                                                             <tr>
+                                                                <th class="sortable">ID</th>
                                                                 <th class="sortable">DateTime</th>
                                                                 <th class="sortable">Name</th>
                                                                 <th class="sortable">No. Plate</th>
@@ -241,6 +244,7 @@
                                                                         dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
                                                                     }
                                                                     String serviceName = qr.getName();
+                                                                    
                                                                     String address = qr.getAddress();
                                                                     String serviceAmenities = qr.getAmenities();
                                                                     String serviceDescription = qr.getDescription();
@@ -267,6 +271,7 @@
 
                                                             %>
                                                             <tr>
+                                                                <td><% out.print(serviceId);%></td>
                                                                 <td><% out.print(dateTime);%></td>
                                                                 <td><% out.print(custName);%></td>
                                                                 <td><% out.print(carPlate);%></td>
@@ -422,11 +427,12 @@
 
 
 
-                                        <div class="tab-pane fade active in" id="Waiting_for_Response" >
+                                        <div class="tab-pane fade" id="Waiting_for_Response" >
                                             <div class="table-responsive">
                                                 <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable2">
                                                     <thead>
                                                         <tr>
+                                                            <th class="sortable">ID</th>
                                                             <th class="sortable">DateTime</th>
                                                             <th class="sortable">Name</th>
                                                             <th class="sortable">No. Plate</th>
@@ -478,6 +484,7 @@
 
                                                         %>
                                                         <tr>
+                                                            <td><% out.print(serviceId);%></td>
                                                             <td><% out.print(dateTime);%></td>
                                                             <td><% out.print(custName);%></td>
                                                             <td><% out.print(carPlate);%></td>
@@ -599,11 +606,12 @@
                                         </div>
                                     </div><!--Waiting_for_Response-->
 
-                                    <div class="tab-pane fade active in" id="Send_Final_Quote" >
+                                    <div class="tab-pane fade" id="Send_Final_Quote" >
                                         <div class="table-responsive">
                                             <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable3">
                                                 <thead>
                                                     <tr>
+                                                        <th class="sortable">ID</th>
                                                         <th class="sortable">DateTime</th>
                                                         <th class="sortable">Name</th>
                                                         <th class="sortable">No. Plate</th>
@@ -656,6 +664,7 @@
 
                                                     %>
                                                     <tr>
+                                                        <td><% out.print(serviceId);%></td>
                                                         <td><% out.print(dateTime);%></td>
                                                         <td><% out.print(custName);%></td>
                                                         <td><% out.print(carPlate);%></td>
@@ -798,13 +807,13 @@
                             </table>
                         </div>
                     </div><!--Send Final Quote-->
-
-
-                    <div class="tab-pane fade active in" id="Final_Quote_Accepted" >
+                    
+                    <div class="tab-pane fade" id="Awaiting_Final_Confirmation" >
                         <div class="table-responsive">
                             <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable4">
                                 <thead>
                                     <tr>
+                                        <th class="sortable">ID</th>
                                         <th class="sortable">DateTime</th>
                                         <th class="sortable">Name</th>
                                         <th class="sortable">No. Plate</th>
@@ -818,45 +827,230 @@
                                 <tbody>
                                     <!--Loop per new request-->
                                     <%
-                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "requested_datetime", "desc");
-                                        it = qList.entrySet().iterator();
+                                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 3, "requested_datetime", "desc");
+                                                        it = qList.entrySet().iterator();
 
-                                        while (it.hasNext()) {
-                                            Map.Entry pair = (Map.Entry) it.next();
-                                            QuotationRequest qr = (QuotationRequest) pair.getValue();
-                                            int id = qr.getId();
-                                            Timestamp timeStamp = qr.getRequestedDate();
-                                            String dateTime = "01-01-1990 00:00:00";
-                                            if (timeStamp != null) {
-                                                dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
-                                            }
-                                            String serviceName = qr.getName();
-                                            String address = qr.getAddress();
-                                            String serviceAmenities = qr.getAmenities();
-                                            String serviceDescription = qr.getDescription();
-                                            String serviceDetails = qr.getDetails();
-                                            int serviceId = qr.getId();
-                                            String serviceMileage = qr.getMileage();
-                                            String carPhoto = qr.getPhotos();
-                                            int serviceStatus = qr.getOffer().getStatus();
-                                            String serviceUrgency = qr.getUrgency();
+                                                        while (it.hasNext()) {
+                                                            Map.Entry pair = (Map.Entry) it.next();
+                                                            QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                            int id = qr.getId();
+                                                            Timestamp timeStamp = qr.getRequestedDate();
+                                                            String dateTime = "01-01-1990 00:00:00";
+                                                            if (timeStamp != null) {
+                                                                dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                            }
+                                                            String serviceName = qr.getName();
+                                                            String address = qr.getAddress();
+                                                            String serviceAmenities = qr.getAmenities();
+                                                            String serviceDescription = qr.getDescription();
+                                                            String serviceDetails = qr.getDetails();
+                                                            int serviceId = qr.getId();
+                                                            String serviceMileage = qr.getMileage();
+                                                            String carPhoto = qr.getPhotos();
+                                                            int serviceStatus = qr.getOffer().getStatus();
+                                                            String serviceUrgency = qr.getUrgency();
 
-                                            Customer cust = qr.getCustomer();
-                                            String custName = cust.getName();
-                                            String custEmail = cust.getEmail();
-                                            String custPhone = cust.getHandphone();
+                                                            Customer cust = qr.getCustomer();
+                                                            String custName = cust.getName();
+                                                            String custEmail = cust.getEmail();
+                                                            String custPhone = cust.getHandphone();
 
-                                            Vehicle vehicle = qr.getVehicle();
-                                            String carPlate = vehicle.getPlateNumber();
-                                            String carModel = vehicle.getModel();
-                                            String carMake = vehicle.getMake();
-                                            int carYear = vehicle.getYear();
-                                            String carColor = vehicle.getColour();
-                                            String carControl = vehicle.getControl();
+                                                            Vehicle vehicle = qr.getVehicle();
+                                                            String carPlate = vehicle.getPlateNumber();
+                                                            String carModel = vehicle.getModel();
+                                                            String carMake = vehicle.getMake();
+                                                            int carYear = vehicle.getYear();
+                                                            String carColor = vehicle.getColour();
+                                                            String carControl = vehicle.getControl();
 
 
-                                    %>
+                                                    %>
                                     <tr>
+                                        <td><% out.print(serviceId);%></td>
+                                        <td><% out.print(dateTime);%></td>
+                                        <td><% out.print(custName);%></td>
+                                        <td><% out.print(carPlate);%></td>
+                                        <td><% out.print(serviceName);%></td>
+                                        <td><% out.print(custEmail);%></td>
+                                        <td><% out.print(custPhone);%></td>
+                                        <!--Picture Attachment-->
+                                        <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                        <!-- Modal -->
+                                <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog-img">
+                                        <div class="modal-content">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <div class="modal-header">
+                                                <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                            </div>
+                                        </div> <!--/.modal-content--> 
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                                <% i++; %>
+                                <!--Quote-->
+                                <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                </div>
+                                                <div class="line-across"></div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Name: </b><% out.print(custName);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Date & Time: </b><% out.print(dateTime);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Email: </b><% out.print(custEmail);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Contact No: </b><% out.print(custPhone);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>License Plate: </b><% out.print(carPlate);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Service Request: </b><% out.print(serviceName);%></p>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <p><b>Urgency: </b><% out.print(serviceUrgency);%></p>
+                                                </div>
+
+                                                <div>
+                                                    <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div>
+                                                    <div class="quotation text-left">
+                                                        Agreed Amount: $500
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                </div>
+                                                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                            </div>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        </tr>
+
+                        <%
+                                i++;
+                            }
+                        %>
+
+                        </tbody>
+
+                        </table>
+                    </div>
+                </div><!--Awaiting Final Confirmation-->
+
+                    <div class="tab-pane fade" id="Final_Quote_Accepted" >
+                        <div class="table-responsive">
+                            <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable5">
+                                <thead>
+                                    <tr>
+                                        <th class="sortable">ID</th>
+                                        <th class="sortable">DateTime</th>
+                                        <th class="sortable">Name</th>
+                                        <th class="sortable">No. Plate</th>
+                                        <th class="sortable">Services</th>
+                                        <th class="sortable">Email</th>
+                                        <th class="sortable">Phone</th>
+                                        <th>Attachment</th>
+                                        <th>Quote</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Loop per new request-->
+                                    <%
+                                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 3, "requested_datetime", "desc");
+                                                        it = qList.entrySet().iterator();
+
+                                                        while (it.hasNext()) {
+                                                            Map.Entry pair = (Map.Entry) it.next();
+                                                            QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                            int id = qr.getId();
+                                                            Timestamp timeStamp = qr.getRequestedDate();
+                                                            String dateTime = "01-01-1990 00:00:00";
+                                                            if (timeStamp != null) {
+                                                                dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                            }
+                                                            String serviceName = qr.getName();
+                                                            String address = qr.getAddress();
+                                                            String serviceAmenities = qr.getAmenities();
+                                                            String serviceDescription = qr.getDescription();
+                                                            String serviceDetails = qr.getDetails();
+                                                            int serviceId = qr.getId();
+                                                            String serviceMileage = qr.getMileage();
+                                                            String carPhoto = qr.getPhotos();
+                                                            int serviceStatus = qr.getOffer().getStatus();
+                                                            String serviceUrgency = qr.getUrgency();
+
+                                                            Customer cust = qr.getCustomer();
+                                                            String custName = cust.getName();
+                                                            String custEmail = cust.getEmail();
+                                                            String custPhone = cust.getHandphone();
+
+                                                            Vehicle vehicle = qr.getVehicle();
+                                                            String carPlate = vehicle.getPlateNumber();
+                                                            String carModel = vehicle.getModel();
+                                                            String carMake = vehicle.getMake();
+                                                            int carYear = vehicle.getYear();
+                                                            String carColor = vehicle.getColour();
+                                                            String carControl = vehicle.getControl();
+
+
+                                                    %>
+                                    <tr>
+                                        <td><% out.print(serviceId);%></td>
                                         <td><% out.print(dateTime);%></td>
                                         <td><% out.print(custName);%></td>
                                         <td><% out.print(carPlate);%></td>

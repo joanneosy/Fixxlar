@@ -4,6 +4,12 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="entity.Vehicle"%>
+<%@page import="entity.Customer"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="entity.QuotationRequest"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,7 +17,7 @@
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@include file="ProtectWorkshop.jsp"%>--%>
+<%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,15 +27,17 @@
 
         <link rel="icon" type="image/ico" href="images/favicon.ico" />
         <!-- Bootstrap -->
+        <!--<link href="css/bootstrap.css" rel="stylesheet">-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/animate.css">
         <link type="text/css" rel="stylesheet" media="all" href="css/jquery.mmenu.all.css" />
         <link rel="stylesheet" href="css/jquery.videobackground.css">
         <link rel="stylesheet" href="css/bootstrap-checkbox.css">
+        <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 
-        <link rel="stylesheet" href="css/custom.css">
         <link href="css/minimal.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +54,7 @@
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
         %>
-        
+
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -164,9 +172,9 @@
 
                                                 <div class="btn-group btn-group-xs table-options desktopOnly">
                                                     <ul class="nav nav-pills">
-                                                        <li class="active"><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
+                                                        <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
+                                                        <li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
                                                         <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
-                                                        <li><a href="#All" data-toggle="pill">All</a></li>
                                                     </ul>
                                                 </div>
                                                 <div class="btn-group mobileOnly" style="float:right">
@@ -175,9 +183,9 @@
                                                     </button>
 
                                                     <ul class="dropdown-menu" role="menu" >
-                                                        <li class="active"><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
+                                                        <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
+                                                        <li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
                                                         <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
-                                                        <li><a href="#All" data-toggle="pill">All</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -191,912 +199,855 @@
                                     <!-- tile body -->
                                     <div class="tile-body no-vpadding">
                                         <div class="tab-content">
-                                            <!--Loop per new status-->
-                                            <div class="tab-pane fade active in" id="Ongoing_Service" >
+                                            <%                                                int i = 1;
+                                                QuotationRequestDAO qDAO = new QuotationRequestDAO();
+                                                HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "requested_datetime", "desc");
+
+                                            %>
+
+
+
+                                            <div class="tab-pane fade active in" id="New_Service" >
                                                 <div class="table-responsive">
-                                                    <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable">
-                                                        
-                                                        <div class="tab-pane fade active in" id="Ongoing_Service" >
-                                                            <div class="table-responsive">
-                                                                <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th class="sortable">DateTime</th>
-                                                                            <th class="sortable">Name</th>
-                                                                            <th class="sortable">Number Plate</th>
-                                                                            <th class="sortable">Year of Manufacture</th>
-                                                                            <th class="sortable">Services</th>
-                                                                            <th class="sortable">Email</th>
-                                                                            <th class="sortable">Phone</th>
-                                                                            <th>Attachment</th>
-                                                                            <th>Quote</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>01/07/2016 19:04</td>
-                                                                            <td>Otto</td>
-                                                                            <td>Honda Civic</td>
-                                                                            <td>2000</td>
-                                                                            <td>Gearbox</td>
-                                                                            <td>otto@gmail.com</td>
-                                                                            <td>91234567</td>
-                                                                            <!--Picture Attachment-->
-                                                                            <td class="text-center"><a href="#myModal1" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                                            <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog-img">
-                                                                            <div class="modal-content">
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                <div class="modal-header">
-                                                                                    <h4 class="modal-title">Honda Civic - 2000</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                                </div>
-                                                                            </div> <!--/.modal-content--> 
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-
-                                                                    <!--Quote-->
-                                                                    <td class="text-center"><button href="#myModal2" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                    <h4 class="modal-title">New Request - Otto Tan</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="text-center">
-                                                                                        <img class="img-thumbnail-small"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
-                                                                                    </div>
-                                                                                    <div class="line-across"></div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Name:</b> Otto Tan</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Email:</b> otto@gmail.com</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Contact No:</b> 91234567</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Model:</b> Honda Civic</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Year:</b> 2000</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>License Plate:</b> SAB 1234 A</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Color:</b> Black</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Type:</b> Manual</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Mileage:</b> 9999</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Service Request:</b> Gearbox</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Urgency:</b> xxxx</p>
-                                                                                    </div>
-
-                                                                                    <div>
-                                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <form name="quote" action="quote">
-                                                                                        Quotation Amount: <input type="text"/>
-                                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                    </form>
-                                                                                    <button type="button" class="btn btn-default">Chat</button>
-                                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                                                </div>
-                                                                            </div><!-- /.modal-content -->
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-                                                                    </tr> 
-                                                                    </tbody>
-
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="Completed_Service">
-                                                            <div class="table-responsive">
-                                                                <table class="table table-custom1 table-sortable1 tablesorter order-table" id="myTable1">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <!--                                                    <th style="width: 40px;">
-                                                                                                                        <div class="checkbox check-transparent">
-                                                                                                                            <input type="checkbox" value="1" id="allchck2">
-                                                                                                                            <label for="allchck2"></label>
-                                                                                                                        </div>
-                                                                                                                        </th>-->
-                                                                            <th class="sortable">DateTime</th>
-                                                                            <th class="sortable">Name</th>
-                                                                            <th class="sortable">Car Make Model</th>
-                                                                            <th class="sortable">Year of Manufacture</th>
-                                                                            <th class="sortable">Services</th>
-                                                                            <th class="sortable">Email</th>
-                                                                            <th class="sortable">Phone</th>
-                                                                            <th>Attachment</th>
-                                                                            <th>Details</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td class="text-left">01/07/2016 19:04</td>
-                                                                            <td>Joanne Ong</td>
-                                                                            <td class="text-left">Toyota Camry</td>
-                                                                            <td class="text-left">1992</td>
-                                                                            <td>Gearbox</td>
-                                                                            <td>joanne@gmail.com</td>
-                                                                            <td>98765432</td>
-                                                                            <!--Picture Attachment-->
-                                                                            <td class="text-center"><a href="#myModal9" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                                            <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog-img">
-                                                                            <div class="modal-content">
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                <div class="modal-header">
-                                                                                    <h4 class="modal-title">Toyota Camry - 1992</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <img class="img-responsive"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                                </div>
-                                                                            </div> <!--/.modal-content--> 
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-                                                                    <!--Quote-->
-                                                                    <td class="text-center"><button href="#myModal10" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                    <h4 class="modal-title">New Request - Joanne Ong</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="text-center">
-                                                                                        <img class="img-thumbnail-small"src="http://starmoz.com/images/toyota-camry-1992-18.jpg"/>
-                                                                                    </div>
-                                                                                    <div class="line-across"></div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Name:</b> Joanne Ong</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Email:</b> joanne@gmail.com</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Contact No:</b> 98765432</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Model:</b> Toyota Camry</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Year:</b> 1992</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>License Plate:</b> Saz 3233 C</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Color:</b> Red</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Type:</b> Auto</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Mileage:</b> 2222</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Service Request:</b> Tyre Change</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Urgency:</b> xxxx</p>
-                                                                                    </div>
-
-                                                                                    <div>
-                                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <!--                                                                    <form name="quote" action="quote">
-                                                                                                                                                            Quotation Amount: <input type="text" placeholder="$100"/>
-                                                                                                                                                            <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                                                                                        </form>-->
-                                                                                    Quotation Amount: $100
-                                                                                    <button type="button" class="btn btn-default">Chat</button>
-                                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                                                </div>
-                                                                            </div><!-- /.modal-content -->
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-                                                                    </tr>
-                                                                    </tbody>
-
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="All">
-                                                            <div class="table-responsive">
-                                                                <table class="table table-custom1 table-sortable1 tablesorter order-table" id="myTable4">
-                                                                    <thead>
-                                                                        <tr role="row" class="tablesorter-headerRow">
-                                                                            <!--                                                    <th style="width: 40px;">
-                                                                                                                        <div class="checkbox check-transparent">
-                                                                                                                            <input type="checkbox" value="1" id="allchck2">
-                                                                                                                            <label for="allchck2"></label>
-                                                                                                                        </div>
-                                                                                                                        </th>-->
-                                                                            <th class="sortable">DateTime</th>
-                                                                            <th class="sortable">Name</th>
-                                                                            <th class="sortable">Car Make Model</th>
-                                                                            <th class="sortable">Year of Manufacture</th>
-                                                                            <th class="sortable">Services</th>
-                                                                            <th class="sortable">Email</th>
-                                                                            <th class="sortable">Phone</th>
-                                                                            <th>Attachment</th>
-                                                                            <th>Quote</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <!--                                                    <td>
-                                                                                                                                    <div class="checkbox check-transparent">
-                                                                                                                                        <input type="checkbox" value="1" id="chck04">
-                                                                                                                                        <label for="chck04"></label>
-                                                                                                                                    </div>
-                                                                                                                                </td>-->
-                                                                            <td>01/07/2016 19:04</td>
-                                                                            <td>Otto</td>
-                                                                            <td>Honda Civic</td>
-                                                                            <td>2000</td>
-                                                                            <td>Gearbox</td>
-                                                                            <td>otto@gmail.com</td>
-                                                                            <td>91234567</td>
-                                                                            <!--Picture Attachment-->
-                                                                            <td class="text-center"><a href="#myModal31" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                                            <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal31" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog-img">
-                                                                            <div class="modal-content">
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                <div class="modal-header">
-                                                                                    <h4 class="modal-title">Honda Civic - 2000</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <img class="img-responsive"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                                </div>
-                                                                            </div> <!--/.modal-content--> 
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-
-                                                                    <!--Quote-->
-                                                                    <td class="text-center"><button href="#myModal32" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal32" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                    <h4 class="modal-title">New Request - Otto Tan</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="text-center">
-                                                                                        <img class="img-thumbnail-small"src="http://buyersguide.caranddriver.com/media/assets/submodel/6985.jpg"/>
-                                                                                    </div>
-                                                                                    <div class="line-across"></div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Name:</b> Otto Tan</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Date & Time:</b> 01/07/2016 19:04</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Email:</b> otto@gmail.com</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Contact No:</b> 91234567</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Model:</b> Honda Civic</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Year:</b> 2000</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>License Plate:</b> SAB 1234 A</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Color:</b> Black</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Type:</b> Manual</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Mileage:</b> 9999</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Service Request:</b> Gearbox</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Urgency:</b> xxxx</p>
-                                                                                    </div>
-
-                                                                                    <div>
-                                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <form name="quote" action="quote">
-                                                                                        Quotation Amount: <input type="text"/>
-                                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                    </form>
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </div><!-- /.modal-content -->
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <!--                                                    <td>
-                                                                                                                                <div class="checkbox check-transparent">
-                                                                                                                                    <input type="checkbox" value="1" id="chck04">
-                                                                                                                                    <label for="chck04"></label>
-                                                                                                                                </div>
-                                                                                                                            </td>-->
-                                                                        <td>01/08/2016 19:04</td>
-                                                                        <td>Bob</td>
-                                                                        <td>Toyota Corolla</td>
-                                                                        <td>2005</td>
-                                                                        <td>Tyre Change</td>
-                                                                        <td>bob@gmail.com</td>
-                                                                        <td>92345678</td>
-                                                                        <!--Picture Attachment-->
-                                                                        <td class="text-center"><a href="#myModal33" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                                        <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal33" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog-img">
-                                                                            <div class="modal-content">
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                <div class="modal-header">
-                                                                                    <h4 class="modal-title">Toyota Corolla - 2005</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <img class="img-responsive"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                                </div>
-                                                                            </div> <!--/.modal-content--> 
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-
-                                                                    <!--Quote-->
-                                                                    <td class="text-center"><button href="#myModal34" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal34" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                    <h4 class="modal-title">New Request - Bob Lim</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="text-center">
-                                                                                        <img class="img-thumbnail-small"src="http://spidercars.net/wp-content/uploads/images/2005-Toyota-Corolla_13748.jpg"/>
-                                                                                    </div>
-                                                                                    <div class="line-across"></div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Name:</b> Bob Lim</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Date & Time:</b> 01/08/2016 19:04</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Email:</b> bob@gmail.com</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Contact No:</b> 92345678</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Model:</b> Toyota Corolla</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Year:</b> 2005</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>License Plate:</b> Szz 6789 C</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Color:</b> Black</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Type:</b> Auto</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Mileage:</b> 1111</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Service Request:</b> Tyre Change</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Urgency:</b> xxxx</p>
-                                                                                    </div>
-
-                                                                                    <div>
-                                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <form name="quote" action="quote">
-                                                                                        Quotation Amount: <input type="text"/>
-                                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                    </form>
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </div><!-- /.modal-content -->
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <!--                                                    <td>
-                                                                                                                                <div class="checkbox check-transparent">
-                                                                                                                                    <input type="checkbox" value="1" id="chck04">
-                                                                                                                                    <label for="chck04"></label>
-                                                                                                                                </div>
-                                                                                                                            </td>-->
-                                                                        <td>01/08/2016 19:04</td>
-                                                                        <td>Nigel</td>
-                                                                        <td>Nissan Sunny </td>
-                                                                        <td>2016</td>
-                                                                        <td>Piston Change</td>
-                                                                        <td>nigel@gmail.com</td>
-                                                                        <td>91212121</td>
-                                                                        <!--Picture Attachment-->
-                                                                        <td class="text-center"><a href="#myModal35" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                                        <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal35" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog-img">
-                                                                            <div class="modal-content">
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                <div class="modal-header">
-                                                                                    <h4 class="modal-title">Nissan Sunny - 2016</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <img class="img-responsive"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                                </div>
-                                                                            </div> <!--/.modal-content--> 
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-
-                                                                    <!--Quote-->
-                                                                    <td class="text-center"><button href="#myModal36" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="myModal36" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                                    <h4 class="modal-title">New Request - Nigel Tan</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <div class="text-center">
-                                                                                        <img class="img-thumbnail-small"src="https://www.nissan-cdn.net/content/dam/Nissan/eg/vehicles/sunny/product_code/product_version/overview/1920x800s3.jpg.ximg.m_12_h.smart.jpg"/>
-                                                                                    </div>
-                                                                                    <div class="line-across"></div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Name:</b> Nigel Tan</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Date & Time:</b> 01/08/2016 19:04</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Email:</b> nigel@gmail.com</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Contact No:</b> 91212121</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Model:</b> Nissan Sunny</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Year:</b> 2016</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>License Plate:</b> SXY 2322 A</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Color:</b> Silver</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Vehicle Type:</b> Manual</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Mileage:</b> 9999</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Service Request:</b> Piston Change</p>
-                                                                                    </div>
-
-                                                                                    <div class="col-xs-6">
-                                                                                        <p><b>Urgency:</b> xxxx</p>
-                                                                                    </div>
-
-                                                                                    <div>
-                                                                                        <p><b>Service Description:</b> Lorem ipsum dolor sit amet, sed voluptatum temporibus te, convenire deterruisset at vix, per laboramus aliquando id. At ius dicam oporteat. Odio iusto definiebas mel id. Ex ceteros copiosae eum. Augue labore incorrupte per at. Duo brute senserit patrioque ut, eu rebum graeco eum.</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <form name="quote" action="quote">
-                                                                                        Quotation Amount: <input type="text"/>
-                                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                    </form>
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </div><!-- /.modal-content -->
-                                                                        </div><!-- /.modal-dialog -->
-                                                                    </div><!-- /.modal -->
-                                                                    </tr>
-                                                                    </tbody>
-
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                </div><!--tab-content-->
-
-
+                                                    <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable1">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="sortable">ID</th>
+                                                                <th class="sortable">DateTime</th>
+                                                                <th class="sortable">Name</th>
+                                                                <th class="sortable">No. Plate</th>
+                                                                <th class="sortable">Services</th>
+                                                                <!--<th class="sortable">Email</th>-->
+                                                                <th class="sortable">Phone</th>
+                                                                <th>Full Info</th>
+                                                                <th>Start Service</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!--Loop per new request-->
+                                                            <%                                                                Iterator it = qList.entrySet().iterator();
+                                                                while (it.hasNext()) {
+                                                                    Map.Entry pair = (Map.Entry) it.next();
+                                                                    QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                                    int id = qr.getId();
+                                                                    Timestamp timeStamp = qr.getRequestedDate();
+                                                                    String dateTime = "01-01-1990 00:00:00";
+                                                                    if (timeStamp != null) {
+                                                                        dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                                    }
+                                                                    String serviceName = qr.getName();
+                                                                    String address = qr.getAddress();
+                                                                    String serviceAmenities = qr.getAmenities();
+                                                                    String serviceDescription = qr.getDescription();
+                                                                    String serviceDetails = qr.getDetails();
+                                                                    int serviceId = qr.getId();
+                                                                    String serviceMileage = qr.getMileage();
+                                                                    String carPhoto = qr.getPhotos();
+                                                                    int serviceStatus = qr.getOffer().getStatus();
+                                                                    String serviceUrgency = qr.getUrgency();
+
+                                                                    Customer cust = qr.getCustomer();
+                                                                    String custName = cust.getName();
+                                                                    String custEmail = cust.getEmail();
+                                                                    String custPhone = cust.getHandphone();
+
+                                                                    Vehicle vehicle = qr.getVehicle();
+                                                                    String carPlate = vehicle.getPlateNumber();
+                                                                    String carModel = vehicle.getModel();
+                                                                    String carMake = vehicle.getMake();
+                                                                    int carYear = vehicle.getYear();
+                                                                    String carColor = vehicle.getColour();
+                                                                    String carControl = vehicle.getControl();
+
+
+                                                            %>
+                                                            <tr>
+                                                                <td><% out.print(serviceId);%></td>
+                                                                <td><% out.print(dateTime);%></td>
+                                                                <td><% out.print(custName);%></td>
+                                                                <td><% out.print(carPlate);%></td>
+                                                                <td><% out.print(serviceName);%></td>
+                                                                <td><% out.print(custPhone);%></td>
+                                                                <!--Picture Attachment-->
+                                                                <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                                <!-- Modal -->
+                                                        <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                        <h4 class="modal-title">Service - <% out.print(custName);%></h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="text-center">
+                                                                            <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                        </div>
+                                                                        <div class="line-across"></div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Name: </b><% out.print(custName);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Date & Time: </b><% out.print(dateTime);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Email: </b><% out.print(custEmail);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Contact No: </b><% out.print(custPhone);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>License Plate: </b><% out.print(carPlate);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Service Request: </b><% out.print(serviceName);%></p>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Urgency: </b><% out.print(serviceUrgency);%></p>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="text-left">Agreed Amount: $200</div>
+                                                                        <div>
+                                                                            <button type="button" class="btn btn-default">Chat</button>
+                                                                        </div>
+                                                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal -->
+                                                        <% i++; %>
+                                                        <!--Quote-->
+                                                        <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Start</span></button></td>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                        <h4 class="modal-title">Service - <% out.print(custName);%></h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div><h3>Estimated Completion (Date & Time):</h3></div>
+                                                                        <div class="form-group">
+                                                                            <div class='input-group date' id='<%="datetimepicker" + i%>'>
+                                                                                <input type='text' class="form-control dt" id='<%="dt" + i%>'/>
+                                                                                <span class="input-group-addon">
+                                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="text-left">Quoted Amount: $200</div>
+                                                                        <div>
+                                                                            <button type="button" class="btn btn-primary" id='<%="submitdt" + i%>' onClick="submitdt(this.id)">Start Service</button>
+                                                                            <button type="button" class="btn btn-default">Chat</button>
+                                                                        </div>
+                                                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                </div><!-- /.modal -->
+                                                </tr>
+
+                                                <%
+                                                        i++;
+                                                    }
+                                                %>
+
+                                                </tbody>
+
+                                                </table>
                                             </div>
-                                            <!-- /tile body -->
-
-
-                                            <!-- tile footer -->
-                                            <div class="tile-footer bg-transparent-white-2 rounded-bottom-corners">
-                                                <div class="row">  
-
-                                                    <div class="col-sm-4">
-                                                        <!--                                                <div class="input-group table-options">
-                                                                                                            <select class="chosen-select form-control">
-                                                                                                                <option>Bulk Action</option>
-                                                                                                                <option>Delete Selected</option>
-                                                                                                                <option>Copy Selected</option>
-                                                                                                                <option>Archive Selected</option>
-                                                                                                            </select>
-                                                                                                            <span class="input-group-btn">
-                                                                                                                <button class="btn btn-default" type="button">Apply</button>
-                                                                                                            </span>
-                                                                                                        </div>-->
-                                                    </div>
-
-                                                    <div class="col-sm-4 text-center">
-                                                        <small class="inline table-options paging-info">showing 1-3 of 24 items</small>
-                                                    </div>
-
-                                                    <div class="col-sm-4 text-right sm-center">
-                                                        <ul class="pagination pagination-xs nomargin pagination-custom">
-                                                            <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                                            <li class="active"><a href="#">1</a></li>
-                                                            <li><a href="#">2</a></li>
-                                                            <li><a href="#">3</a></li>
-                                                            <li><a href="#">4</a></li>
-                                                            <li><a href="#">5</a></li>
-                                                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                                        </ul>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <!-- /tile footer -->
+                                        </div><!--New-->
 
 
 
+                                        <div class="tab-pane fade" id="Ongoing_Service" >
+                                            <div class="table-responsive">
+                                                <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable2">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="sortable">DateTime</th>
+                                                            <th class="sortable">Name</th>
+                                                            <th class="sortable">No. Plate</th>
+                                                            <th class="sortable">Services</th>
+                                                            <!--<th class="sortable">Email</th>-->
+                                                            <th class="sortable">Phone</th>
+                                                            <th>Attachment</th>
+                                                            <th>More Info</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!--Loop per new request-->
+                                                        <%
+                                                            qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 2, "requested_datetime", "desc");
+                                                            it = qList.entrySet().iterator();
+                                                            while (it.hasNext()) {
+                                                                Map.Entry pair = (Map.Entry) it.next();
+                                                                QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                                int id = qr.getId();
+                                                                Timestamp timeStamp = qr.getRequestedDate();
+                                                                String dateTime = "01-01-1990 00:00:00";
+                                                                if (timeStamp != null) {
+                                                                    dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                                }
+                                                                String serviceName = qr.getName();
+                                                                String address = qr.getAddress();
+                                                                String serviceAmenities = qr.getAmenities();
+                                                                String serviceDescription = qr.getDescription();
+                                                                String serviceDetails = qr.getDetails();
+                                                                int serviceId = qr.getId();
+                                                                String serviceMileage = qr.getMileage();
+                                                                String carPhoto = qr.getPhotos();
+                                                                int serviceStatus = qr.getOffer().getStatus();
+                                                                String serviceUrgency = qr.getUrgency();
 
-                                            </section>
-                                            <!-- /tile -->
+                                                                Customer cust = qr.getCustomer();
+                                                                String custName = cust.getName();
+                                                                String custEmail = cust.getEmail();
+                                                                String custPhone = cust.getHandphone();
+
+                                                                Vehicle vehicle = qr.getVehicle();
+                                                                String carPlate = vehicle.getPlateNumber();
+                                                                String carModel = vehicle.getModel();
+                                                                String carMake = vehicle.getMake();
+                                                                int carYear = vehicle.getYear();
+                                                                String carColor = vehicle.getColour();
+                                                                String carControl = vehicle.getControl();
 
 
+                                                        %>
+                                                        <tr>
+                                                            <td><% out.print(dateTime);%></td>
+                                                            <td><% out.print(custName);%></td>
+                                                            <td><% out.print(carPlate);%></td>
+                                                            <td><% out.print(serviceName);%></td>
+                                                            <td><% out.print(custPhone);%></td>
+                                                            <!--Picture Attachment-->
+                                                            <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
+                                                            <!-- Modal -->
+                                                    <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog-img">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                </div>
+                                                            </div> <!--/.modal-content--> 
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                    <% i++; %>
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
 
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center">
+                                                                        <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                    </div>
+                                                                    <div class="line-across"></div>
 
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Name: </b><% out.print(custName);%></p>
+                                                                    </div>
 
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Date & Time: </b><% out.print(dateTime);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Email: </b><% out.print(custEmail);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Contact No: </b><% out.print(custPhone);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate: </b><% out.print(carPlate);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request: </b><% out.print(serviceName);%></p>
+                                                                    </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency: </b><% out.print(serviceUrgency);%></p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <div class="text-left">Quoted Amount: $200</div>
+                                                                    <div class="text-left">Est. Completion Time: 07/27/2016 12:00 AM</div>
+                                                                    <div>
+                                                                        <button type="button" class="btn btn-default">Chat</button>
+                                                                    </div>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                            </tr>
+
+                                            <%
+                                                    i++;
+                                                }
+                                            %>
+
+                                            </tbody>
+
+                                            </table>
                                         </div>
-                                        <!-- /col 12 -->
+                                    </div><!--Ongoing Service-->
+
+                                    <div class="tab-pane fade" id="Completed_Service" >
+                                        <div class="table-responsive">
+                                            <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable3">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="sortable">DateTime</th>
+                                                        <th class="sortable">Name</th>
+                                                        <th class="sortable">No. Plate</th>
+                                                        <th class="sortable">Services</th>
+                                                        <!--<th class="sortable">Email</th>-->
+                                                        <th class="sortable">Phone</th>
+                                                        <th>Attachment</th>
+                                                        <th>Complete Service</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!--Loop per new request-->
+                                                    <%
+                                                        qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 2, "requested_datetime", "desc");
+                                                        it = qList.entrySet().iterator();
+                                                        while (it.hasNext()) {
+                                                            Map.Entry pair = (Map.Entry) it.next();
+                                                            QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                            int id = qr.getId();
+                                                            Timestamp timeStamp = qr.getRequestedDate();
+                                                            String dateTime = "01-01-1990 00:00:00";
+                                                            if (timeStamp != null) {
+                                                                dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                            }
+                                                            String serviceName = qr.getName();
+                                                            String address = qr.getAddress();
+                                                            String serviceAmenities = qr.getAmenities();
+                                                            String serviceDescription = qr.getDescription();
+                                                            String serviceDetails = qr.getDetails();
+                                                            int serviceId = qr.getId();
+                                                            String serviceMileage = qr.getMileage();
+                                                            String carPhoto = qr.getPhotos();
+                                                            int serviceStatus = qr.getOffer().getStatus();
+                                                            String serviceUrgency = qr.getUrgency();
+
+                                                            Customer cust = qr.getCustomer();
+                                                            String custName = cust.getName();
+                                                            String custEmail = cust.getEmail();
+                                                            String custPhone = cust.getHandphone();
+
+                                                            Vehicle vehicle = qr.getVehicle();
+                                                            String carPlate = vehicle.getPlateNumber();
+                                                            String carModel = vehicle.getModel();
+                                                            String carMake = vehicle.getMake();
+                                                            int carYear = vehicle.getYear();
+                                                            String carColor = vehicle.getColour();
+                                                            String carControl = vehicle.getControl();
 
 
+                                                    %>
+                                                    <tr>
+                                                        <td><% out.print(dateTime);%></td>
+                                                        <td><% out.print(custName);%></td>
+                                                        <td><% out.print(carPlate);%></td>
+                                                        <td><% out.print(serviceName);%></td>
+                                                        <td><% out.print(custPhone);%></td>
+                                                        <!--Picture Attachment-->
+                                                        <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
-                                    </div>
-                                    <!-- /row -->
+                                                        <!-- Modal -->
+                                                <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog-img">
+                                                        <div class="modal-content">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                            </div>
+                                                        </div> <!--/.modal-content--> 
+                                                    </div><!-- /.modal-dialog -->
+                                                </div><!-- /.modal -->
+                                                <% i++; %>
+                                                <!--Quote-->
+                                                <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Complete</span></button></td>
 
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="text-center">
+                                                                    <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                </div>
+                                                                <div class="line-across"></div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Name: </b><% out.print(custName);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Date & Time: </b><% out.print(dateTime);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Email: </b><% out.print(custEmail);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Contact No: </b><% out.print(custPhone);%></p>
+                                                                </div>
 
-                            </div>
-                            <!-- /content container -->
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>License Plate: </b><% out.print(carPlate);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
+                                                                </div>
 
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Service Request: </b><% out.print(serviceName);%></p>
+                                                                </div>
+
+                                                                <div class="col-xs-6">
+                                                                    <p><b>Urgency: </b><% out.print(serviceUrgency);%></p>
+                                                                </div>
+
+                                                                <div>
+                                                                    <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+
+<!--                                                                <div class="text-left border-bottom">
+                                                                    <b>Final Qu //otation Amount</b>
+
+                                                                    <form action="AddFinalQuotation" method="post">
+                                                                        <div>
+                                                                            Final Price: $ <input type="number" name="price" placeholder="200 - 300" required/>
+                                                                        </div>
+                                                                        <div>
+                                                                            Description: <input type="text" name="description" />
+                                                                        </div>
+
+                                                                        <input type="hidden" name="id" value="<%//=id%>">
+                                                                    </form>
+                                                                </div>-->
+                                                                <div>
+                                                                        <button type="submit" class="btn btn-primary">Complete Service</button>
+                                                                    <button type="button" class="btn btn-default">Chat</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--                                                                        <form name="quote" action="quote">
+                                                                                                                                    Quotation Amount: <input type="text"/>
+                                                                                                                                    <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                                                                                </form>-->
+
+                                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                    </div>
+                                                </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                            </tr>
+
+                            <%
+                                    i++;
+                                }
+                            %>
+
+                            </tbody>
+
+                            </table>
                         </div>
-                        <!-- Page content end -->
+                    </div><!--Completed Service-->
 
-
-
-
-                        <!-- Right slider bar -->
-                        <jsp:include page="include/rightbar.jsp"/>
-                        <!-- Right slider bar -->
-
-
-
-
-
-
-                    </div>
-                    <!-- Make page fluid-->
 
 
 
 
                 </div>
-                <!-- Wrap all page content end -->
+                <!--tab-content-->
+
+
+            </div>
+            <!-- /tile body -->
+
+
+            <!-- tile footer -->
+            <div class="tile-footer bg-transparent-white-2 rounded-bottom-corners">
+                <div class="row">  
+
+                    <div class="col-sm-4">
+                        <!--                                                <div class="input-group table-options">
+                                                                            <select class="chosen-select form-control">
+                                                                                <option>Bulk Action</option>
+                                                                                <option>Delete Selected</option>
+                                                                                <option>Copy Selected</option>
+                                                                                <option>Archive Selected</option>
+                                                                            </select>
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn btn-default" type="button">Apply</button>
+                                                                            </span>
+                                                                        </div>-->
+                    </div>
+
+                    <div class="col-sm-4 text-center">
+                        <small class="inline table-options paging-info">showing 1-3 of 24 items</small>
+                    </div>
+
+                    <div class="col-sm-4 text-right sm-center">
+                        <ul class="pagination pagination-xs nomargin pagination-custom">
+                            <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /tile footer -->
 
 
 
-                <section class="videocontent" id="video"></section>
 
-                </body>
-
-
-
-                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-                <script src="https://code.jquery.com/jquery.js"></script>
-                <!-- Include all compiled plugins (below), or include individual files as needed -->
-
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                <script src="js/bootstrap.min.js"></script>
-                <script src="js/bootstrap-dropdown-multilevel.js"></script>
-                <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
-                <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
-                <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
-                <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-                <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-                <script type="text/javascript" src="js/jquery.videobackground.js"></script>
-                <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-                <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
-                <script src="js/minimal.min.js"></script>
-                <!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
-                <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-
-                <!--        <script>
-                            $(function () {
-                
-                                //check all checkboxes
-                                $('table thead input[type="checkbox"]').change(function () {
-                                    $(this).parents('table').find('tbody input[type="checkbox"]').prop('checked', $(this).prop('checked'));
-                                });
-                
-                                // sortable table
-                                $('.table.table-sortable1 th.sortable').click(function () {
-                                    var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                    $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                    $(this).addClass(o);
-                                });
-                
-                                //chosen select input
-                                $(".chosen-select").chosen({disable_search_threshold: 10});
-                
-                                //check toggling
-                                $('.check-toggler').on('click', function () {
-                                    $(this).toggleClass('checked');
-                                });
-                            });
-                
-                        </script>-->
-                <script>
-                    //        $(function(){
-                    //            $('.table.table-sortable1 th.sortable').click(function () {
-                    //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                    //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                    //                $(this).addClass(o);
-                    //            });
-                    //        });
+        </section>
+        <!-- /tile -->
 
 
-                </script>
-                <script>
-                    $(document).ready(function ()
-                    {
-                        $("#myTable").tablesorter();
-                        $("#myTable1").tablesorter();
-                        $("#myTable2").tablesorter();
-                        $("#myTable3").tablesorter();
-                        $("#myTable4").tablesorter();
 
-                    }
-                    );
-                </script>
-                <script>
-                    //Script to load tab and data based on the href #
-                    $(window).load(function () {
-                        var url = document.URL;
-                        if (url.includes('#')) {
-                            url = url.substring(url.indexOf('#'));
-                            console.log(url);
-                        }
-                        $('.nav-pills li a').each(function () {
-                            var link = $(this).attr("href");
-                            console.log(link);
-                            if (link === url) {
-                                $(this).parent().siblings().removeClass('active');
-                                $(this).parent().addClass('active');
-                            }
-                        });
-                        url = url.substring(1);
-                        console.log(url);
 
-                        $(".tab-pane").each(function () {
-                            var tab = $(this).attr('id');
-                            if (tab === url) {
-                                $(this).siblings().removeClass('active in');
-                                $(this).addClass('active in');
-                            }
-                        });
+
+
+    </div>
+    <!-- /col 12 -->
+
+
+
+</div>
+<!-- /row -->
+
+
+
+
+
+
+</div>
+<!-- /content container -->
+
+
+
+
+
+
+</div>
+<!-- Page content end -->
+
+
+
+
+<!-- Right slider bar -->
+<jsp:include page="include/rightbar.jsp"/>
+<!-- Right slider bar -->
+
+
+
+
+
+
+</div>
+<!-- Make page fluid-->
+
+
+
+
+</div>
+<!-- Wrap all page content end -->
+
+
+
+<section class="videocontent" id="video"></section>
+
+</body>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!--<script src="js/bootstrap.js"></script>-->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-dropdown-multilevel.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+<script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+<script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
+<script type="text/javascript" src="js/jquery.videobackground.js"></script>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+<!--<script type="text/javascript" src="js/sorttable.js"></script>-->
+<script src="js/minimal.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
+<script type="text/javascript" src="js/moment.js"></script> 
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
+
+<!--        <script>
+            $(function () {
+
+                //check all checkboxes
+                $('table thead input[type="checkbox"]').change(function () {
+                    $(this).parents('table').find('tbody input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+                });
+
+                // sortable table
+                $('.table.table-sortable1 th.sortable').click(function () {
+                    var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                    $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                    $(this).addClass(o);
+                });
+
+                //chosen select input
+                $(".chosen-select").chosen({disable_search_threshold: 10});
+
+                //check toggling
+                $('.check-toggler').on('click', function () {
+                    $(this).toggleClass('checked');
+                });
+            });
+
+        </script>-->
+<script>
+    //        $(function(){
+    //            $('.table.table-sortable1 th.sortable').click(function () {
+    //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+    //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+    //                $(this).addClass(o);
+    //            });
+    //        });
+
+
+</script>
+<script type="text/javascript">
+    $(".date").each(function () {
+        $(this).datetimepicker();
+    });
+</script>
+<script>
+    $(document).ready(function ()
+    {
+        $("#myTable").tablesorter();
+        $("#myTable1").tablesorter();
+        $("#myTable2").tablesorter();
+        $("#myTable3").tablesorter();
+        $("#myTable4").tablesorter();
+
+    }
+    );
+</script>
+<script>
+    //Script to load tab and data based on the href #
+    $(window).load(function () {
+        var url = document.URL;
+        if (url.includes('#')) {
+            url = url.substring(url.indexOf('#'));
+            console.log(url);
+        }
+        $('.nav-pills li a').each(function () {
+            var link = $(this).attr("href");
+            console.log(link);
+            if (link === url) {
+                $(this).parent().siblings().removeClass('active');
+                $(this).parent().addClass('active');
+            }
+        });
+        url = url.substring(1);
+        console.log(url);
+
+        $(".tab-pane").each(function () {
+            var tab = $(this).attr('id');
+            if (tab === url) {
+                $(this).siblings().removeClass('active in');
+                $(this).addClass('active in');
+            }
+        });
+    });
+
+
+</script>
+<script>
+    $('.dropdown-menu li').on('click', function () {
+        $(this).siblings().removeClass('active');
+        var link = $(this).text();
+        document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
+    });
+
+</script>
+<script>
+    (function (document) {
+        'use strict';
+
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
                     });
+                });
+            }
 
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
 
-                </script>
-                <script>
-                    $('.dropdown-menu li').on('click', function () {
-                        $(this).siblings().removeClass('active');
-                        var link = $(this).text();
-                        document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
+            return {
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
                     });
+                }
+            };
+        })(Array.prototype);
 
-                </script>
-                <script>
-                    (function (document) {
-                        'use strict';
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
 
-                        var LightTableFilter = (function (Arr) {
-
-                            var _input;
-
-                            function _onInputEvent(e) {
-                                _input = e.target;
-                                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                                Arr.forEach.call(tables, function (table) {
-                                    Arr.forEach.call(table.tBodies, function (tbody) {
-                                        Arr.forEach.call(tbody.rows, _filter);
-                                    });
-                                });
-                            }
-
-                            function _filter(row) {
-                                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                            }
-
-                            return {
-                                init: function () {
-                                    var inputs = document.getElementsByClassName('light-table-filter');
-                                    Arr.forEach.call(inputs, function (input) {
-                                        input.oninput = _onInputEvent;
-                                    });
-                                }
-                            };
-                        })(Array.prototype);
-
-                        document.addEventListener('readystatechange', function () {
-                            if (document.readyState === 'complete') {
-                                LightTableFilter.init();
-                            }
-                        });
-
-                    })(document);
-                </script>
-                </html>
+    })(document);
+</script>
+<script>
+    function submitdt(btnId){
+        
+        var id = btnId.substring(6);
+//        document.getElementById(id).submit;
+        console.log(id);
+    }
+</script>
+</html>
