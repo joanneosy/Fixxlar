@@ -52,13 +52,15 @@ public class CompleteServiceServlet extends HttpServlet {
         boolean isSuccess = qrDAO.completeService(staffId, token, offerId);
         //Error message? success message?
         if (isSuccess) {
-            request.setAttribute("isSuccess", "Success!");
-            RequestDispatcher view = request.getRequestDispatcher("ViewQuotationRequest.jsp");
-            view.forward(request, response);
+            session.setAttribute("isSuccess", "Service completed!");
+//            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
+//            view.forward(request, response);
+            response.sendRedirect("ManageService.jsp");
         } else {
-            request.setAttribute("isSuccess", "Failed!");
-            RequestDispatcher view = request.getRequestDispatcher("ViewQuotationRequest.jsp");
-            view.forward(request, response);
+            session.setAttribute("isSuccess", "Failed!");
+//            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
+//            view.forward(request, response);
+            response.sendRedirect("ManageService.jsp");
         }
     }
 

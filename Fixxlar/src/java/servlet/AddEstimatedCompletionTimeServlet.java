@@ -47,12 +47,13 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
                 
         HttpSession session = request.getSession(true);
 
+        String estTimeStr = request.getParameter("dateTime");
+        estTimeStr = estTimeStr + ":00";
         int offerId = Integer.parseInt(request.getParameter("id"));
-        String estTimeStr = request.getParameter("dateTime").replace("T", " ") + ":00";
-        /*Timestamp estTime = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:00");
-        Date parsedDate = dateFormat.parse(estTimeStr);
-        estTime = new java.sql.Timestamp(parsedDate.getTime());*/
+//        Timestamp estTime = null;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:00");
+//        Date parsedDate = dateFormat.parse(estTimeStr);
+//        String dt = new java.sql.Timestamp(parsedDate.getTime()) + "";
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
@@ -60,13 +61,15 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
         boolean isSuccess = qrDAO.addEstimatedCompletionTime(staffId, token, offerId, estTimeStr);
         //Error message? success message?
         if (isSuccess) {
-            request.setAttribute("isSuccess", "Success!");
-            RequestDispatcher view = request.getRequestDispatcher("ViewQuotationRequest.jsp");
-            view.forward(request, response);
+            session.setAttribute("isSuccess", "Estimated completion time is: " + estTimeStr);
+//            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
+//            view.forward(request, response);
+            response.sendRedirect("ManageService.jsp");
         } else {
-            request.setAttribute("isSuccess", "Failed!");
-            RequestDispatcher view = request.getRequestDispatcher("AddEstimatedCompletionTime.jsp?id" + offerId);
-            view.forward(request, response);
+            session.setAttribute("isSuccess", "Failed!");
+//            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
+//            view.forward(request, response);
+            response.sendRedirect("ManageService.jsp");
         }
     }
 

@@ -63,12 +63,12 @@
 .table.table-custom1 > tbody > tr > th.progress-cell .progress, .table.table-custom1 > tbody > tr > td.progress-cell .progress { margin: 0; margin-top: 7px; }
 .table.table-custom1 > tbody > tr:first-child > th, .table.table-custom1 > tbody > tr:first-child > td { border-top: 0; }
 
-<<<<<<< HEAD
+
 body {
     background: #fff;
     background-image: none;
 }
-=======
+
 /*DateTimeForm*/
 [class^="tile"][class*="transparent-"] .dt{
     background-color: transparent;
@@ -82,7 +82,7 @@ body {
 /*DateTimeForm*/
 
 
->>>>>>> dd003c4b8b3ad10edb010b2d4a3ed2e88256b87d
+
 
 /* The Modal (background) */
 .modal {

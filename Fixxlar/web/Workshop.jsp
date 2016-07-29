@@ -275,13 +275,10 @@
                                                             Map.Entry pair = (Map.Entry) it.next();
                                                             QuotationRequest qr = (QuotationRequest) pair.getValue();
                                                             int i = 1;
-<<<<<<< HEAD
-                                                            Timestamp timeStamp = qr.getDate();
+//                                                            Timestamp timeStamp = qr.getRequestedDate();
                                                             String dateTime = "01-01-1990 00:00:00";
-=======
                                                             Timestamp timeStamp = qr.getRequestedDate();
-                                                             String dateTime = "01-01-1990 00:00:00";
->>>>>>> dd003c4b8b3ad10edb010b2d4a3ed2e88256b87d
+//                                                             String dateTime = "01-01-1990 00:00:00";
                                                             if (timeStamp != null) {
                                                                 dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
                                                             }

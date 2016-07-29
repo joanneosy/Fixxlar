@@ -205,7 +205,7 @@
 
 
                                     <!-- tile body -->
-                                    <div class="tile-body no-vpadding">
+                                    <div class="tile-body no-vpadding" id="pageRefresh">
                                         <div class="tab-content">
                                             <%                                                int i = 1;
                                                 QuotationRequestDAO qDAO = new QuotationRequestDAO();
@@ -369,7 +369,7 @@
                                                                         <div>
                                                                             <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
                                                                         </div>
-                                                                    </div>
+                                                                    </div><!-- /.modal-body -->
                                                                     <div class="modal-footer">
                                                                         <div>
                                                                             <div class="text-left border-bottom">
@@ -388,8 +388,8 @@
                                                                                         <button type="submit" class="btn btn-primary">Submit Quote</button>
                                                                                     </form>
                                                                                 </div>
-                                                                                
-                                                                                        <button class="accordion"><b>Diagnostic Price</b></button>
+
+                                                                                <button class="accordion"><b>Diagnostic Price</b></button>
                                                                                 <div class="panel">
                                                                                     <form action = "AddDiagnosticPrice" method= "post">
                                                                                         <div>Price: <input type="number" name="price" required/></div>
@@ -411,7 +411,6 @@
                                                                         </div>
                                                                         <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                                     </div>
-                                                                </div>
                                                             </div><!-- /.modal-content -->
                                                         </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
@@ -595,7 +594,6 @@
                                                                     </div>
                                                                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                                 </div>
-                                                            </div>
                                                         </div><!-- /.modal-content -->
                                                     </div><!-- /.modal-dialog -->
                                             </div><!-- /.modal -->
@@ -670,6 +668,7 @@
                                                             Offer offer = qr.getOffer();
                                                             double min = offer.getInitialMinPrice();
                                                             double max = offer.getInitialMaxPrice();
+                                                            int offerId = offer.getId();
 
 
                                                     %>
@@ -785,7 +784,8 @@
                                                                             Description: <input type="text" name="description" />
                                                                         </div>
 
-                                                                        <input type="hidden" name="id" value="<%=id%>">
+                                                                        <input type="hidden" name="id" value="<%=offerId%>">
+                                                                        <input type="hidden" name="serviceId" value="<%=id%>">
                                                                         <button type="submit" class="btn btn-primary">Submit Quote</button>
                                                                     </form>
                                                                 </div>
@@ -801,7 +801,6 @@
 
                                                         <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                     </div>
-                                                </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
@@ -986,7 +985,6 @@
                                                 </div>
                                                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                             </div>
-                                        </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
@@ -1171,7 +1169,6 @@
                                             </div>
                                             <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                         </div>
-                                    </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
@@ -1459,13 +1456,28 @@
     }
 </script>
 <script type="text/javascript">
-    var msg = '<%=session.getAttribute("isSuccess")%>';
-    if (msg != "null") {
-        function alertName() {
-            alert(msg);
+        function displaymsg() {
+            var msg = '<%=session.getAttribute("isSuccess")%>';
+            if (msg != "null") {
+//                function alertName(msg) {
+                    alert(msg);
+//                }
+            }
+            <%session.setAttribute("isSuccess", "null");%>
         }
-    <%session.setAttribute("isSuccess", "null");%>
-    }
-</script> 
-<script type="text/javascript"> window.onload = alertName;</script>
+    </script> 
+    <!--<script type="text/javascript"> window.onload = alertName;</script>-->
+    <script type="text/JavaScript">
+        function timedRefresh(timeoutPeriod) {
+        setTimeout("location.reload(true);",timeoutPeriod);
+        } 
+        //    window.onload = timedRefresh(300000);
+    </script>
+    <script>
+        function start() {
+            timedRefresh(300000);
+            displaymsg();
+        }
+        window.onload = start;
+    </script>
 </html>
