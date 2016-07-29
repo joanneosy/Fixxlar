@@ -49,33 +49,24 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="ViewRequest.jsp#New">
-                            <i class="fa fa-caret-right"></i> New Requests
+                        <a href="ViewRequest.jsp">
+                            <i class="fa fa-caret-right"></i> View Request
                         </a>
                     </li>
                     <li>
-                        <a href="ViewRequest.jsp#Waiting_for_Response">
-                            <i class="fa fa-caret-right"></i> Waiting for Response
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ViewRequest.jsp#Send_Final_Quote">
-                            <i class="fa fa-caret-right"></i> Send Final Quote
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ViewRequest.jsp#Final_Quote_Accepted">
-                            <i class="fa fa-caret-right"></i> Final Quote Accepted
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ViewRequest.jsp#All">
-                            <i class="fa fa-caret-right"></i> View All Requests
+                        <a href="ManageService.jsp">
+                            <i class="fa fa-caret-right"></i> Manage Service
                         </a>
                     </li>
                 </ul>
             </li>
             
+            <li>
+                <a href="ManageValet.jsp">
+                    <i class="fa fa-pencil"></i> Valet
+                </a>
+            </li>
+<!--            
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-pencil"></i> Manage Service <b class="fa fa-plus dropdown-plus"></b>
@@ -98,7 +89,7 @@
                     </li>
                 </ul>
             </li>
-            
+            -->
             <li>
                 <a href="Summary.jsp">
                     <i class="fa fa-tint"></i> Summary Report

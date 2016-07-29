@@ -90,7 +90,7 @@
                     <div class="pageheader">
 
 
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Manage Service</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Manage Valet</h2>
 
 
                         <!--                        <div class="breadcrumbs">
@@ -129,7 +129,7 @@
 
                                     <!-- tile header -->
                                     <div class="tile-header">
-                                        <h1><strong>Manage Service</strong></h1>
+                                        <h1><strong>Manage Valet</strong></h1>
                                         <!--                                        <div class="search">
                                                                                     <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                                                 </div>-->

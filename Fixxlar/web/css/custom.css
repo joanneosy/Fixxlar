@@ -63,10 +63,26 @@
 .table.table-custom1 > tbody > tr > th.progress-cell .progress, .table.table-custom1 > tbody > tr > td.progress-cell .progress { margin: 0; margin-top: 7px; }
 .table.table-custom1 > tbody > tr:first-child > th, .table.table-custom1 > tbody > tr:first-child > td { border-top: 0; }
 
+<<<<<<< HEAD
 body {
     background: #fff;
     background-image: none;
 }
+=======
+/*DateTimeForm*/
+[class^="tile"][class*="transparent-"] .dt{
+    background-color: transparent;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    color: black;
+}
+[class^="tile"][class*="transparent-"] .dt:focus{
+    background-color: rgba(255, 235, 59, 0.3);
+}
+/*DateTimeForm*/
+
+
+>>>>>>> dd003c4b8b3ad10edb010b2d4a3ed2e88256b87d
 
 /* The Modal (background) */
 .modal {
@@ -229,6 +245,52 @@ li.active a, li.active a:hover {
 #requestSearch{
     float: left;
 }
+
+/*Accordion*/
+
+/* Style the buttons that are used to open and close the accordion panel */
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.accordion.active, button.accordion:hover {
+    background-color: rgb(255, 244, 145);
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+}
+
+/* The "show" class is added to the accordion panel when the user clicks on one of the buttons. This will show the panel content */
+div.panel.show {
+    display: block !important;
+}
+
+button.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+/*Accordion*/
+
 
 @media screen and (max-width: 1190px){
     .desktopOnly {
