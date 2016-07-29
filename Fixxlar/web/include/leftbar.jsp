@@ -60,6 +60,12 @@
                     </li>
                 </ul>
             </li>
+            
+            <li>
+                <a href="ManageValet.jsp">
+                    <i class="fa fa-pencil"></i> Valet
+                </a>
+            </li>
 <!--            
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
