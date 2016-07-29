@@ -8,6 +8,7 @@ package dao;
 import java.util.*;
 import javax.mail.*;
 import entity.Email;
+import org.apache.commons.lang3.ArrayUtils;
 /**
  *
  * @author Joshymantou
@@ -21,11 +22,12 @@ public class FetchEmailDAO {
     public Message[] fetchEmail() {
         Properties props = new Properties();
         props.setProperty("mail.store.protocol", "imaps");
+        //store inbox emails as Message object, store all into Message[] array.
         Message[] msgArr = null;
         try {
             Session session = Session.getInstance(props, null);
             Store store = session.getStore();
-            store.connect("imap.gmail.com", "fixxlar@gmail.com", "fixxlarfyp");
+            store.connect("imap-mail.outlook.com", "joshymantou@outlook.com", "mcgrady11");
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_ONLY);
             msgArr = inbox.getMessages();
@@ -46,6 +48,7 @@ public class FetchEmailDAO {
                 System.out.println("CONTENT:" + bp.getContent());
                 
             }*/
+            ArrayUtils.reverse(msgArr);
             return msgArr;
         } catch (Exception mex) {
             mex.printStackTrace();

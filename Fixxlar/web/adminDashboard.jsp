@@ -45,8 +45,8 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
-
+    <body class="bg-3">
+        <!--<h1>Welcome</h1>-->
         <%            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
             if (successChangePasswordMsg != null) {
                 out.println(successChangePasswordMsg + "<br/><br/>");
@@ -80,6 +80,18 @@
                     <div class="pageheader">
 
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Dashboard <span>// overview </span></h2>
+
+
+                        <!--                        <div class="breadcrumbs">
+                                                    <ol class="breadcrumb">
+                                                        <li>You are here</li>
+                                                        <li><a href="index.html">Minimal</a></li>
+                                                        <li><a href="#">Example Pages</a></li>
+                                                        <li class="active">Blank Page</li>
+                                                    </ol>
+                                                </div>-->
+
+
                     </div>
                     <!-- /page header -->
 
@@ -376,8 +388,9 @@
                             </div>
                             <!-- /col 8 -->
 
-                            <div class="col-md-4">
-                                <div class="main vertical-mail"> 
+
+                            <div class="main vertical-mail">        
+                                <div class="col-md-4">
                                     <%
                                         //Instantiate FetchEmailDAO object to fetch emails into Message array
                                         FetchEmailDAO email = new FetchEmailDAO();
@@ -388,7 +401,7 @@
                                         <li class="heading"><h3>Emails</h3></li>
                                     </ul>
                                     <!-- /temporary Inbox Header -->
-
+                                    
                                     <ul class="inbox" id="mail-inbox">
                                         <%
                                             int msgCounter = 1;
@@ -398,7 +411,7 @@
                                         <%
                                             //for loop to iterate through all emails except last email.
                                             for (int i = msgCounter - 1; i < emailArr.length; i++) {
-
+                                           
                                         %>
                                         <li class="msg">
                                             <div class="checkbox check-transparent">
@@ -421,9 +434,9 @@
                                             </div>
                                         </li>
                                         <%
-                                                //increment counter for email message counter.
-                                                msgCounter++;
-                                                //close for loop for email
+                                            //increment counter for email message counter.
+                                            msgCounter++;
+                                            //close for loop for email
                                             }
                                         %>
 
@@ -450,8 +463,8 @@
                                             </div>
                                         </li>
                                         /Last email --%>
-
-                                        <!-- /inbox list-->
+                                    
+                                    <!-- /inbox list-->
                                     </ul>
                                     <div class="pagination pagination-sm nomargin pagination-custom pager" id='myPager1'>
                                         <%-- remove first.
@@ -527,10 +540,10 @@
 
 <script>
     //Mail favourite star.
-    $(function () {
-        $('#mail-inbox .mail-favourite').click(function () {
-            $(this).toggleClass('active');
-        });
+    $(function(){
+      $('#mail-inbox .mail-favourite').click(function(){
+        $(this).toggleClass('active');
+      }); 
     })
 </script>
 
