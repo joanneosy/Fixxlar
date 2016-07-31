@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="css/jquery.videobackground.css">
         <link rel="stylesheet" href="css/bootstrap-checkbox.css">
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+        <link rel="stylesheet" href="css/jquery.tabpager.css">
 
         <link href="css/minimal.css" rel="stylesheet">
         <link rel="stylesheet" href="css/custom.css">
@@ -173,7 +174,7 @@
 
 
                                                 <div class="btn-group btn-group-xs table-options desktopOnly">
-                                                    <ul class="nav nav-pills">
+                                                    <ul class="nav nav-pills tabpager">
                                                         <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
                                                         <li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
                                                         <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
@@ -225,7 +226,7 @@
                                                                 <th>Start Service</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody class="contents">
                                                             <!--Loop per new request-->
                                                             <%                                                                Iterator it = qList.entrySet().iterator();
                                                                 while (it.hasNext()) {
@@ -246,6 +247,7 @@
                                                                     String serviceMileage = qr.getMileage();
                                                                     String carPhoto = qr.getPhotos();
                                                                     String serviceUrgency = qr.getUrgency();
+                                                                    
 
                                                                     Customer cust = qr.getCustomer();
                                                                     String custName = cust.getName();
@@ -264,6 +266,8 @@
                                                                     double finalPrice = offer.getFinalPrice();
                                                                     int serviceStatus = offer.getStatus();
                                                                     int offerId = offer.getId();
+                                                                    int status = offer.getStatus();
+                                                                    if(status == 5) { //Final quotation accepted with valet
                                                             %>
                                                             <tr>
                                                                 <td><% out.print(serviceId);%></td>
@@ -364,7 +368,7 @@
                                                                         <h4 class="modal-title">Service - <% out.print(custName);%></h4>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <div><h3>Estimated Completion (Date & Time):</h3></div>
+                                                                        <div><h4>Estimated Completion(YYYY-MM-DD HH:MM):</h4></div>
                                                                         <div class="form-group">
                                                                             <div class='input-group date' id='<%="datetimepicker" + i%>'>
                                                                                 <form id='<%="dt" + offerId%>' action="AddEstimatedCompletionTime" role="form">
@@ -395,6 +399,7 @@
 
                                                         <%
                                                                 i++;
+                                                                }
                                                             }
                                                         %>
 
@@ -421,7 +426,7 @@
                                                                 <th>Complete Service</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody class="contents">
                                                             <!--Loop per new request-->
                                                             <%
                                                                 qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 6, "requested_datetime", "desc");
@@ -609,7 +614,7 @@
                                                                 <th>More Info</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody class="contents">
                                                             <!--Loop per new request-->
                                                             <%
                                                                 qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 7, "requested_datetime", "desc");
@@ -649,6 +654,7 @@
 
                                                                     Offer offer = qr.getOffer();
                                                                     double finalPrice = offer.getFinalPrice();
+                                                                    
 
                                                             %>
                                                             <tr>
@@ -805,10 +811,10 @@
                                             </div>
 
                                             <div class="col-sm-4 text-center">
-                                                <small class="inline table-options paging-info">showing 1-3 of 24 items</small>
+                                                <!--<small class="inline table-options paging-info">showing 1-3 of 24 items</small>-->
                                             </div>
 
-                                            <div class="col-sm-4 text-right sm-center">
+                                            <div class="col-sm-4 text-right sm-center" id="paginationTab" style="display:none">
                                                 <ul class="pagination pagination-xs nomargin pagination-custom">
                                                     <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
                                                     <li class="active"><a href="#">1</a></li>
@@ -909,6 +915,7 @@
     <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
     <script type="text/javascript" src="js/moment.js"></script> 
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
+    <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
 
     <!--        <script>
                 $(function () {
@@ -950,6 +957,7 @@
         $(".date").each(function () {
             $(this).datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
+                minDate: new Date()
             });
         });
     </script>
@@ -1064,4 +1072,27 @@
             //        $(id).submit();
         }
     </script>
+    <script>
+    $(document).ready(function () {
+        $(".tabpager").tabpager({
+//  maximum visible items
+            items: 5,
+// CSS class for tabbed content
+            contents: 'contents',
+// transition speed
+            time: 300,
+// text for previous button
+            previous: '&laquo;Prev',
+// text for next button
+            next: 'Next&raquo;',
+// initial tab
+            start: 1,
+// top or bottom
+            position: 'bottom',
+// scrollable
+            scroll: true
+        });
+    });
+
+</script>
 </html>
