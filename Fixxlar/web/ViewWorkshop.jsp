@@ -39,42 +39,42 @@
             </select>   
             <input type="submit" value="Go!">
         </form>
-        
+
         <form action="SearchWorkshop" method="post">
             Search:
             <input type="text" name="search"/>
             <input type="submit" value="Go!">
         </form>
-        
 
-            <%
-                ArrayList<Workshop> allWorkshops = (ArrayList<Workshop>) request.getAttribute("workshops");
-                if (allWorkshops == null) {
-                    WorkshopDAO wDAO = new WorkshopDAO();
-                    allWorkshops = wDAO.retrieveAllWorkshops(user.getStaffId(), user.getToken());
-                }
-                if (allWorkshops.size() == 0) {
-                    out.println("No workshop found. Try again.<br/>");
-                } else {
-            %>
-                    <table style=\"width:100%\" border=\"1\">
-                    <tr>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Description</th>
-                    <th>Website</th>
-                    <th>Opening Hours</th>
-                    <th>Contact Number</th>
-                    <th>Location</th>
-                    <th>Brands Carried</th>
-                    <th>Category</th>
-                    <th>Specialize</th>
-                    <th>Remark</th>
-                    <th>Active</th>
-                    <th>Edit</th>
-                    </tr>
+
+        <%
+            ArrayList<Workshop> allWorkshops = (ArrayList<Workshop>) request.getAttribute("workshops");
+            if (allWorkshops == null) {
+                WorkshopDAO wDAO = new WorkshopDAO();
+                allWorkshops = wDAO.retrieveAllWorkshops(user.getStaffId(), user.getToken());
+            }
+            if (allWorkshops.size() == 0) {
+                out.println("No workshop found. Try again.<br/>");
+            } else {
+        %>
+        <table style=\"width:100%\" border=\"1\">
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Description</th>
+                <th>Website</th>
+                <th>Opening Hours</th>
+                <th>Contact Number</th>
+                <th>Location</th>
+                <th>Brands Carried</th>
+                <th>Category</th>
+                <th>Specialize</th>
+                <th>Remark</th>
+                <th>Active</th>
+                <th>Edit</th>
+            </tr>
             <%
                     for (Workshop w : allWorkshops) {
                         out.println("<tr>");
@@ -94,11 +94,14 @@
                         out.println("</td>");
                         out.println("<td>" + w.getLocation() + "</td>");
                         out.println("<td>" + w.getBrandsCarried() + "</td>");
-                        out.println("<td>" + w.getCategory() + "</td>");
+                        String[] category = w.getCategory().split(",");
+                        for (String s : category) {
+                            out.println(s + "<br/>");
+                        }
                         out.println("<td>");
                         String[] carBrands = w.getSpecialize().split(",");
                         for (String s : carBrands) {
-                            out.println(s + ", ");
+                            out.println(s + "<br/>");
                         }
                         out.println("</td>");
                         out.println("<td>" + w.getRemark() + "</td>");

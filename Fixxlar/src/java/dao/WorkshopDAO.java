@@ -316,7 +316,7 @@ public class WorkshopDAO {
     public ArrayList<String> addWorkshop(String email, String name, String description, String website, String address, String openingHour, String openingHourFormat, double latitude,
             double longitude, String contact, String contact2, String location, String specialize, String category, String brandsCarried,
             String remark, int staffId, String token) throws UnsupportedEncodingException, IOException {
-        String url = "http://119.81.43.85/erp/workshop/get_shop_by_id_or_email";
+        String url = "http://119.81.43.85/erp/workshop/add_shop";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);

@@ -46,8 +46,6 @@ public class AddWorkshopServlet extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
         String website = request.getParameter("website");
@@ -59,14 +57,11 @@ public class AddWorkshopServlet extends HttpServlet {
         String contact2 = request.getParameter("contact2");
         String location = request.getParameter("location");
         String brandsCarried = request.getParameter("brandsCarried");
-        String category = request.getParameter("category");
+        String[] categoryArr = request.getParameterValues("category");
         String remark = request.getParameter("remark");
-        String wsStaffName = request.getParameter("staffName");
-        String wsStaffHpNo = request.getParameter("staffHpNo");
-        String specialize = "";
 
         ArrayList<String> errMsg = new ArrayList<String>();
-
+        String specialize = "";
         if (specializeArr == null) {
             errMsg.add("No car brands selected.");
         } else {
@@ -76,11 +71,14 @@ public class AddWorkshopServlet extends HttpServlet {
             }
         }
 
-        if (!password.equals(confirmPassword)) {
-            errMsg.add("Passwords do not match.");
+        String category = "";
+        if (categoryArr == null) {
+            errMsg.add("No category selected.");
         } else {
-            HashCode hc = new HashCode();
-            password = hc.generateSaltedHash(password);
+            category = categoryArr[0];
+            for (int i = 1; i < categoryArr.length; i++) {
+                category += "," + categoryArr[i];
+            }
         }
 
         WebUserDAO uDAO = new WebUserDAO();
@@ -107,9 +105,8 @@ public class AddWorkshopServlet extends HttpServlet {
             if (addErrMsg.size() == 0) {
                 Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());
                 int wsId = ws.getId();
-                uDAO.addMasterUser(staffId, token, wsStaffName, email, wsStaffHpNo, wsId, password);
-                request.setAttribute("successMsg", "Workshop successfully added!");
-                RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
+                request.setAttribute("workshopId", wsId);
+                RequestDispatcher view = request.getRequestDispatcher("AddMasterWorkshopStaff.jsp");
                 view.forward(request, response);
             } else {
                 request.setAttribute("errMsg", addErrMsg);

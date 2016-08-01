@@ -24,8 +24,6 @@
         <form action = "AddWorkshop" method= "post">
             Company Name: <input type="text" name="name" required/><br/>
             Email: <input type="email" name="email" required/><br/>
-            Password: <input type="password" name="password" required/><br/>
-            Confirm Password: <input type="password" name="confirmPassword" required/><br/>
             Address <input type="text" name="address" required/><br/>
             Website: <input type="text" name="website" required/><br/>
             Description: <textarea name= 'description' cols="50" rows="5"></textarea><br/>
@@ -35,16 +33,21 @@
             Another Contact Number: <input type="text" name="contact2" /><br/>
             Location: <input type="text" name="location" /><br/>
             Brands Carried <input type="text" name="brandsCarried" /><br/>
-            Category: <input type="text" name="category" /><br/>
+            Category: 
+            <input type="checkbox" name="category" value="Maintenance1"/>Maintenance1<br/>
+            <input type="checkbox" name="category" value="Car Grooming1"/>Car Grooming1<br/>
+            <input type="checkbox" name="category" value="Tyre/Wheel Service1"/>Tyre/Wheel Service1<br/>
+            <input type="checkbox" name="category" value="Air Conditioning1"/>Air Conditioning1<br/>
+            <input type="checkbox" name="category" value="Battery1"/>Battery1<br/>
+            <input type="checkbox" name="category" value="Others1"/>Others1<br/>
             Remark: <input type="text" name="remark" /><br/>
 
             <br/>
             Specialize: <br/>
-            <%                
-                WorkshopDAO wDAO = new WorkshopDAO();
+            <%                WorkshopDAO wDAO = new WorkshopDAO();
                 ArrayList<String> carBrands = wDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
                 for (String cb : carBrands) {
-                    out.println("<input type=\"checkbox\" name=\"specialize\" value=\"" + cb + "\">"  + cb + "<br>");
+                    out.println("<input type=\"checkbox\" name=\"specialize\" value=\"" + cb + "\">" + cb + "<br>");
                 }
             %>
             <input type="submit" value="Add Workshop"><br/><br/>

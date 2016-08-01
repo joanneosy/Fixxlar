@@ -56,7 +56,7 @@ public class EditWorkshopServlet extends HttpServlet {
         String contact2 = request.getParameter("contact2");
         String location = request.getParameter("location");
         String brandsCarried = request.getParameter("brandsCarried");
-        String category = request.getParameter("category");
+        String[] categoryArr = request.getParameterValues("category");
         String remark = request.getParameter("remark");
         String statusStr = request.getParameter("isActive");
         int status = 1;
@@ -76,6 +76,16 @@ public class EditWorkshopServlet extends HttpServlet {
             }
         }
 
+        String category = "";
+        if (categoryArr == null) {
+            errMsg.add("No category selected.");
+        } else {
+            category = categoryArr[0];
+            for (int i = 1; i < categoryArr.length; i++) {
+                category += "," + categoryArr[i];
+            }
+        }
+
         WorkshopDAO wDAO = new WorkshopDAO();
         String[] latLong = wDAO.retrieveLatLong(address);
         if (latLong == null) {
@@ -84,7 +94,7 @@ public class EditWorkshopServlet extends HttpServlet {
             latitude = Double.parseDouble(latLong[0]);
             longitude = Double.parseDouble(latLong[1]);
         }
-        
+
         if (errMsg.size() == 0) {
             HttpSession session = request.getSession(true);
             WebUser user = (WebUser) session.getAttribute("loggedInUser");

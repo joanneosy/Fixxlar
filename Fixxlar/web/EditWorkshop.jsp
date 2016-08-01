@@ -21,44 +21,123 @@
         <title>Edit Workshop</title>
     </head>
     <body>
-        <%
-            int wsId = Integer.parseInt(request.getParameter("id"));
+        <%            int wsId = Integer.parseInt(request.getParameter("id"));
             WorkshopDAO wDAO = new WorkshopDAO();
             Workshop ws = wDAO.retrieveWorkshop(wsId, user.getStaffId(), user.getToken());
+            String email = ws.getEmail();
+            if (email.equals("null")) {
+                email = "";
+            }
+            String name = ws.getName();
+            if (name.equals("null")) {
+                name = "";
+            }
+            String address = ws.getAddress();
+            String postalCode = "";
+            if (address.equals("null")) {
+                address = "";
+            }
+            /*else {
+                postalCode = address.substring(address.lastIndexOf(" ")+1);
+                address = address.substring(0, address.lastIndexOf(" ", address.lastIndexOf(" ") - 1));
+            }*/
             String website = ws.getWebsite();
-            if (website.equals("null")) { website = ""; }
+            if (website.equals("null")) {
+                website = "";
+            }
             String description = ws.getDescription();
-            if (description.equals("null")) { description = ""; }
+            if (description.equals("null")) {
+                description = "";
+            }
+            String openingHour = ws.getOpeningHour();
+            if (openingHour.equals("null")) {
+                openingHour = "";
+            }
             String openingHourFormat = ws.getOpeningHourFormat();
-            if (openingHourFormat.equals("null")) { openingHourFormat = ""; }
+            if (openingHourFormat.equals("null")) {
+                openingHourFormat = "";
+            }
+            String contact = ws.getContact();
+            if (contact.equals("null")) {
+                contact = "";
+            }
             String contact2 = ws.getContact2();
-            if (contact2.equals("null")) { contact2 = ""; }
+            if (contact2.equals("null")) {
+                contact2 = "";
+            }
             String location = ws.getLocation();
-            if (location.equals("null")) { location = ""; }
+            if (location.equals("null")) {
+                location = "";
+            }
             String brandsCarried = ws.getBrandsCarried();
-            if (brandsCarried.equals("null")) { brandsCarried = ""; }
+            if (brandsCarried.equals("null")) {
+                brandsCarried = "";
+            }
             String category = ws.getCategory();
-            if (category.equals("null")) { category = ""; }
+            if (category.equals("null")) {
+                category = "";
+            }
             String remark = ws.getRemark();
-            if (remark.equals("null")) { remark = ""; }
+            if (remark.equals("null")) {
+                remark = "";
+            }
             int status = ws.getStatus();
         %>
         <h1>Edit <%=ws.getName()%></h1>
         <form action = "EditWorkshop" method= "post">
             ID: <input type="text" name="id" value="<%=ws.getId()%>" readonly/><br/>
-            Email: <input type="email" name="email" value="<%=ws.getEmail()%>" required/><br/>
-            Company Name: <input type="text" name="name" value="<%=ws.getName()%>" required/><br/>
-            Address <input type="text" name="address" value="<%=ws.getAddress()%>" required/><br/>
+            Email: <input type="email" name="email" value="<%=ws.getEmail()%>"/><br/>
+            Company Name: <input type="text" name="name" value="<%=ws.getName()%>"/><br/>
+            Address <input type="text" name="address" value="<%=ws.getAddress()%>"/><br/>
             Website: <input type="text" name="website" value="<%=website%>" /><br/>
             Description: <textarea name= 'description' cols="50" rows="5" ><%=description%></textarea><br/>
-            Opening Hours <input type="text" name="openingHour" value="<%=ws.getOpeningHour()%>" required/><br/>
+            Opening Hours <input type="text" name="openingHour" value="<%=ws.getOpeningHour()%>"/><br/>
             Opening Hours Format: <input type="text" name="openingHourFormat" value="<%=openingHourFormat%>"/><br/>
-            Contact Number: <input type="text" name="contact" value="<%=ws.getContact()%>" required/><br/>
+            Contact Number: <input type="text" name="contact" value="<%=ws.getContact()%>"/><br/>
             Another Contact Number: <input type="text" name="contact2" value="<%=contact2%>"/><br/>
             Location: <input type="text" name="location" value="<%=location%>"/><br/>
             Brands Carried <input type="text" name="brandsCarried" value="<%=brandsCarried%>"/><br/>
-            Category: <input type="text" name="category" value="<%=category%>"/><br/>
+            Category: 
+            <%
+                String[] categories = category.split(",");
+                if (Arrays.asList(categories).contains("Maintenance1")) {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Maintenance1\" checked/>Maintenance1<br/>");
+                } else {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Maintenance1\"/>Maintenance1<br/>");
+                }
+                
+                if (Arrays.asList(categories).contains("Car Grooming1")) {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Car Grooming1\" checked/>Car Grooming1<br/>");
+                } else {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Car Grooming1\"/>Car Grooming1<br/>");
+                }
+                
+                if (Arrays.asList(categories).contains("Tyre/Wheel Service1")) {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Tyre/Wheel Service1\" checked/>Tyre/Wheel Service1<br/>");
+                } else {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Tyre/Wheel Service1\"/>Tyre/Wheel Service1<br/>");
+                }
+                
+                if (Arrays.asList(categories).contains("Air Conditioning1")) {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Air Conditioning1\" checked/>Air Conditioning1<br/>");
+                } else {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Air Conditioning1\"/>Air Conditioning1<br/>");
+                }
+                
+                if (Arrays.asList(categories).contains("Battery1")) {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Battery1\" checked/>Battery1<br/>");
+                } else {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Battery1\"/>Battery1<br/>");
+                }
+                
+                if (Arrays.asList(categories).contains("Others1")) {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Others1\" checked/>Others1<br/>");
+                } else {
+                    out.println("<input type=\"checkbox\" name=\"category\" value=\"Others1\"/>Others1<br/>");
+                }
+                %>
             Remark: <input type="text" name="remark" value="<%=remark%>"/><br/>
+            
             Active: 
             <%
                 if (status == 1) {

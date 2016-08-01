@@ -155,7 +155,7 @@ public class WebUserDAO {
         }
     }
 
-    public boolean addMasterUser(int staffId, String token, String name, String email, String hpNo, int shopId, String password) throws UnsupportedEncodingException, IOException {
+    public boolean addMasterWorkshopStaff(int staffId, String token, String name, String email, String hpNo, int shopId, String password) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/user/add_new_master_workshop_staff";
 
         HttpClient client = new DefaultHttpClient();
@@ -198,8 +198,8 @@ public class WebUserDAO {
         }
     }
     
-    public boolean addNormalUser(int staffId, String token, String name, String email, String hpNo, int shopId, String password) throws UnsupportedEncodingException, IOException {
-        String url = "http://119.81.43.85/erp/user/add_new_master_workshop_staff";
+    public boolean addNormalWorkshopStaff(int staffId, String token, String name, String email, String hpNo, int shopId, String password) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/user/add_new_normal_workshop_staff";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -214,6 +214,90 @@ public class WebUserDAO {
         urlParameters.add(new BasicNameValuePair("email", email));
         urlParameters.add(new BasicNameValuePair("handphone", hpNo));
         urlParameters.add(new BasicNameValuePair("shop_id", shopId + ""));
+        urlParameters.add(new BasicNameValuePair("password", password));
+
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean addMasterAdmin(int staffId, String token, String name, String email, String hpNo, String password) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/user/add_new_master_admin";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("staff_name", name));
+        urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("handphone", hpNo));
+        urlParameters.add(new BasicNameValuePair("password", password));
+
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+     public boolean addNormalAdmin(int staffId, String token, String name, String email, String hpNo, String password) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/user/add_new_normal_admin";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("staff_name", name));
+        urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("handphone", hpNo));
         urlParameters.add(new BasicNameValuePair("password", password));
 
 
