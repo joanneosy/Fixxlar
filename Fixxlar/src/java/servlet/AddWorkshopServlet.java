@@ -45,11 +45,29 @@ public class AddWorkshopServlet extends HttpServlet {
 
         String name = request.getParameter("name");
         String address = request.getParameter("address");
+        String postalCode = request.getParameter("postalCode");
         String email = request.getParameter("email");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
-        String website = request.getParameter("website");
-        String openingHour = request.getParameter("openingHour");
+        String website = "https://" + request.getParameter("website");
+        
+        String mondayOpen = request.getParameter("mondayOpen");
+        String mondayClose = request.getParameter("mondayClose");
+        String tuesdayOpen = request.getParameter("tuesdayOpen");
+        String tuesdayClose = request.getParameter("tuesdayClose");
+        String wednesdayOpen = request.getParameter("wednesdayOpen");
+        String wednesdayClose = request.getParameter("wednesdayClose");
+        String thursdayOpen = request.getParameter("thursdayOpen");
+        String thursdayClose = request.getParameter("thursdayClose");
+        String fridayOpen = request.getParameter("fridayOpen");
+        String fridayClose = request.getParameter("fridayClose");
+        String saturdayOpen = request.getParameter("saturdayOpen");
+        String saturdayClose = request.getParameter("saturdayClose");
+        String sundayOpen = request.getParameter("sundayOpen");
+        String sundayClose = request.getParameter("sundayClose");
+        String phOpen = request.getParameter("phOpen");
+        String phClose = request.getParameter("phClose");
+        
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
         double longitude = 0.0;
@@ -61,6 +79,17 @@ public class AddWorkshopServlet extends HttpServlet {
         String remark = request.getParameter("remark");
 
         ArrayList<String> errMsg = new ArrayList<String>();
+        
+        String openingHour = "";
+        openingHour = "Monday-" + mondayOpen + "-" + mondayClose + ","
+                + "Tuesday-" + tuesdayOpen + "-" + tuesdayClose + ","
+                + "Wednesday-" + wednesdayOpen + "-" + wednesdayClose + ","
+                + "Thursday-" + thursdayOpen + "-" + thursdayClose + ","
+                + "Friday-" + fridayOpen + "-" + fridayClose + ","
+                + "Saturday-" + saturdayOpen + "-" + saturdayClose + ","
+                + "Sunday-" + sundayOpen + "-" + sundayClose + ","
+                + "Ph-" + phOpen + "-" + phClose;
+        
         String specialize = "";
         if (specializeArr == null) {
             errMsg.add("No car brands selected.");
@@ -83,7 +112,7 @@ public class AddWorkshopServlet extends HttpServlet {
 
         WebUserDAO uDAO = new WebUserDAO();
         WorkshopDAO wDAO = new WorkshopDAO();
-        String[] latLong = wDAO.retrieveLatLong(address);
+        String[] latLong = wDAO.retrieveLatLong("Singapore " + postalCode);
         if (latLong == null) {
             errMsg.add("Invalid address.");
         } else {
@@ -100,7 +129,7 @@ public class AddWorkshopServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = wDAO.addWorkshop(email, name, description, website, address, openingHour, openingHourFormat,
+            ArrayList<String> addErrMsg = wDAO.addWorkshop(email, name, description, website, address + " " + postalCode, openingHour, openingHourFormat,
                     latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, staffId, token);
             if (addErrMsg.size() == 0) {
                 Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());

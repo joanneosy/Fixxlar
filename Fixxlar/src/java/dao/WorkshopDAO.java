@@ -669,6 +669,7 @@ public class WorkshopDAO {
     }
 
     public static void main(String[] args) throws IOException {
-
+        String website = "https://www.example.com";
+        System.out.println(website.substring(website.indexOf("/")+2));
     }
 }

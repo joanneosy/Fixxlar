@@ -24,14 +24,269 @@
         <form action = "AddWorkshop" method= "post">
             Company Name: <input type="text" name="name" required/><br/>
             Email: <input type="email" name="email" required/><br/>
-            Address <input type="text" name="address" required/><br/>
-            Website: <input type="text" name="website" required/><br/>
+            Address: <input type="text" name="address" required/><br/>
+            Postal Code: <input type="text" name="postalCode" required/><br/>
+            Website: https://<input type="text" name="website" required/><br/>
             Description: <textarea name= 'description' cols="50" rows="5"></textarea><br/>
-            Opening Hours <input type="text" name="openingHour" required/><br/>
+            <br/>
+            Opening Hours: <br/>
+            Monday: 
+            <select name="mondayOpen">
+                <option value="Closed">Closed</option>
+                <%                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="mondayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Tuesday: 
+            <select name="tuesdayOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="tuesdayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Wednesday: 
+            <select name="wednesdayOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="wednesdayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Thursday 
+            <select name="thursdayOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="thursdayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Friday: 
+            <select name="fridayOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="fridayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Saturday: 
+            <select name="saturdayOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="saturdayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Sunday: 
+            <select name="sundayOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="sundayClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/>
+
+            Public Holidays: 
+            <select name="phOpen">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select>
+
+            <select name="phClose">
+                <option value="Closed">Closed</option>
+                <%
+                    for (int i = 0; i < 2400; i += 100) {
+                        String str = i + "";
+                        if (str.length() == 3) {
+                            str = "0" + str;
+                        } else if (str.length() == 1) {
+                            str = "0000";
+                        }
+                        out.println("<option value=\"" + str + "\">" + str + "</option>");
+                    }
+                %>
+            </select><br/><br/>
             Opening Hours Format: <input type="text" name="openingHourFormat" /><br/>
             Contact Number: <input type="text" name="contact" required/><br/>
             Another Contact Number: <input type="text" name="contact2" /><br/>
-            Location: <input type="text" name="location" /><br/>
+            Location: 
+            <select name="location">
+                <option value="West">West</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="Central">Central</option>
+            </select><br/>
             Brands Carried <input type="text" name="brandsCarried" /><br/>
             Category: 
             <input type="checkbox" name="category" value="Maintenance1"/>Maintenance1<br/>

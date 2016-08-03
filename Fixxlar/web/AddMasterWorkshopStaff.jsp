@@ -26,7 +26,7 @@
             Password: <input type="password" name="password" required/><br/>
             Confirm Password: <input type="password" name="confirmPassword" required/><br/>
             Handphone number: <input type="number" name="staffHpNo" required/><br/> 
-            <input type="hidden" name="workshopId" value="<%=request.getParameter("workshopId")%>"/>
+            <input type="hidden" name="workshopId" value="<%=request.getAttribute("workshopId")%>"/>
             <input type="submit" value="Add Master Workshop Staff"><br/><br/>
             <a href="<%=(String) session.getAttribute("loggedInUserType")%>.jsp">Home</a>
         </form><br/>

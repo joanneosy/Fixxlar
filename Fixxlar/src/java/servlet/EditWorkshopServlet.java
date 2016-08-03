@@ -44,10 +44,11 @@ public class EditWorkshopServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String address = request.getParameter("address");
+        String postalCode = request.getParameter("postalCode");
         String email = request.getParameter("email");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
-        String website = request.getParameter("website");
+        String website = "https://" + request.getParameter("website");
         String openingHour = request.getParameter("openingHour");
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
@@ -87,7 +88,7 @@ public class EditWorkshopServlet extends HttpServlet {
         }
 
         WorkshopDAO wDAO = new WorkshopDAO();
-        String[] latLong = wDAO.retrieveLatLong(address);
+        String[] latLong = wDAO.retrieveLatLong("Singapore " + postalCode);
         if (latLong == null) {
             errMsg.add("Invalid address.");
         } else {
@@ -100,7 +101,7 @@ public class EditWorkshopServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = wDAO.updateWorkshop(id, email, name, description, website, address, openingHour, openingHourFormat,
+            ArrayList<String> addErrMsg = wDAO.updateWorkshop(id, email, name, description, website, address + " " + postalCode, openingHour, openingHourFormat,
                     latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, status, staffId, token);
             if (addErrMsg.size() == 0) {
                 request.setAttribute("successMsg", "Workshop successfully edited!");

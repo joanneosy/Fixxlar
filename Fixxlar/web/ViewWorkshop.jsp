@@ -94,10 +94,12 @@
                         out.println("</td>");
                         out.println("<td>" + w.getLocation() + "</td>");
                         out.println("<td>" + w.getBrandsCarried() + "</td>");
+                        out.println("<td>");
                         String[] category = w.getCategory().split(",");
                         for (String s : category) {
                             out.println(s + "<br/>");
                         }
+                        out.println("</td>");
                         out.println("<td>");
                         String[] carBrands = w.getSpecialize().split(",");
                         for (String s : carBrands) {
