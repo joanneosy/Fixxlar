@@ -51,7 +51,7 @@ public class AuthenticateServlet extends HttpServlet {
             int userType = user.getUserType();
             if (userType == 1) {
                 session.setAttribute("loggedInUserType", "Workshop");
-                response.sendRedirect("Workshop.jsp");
+                response.sendRedirect("New_Request.jsp");
             } else if (userType == 2) {
                 session.setAttribute("loggedInUserType", "Admin");
                 response.sendRedirect("Admin.jsp");

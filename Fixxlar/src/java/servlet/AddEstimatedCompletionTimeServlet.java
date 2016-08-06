@@ -64,12 +64,12 @@ public class AddEstimatedCompletionTimeServlet extends HttpServlet {
             session.setAttribute("isSuccess", "Estimated completion time is: " + estTimeStr);
 //            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("ManageService.jsp");
+            response.sendRedirect("New_Service.jsp");
         } else {
             session.setAttribute("isSuccess", "Failed!");
 //            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("ManageService.jsp");
+            response.sendRedirect("New_Service.jsp");
         }
     }
 

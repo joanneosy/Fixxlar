@@ -11,14 +11,6 @@
         <a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation <i class="fa fa-angle-up"></i></a>
 
         <ul class="menu"> 
-            
- 
-            <li>
-                <a href="Workshop.jsp">
-                    <i class="fa fa-tachometer"></i> Dashboard
-                    <!--<span class="badge badge-red">1</span>-->
-                </a>
-            </li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -49,13 +41,28 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="ViewRequest.jsp">
-                            <i class="fa fa-caret-right"></i> View Request
+                        <a href="New_Request.jsp">
+                            <i class="fa fa-caret-right"></i> New Request
                         </a>
                     </li>
                     <li>
-                        <a href="ManageService.jsp">
-                            <i class="fa fa-caret-right"></i> Manage Service
+                        <a href="Send_Final_Quote.jsp">
+                            <i class="fa fa-caret-right"></i> Send Final Quote
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Final_Quote_Accepted.jsp">
+                            <i class="fa fa-caret-right"></i> Final Quote Accepted
+                        </a>
+                    </li>
+                    <li>
+                        <a href="New_Service.jsp">
+                            <i class="fa fa-caret-right"></i> New Service
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Ongoing_Service.jsp">
+                            <i class="fa fa-caret-right"></i> Ongoing Service
                         </a>
                     </li>
                 </ul>

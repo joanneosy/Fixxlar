@@ -197,7 +197,7 @@
                                     <div class="tile-widget bg-transparent-white-2">
                                         <div class="row">
 
-                                            <div class="col-sm-2 col-xs-6">
+                                            <div class="col-sm-2 col-xs-3">
                                                 <div class="search" id="requestSearch">
                                                     <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                 </div>
@@ -214,7 +214,7 @@
                                                                                                 </div>-->
                                             </div>
 
-                                            <div class="col-sm-10 col-xs-6 text-right">
+                                            <div class="col-sm-10 col-xs-9 text-right">
 
                                                 <!--                                                <div class="btn-group btn-group-xs table-options">
                                                                                                     <button type="button active" class="btn btn-default" href="#New">New</button>
@@ -234,20 +234,20 @@
                                                         <!--<li><a href="#All" data-toggle="pill">All</a></li>-->
                                                     </ul>
                                                 </div>
-                                                <div class="btn-group mobileOnly" style="float:right">
-                                                    <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" id='select'>
-                                                        Select <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu tabpager" id="requestDropdown" role="menu" >
-                                                        <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
-                                                        <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
-                                                        <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
-                                                        <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
-                                                        <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
-                                                        <!--<li><a href="#All" data-toggle="pill">All</a></li>-->
-                                                    </ul>
-                                                </div>
+                                                <!--                                                <div class="btn-group mobileOnly" style="float:right">
+                                                                                                    <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" id='select'>
+                                                                                                        Select <span class="caret"></span>
+                                                                                                    </button>
+                                                
+                                                                                                    <ul class="dropdown-menu tabpager" id="requestDropdown" role="menu" >
+                                                                                                        <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
+                                                                                                        <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
+                                                                                                        <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
+                                                                                                        <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
+                                                                                                        <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
+                                                                                                        <li><a href="#All" data-toggle="pill">All</a></li>
+                                                                                                    </ul>
+                                                                                                </div>-->
                                             </div>
 
 
@@ -1269,7 +1269,7 @@
                                 </div>
 
                                 <div class="col-sm-4 text-center">
-<!--                                    <small class="inline table-options paging-info">showing 1-3 of 24 items</small>-->
+                                    <!--                                    <small class="inline table-options paging-info">showing 1-3 of 24 items</small>-->
                                 </div>
 
                                 <div class="col-sm-4 text-right sm-center" id="paginationTab" style="display:none">
@@ -1411,12 +1411,26 @@
 <script>
     $(document).ready(function ()
     {
-        $("#myTable1").tablesorter();
-        $("#myTable2").tablesorter();
-        $("#myTable3").tablesorter();
-        $("#myTable4").tablesorter();
-        $("#myTable5").tablesorter();
-
+        $("#myTable1").tablesorter({
+            sortList: [[0,0],[1,0]]
+        });
+        $("#myTable2").tablesorter({
+            sortList: [[0,0],[1,0]]
+        });
+        $("#myTable3").tablesorter({
+            sortList: [[0,0],[1,0]]
+        });
+        $("#myTable4").tablesorter({
+            sortList: [[0,0],[1,0]]
+        });
+        $("#myTable5").tablesorter({
+            sortList: [[0,0],[1,0]]
+        });
+//        $("#myTable1").tablesorter();
+//        $("#myTable2").tablesorter();
+//        $("#myTable3").tablesorter();
+//        $("#myTable4").tablesorter();
+//        $("#myTable5").tablesorter();
     }
     );
 </script>

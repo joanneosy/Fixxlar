@@ -180,7 +180,7 @@
                                                         <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
                                                     </ul>
                                                 </div>
-                                                <div class="btn-group mobileOnly" style="float:right">
+<!--                                                <div class="btn-group mobileOnly" style="float:right">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id='select'>
                                                         Select <span class="caret"></span>
                                                     </button>
@@ -190,7 +190,7 @@
                                                         <li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
                                                         <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
                                                     </ul>
-                                                </div>
+                                                </div>-->
                                             </div>
 
 

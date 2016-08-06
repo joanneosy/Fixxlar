@@ -292,11 +292,11 @@ button.accordion.active:after {
 /*Accordion*/
 
 
-@media screen and (max-width: 1190px){
+/*@media screen and (max-width: 1190px){
     .desktopOnly {
         display: none;
     }
     .mobileOnly {
         display: initial;
     }
-}
+}*/

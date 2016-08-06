@@ -29,15 +29,15 @@
         <!-- /Page refresh -->
 
         <!-- Search -->
-        <div class="search" id="main-search">
+<!--        <div class="search" id="main-search">
             <i class="fa fa-search"></i> <input type="text" placeholder="Search...">
-        </div>
+        </div>-->
         <!-- Search end -->
 
         <!-- Quick Actions -->
         <ul class="nav navbar-nav quick-actions">
 
-            <li class="dropdown divided">
+<!--            <li class="dropdown divided">
 
                 <a class="dropdown-toggle button" data-toggle="dropdown" href="#">
                     <i class="fa fa-tasks"></i>
@@ -114,9 +114,9 @@
                     <li><a href="#">Check all tasks <i class="fa fa-angle-right"></i></a></li>
                 </ul>
 
-            </li>
+            </li>-->
 
-            <li class="dropdown divided">
+<!--            <li class="dropdown divided">
 
                 <a class="dropdown-toggle button" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>
@@ -249,7 +249,7 @@
                     <li><a href="#">Check all notifications <i class="fa fa-angle-right"></i></a></li>
                 </ul>
 
-            </li>
+            </li>-->
 
             <li class="dropdown divided user" id="current-user">
                 <div class="profile-photo">
@@ -261,7 +261,7 @@
 
                 <ul class="dropdown-menu arrow settings">
 
-                    <li>
+<!--                    <li>
 
                         <h3>Backgrounds:</h3>
                         <ul id="color-schemes">
@@ -281,9 +281,9 @@
                         </ul>
 
 
-                    </li>
+                    </li>-->
 
-                    <li class="divider"></li>
+<!--                    <li class="divider"></li>
 
 
 
@@ -319,7 +319,7 @@
                     </li>
 
 
-                    <li class="divider"></li>
+                    <li class="divider"></li>-->
 
                     <li>
                         <a href="#"><i class="fa fa-user"></i> Profile</a>
@@ -328,13 +328,13 @@
                         <a href="ChangePassword.jsp"><i class="fa fa-user"></i> Change Password</a>
                     </li>
 
-                    <li>
+<!--                    <li>
                         <a href="#"><i class="fa fa-calendar"></i> Calendar</a>
                     </li>
 
                     <li>
                         <a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge badge-red" id="user-inbox">3</span></a>
-                    </li>
+                    </li>-->
 
                     <li class="divider"></li>
 
@@ -344,9 +344,9 @@
                 </ul>
             </li>
 
-            <li>
+<!--            <li>
                 <a href="#mmenu"><i class="fa fa-comments"></i></a>
-            </li>
+            </li>-->
         </ul>
         <!-- /Quick Actions -->
 

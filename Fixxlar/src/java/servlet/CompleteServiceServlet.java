@@ -55,12 +55,12 @@ public class CompleteServiceServlet extends HttpServlet {
             session.setAttribute("isSuccess", "Service completed!");
 //            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("ManageService.jsp");
+            response.sendRedirect("Ongoing_Service.jsp");
         } else {
             session.setAttribute("isSuccess", "Failed!");
 //            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("ManageService.jsp");
+            response.sendRedirect("Ongoing_Service.jsp");
         }
     }
 

@@ -54,12 +54,12 @@ public class AddFinalQuotationServlet extends HttpServlet {
             session.setAttribute("isSuccess", "$" + price + " quoted as the final amount for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp?id=" + quotationRequestId);
 //            view.forward(request, response);
-            response.sendRedirect("ViewRequest.jsp");
+            response.sendRedirect("Send_Final_Quote.jsp");
         } else {
             session.setAttribute("isSuccess", "Failed!");
 //            RequestDispatcher view = request.getRequestDispatcher("AddFinalQuotation.jsp?id=" + offerId);
 //            view.forward(request, response);
-            response.sendRedirect("ViewRequest.jsp");
+            response.sendRedirect("Send_Final_Quote.jsp");
         }
     }
 

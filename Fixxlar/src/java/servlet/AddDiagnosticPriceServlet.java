@@ -42,7 +42,7 @@ public class AddDiagnosticPriceServlet extends HttpServlet {
 
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double price = Double.parseDouble(request.getParameter("price"));
-        String description = (String)request.getParameter("description");
+        String description = "";
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
@@ -54,12 +54,12 @@ public class AddDiagnosticPriceServlet extends HttpServlet {
             session.setAttribute("isSuccess", "Diagnostic Price: $" + price + " for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp?id=" + quotationRequestId);
 //            view.forward(request, response);
-            response.sendRedirect("ViewRequest.jsp");
+            response.sendRedirect("New_Request.jsp");
         } else {
             session.setAttribute("isSuccess", "Failed!");
 //            RequestDispatcher view = request.getRequestDispatcher("AddDiagnosticPrice.jsp?id=" + quotationRequestId);
 //            view.forward(request, response);
-            response.sendRedirect("ViewRequest.jsp");
+            response.sendRedirect("New_Request.jsp");
         }
     }
 

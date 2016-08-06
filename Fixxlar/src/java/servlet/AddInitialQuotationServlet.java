@@ -43,7 +43,7 @@ public class AddInitialQuotationServlet extends HttpServlet {
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double minPrice = Double.parseDouble(request.getParameter("minPrice"));
         double maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
-        String description = request.getParameter("description");
+        String description = "";
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
@@ -55,12 +55,12 @@ public class AddInitialQuotationServlet extends HttpServlet {
             session.setAttribute("isSuccess", "Quoted $" + minPrice + " - $" + maxPrice + " for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("ViewRequest.jsp");
+            response.sendRedirect("New_Request.jsp");
         } else {
             session.setAttribute("isSuccess", "Quotation failed for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("ViewRequest.jsp");
+            response.sendRedirect("New_Request.jsp");
         }
     }
 

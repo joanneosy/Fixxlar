@@ -33,17 +33,7 @@
                         <img src="images/Logo.png" alt class="logo">
                         <h1><strong>Welcome</strong></h1>
 
-                        <%
-                            String errMsg = (String) request.getAttribute("errMsg");
-                            if (errMsg != null) {
-                                out.println(errMsg + "<br/><br/>");
-                            }
-
-                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
-                            if (successResetPasswordMsg != null) {
-                                out.println(successResetPasswordMsg + "<br/><br/>");
-                            }
-                        %>
+                        
                         <!--<a href = "ForgotPassword.jsp">Forgot Password</a><br/><br/>
                         <form action = "Authenticate.jsp" method= "post">
                             Email: <input type="email" name="email" required/><br/>
@@ -74,6 +64,17 @@
                                 <button class="btn btn-greensea">Log In</button>
                             </section>
                         </form>
+                        <%
+                            String errMsg = (String) request.getAttribute("errMsg");
+                            if (errMsg != null) {
+                                out.println(errMsg + "<br/><br/>");
+                            }
+
+                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
+                            if (successResetPasswordMsg != null) {
+                                out.println(successResetPasswordMsg + "<br/><br/>");
+                            }
+                        %>
                     </div>
                 </div>
                 <!-- /Page content -->  
