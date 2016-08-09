@@ -17,14 +17,18 @@ public class WebUser {
     private int refStaffId;
     private String token;
     private int shopId;
+    private String handphone;
+    private String name;
 
-    public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId) {
+    public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone) {
         this.staffId = staffId;
         this.email = email;
         this.userType = userType;
         this.refStaffId = refStaffId;
         this.token = token;
         this.shopId = shopId;
+        this.handphone = handphone;
+        this.name = name;
     }
 
     //getter methods
@@ -65,5 +69,13 @@ public class WebUser {
     
     public int getShopId() {
         return shopId;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getHandphone() {
+        return handphone;
     }
 }
