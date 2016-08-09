@@ -12,11 +12,11 @@
 
         <ul class="menu"> 
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <!--<li class="dropdown">-->
+<!--                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-list"></i> Profile <b class="fa fa-plus dropdown-plus"></b>
-                </a>
-                <ul class="dropdown-menu">
+                </a>-->
+<!--                <ul class="dropdown-menu">
                     <li>
                         <a href="Calendar.jsp">
                             <i class="fa fa-caret-right"></i> Calendar
@@ -32,7 +32,12 @@
                             <i class="fa fa-caret-right"></i> Personalise
                         </a>
                     </li>
-                </ul>
+                </ul>-->
+            <!--</li>-->
+            <li>
+                <a href="Profile.jsp">
+                    <i class="fa fa-list"></i> Profile
+                </a>
             </li>
 
             <li class="dropdown">
@@ -98,33 +103,14 @@
             </li>
             -->
             <li>
-                <a href="Summary.jsp">
+                <a href="page-offline.html">
                     <i class="fa fa-tint"></i> Summary Report
                 </a>
             </li>
             <li>
-                <a href="Analytics.jsp">
+                <a href="page-offline.html">
                     <i class="fa fa-th"></i> Analytics
                 </a>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-th-large"></i> Mailbox <b class="fa fa-plus dropdown-plus"></b>
-                    <span class="label label-greensea">mails</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="Email.jsp">
-                            <i class="fa fa-caret-right"></i> Send Email
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Inbox.jsp">
-                            <i class="fa fa-caret-right"></i> Inbox
-                        </a>
-                    </li>
-                </ul>
             </li>
 
 

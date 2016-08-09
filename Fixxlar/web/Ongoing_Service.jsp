@@ -25,81 +25,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hello workshop</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8" />
-
-        <link rel="icon" type="image/ico" href="images/favicon.ico" />
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/animate.css">
-        <link type="text/css" rel="stylesheet" media="all" href="css/jquery.mmenu.all.css" />
-        <link rel="stylesheet" href="css/jquery.videobackground.css">
-        <link rel="stylesheet" href="css/bootstrap-checkbox.css">
-        <link rel="stylesheet" href="css/jquery.tabpager.css">
-
-        <link href="css/minimal.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/custom.css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-        <style>
-            #accordion {
-                list-style: none;
-                padding: 2px;
-            }
-            #accordion > li {
-                display: block;
-                list-style: none;
-            }
-            #accordion > li > span {
-                display: block;
-                color: #fff;
-                margin: 4px 0;
-                padding: 6px;
-                background: url(images/expand_arrow.png) no-repeat 99.5% 6px #525252;
-                background-size: 20px;
-                font-weight: normal;
-                cursor: pointer; font-size:16px
-            }
-            #accordion > li > div {
-                list-style: none;
-                padding: 6px;
-                display: none; overflow:auto
-            }
-            #accordion > ul li {
-                font-weight: normal;
-                cursor: auto;
-                padding: 0 0 0 7px;
-            }
-            #accordion a {
-                text-decoration: none;
-            }
-            #accordion li > span:hover {
-            }
-            #accordion li > span.active {
-                background: url(images/collapse-arrow.png) no-repeat 99.5% 6px #000;
-                background-size: 20px
-            }
-            #accordion li > span:after {
-                content: '\02795'; /* Unicode character for "plus" sign (+) */
-                font-size: 13px;
-                color: #fff;
-                float: right;
-                margin-left: 5px;
-
-            }
-
-            #accordion li > span.active:after {
-                content: "\2796"; /* Unicode character for "minus" sign (-) */
-            }
-
-        </style>
+        <title>Service</title>
+        <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->

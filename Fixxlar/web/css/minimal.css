@@ -1157,7 +1157,7 @@ menu button .fa, menu .btn .fa { margin-right: 3px; }
 .navbar.navbar-transparent-black { background-color: rgba(0, 0, 0, 0.1); }
 .navbar.navbar-transparent-black .navbar-header { background-color: rgba(0, 0, 0, 0.05); }
 .navbar .navbar-header { width: 250px; position: relative; z-index: 99; }
-.navbar .navbar-header .navbar-brand { font-weight: 300; font-size: 18px; font-family: "Roboto Condensed", sans-serif; color: white; padding: 0; padding-left: 20px; height: 45px; line-height: 45px; background: url(../images/minimal-logo.png) no-repeat 0 16px; }
+.navbar .navbar-header .navbar-brand { font-weight: 300; font-size: 18px; font-family: "Roboto Condensed", sans-serif; color: white; padding: 0; padding-left: 20px; height: 45px; line-height: 45px; background: url(../images/Logo.png) no-repeat 0 50%; background-size: 50%; width: 100px; }
 .navbar .navbar-header .navbar-brand img { vertical-align: top; }
 .navbar .navbar-header .sidebar-collapse { display: inline-block; float: right; line-height: 43px; }
 .navbar .navbar-header .sidebar-collapse a { font-size: 18px; line-height: 45px; color: #f2f2f2; }

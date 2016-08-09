@@ -1,5 +1,5 @@
 
-        <link rel="icon" type="image/ico" href="images/favicon.ico" />
+        <link rel="icon" type="image/ico" href="images/Logo.ico" />
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">

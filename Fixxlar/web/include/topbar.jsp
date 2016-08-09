@@ -5,8 +5,8 @@
 
     <!-- Branding -->
     <div class="navbar-header col-md-2">
-        <a class="navbar-brand" href="Workshop.jsp">
-            <strong>FIXIR</strong>
+        <a class="navbar-brand" href="New_Request.jsp">
+            <!--<img src="images/Logo.ico"/>-->
         </a>
         <div class="sidebar-collapse">
             <a href="#">

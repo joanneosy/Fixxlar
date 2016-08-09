@@ -23,31 +23,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hello workshop</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8" />
-
-        <link rel="icon" type="image/ico" href="images/favicon.ico" />
-        <!-- Bootstrap -->
-        <!--<link href="css/bootstrap.css" rel="stylesheet">-->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/animate.css">
-        <link type="text/css" rel="stylesheet" media="all" href="css/jquery.mmenu.all.css" />
-        <link rel="stylesheet" href="css/jquery.videobackground.css">
-        <link rel="stylesheet" href="css/bootstrap-checkbox.css">
-        <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-
-        <link href="css/minimal.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/custom.css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
+        <title>Valet</title>
+        <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
@@ -133,11 +112,11 @@
                                         <!--                                        <div class="search">
                                                                                     <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                                                 </div>-->
-                                        <div class="controls">
+<!--                                        <div class="controls">
                                             <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
                                             <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
                                             <a href="#" class="remove"><i class="fa fa-times"></i></a>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <!-- /tile header -->
 
@@ -146,9 +125,9 @@
                                         <div class="row">
 
                                             <div class="col-sm-2 col-xs-6">
-                                                <div class="search" id="requestSearch">
+<!--                                                <div class="search" id="requestSearch">
                                                     <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
-                                                </div>
+                                                </div>-->
                                                 <!--                                                <div class="input-group table-options">
                                                                                                     <select class="chosen-select form-control">
                                                                                                         <option>Bulk Action</option>
@@ -211,7 +190,7 @@
 
                                             <div class="tab-pane fade active in" id="New_Valet" >
                                                 <div class="table-responsive">
-                                                    <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable1">
+                                                    <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
                                                         <thead>
                                                             <tr>
                                                                 <th class="sortable">ID</th>
@@ -351,7 +330,7 @@
 
                                             <div class="tab-pane fade" id="Ongoing_Valet" >
                                                 <div class="table-responsive">
-                                                    <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable2">
+                                                    <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
                                                         <thead>
                                                             <tr>
                                                                 <th class="sortable">ID</th>
@@ -572,7 +551,7 @@
 
                                             <div class="tab-pane fade" id="Completed_Valet" >
                                                 <div class="table-responsive">
-                                                    <table class="table table-custom1 table-sortable1 tablesorter order-table " id="myTable3">
+                                                    <table id="example3" class="table table-custom1 table-sortable" cellspacing="0" width="100%">    
                                                         <thead>
                                                             <tr>
                                                                 <th class="sortable">ID</th>
@@ -712,7 +691,7 @@
                                                                                                     </span>
                                                                                                 </div>-->
                                             </div>
-
+<!--
                                             <div class="col-sm-4 text-center">
                                                 <small class="inline table-options paging-info">showing 1-3 of 24 items</small>
                                             </div>
@@ -727,7 +706,7 @@
                                                     <li><a href="#">5</a></li>
                                                     <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
                                                 </ul>
-                                            </div>
+                                            </div>-->
 
                                         </div>
                                     </div>
@@ -818,6 +797,8 @@
     <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
     <script type="text/javascript" src="js/moment.js"></script> 
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
 
     <!--        <script>
                 $(function () {
@@ -945,5 +926,14 @@
             console.log(id);
             //        $(id).submit();
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+            $('#example2').DataTable();
+            $('#example3').DataTable();
+            $('#example4').DataTable();
+            $('#example5').DataTable();
+        });
     </script>
 </html>
