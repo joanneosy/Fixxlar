@@ -15,7 +15,7 @@
         response.sendRedirect("Login.jsp");
         return;
     } else if (userType.equals("Workshop")) {
-        response.sendRedirect("Workshop.jsp");
+        response.sendRedirect("New_Request.jsp");
     } else if (userType.equals("Groomer")) {
         response.sendRedirect("Groomer.jsp");
     } 

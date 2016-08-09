@@ -9,11 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register Stripe</title>
-        <jsp:include page="include/head.jsp"/>
-    </head>
+    <jsp:include page="include/head.jsp"/>
     <body class="bg-3">
         <!-- Wrap all page content here -->
         <div id="wrap">
@@ -48,43 +44,43 @@
 
                                         <!-- /tile body -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form">
+                                            <form class="form-horizontal" role="form" action="AddMasterWorkshopStaff" method="post">
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Username</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01">
+                                                        <input type="text" class="form-control" id="input01" name="staffName" required>
                                                     </div>
                                                 </div>
-                                                
-                                                <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Email</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01">
-                                                    </div>
-                                                </div>
-                                                
 
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Password</label>
+                                                    <label for="input02" class="col-sm-4 control-label">Email</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input02">
+                                                        <input type="text" class="form-control" id="input02" name="staffEmail" required>
                                                     </div>
                                                 </div>
-                                                
+
+
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Confirm Password</label>
+                                                    <label for="input03" class="col-sm-4 control-label">Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input02">
+                                                        <input type="password" class="form-control" id="input03" name="password" required>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Handphone Number</label>
+                                                    <label for="input04" class="col-sm-4 control-label">Confirm Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01">
+                                                        <input type="password" class="form-control" id="input04" name="confirmPassword" required>
                                                     </div>
                                                 </div>
-                                                
+
+                                                <div class="form-group">
+                                                    <label for="input05" class="col-sm-4 control-label">Handphone Number</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="input05" name="staffHpNo" required>
+                                                    </div>
+                                                </div>
+
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
@@ -115,7 +111,7 @@
         </div>
         <!--End page wrap-->
         <%-- scripts --%>
-    
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->

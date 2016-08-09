@@ -47,39 +47,39 @@
 
                                         <!-- /tile body -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form">
+                                            <form class="form-horizontal" role="form" action="AddNormalWorkshopStaff" method="POST">
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Name</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01">
+                                                        <input type="text" class="form-control" id="input01" name="staffName">
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Email</label>
+                                                    <label for="input02" class="col-sm-4 control-label">Email</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01">
+                                                        <input type="text" class="form-control" id="input02" name="staffEmail">
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Phone Number</label>
+                                                    <label for="input03" class="col-sm-4 control-label">Phone Number</label>
                                                     <div class="col-sm-8">
-                                                        <input type="tel" class="form-control" id="input01">
+                                                        <input type="tel" class="form-control" id="input03" name="staffHpNo">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Password</label>
+                                                    <label for="input04" class="col-sm-4 control-label">Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input02">
+                                                        <input type="password" class="form-control" id="input04" name="password">
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Confirm Password</label>
+                                                    <label for="input05" class="col-sm-4 control-label">Confirm Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input02">
+                                                        <input type="password" class="form-control" id="input05" name="confirmPassword">
                                                     </div>
                                                 </div>
                                                 

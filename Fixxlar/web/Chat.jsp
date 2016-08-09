@@ -4,9 +4,16 @@
     Author     : User
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="entity.Chat"%>
+<%@page import="dao.ChatDAO"%>
 <%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@include file="ProtectWorkshop.jsp"%>--%>
+<%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +42,10 @@
         <![endif]-->
     </head>
     <body class="bg-1">
-
+        <%            ChatDAO chatDAO = new ChatDAO();
+            String token = user.getToken();
+            int staffID = user.getStaffId();
+        %>
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -53,10 +63,10 @@
                 <!-- Top and side nav bar -->
                 <jsp:include page="include/topbar.jsp"/>
                 <!-- Top and side nav bar -->
-                
 
 
-               
+
+
 
 
 
@@ -81,14 +91,14 @@
                         <h2><i class="fa fa-comments" style="line-height: 48px;padding-left: 0;"></i> Chat <span></span></h2>
 
 
-                        <div class="breadcrumbs">
+<!--                        <div class="breadcrumbs">
                             <ol class="breadcrumb">
                                 <li>You are here</li>
                                 <li><a href="index.html">Minimal</a></li>
                                 <li><a href="#">Example Pages</a></li>
                                 <li class="active">Chat</li>
                             </ol>
-                        </div>
+                        </div>-->
 
 
                     </div>
@@ -118,8 +128,8 @@
                                     <!-- tile header -->
                                     <div class="tile-header color bg-transparent-black-5 rounded-top-corners">
                                         <ul class="chat-nav main-nav inline">
-                                            <li><h3><strong>Inbox</strong> <span class="badge badge-red">3</span></h3></li>
-                                            <li class="pull-right">
+                                            <li><h3><strong>Inbox</strong></h3></li>
+<!--                                            <li class="pull-right">
                                                 <button type="button" class="btn btn-transparent-white btn-sm dropdown-toggle" data-toggle="dropdown">
                                                     More <i class="fa fa-caret-down"></i>
                                                 </button>
@@ -130,7 +140,7 @@
                                                     <li class="divider"></li>
                                                     <li><a href="#">Separated link</a></li>
                                                 </ul>
-                                            </li>
+                                            </li>-->
                                         </ul>
                                     </div>
                                     <!-- /tile header -->
@@ -140,198 +150,64 @@
                                     <div class="tile-body color transparent-black rounded-bottom-corners nopadding">
 
                                         <ul class="chat-inbox" id="chat-inbox">
-                                            <li><input type="text" class="form-control" placeholder="Search..."></li>
+                                            <!--<li><input type="text" class="form-control" placeholder="Search..."></li>-->
+                                            <%                                                HashMap<Integer, Chat> chatMap = chatDAO.getChatList(user.getStaffId(), user.getToken());
+                                                Iterator it = chatMap.entrySet().iterator();
+                                                int z = 1;
+                                                while (it.hasNext()) {
+                                                    Map.Entry pair = (Map.Entry) it.next();
+                                                    Chat chat = (Chat) pair.getValue();
+                                                    int id = chat.getId();
+                                                    int service_id = chat.getService_id();
+                                                    int user_id = chat.getUser_id();
+                                                    int shop_id = chat.getShop_id();
+                                                    String last_message = chat.getLast_message();
+                                                    Timestamp timeStamp = chat.getModified();
+                                                    String modified = "01-01-1990 00:00:00";
+                                                    if (timeStamp != null) {
+                                                        modified = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                    }
+                                                    timeStamp = chat.getDeleted_at();
+                                                    String deleted_at = "01-01-1990 00:00:00";
+                                                    if (timeStamp != null) {
+                                                        deleted_at = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                    }
+                                                    timeStamp = chat.getCreated();
+                                                    String created = "01-01-1990 00:00:00";
+                                                    if (timeStamp != null) {
+                                                        created = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                    }
+                                                    String user_name = chat.getUser_name();
+                                                    String[] msg = last_message.split(":");
+                                                    if (msg[0].equals("0")) {
+                                                        last_message = "You: " + msg[1];
+                                                    } else {
+                                                        last_message = user_name + ": " + msg[1];
+                                                    }
+                                            %>
+
                                             <li>
-                                                <a href="#" class="active">
+                                                <a href="#" class="<%if(z == 1){%>active<%}%> chatNav" id="<%=user_id%>-<%=user_name%>">
                                                     <div class="media">
                                                         <div class="pull-left">
                                                             <img class="media-object img-circle" src="assets/images/ici-avatar.jpg">
                                                         </div>
                                                         <div class="media-body">
-                                                            <p class="media-heading">Ing. Imrich Kamarel <span class="time">12:44</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
+                                                            <p class="media-heading"><%=user_name%> <span class="time"><%=modified%></span></p>
+                                                            <span class="message"><%=last_message%></span>
                                                             <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
+<!--                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
+                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>-->
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/arnold-avatar.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Arnold Karlsberg <span class="time">yesterday</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="unread">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/george-avatar.jpg">
-                                                            <span class="badge badge-red">1</span>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">George McCain <span class="time">31.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="unread">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/peter-avatar.jpg">
-                                                            <span class="badge badge-red">2</span>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Peter Kay <span class="time">28.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar1.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Lucius Cashmere <span class="time">27.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar2.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Jesse Phoenix <span class="time">25.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar3.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Dell MacApple <span class="time">23.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar4.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Roger Flopple <span class="time">18.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar5.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Bobby Socks <span class="time">17.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar6.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Nico Vulture <span class="time">16.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <div class="pull-left" href="#">
-                                                            <img class="media-object img-circle" src="assets/images/random-avatar7.jpg">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="media-heading">Silk Teddy <span class="time">12.3.2014</span></p>
-                                                            <span class="message">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
-                                                            <div class="chat-actions">
-                                                                <span class="mark-unread" title="Mark as unread"><i class="fa fa-circle-o"></i></span> 
-                                                                <span class="archive" title="Archive"><i class="fa fa-times"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                            <%
+                                            z++;
+                                                }
+                                            %>
                                         </ul>
-
                                     </div>
                                     <!-- /tile body -->
 
@@ -352,9 +228,9 @@
 
                                     <!-- tile header -->
                                     <div class="tile-header color bg-transparent-black-5 rounded-corners">
-                                        <ul class="chat-nav side-nav inline">
-                                            <li><h3><strong>Ing. Imrich</strong> Kamarel</h3></li>
-                                            <li class="pull-right">
+                                        <ul class="chat-nav side-nav inline" id="chatHead">
+                                            <li><h3><strong></strong></h3></li>
+<!--                                            <li class="pull-right">
                                                 <div class="btn-group btn-group-sm">
                                                     <button type="button" class="btn btn-transparent-white"><i class="fa fa-plus"></i> New Message</button>
                                                     <button type="button" class="btn btn-transparent-white dropdown-toggle" data-toggle="dropdown">
@@ -370,7 +246,7 @@
                                                     <input type="text" class="form-control input-sm" placeholder="Search..." id="chat-search">
                                                     <button type="button" class="btn btn-transparent-white" id="initialize-search"><i class="fa fa-search"></i></button>
                                                 </div>
-                                            </li>
+                                            </li>-->
                                         </ul>
                                     </div>
                                     <!-- /tile header -->
@@ -402,10 +278,10 @@
                                                 <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
                                                 <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
                                                 <button type="button" class="btn btn-transparent-white last pull-right" onclick="sendMsg()">Send message</button>
-<!--                                                <div class="checkbox check-transparent pull-right">
-                                                    <input type="checkbox" value="1" id="send-by-enter">
-                                                    <label for="send-by-enter">Press Enter to send</label>
-                                                </div>-->
+                                                <!--                                                <div class="checkbox check-transparent pull-right">
+                                                                                                    <input type="checkbox" value="1" id="send-by-enter">
+                                                                                                    <label for="send-by-enter">Press Enter to send</label>
+                                                                                                </div>-->
                                             </div>
                                         </div>
 
@@ -951,6 +827,78 @@
                 });
             });
 
+        </script>
+        <!--        <script>
+                    $("#sendMsg").click(function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: 'http://119.81.43.85/chat/send_chat_message',
+                            crossDomain: true,
+                            data: {
+                                "channel_name": "Chat:Workshop:1:354",
+                                "topic_id": "2",
+                                "staff_id": "31",
+                                "token": "786f7aefa6d9299dfd84f61f1cd42dd5d84fa8c549da87bc63f2d95372c664a2c9bf6e09c16da6393cc84d8578431f9a9ab3d33424810e28d06feeec62b30924a60bffd021ae86069a052c150c99547876c225814d471bdb3857eb1c708b7105cb72c6a02699a85cd284cb9f89098b8c263017c9f3272287668a2098c1de80a268a430c24318fb92867b3ce0edff88579f29cd6997558b11ecebe423818eb1d5b8e037a5515d6f0ac4ffc8cbbdd34023ec2440fd6c036511899c9325be80df56941fe1b5685fe4ee7214a2a6ce1a06fae528ddffd10bc8b2a8d725c25207070fc8c033d2695ccbba1b2e6261e0fbe938a3ab8193f410a5d306144716fe991f0ddaa6032653a3d453e7365e791bd908247c664bf3114b3bbad3d30b834c27f4dcc9705bb89fbbdf060b2afc585e969f10b89a99ab1c8a6e37e16c15d5c9ad72341d2c09c68c008623e99bd6f796ef428524714cc12235080cb2cca33d10b8432491a9766babb55eb533a3c14d8c2974f1364fd51f86f61934c91af95c89edbedc0bb605fa8cc03cc52179984daee998939e964d9e92506369e2f792f91c50dc4a9e83b3629e3d9da509790f5e408fa3f282f9dae1b14b35fb846dace1e3d41b015fb81792b6ca0f5d338fbcfe3e27d97d7f0ede817a74f53ce6d7e532690ca8ac203f592b2bd4acec86212128447484436af9deea8e7fa6262159531693a16a7d",
+                                "message": "0:354:Hello from web"
+                            },
+                            dataType: 'json',
+                            success: function () {
+                                alert("SUCCESS!");
+                            },
+                            error: function () {
+                                alert("ERROR!");
+                            }
+                        });
+                    });
+                </script>-->
+        <script>
+            $('.chatNav').click(function (event) {
+//                event.preventDefault();
+                $("#log").html("");
+                $(this).parent().siblings().children().removeClass("active").remove;
+                $(this).addClass("active").removeClass("unread");
+                var uid = this.id;
+                var user_id = uid.substring(0, uid.indexOf("-"));
+                var userName = uid.substring(uid.indexOf("-") + 1);
+                $("#chatHead li h3").html(userName)
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/chat/retrive_chat_history',
+                    crossDomain: true,
+                    data: {
+                        "type_of_message": "1",
+                        "no_of_message_display": "20",
+                        "driver_id": user_id,
+                        "token": "<%=token%>",
+                        "staff_id": "<%=staffID%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+//                        $.each(data.items, function(i,item)){
+//                            console.log(i + ": " + item);
+//                        }
+//                        console.log(data);
+                        var msg = data.payload.chat_message;
+                        for(i = msg.length-1; i >= 0; i--){
+//                            console.log(msg[i].message);
+                            if(msg[i].type == "0"){
+                                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + msg[i].modified + '</span></p>' + msg[i].message + '</div></div></li>' + $("#log").html());
+                            } else{
+                                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">'+userName+'</a> <span class="time">' + msg[i].modified + '</span></p>' + msg[i].message + '</div></div></li>' + $("#log").html());
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert("fail");
+                    }
+                });
+            });
+//            if (sender != "Web") {
+//                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//            } else {
+//                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//
+//            }
         </script>
     </body>
 </html>

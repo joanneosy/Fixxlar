@@ -189,29 +189,38 @@
                                                  openingMap.put(startEnd, day);
                                                  }
                                                  }*/
-                                                ArrayList<String> hourList = new ArrayList<String>();
-                                                String day = wsOpeningHr[0].substring(0, wsOpeningHr[0].indexOf("-"));
-                                                String startEnd = wsOpeningHr[0].substring(wsOpeningHr[0].indexOf("-") + 1);
-                                                for (int x = 1; x < wsOpeningHr.length; x++) {
-                                                    String openHr = wsOpeningHr[x];
-                                                    String day2 = openHr.substring(0, openHr.indexOf("-"));
-                                                    String startEnd2 = openHr.substring(openHr.indexOf("-") + 1);
-                                                    if (startEnd.equals(startEnd2)) {
-                                                        day = day + "-" + day2;
-                                                    } else {
-                                                        day = day + ":" + startEnd;
-                                                        hourList.add(day);
-                                                        day = day2;
-                                                        startEnd = startEnd2;
-                                                    }
-                                                    if (x == wsOpeningHr.length - 1) {
-                                                        day = day + ":" + startEnd2;
-                                                        hourList.add(day);
-                                                    }
+                                            for(int i = 0; i < wsOpeningHr.length; i++){
+                                                String day = wsOpeningHr[i];
+                                                String[] dayDetails = day.split("-");
+                                                if(dayDetails[1].equals("Closed")){
+                                                    out.print(dayDetails[0] + ": " + dayDetails[1] + "<br>");
+                                                }else{
+                                                    out.print(dayDetails[0] + ": " + dayDetails[1] + " - " + dayDetails[2] + "<br>");
                                                 }
-                                                for (String x : hourList) {
-                                                    out.println(x);
-                                                }
+                                            }
+//                                                ArrayList<String> hourList = new ArrayList<String>();
+//                                                String day = wsOpeningHr[0].substring(0, wsOpeningHr[0].indexOf("-"));
+//                                                String startEnd = wsOpeningHr[0].substring(wsOpeningHr[0].indexOf("-") + 1);
+//                                                for (int x = 1; x < wsOpeningHr.length; x++) {
+//                                                    String openHr = wsOpeningHr[x];
+//                                                    String day2 = openHr.substring(0, openHr.indexOf("-"));
+//                                                    String startEnd2 = openHr.substring(openHr.indexOf("-") + 1);
+//                                                    if (startEnd.equals(startEnd2)) {
+//                                                        day = day + "-" + day2;
+//                                                    } else {
+//                                                        day = day + ":" + startEnd;
+//                                                        hourList.add(day);
+//                                                        day = day2;
+//                                                        startEnd = startEnd2;
+//                                                    }
+//                                                    if (x == wsOpeningHr.length - 1) {
+//                                                        day = day + ":" + startEnd2;
+//                                                        hourList.add(day);
+//                                                    }
+//                                                }
+//                                                for (String x : hourList) {
+//                                                    out.println(x);
+//                                                }
                                             %>
                                             <!--                                            <div class="row">
                                                                                             <div class="col-md-12">

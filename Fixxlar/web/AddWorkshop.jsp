@@ -1,101 +1,24 @@
 <%-- 
-    Document   : EditWorkshop
-    Created on : Jun 3, 2016, 3:39:11 PM
-    Author     : Joanne
+    Document   : AdminSettings
+    Created on : 3 Aug, 2016, 12:26:26 PM
+    Author     : Joshymantou
 --%>
 
-<%@page import="entity.CarBrand"%>
+
 <%@page import="java.util.Arrays"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.TreeMap"%>
-<%@page import="dao.WorkshopDAO"%>
 <%@page import="entity.Workshop"%>
-<%@include file="ProtectAdmin.jsp"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="ProtectAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8" />
-        <title>Edit Workshop</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Admin Settings</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
-        <%            int wsId = Integer.parseInt(request.getParameter("id"));
-            WorkshopDAO wDAO = new WorkshopDAO();
-            Workshop ws = wDAO.retrieveWorkshop(wsId, user.getStaffId(), user.getToken());
-            String email = ws.getEmail();
-            if (email.equals("null")) {
-                email = "";
-            }
-            String name = ws.getName();
-            if (name.equals("null")) {
-                name = "";
-            }
-
-            String address = ws.getAddress();
-            String postalCode = "";
-            if (address.equals("null")) {
-                address = "";
-            } else {
-                postalCode = address.substring(address.lastIndexOf(" ") + 1);
-                address = address.substring(0, address.lastIndexOf(" ", address.lastIndexOf(" ") - 1));
-            }
-
-            String website = ws.getWebsite();
-            if (website.equals("null")) {
-                website = "";
-            }
-
-            String description = ws.getDescription();
-            if (description.equals("null")) {
-                description = "";
-            }
-            String openingHour = ws.getOpeningHour();
-            String[] daysAndTime = null;
-
-            if (openingHour.equals("null")) {
-                openingHour = "";
-            } else {
-                //Each string in this format: Monday-0900-1800
-                daysAndTime = openingHour.split(",");
-            }
-            String openingHourFormat = ws.getOpeningHourFormat();
-            if (openingHourFormat.equals("null")) {
-                openingHourFormat = "";
-            }
-            String contact = ws.getContact();
-            if (contact.equals("null")) {
-                contact = "";
-            }
-            String contact2 = ws.getContact2();
-            if (contact2.equals("null")) {
-                contact2 = "";
-            }
-            String location = ws.getLocation();
-            if (location.equals("null")) {
-                location = "";
-            }
-            String brandsCarried = ws.getBrandsCarried();
-            if (brandsCarried.equals("null")) {
-                brandsCarried = "";
-            }
-            String category = ws.getCategory();
-            if (category.equals("null")) {
-                category = "";
-            }
-            String remark = ws.getRemark();
-            if (remark.equals("null")) {
-                remark = "";
-            }
-            int status = ws.getStatus();
-            String[] carBrandsID = ws.getSpecialize().split(",");
-            ArrayList<String> carBrands = wDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
-
-        %>
-
         <!-- Wrap all page content here -->
         <div id="wrap">
             <!-- Make page fluid -->
@@ -108,7 +31,7 @@
 
                     <!-- page header -->
                     <div class="pageheader">
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Edit Profile</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Add Workshop</h2>
                         <!--<a href="AddWorshop.jsp" class="btn btn-primary btn-lg pull-right margin-top-15"  role="button">Submit</a>-->
                     </div>
                     <!-- /page header -->
@@ -124,100 +47,74 @@
                                     <section class="tile color transparent-black">
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>Edit</strong> <%=ws.getName()%></h1>
+                                            <h1><strong>Add</strong> Workshop</h1>
                                         </div>
                                         <!-- /tile header -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form" action="EditWorkshop">
+                                            <form class="form-horizontal" role="form" action="AddWorkshop" method="POST">
 
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-2 control-label">Workshop Name</label>
+                                                    <label for="input01" class="col-sm-2 control-label">Workshop Name</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=name%>" name="name">
+                                                        <input type="text" class="form-control" id="input01" name="name">
                                                     </div>
 
-                                                    <label for="input03" class="col-sm-2 control-label">Contact Number</label>
+                                                    <label for="input02" class="col-sm-2 control-label">Contact Number</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control"value="<%=contact%>" name="contact">
+                                                        <input type="text" class="form-control" id="input02" name="contact">
                                                     </div>
                                                 </div>
-                                                s
+
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Alt. Contact</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=contact2%>" name="contact2">
+                                                        <input type="text" class="form-control" id="input03" name="contact2">
                                                     </div>
 
-                                                    <label for="input03" class="col-sm-2 control-label">Address</label>
+                                                    <label for="input04" class="col-sm-2 control-label">Address</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=address%>" name="address">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="input03" class="col-sm-2 control-label">Postal Code</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=postalCode%>" name="postalCode">
-                                                    </div>
-
-                                                    <label for="input03" class="col-sm-2 control-label">Website</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=website%>" name="website">
+                                                        <input type="text" class="form-control" id="input04" name="address">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-2 control-label">Brands Carried</label>
+                                                    <label for="input05" class="col-sm-2 control-label">Postal Code</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=brandsCarried%>" name="brandsCarried">
+                                                        <input type="text" class="form-control" id="input05" name="postalCode">
                                                     </div>
 
-                                                    <label for="input03" class="col-sm-2 control-label">Remarks</label>
+                                                    <label for="input06" class="col-sm-2 control-label">Website</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=remark%>" name="remark">
+                                                        <input type="text" class="form-control" id="" name="website">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-2 control-label">Description</label>
+                                                    <label for="input07" class="col-sm-2 control-label">Brands Carried</label>
                                                     <div class="col-sm-4">
-                                                        <textarea class="form-control" rows="3" value="<%=description%>" name="description"></textarea>
+                                                        <input type="text" class="form-control" id="input07" name="brandsCarried">
                                                     </div>
 
-                                                    <label for="input03" class="col-sm-2 control-label">Location</label>
+                                                    <label for="input08" class="col-sm-2 control-label">Remarks</label>
                                                     <div class="col-sm-4">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="location">
-                                                            <%
-                                                                if (location.equals("West")) {
-                                                                    out.println("<option value=\"West\" selected>West</option>");
-                                                                } else {
-                                                                    out.println("<option value=\"West\">West</option>");
-                                                                }
+                                                        <input type="text" class="form-control" id="input08" name="remark">
+                                                    </div>
+                                                </div>
 
-                                                                if (location.equals("North")) {
-                                                                    out.println("<option value=\"North\" selected>North</option>");
-                                                                } else {
-                                                                    out.println("<option value=\"North\">North</option>");
-                                                                }
+                                                <div class="form-group">
+                                                    <label for="input09" class="col-sm-2 control-label">Description</label>
+                                                    <div class="col-sm-4">
+                                                        <textarea class="form-control" id="input09" rows="3" name="description"></textarea>
+                                                    </div>
 
-                                                                if (location.equals("South")) {
-                                                                    out.println("<option value=\"South\" selected>South</option>");
-                                                                } else {
-                                                                    out.println("<option value=\"South\">South</option>");
-                                                                }
-
-                                                                if (location.equals("Central")) {
-                                                                    out.println("<option value=\"Central\" selected>Central</option>");
-                                                                } else {
-                                                                    out.println("<option value=\"Central\">Central</option>");
-                                                                }
-
-                                                                if (location.equals("East")) {
-                                                                    out.println("<option value=\"East\" selected>East</option>");
-                                                                } else {
-                                                                    out.println("<option value=\"East\">East</option>");
-                                                                }
-                                                            %> 
+                                                    <label for="input10" class="col-sm-2 control-label">Location</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="chosen-select chosen-transparent form-control" id="input10" name="location">
+                                                            <option>North</option>
+                                                            <option>South</option>
+                                                            <option>East</option>
+                                                            <option>West</option>
+                                                            <option>Central</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -256,12 +153,12 @@
                                                     hours.add("2200");
                                                     hours.add("2300");
 
-
+                                                    int label = 11;
                                                 %>
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-2 control-label">Monday</label>
+                                                    <label for="input11" class="col-sm-2 control-label">Monday</label>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
+                                                        <select class="chosen-select chosen-transparent form-control" id="input11" name="mondayOpen">
                                                             <%                                                                for (int i = 0; i < hours.size(); i++) {
                                                             %>
                                                             <option><%= hours.get(i)%></option>
@@ -283,66 +180,26 @@
                                                     </div>
                                                     <div class="col-sm-3">
 
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input08">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="">
                                                             <%
+                                                                WorkshopDAO wsDAO = new WorkshopDAO();
+                                                                Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
+                                                                ArrayList<String> carBrands = wsDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
                                                                 for (String s : carBrands) {
-                                                                    if (Arrays.asList(carBrandsID).contains(s)) {
-                                                                        out.println("<option selected>" + s + "</option>");
-                                                                    } else {
-                                                                        out.println("<option>" + s + "</option>");
-                                                                    }
+                                                                    out.println("<option>" + s + "</option>");
                                                                 }
                                                             %>
                                                         </select>
 
-
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input08">
-
-                                                            <%
-                                                                String[] categories = category.split(",");
-                                                                if (Arrays.asList(categories).contains("Maintenance1")) {
-                                                                    out.println("<option selected>Maintenance1</option>");
-                                                                } else {
-                                                                    out.println("<option>Maintenance1</option>");
-                                                                }
-
-                                                                if (Arrays.asList(categories).contains("Car Grooming1")) {
-                                                                    out.println("<option selected>Car Grooming1</option>");
-                                                                } else {
-                                                                    out.println("<option>Car Grooming1</option>");
-                                                                }
-
-                                                                if (Arrays.asList(categories).contains("Tyre/Wheel Service1")) {
-                                                                    out.println("<option selected>Tyre/Wheel Service1</option>");
-                                                                } else {
-                                                                    out.println("<option>Tyre/Wheel Service1</option>");
-                                                                }
-
-                                                                if (Arrays.asList(categories).contains("Air Conditioning1")) {
-                                                                    out.println("<option selected>Air Conditioning1</option>");
-                                                                } else {
-                                                                    out.println("<option>Air Conditioning1</option>");
-                                                                }
-
-                                                                if (Arrays.asList(categories).contains("Battery1")) {
-                                                                    out.println("<option selected>Battery1</option>");
-                                                                } else {
-                                                                    out.println("<option>Battery1</option>");
-                                                                }
-
-                                                                if (Arrays.asList(categories).contains("Others1")) {
-                                                                    out.println("<option selected>Others1</option>");
-                                                                } else {
-                                                                    out.println("<option>Others1</option>");
-                                                                }
-                                                            %>
-                                                            <option>Maintenence</option>
-                                                            <option>Car Grooming</option>
-                                                            <option>Air Conditioning</option>
-                                                            <option>Battery</option>
-                                                            <option>Others</option>
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="">
+                                                            <option>Maintenence1</option>
+                                                            <option>Car Grooming1</option>
+                                                            <option>Tyre/Wheel Service1</option>
+                                                            <option>Air Conditioning1</option>
+                                                            <option>Battery1</option>
+                                                            <option>Others1</option>
                                                         </select>
 
                                                     </div>
@@ -382,9 +239,9 @@
                                                     for (int i = 1; i < days.size(); i++) {
                                                 %>
                                                 <div class="form-group">
-                                                    <label class="col-sm-2 control-label"><%=days.get(i)%></label>
+                                                    <label for="input03" class="col-sm-2 control-label"><%=days.get(i)%></label>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="<%=paramList.get(z)%>">
+                                                        <select class="chosen-select chosen-transparent form-control" id="" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
@@ -392,11 +249,11 @@
                                                             %>
                                                             <option><%=hours.get(j)%></option>
                                                             <%                                                                } //end hours loop
-%>
+                                                            %>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="<%=paramList.get(z)%>">
+                                                        <select class="chosen-select chosen-transparent form-control" id="" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
@@ -415,7 +272,7 @@
 
                                                 <%
                                                     }//end of for loop for operating days
-                                                %>
+%>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -5,6 +5,12 @@
 --%>
 
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="entity.WebUser"%>
+<%@page import="dao.WebUserDAO"%>
+<%@include file="ProtectWorkshop.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +20,9 @@
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
+        <%            WebUserDAO webUserDAO = new WebUserDAO();
+            HashMap<Integer, WebUser> webUserMap = webUserDAO.retrieveNormalWorkshopStaff(user.getStaffId(), user.getToken(), user.getShopId());
+        %>
         <!-- Wrap all page content here -->
         <div id="wrap">
             <!-- Make page fluid -->
@@ -42,7 +51,7 @@
                                     <div class="tile-header">
                                         <div class="col-md-12">
                                             <div class="col-md-offset-11">
-                                                <button type="submit" class="btn btn-primary">Add Employee</button>
+                                                <a href ="AddEmployee.jsp" type="button" class="btn btn-primary">Add Employee</a>
                                             </div>
                                         </div>
                                     </div>
@@ -61,24 +70,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <%
+                                                    Iterator it = webUserMap.entrySet().iterator();
+                                                    while (it.hasNext()) {
+                                                        Map.Entry pair = (Map.Entry) it.next();
+                                                        WebUser staff = (WebUser) pair.getValue();
+                                                        String email = staff.getEmail();
+                                                        int staffId = staff.getStaffId();
+                                                        String name = staff.getName();
+                                                        String hp = staff.getHandphone();
+
+
+                                                %>
                                                 <tr>
-                                                    <td>111</td>
-                                                    <td>Joshua</td>
-                                                    <td>joshua@bengws.com</td>
-                                                    <td>93712312</td>
+                                                    <td><%=staffId%></td>
+                                                    <td><%=name%></td>
+                                                    <td><%=email%></td>
+                                                    <td><%=hp%></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>112</td>
-                                                    <td>Melvin</td>
-                                                    <td>melvin@bengws.com</td>
-                                                    <td>81238712</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>113</td>
-                                                    <td>Joanne</td>
-                                                    <td>joanne@bengws.com</td>
-                                                    <td>91464112</td>
-                                                </tr>
+
+
+                                                <%
+                                                    }
+
+                                                %>
                                             </tbody>
                                         </table>
 
