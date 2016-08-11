@@ -19,8 +19,9 @@ public class WebUser {
     private int shopId;
     private String handphone;
     private String name;
+    private int staffType;
 
-    public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone) {
+    public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone, int staffType) {
         this.staffId = staffId;
         this.email = email;
         this.userType = userType;
@@ -29,6 +30,7 @@ public class WebUser {
         this.shopId = shopId;
         this.handphone = handphone;
         this.name = name;
+        this.staffType = staffType;
     }
 
     //getter methods
@@ -77,5 +79,10 @@ public class WebUser {
     
     public String getHandphone() {
         return handphone;
+    }
+    
+    //Whether the user is super / master / normal user
+    public int getStaffType() {
+        return staffType;
     }
 }
