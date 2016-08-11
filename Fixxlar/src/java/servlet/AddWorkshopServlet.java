@@ -120,9 +120,6 @@ public class AddWorkshopServlet extends HttpServlet {
             longitude = Double.parseDouble(latLong[1]);
         }
 
-        if (uDAO.retrieveUser(email) != null) {
-            errMsg.add("User exists.");
-        }
 
         if (errMsg.size() == 0) {
             HttpSession session = request.getSession(true);
