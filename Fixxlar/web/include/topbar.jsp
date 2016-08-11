@@ -1,4 +1,4 @@
-
+ii
 <div class="navbar navbar-default navbar-fixed-top navbar-transparent-black mm-fixed-top" role="navigation" id="navbar">
 
 
@@ -351,7 +351,17 @@
         <!-- /Quick Actions -->
 
         <!--Leftbar-->
-        <jsp:include page="leftbar.jsp"/>
+        <%--<jsp:include page="leftbar.jsp"/>--%>
+        
+        <%
+            //if admin, include admin_leftbar
+            if (userType.equals("Workshop")) {
+        %>
+            <%@include file="workshop_leftbar.jsp"%>
+        <% } else { %>
+            <%@include file="admin_leftbar.jsp"%>
+        <% } %>
+                
         <!--End Leftbar-->
 
 

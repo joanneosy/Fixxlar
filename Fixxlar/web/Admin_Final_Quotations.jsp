@@ -21,7 +21,7 @@
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectWorkshop.jsp"%>
+<%@include file="ProtectAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -92,7 +92,7 @@
                                     <div class="tile-body color transparent-black rounded-corners">
 
                                         <!-- cards -->
-                                        <%@include file="include/flipcard.jsp"%>
+                                        <%@include file="include/admin_flipcard.jsp"%>
                                         <!--                                        <div class="row cards">
                                         
                                                                                     <div class="card-container col-lg-2 col-sm-6 col-sm-12">

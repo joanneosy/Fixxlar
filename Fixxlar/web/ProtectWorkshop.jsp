@@ -17,7 +17,7 @@
         response.sendRedirect("Login.jsp");
         return;
     } else if (userType.equals("Admin")) {
-        response.sendRedirect("Admin.jsp");
+        response.sendRedirect("adminDashboard.jsp");
     } else if (userType.equals("Groomer")) {
         response.sendRedirect("Groomer.jsp");
     }

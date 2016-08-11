@@ -70,7 +70,8 @@
             <!-- Make page fluid -->
             <div class="row">
                 <!-- Top and leftbar -->
-                <jsp:include page="include/topbar.jsp"/>
+                <%--<jsp:include page="include/topbar.jsp"/>--%>
+                <%@include file="include/topbar.jsp"%>
                 <!-- Top and leftbar end -->
 
                 <!-- Page content -->

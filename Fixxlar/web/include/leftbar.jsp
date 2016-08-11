@@ -11,29 +11,6 @@
         <a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation <i class="fa fa-angle-up"></i></a>
 
         <ul class="menu"> 
-
-            <!--<li class="dropdown">-->
-<!--                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-list"></i> Profile <b class="fa fa-plus dropdown-plus"></b>
-                </a>-->
-<!--                <ul class="dropdown-menu">
-                    <li>
-                        <a href="Calendar.jsp">
-                            <i class="fa fa-caret-right"></i> Calendar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Inbox.jsp">
-                            <i class="fa fa-caret-right"></i> Inbox
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Personalise.jsp">
-                            <i class="fa fa-caret-right"></i> Personalise
-                        </a>
-                    </li>
-                </ul>-->
-            <!--</li>-->
             <li>
                 <a href="Profile.jsp">
                     <i class="fa fa-list"></i> Profile

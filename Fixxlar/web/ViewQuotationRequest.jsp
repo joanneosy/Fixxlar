@@ -37,7 +37,7 @@
             int staffId = user.getStaffId();
 
             QuotationRequestDAO qrDAO = new QuotationRequestDAO();
-            HashMap<Integer, QuotationRequest> allQuotationRequests = qrDAO.retrieveAllQuotationRequests(staffId, token, 0, 0, "", "requested_datetime", "desc");
+            HashMap<Integer, QuotationRequest> allQuotationRequests = qrDAO.retrieveAllQuotationRequests(staffId, token, 0, 0, "requested_datetime", "desc");
         %>
         <table style="width:100%" border="1">
             <tr>

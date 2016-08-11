@@ -28,8 +28,8 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
 
-                    <jsp:include page="include/topbar.jsp"/>
-
+                    <%--<jsp:include page="include/topbar.jsp"/>--%>
+                    <%@include file="include/topbar.jsp"%> 
                     <!-- page header -->
                     <div class="pageheader">
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Edit Profile</h2>
@@ -48,7 +48,7 @@
                                     <section class="tile color transparent-black">
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>Add</strong> Workshop</h1>
+                                            <h1><strong>Edit</strong> Workshop Profile</h1>
                                         </div>
                                         <%                                            WorkshopDAO wsDAO = new WorkshopDAO();
                                             Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
@@ -74,7 +74,7 @@
                                         %>
                                         <!-- /tile header -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form" action="EditWorkshop">
+                                            <form class="form-horizontal" role="form" action="EditWorkshop" method="POST">
 
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Workshop Name</label>
@@ -84,7 +84,7 @@
 
                                                     <label for="input03" class="col-sm-2 control-label">Contact Number</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control"value="<%=wsContact%>" name="contact">
+                                                        <input type="text" class="form-control" value="<%=wsContact%>" name="contact">
                                                     </div>
                                                 </div>
 

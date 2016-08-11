@@ -17,10 +17,11 @@
         <meta charset="UTF-8" />
         <title>Profile</title>
         <jsp:include page="include/head.jsp"/>
+        <link rel="stylesheet" href="js/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="js/ColVis.css">
+        <link rel="stylesheet" href="js/TableTools.css">
     </head>
-    <link rel="stylesheet" href="js/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="js/ColVis.css">
-    <link rel="stylesheet" href="js/TableTools.css">
+
     <body class="bg-3">
         <!-- Wrap all page content here -->
         <div id="wrap">
@@ -29,8 +30,8 @@
                 <div class="mask"><div id="loader"></div></div>
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-                    <jsp:include page="include/topbar.jsp"/>
-
+                    <%--<jsp:include page="include/topbar.jsp"/>--%>
+                    <%@include file="include/topbar.jsp"%>
                     <!-- page header -->
                     <div class="pageheader">
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Profile Page</h2>

@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joanne
  */
-@WebServlet(name = "AddNormalWorkshopStaffServlet", urlPatterns = {"/AddNormalWorkshopStaff"})
-public class AddNormalWorkshopStaffServlet extends HttpServlet {
+@WebServlet(name = "AddEmployeeServlet", urlPatterns = {"/AddEmployee"})
+public class AddEmployeeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,7 +55,7 @@ public class AddNormalWorkshopStaffServlet extends HttpServlet {
             WebUserDAO uDAO = new WebUserDAO();
             boolean isSuccess = uDAO.addNormalWorkshopStaff(staffId, token, wsStaffName, wsStaffEmail, wsStaffHpNo, wsId, password);
             if (isSuccess) {
-                response.sendRedirect("Workshop.jsp");
+                response.sendRedirect("ViewEmployees.jsp");
             } else {
                 request.setAttribute("workshopId", wsId);    
                 request.setAttribute("errMsg", "Failed");

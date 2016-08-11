@@ -47,7 +47,8 @@
             <div class="row">
 
                 <!-- Top and side nav bar -->
-                <jsp:include page="include/topbar.jsp"/>
+                <%--<jsp:include page="include/topbar.jsp"/>--%>
+                <%@include file="include/topbar.jsp"%>
                 <!-- Top and side nav bar -->
 
 

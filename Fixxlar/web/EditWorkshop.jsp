@@ -104,8 +104,8 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
 
-                    <jsp:include page="include/topbar.jsp"/>
-
+                    <%--<jsp:include page="include/topbar.jsp"/>--%>
+                    <%@include file="include/topbar.jsp"%>
                     <!-- page header -->
                     <div class="pageheader">
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Edit Profile</h2>

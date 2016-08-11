@@ -21,13 +21,13 @@
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectWorkshop.jsp"%>
+<%@include file="ProtectAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8" />
-        <title>Request</title>
+        <title>Service</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -92,7 +92,7 @@
                                     <div class="tile-body color transparent-black rounded-corners">
 
                                         <!-- cards -->
-                                        <%@include file="include/flipcard.jsp"%>
+                                        <%@include file="include/admin_flipcard.jsp"%>
                                         <!--                                        <div class="row cards">
                                         
                                                                                     <div class="card-container col-lg-2 col-sm-6 col-sm-12">
@@ -219,7 +219,7 @@
                                         
                                                                                             </div>
                                                                                             <div class="back">
-                                                                                                <a href="Completed_Service.jsp">
+                                                                                                <a href="Ongoing_Service.jsp">
                                                                                                     <i class="fa fa-bar-chart-o fa-4x"></i>
                                                                                                     <span>More Information</span>
                                                                                                 </a>
@@ -284,7 +284,7 @@
 
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>View Request</strong></h1>
+                                            <h1><strong>View Service</strong></h1>
                                             <!--                                        <div class="search">
                                                                                         <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                                                     </div>-->
@@ -329,26 +329,20 @@
 
                                                     <div class="btn-group btn-group-xs table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager">
-                                                            <!--                                                            <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
-                                                                                                                        <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
-                                                                                                                        <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
-                                                                                                                        <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>-->
-                                                            <li class="active"><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
-                                                            <!--<li><a href="#All" data-toggle="pill">All</a></li>-->
+                                                            <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
+                                                            <!--<li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>-->
+                                                            <!--<li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>-->
                                                         </ul>
                                                     </div>
-                                                    <!--                                                <div class="btn-group mobileOnly" style="float:right">
-                                                                                                        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" id='select'>
+                                                    <!--                                                    <div class="btn-group mobileOnly" style="float:right">
+                                                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id='select'>
                                                                                                             Select <span class="caret"></span>
                                                                                                         </button>
                                                     
-                                                                                                        <ul class="dropdown-menu tabpager" id="requestDropdown" role="menu" >
-                                                                                                            <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
-                                                                                                            <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
-                                                                                                            <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
-                                                                                                            <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
-                                                                                                            <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
-                                                                                                            <li><a href="#All" data-toggle="pill">All</a></li>
+                                                                                                        <ul class="dropdown-menu" role="menu" >
+                                                                                                            <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
+                                                                                                            <li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
+                                                                                                            <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
                                                                                                         </ul>
                                                                                                     </div>-->
                                                 </div>
@@ -360,17 +354,18 @@
 
 
                                         <!-- tile body -->
-                                        <div class="tile-body no-vpadding" id="pageRefresh">
+                                        <div class="tile-body no-vpadding">
                                             <div class="tab-content">
-                                                <%                                                
+                                                <%
                                                     int i = 1;
                                                     qDAO = new QuotationRequestDAO();
                                                     HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "requested_datetime", "desc");
 
-
                                                 %>
 
-                                                <div class="tab-pane fade active in" id="Final_Quote_Accepted" >
+
+
+                                                <div class="tab-pane fade active in" id="New_Service" >
                                                     <div class="table-responsive">
                                                         <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
                                                             <thead>
@@ -381,15 +376,13 @@
                                                                     <th class="sortable">No. Plate</th>
                                                                     <th class="sortable">Car Model</th>
                                                                     <th class="sortable">Services</th>
-                                                                    <!--<th>Attachment</th>-->
-                                                                    <th>Details</th>
+                                                                    <th>More Info</th>
+                                                                    <th>Start Service</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="contents">
                                                                 <!--Loop per new request-->
-                                                                <%                                                                    qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "requested_datetime", "desc");
-                                                                    Iterator it = qList.entrySet().iterator();
-
+                                                                <%                                                                Iterator it = qList.entrySet().iterator();
                                                                     while (it.hasNext()) {
                                                                         Map.Entry pair = (Map.Entry) it.next();
                                                                         QuotationRequest qr = (QuotationRequest) pair.getValue();
@@ -407,7 +400,6 @@
                                                                         int serviceId = qr.getId();
                                                                         String serviceMileage = qr.getMileage();
                                                                         String carPhoto = qr.getPhotos();
-                                                                        int serviceStatus = qr.getOffer().getStatus();
                                                                         String serviceUrgency = qr.getUrgency();
 
                                                                         Customer cust = qr.getCustomer();
@@ -425,6 +417,10 @@
 
                                                                         Offer offer = qr.getOffer();
                                                                         double finalPrice = offer.getFinalPrice();
+                                                                        int serviceStatus = offer.getStatus();
+                                                                        int offerId = offer.getId();
+                                                                        int status = offer.getStatus();
+                                                                        if (status == 5) { //Final quotation accepted with valet
                                                                 %>
                                                                 <tr>
                                                                     <td><% out.print(serviceId);%></td>
@@ -434,30 +430,9 @@
                                                                     <td><% out.print(carModel);%></td>
                                                                     <td><% out.print(serviceName);%></td>
                                                                     <!--Picture Attachment-->
-                                                                    <!--<td class="text-center"><a href="<%// out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
+                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
 
                                                                     <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog-img">
-                                                                    <div class="modal-content">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div> <!--/.modal-content--> 
-                                                                </div> <!--/.modal-dialog--> 
-                                                            </div><!--/.modal--> 
-                                                            <% i++; %>
-                                                            <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
-
-                                                            <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
@@ -465,7 +440,7 @@
                                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                                             <div class="row">
                                                                                 <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">Confirmed Request - <% out.print(custName);%></h4>
+                                                                                    <h4 class="modal-title">New Service - <% out.print(custName);%></h4>
                                                                                 </div>
                                                                                 <div class="col-xs-6 text-right">
                                                                                     <h4 class="modal-title"><%=dateTime%></h4>
@@ -527,12 +502,238 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
+                                                                            <div class="text-left">Agreed Amount: $<%=finalPrice%></div>
                                                                             <div>
-                                                                                <div class="quotation text-left">
-                                                                                    Agreed Amount: $<%=finalPrice%>
+                                                                                <button type="button" class="btn btn-default">Chat</button>
+                                                                            </div>
+                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal -->
+                                                            <% i++; %>
+                                                            <!--Quote-->
+                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Start</span></button></td>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                            <h4 class="modal-title">Service - <% out.print(custName);%></h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div><h4>Estimated Completion(YYYY-MM-DD HH:MM):</h4></div>
+                                                                            <div class="form-group">
+                                                                                <div class='input-group date' id='<%="datetimepicker" + i%>'>
+                                                                                    <form id='<%="dt" + offerId%>' action="AddEstimatedCompletionTime" role="form">
+                                                                                        <input type='text' name="dateTime" class="form-control dt" />
+                                                                                        <input type="hidden" id="<%="hidden" + offerId%>" name="id" value="">
+                                                                                    </form>
+
+                                                                                    <span class="input-group-addon">
+                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                    </span>
                                                                                 </div>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="text-left">Quoted Amount: $<%=finalPrice%></div>
                                                                             <div>
+                                                                                <button type="button" class="btn btn-primary" id='<%="submitdt" + offerId%>' onClick="submitdt(this.id, <%=offerId%>)">Start Service</button>
+                                                                                <button type="button" class="btn btn-default">Chat</button>
+                                                                            </div>
+                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal-dialog -->
+                                                            </div><!-- /.modal -->
+                                                            </tr>
+
+                                                            <%
+                                                                        i++;
+                                                                    }
+                                                                }
+                                                            %>
+
+                                                            </tbody>
+
+                                                        </table>
+                                                    </div>
+                                                </div><!--New-->
+
+
+
+                                                <div class="tab-pane fade" id="Ongoing_Service" >
+                                                    <div class="table-responsive">
+                                                        <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="sortable">ID</th>
+                                                                    <th class="sortable">DateTime</th>
+                                                                    <th class="sortable">Name</th>
+                                                                    <th class="sortable">No. Plate</th>
+                                                                    <th class="sortable">Car Model</th>
+                                                                    <th class="sortable">Services</th>
+                                                                    <th>Attachment</th>
+                                                                    <th>Complete Service</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="contents">
+                                                                <!--Loop per new request-->
+                                                                <%
+                                                                    qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 6, "requested_datetime", "desc");
+                                                                    it = qList.entrySet().iterator();
+                                                                    while (it.hasNext()) {
+                                                                        Map.Entry pair = (Map.Entry) it.next();
+                                                                        QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                                        int id = qr.getId();
+                                                                        Timestamp timeStamp = qr.getRequestedDate();
+                                                                        String dateTime = "01-01-1990 00:00:00";
+                                                                        if (timeStamp != null) {
+                                                                            dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                                        }
+                                                                        String serviceName = qr.getName();
+                                                                        String address = qr.getAddress();
+                                                                        String serviceAmenities = qr.getAmenities();
+                                                                        String serviceDescription = qr.getDescription();
+                                                                        String serviceDetails = qr.getDetails();
+                                                                        int serviceId = qr.getId();
+                                                                        String serviceMileage = qr.getMileage();
+                                                                        String carPhoto = qr.getPhotos();
+                                                                        int serviceStatus = qr.getOffer().getStatus();
+                                                                        String serviceUrgency = qr.getUrgency();
+
+                                                                        Customer cust = qr.getCustomer();
+                                                                        String custName = cust.getName();
+                                                                        String custEmail = cust.getEmail();
+                                                                        String custPhone = cust.getHandphone();
+
+                                                                        Vehicle vehicle = qr.getVehicle();
+                                                                        String carPlate = vehicle.getPlateNumber();
+                                                                        String carModel = vehicle.getModel();
+                                                                        String carMake = vehicle.getMake();
+                                                                        int carYear = vehicle.getYear();
+                                                                        String carColor = vehicle.getColour();
+                                                                        String carControl = vehicle.getControl();
+
+                                                                        Offer offer = qr.getOffer();
+                                                                        double finalPrice = offer.getFinalPrice();
+                                                                        Timestamp dt = offer.getEstCompletionTime();
+                                                                        String estTime = "01-01-1990 00:00:00";
+                                                                        if (timeStamp != null) {
+                                                                            estTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(dt);
+                                                                        }
+                                                                        int offerId = offer.getId();
+
+                                                                %>
+                                                                <tr>
+                                                                    <td><% out.print(serviceId);%></td>
+                                                                    <td><% out.print(dateTime);%></td>
+                                                                    <td><% out.print(custName);%></td>
+                                                                    <td><% out.print(carPlate);%></td>
+                                                                    <td><% out.print(carModel);%></td>
+                                                                    <td><% out.print(serviceName);%></td>
+                                                                    <!--Picture Attachment-->
+                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+
+                                                                    <!-- Modal -->
+                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog-img">
+                                                                    <div class="modal-content">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                        </div>
+                                                                    </div> <!--/.modal-content--> 
+                                                                </div><!-- /.modal-dialog -->
+                                                            </div><!-- /.modal -->
+                                                            <% i++; %>
+                                                            <!--Quote-->
+                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Complete</span></button></td>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                            <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="text-center">
+                                                                                <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                            </div>
+                                                                            <div class="line-across"></div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Name: </b><% out.print(custName);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Date & Time: </b><% out.print(dateTime);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Email: </b><% out.print(custEmail);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Contact No: </b><% out.print(custPhone);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>License Plate: </b><% out.print(carPlate);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Service Request: </b><% out.print(serviceName);%></p>
+                                                                            </div>
+
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Urgency: </b><% out.print(serviceUrgency);%></p>
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="text-left">Quoted Amount: $<%=finalPrice%></div>
+                                                                            <div class="text-left">Est. Completion Time: <%=estTime%></div>
+                                                                            <div>
+                                                                                <form action="CompleteService">
+                                                                                    <input type="hidden" name="id" value="<%=offerId%>"/>
+                                                                                    <input type="submit" class="btn btn-primary" value="Complete Service"></button>
+                                                                                </form>
                                                                                 <button type="button" class="btn btn-default">Chat</button>
                                                                             </div>
                                                                             <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
@@ -551,7 +752,9 @@
 
                                                         </table>
                                                     </div>
-                                                </div><!--Final Quotation Accepted-->
+                                                </div><!--Ongoing Service-->
+
+
 
 
 
@@ -586,17 +789,17 @@
                                                     <!--                                    <small class="inline table-options paging-info">showing 1-3 of 24 items</small>-->
                                                 </div>
 
-                                                <!--                                                <div class="col-sm-4 text-right sm-center" id="paginationTab" style="display:none">
-                                                                                                    <ul class="pagination pagination-xs nomargin pagination-custom">
-                                                                                                        <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                                                                                        <li class="active"><a href="#">1</a></li>
-                                                                                                        <li><a href="#">2</a></li>
-                                                                                                        <li><a href="#">3</a></li>
-                                                                                                        <li><a href="#">4</a></li>
-                                                                                                        <li><a href="#">5</a></li>
-                                                                                                        <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                                                                                    </ul>
-                                                                                                </div>-->
+                                                <div class="col-sm-4 text-right sm-center" id="paginationTab" style="display:none">
+                                                    <ul class="pagination pagination-xs nomargin pagination-custom">
+                                                        <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                                        <li class="active"><a href="#">1</a></li>
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><a href="#">4</a></li>
+                                                        <li><a href="#">5</a></li>
+                                                        <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                                    </ul>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -687,99 +890,163 @@
     <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+    <script type="text/javascript" src="js/moment.js"></script> 
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
 
 
 
     <script>
-        $(function () {
-            // Initialize card flip
-            $('.card.hover').hover(function () {
-                $(this).addClass('flip');
-            }, function () {
-                $(this).removeClass('flip');
-            });
+                                                                                    $(function () {
+                                                                                        // Initialize card flip
+                                                                                        $('.card.hover').hover(function () {
+                                                                                            $(this).addClass('flip');
+                                                                                        }, function () {
+                                                                                            $(this).removeClass('flip');
+                                                                                        });
 
-            //sortable table
-            $('.table.table-sortable th.sortable').click(function () {
-                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                $(this).addClass(o);
-            });
+                                                                                        //         sortable table
+                                                                                        $('.table.table-sortable th.sortable').click(function () {
+                                                                                            var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                                            $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                                            $(this).addClass(o);
+                                                                                        });
 
-            //todo's
-            $('#todolist li label').click(function () {
-                $(this).toggleClass('done');
-            });
-
-
-        });
-
-        $(function () {
-
-            var contentHeight = $('#content').height();
-            var chatInboxHeight = contentHeight - 178;
-            var chatContentHeight = contentHeight - 178 - 200;
-
-            var setChatHeight = function () {
-                $('#chat-inbox').css('height', chatInboxHeight);
-                $('#chat-content').css('height', chatContentHeight);
-            };
-
-            setChatHeight();
-
-            $(window).resize(function () {
-                contentHeight = $('#content').height();
-                chatInboxHeight = contentHeight - 178;
-                chatContentHeight = contentHeight - 178 - 200;
-
-                setChatHeight();
-            });
-
-            $("#chat-inbox").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $("#chat-content").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $('#chat-inbox .chat-actions > span').tooltip({
-                placement: 'top',
-                trigger: 'hover',
-                html: true,
-                container: 'body'
-            });
-
-            $('#initialize-search').click(function () {
-                $('#chat-search').toggleClass('active').focus();
-            });
-
-            $(document).click(function (e) {
-                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                    $('#chat-search').removeClass('active');
-                }
-            });
-
-            $(window).mouseover(function () {
-                $("#chat-inbox").getNiceScroll().resize();
-                $("#chat-content").getNiceScroll().resize();
-            });
-
-        });
+                                                                                        //todo's
+                                                                                        $('#todolist li label').click(function () {
+                                                                                            $(this).toggleClass('done');
+                                                                                        });
 
 
+                                                                                    });
+
+                                                                                    $(function () {
+
+                                                                                        var contentHeight = $('#content').height();
+                                                                                        var chatInboxHeight = contentHeight - 178;
+                                                                                        var chatContentHeight = contentHeight - 178 - 200;
+
+                                                                                        var setChatHeight = function () {
+                                                                                            $('#chat-inbox').css('height', chatInboxHeight);
+                                                                                            $('#chat-content').css('height', chatContentHeight);
+                                                                                        };
+
+                                                                                        setChatHeight();
+
+                                                                                        $(window).resize(function () {
+                                                                                            contentHeight = $('#content').height();
+                                                                                            chatInboxHeight = contentHeight - 178;
+                                                                                            chatContentHeight = contentHeight - 178 - 200;
+
+                                                                                            setChatHeight();
+                                                                                        });
+
+                                                                                        $("#chat-inbox").niceScroll({
+                                                                                            cursorcolor: '#000000',
+                                                                                            zindex: 999999,
+                                                                                            bouncescroll: true,
+                                                                                            cursoropacitymax: 0.4,
+                                                                                            cursorborder: '',
+                                                                                            cursorborderradius: 0,
+                                                                                            cursorwidth: '5px'
+                                                                                        });
+
+                                                                                        $("#chat-content").niceScroll({
+                                                                                            cursorcolor: '#000000',
+                                                                                            zindex: 999999,
+                                                                                            bouncescroll: true,
+                                                                                            cursoropacitymax: 0.4,
+                                                                                            cursorborder: '',
+                                                                                            cursorborderradius: 0,
+                                                                                            cursorwidth: '5px'
+                                                                                        });
+
+                                                                                        $('#chat-inbox .chat-actions > span').tooltip({
+                                                                                            placement: 'top',
+                                                                                            trigger: 'hover',
+                                                                                            html: true,
+                                                                                            container: 'body'
+                                                                                        });
+
+                                                                                        $('#initialize-search').click(function () {
+                                                                                            $('#chat-search').toggleClass('active').focus();
+                                                                                        });
+
+                                                                                        $(document).click(function (e) {
+                                                                                            if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                                                                                                $('#chat-search').removeClass('active');
+                                                                                            }
+                                                                                        });
+
+                                                                                        $(window).mouseover(function () {
+                                                                                            $("#chat-inbox").getNiceScroll().resize();
+                                                                                            $("#chat-content").getNiceScroll().resize();
+                                                                                        });
+
+                                                                                    });
+
+
+    </script>
+    <!--        <script>
+                $(function () {
+    
+                    //check all checkboxes
+                    $('table thead input[type="checkbox"]').change(function () {
+                        $(this).parents('table').find('tbody input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+                    });
+    
+                    // sortable table
+                    $('.table.table-sortable1 th.sortable').click(function () {
+                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                        $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                        $(this).addClass(o);
+                    });
+    
+                    //chosen select input
+                    $(".chosen-select").chosen({disable_search_threshold: 10});
+    
+                    //check toggling
+                    $('.check-toggler').on('click', function () {
+                        $(this).toggleClass('checked');
+                    });
+                });
+    
+            </script>-->
+    <script>
+        //        $(function(){
+        //            $('.table.table-sortable1 th.sortable').click(function () {
+        //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+        //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+        //                $(this).addClass(o);
+        //            });
+        //        });
+
+
+    </script>
+    <script>
+        $(document).ready(function ()
+        {
+            //        $("#myTable1").tablesorter({
+            //            sortList: [[0,0],[1,0]]
+            //        });
+            //        $("#myTable2").tablesorter({
+            //            sortList: [[0,0],[1,0]]
+            //        });
+            //        $("#myTable3").tablesorter({
+            //            sortList: [[0,0],[1,0]]
+            //        });
+            //        $("#myTable4").tablesorter({
+            //            sortList: [[0,0],[1,0]]
+            //        });
+            //        $("#myTable5").tablesorter({
+            //            sortList: [[0,0],[1,0]]
+            //        });
+            //        $("#myTable1").tablesorter();
+            //        $("#myTable2").tablesorter();
+            //        $("#myTable3").tablesorter();
+            //        $("#myTable4").tablesorter();
+            //        $("#myTable5").tablesorter();
+        }
+        );
     </script>
     <script>
         //Script to load tab and data based on the href #
@@ -860,6 +1127,17 @@
 
         })(document);
     </script>
+    <script>
+        //    var acc = document.getElementsByClassName("accordion");
+        //    var i;
+        //
+        //    for (i = 0; i < acc.length; i++) {
+        //        acc[i].onclick = function () {
+        //            this.classList.toggle("active");
+        //            this.nextElementSibling.classList.toggle("show");
+        //        }
+        //    }
+    </script>
     <script type="text/javascript">
         function displaymsg() {
             var msg = '<%=session.getAttribute("isSuccess")%>';
@@ -893,6 +1171,29 @@
 
     </script>
     <script>
+        //    $(document).ready(function () {
+        //        $(".tabpager").tabpager({
+        ////  maximum visible items
+        //            items: 5,
+        //// CSS class for tabbed content
+        //            contents: 'contents',
+        //// transition speed
+        //            time: 300,
+        //// text for previous button
+        //            previous: '&laquo;Prev',
+        //// text for next button
+        //            next: 'Next&raquo;',
+        //// initial tab
+        //            start: 1,
+        //// top or bottom
+        //            position: 'bottom',
+        //// scrollable
+        //            scroll: true
+        //        });
+        //    });
+
+    </script>
+    <script>
         $(document).ready(function () {
             $('#example').DataTable();
             $('#example2').DataTable();
@@ -901,4 +1202,26 @@
             $('#example5').DataTable();
         });
     </script>
+
+    <!--DATETIME-->
+    <script type="text/javascript">
+        $(".date").each(function () {
+            $(this).datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                minDate: new Date()
+            });
+        });
+    </script>
+    <script>
+        function submitdt(btnId, offerId) {
+
+            var formId = btnId.substring(6);
+            var hidden = "hidden" + offerId;
+            document.getElementById(hidden).value = offerId;
+            document.getElementById(formId).submit();
+            console.log(formId);
+            //        $(id).submit();
+        }
+    </script>
+    <!--DATETIME-->
 </html>

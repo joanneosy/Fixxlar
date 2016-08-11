@@ -23,7 +23,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hello workshop</title>
+        <title>Manage Service</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8" />
 
@@ -69,7 +69,8 @@
             <div class="row">
 
                 <!-- Top and side nav bar -->
-                <jsp:include page="include/topbar.jsp"/>
+                <%--<jsp:include page="include/topbar.jsp"/>--%>
+                <%@include file="include/topbar.jsp"%>
                 <!-- Top and side nav bar -->
 
 
