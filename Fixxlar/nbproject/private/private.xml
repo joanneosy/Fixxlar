@@ -5,14 +5,15 @@
         <group>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/entity/WebUser.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/EditWorkshopServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/web/EditStaff.jsp</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/web/EditWorkshop.jsp</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/WebUserDAO.java</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/web/EditNormalWorkshopStaff.jsp</file>
-            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/EditNormalWorkshopStaffServlet.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/web/EditProfile.jsp</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AuthenticateServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/EditStaffServlet.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/WorkshopDAO.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/servlet/AddWorkshopServlet.java</file>
+            <file>file:/Users/smu/Fixxlar/Fixxlar/src/java/dao/QuotationRequestDAO.java</file>
             <file>file:/Users/smu/Fixxlar/Fixxlar/web/ViewEmployees.jsp</file>
         </group>
     </open-files>
