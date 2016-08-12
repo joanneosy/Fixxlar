@@ -10,7 +10,6 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="entity.WebUser"%>
 <%@page import="dao.WebUserDAO"%>
-<%@include file="ProtectWorkshop.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +19,21 @@
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
+
         <%            WebUserDAO webUserDAO = new WebUserDAO();
-            HashMap<Integer, WebUser> webUserMap = webUserDAO.retrieveNormalWorkshopStaff(user.getStaffId(), user.getToken(), user.getShopId());
+            HashMap<Integer, WebUser> webUserMap = new HashMap<>();
+            HashMap<Integer, WebUser> adminUserMap = new HashMap<>();
+            
+            WebUser user = (WebUser) session.getAttribute("loggedInUser");
+            String userType = (String)session.getAttribute("loggedInUserType");
+            if (userType.equals("Admin")) {
+                // Retrieve the master work shop staffs + Fixir staff
+                webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
+                adminUserMap = webUserDAO.retrieveAllAdmin(user.getStaffId(), user.getToken());
+            } else {//workshop 
+
+                webUserMap = webUserDAO.retrieveNormalWorkshopStaff(user.getStaffId(), user.getToken(), user.getShopId());
+            }
         %>
         <!-- Wrap all page content here -->
         <div id="wrap">
@@ -91,6 +103,27 @@
 
 
                                                 <%
+                                                    }
+
+                                                    //print admin staff if webUser is admin
+                                                    if (userType.equals("Admin")) {
+                                                        Iterator it2 = adminUserMap.entrySet().iterator();
+                                                        while (it2.hasNext()) {
+                                                            Map.Entry pair = (Map.Entry) it2.next();
+                                                            WebUser adminStaff = (WebUser) pair.getValue();
+                                                            String email = adminStaff.getEmail();
+                                                            int staffId = adminStaff.getStaffId();
+                                                            String name = adminStaff.getName();
+                                                            String hp = adminStaff.getHandphone();
+                                                %>
+                                                <tr>
+                                                    <td><%=staffId%></td>
+                                                    <td><%=name%></td>
+                                                    <td><%=email%></td>
+                                                    <td><%=hp%></td>
+                                                </tr>
+                                                <%
+                                                        }
                                                     }
 
                                                 %>
