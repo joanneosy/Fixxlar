@@ -24,7 +24,7 @@
             </li>
             
             <li>
-                <a href="ViewEmployees.jsp">
+                <a href="View_Fixir_Employee.jsp">
                     <i class="fa fa-list"></i> Fixir Staff
                 </a>
             </li>

@@ -6,7 +6,6 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@include file="ProtectAdmin.jsp"%>--%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,8 +21,8 @@
                 <div class="mask"><div id="loader"></div></div>
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-                    <%--<jsp:include page="include/topbar.jsp"/>--%>
-                    <%@include file="include/topbar.jsp"%>
+                    <jsp:include page="include/topbar.jsp"/>
+
                     <!-- page header -->
                     <div class="pageheader">
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Add Employee</h2>
@@ -48,7 +47,7 @@
 
                                         <!-- /tile body -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form" action="AddEmployee" method="POST">
+                                            <form class="form-horizontal" role="form" action="AddNormalWorkshopStaff" method="POST">
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Name</label>
                                                     <div class="col-sm-8">
