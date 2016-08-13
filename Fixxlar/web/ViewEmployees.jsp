@@ -28,8 +28,16 @@
             String userType = (String)session.getAttribute("loggedInUserType");
             if (userType.equals("Admin")) {
                 // Retrieve the master work shop staffs + Fixir staff
-                webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
-                adminUserMap = webUserDAO.retrieveAllAdmin(user.getStaffId(), user.getToken());
+                int staffType = user.getStaffType();
+                //only super user and master user can view admin and master staff
+                if (staffType == 1 || staffType == 2) {
+                    webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
+                    adminUserMap = webUserDAO.retrieveAllAdmin(user.getStaffId(), user.getToken());
+                } else {
+                    //normal fixir admin can only view master worshop
+                    webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
+                }
+                
             } else {//workshop 
 
                 webUserMap = webUserDAO.retrieveNormalWorkshopStaff(user.getStaffId(), user.getToken(), user.getShopId());

@@ -36,12 +36,15 @@ public class AddEmployeeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String wsStaffName = request.getParameter("staffName");
-        String wsStaffHpNo = request.getParameter("staffHpNo");
-        String wsStaffEmail = request.getParameter("staffEmail");
+        String staffName = request.getParameter("staffName");
+        String staffHpNo = request.getParameter("staffHpNo");
+        String staffEmail = request.getParameter("staffEmail");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
-
+        //retrieve hidden fields
+        String userType = request.getParameter("userType");
+        int staffType = Integer.parseInt(request.getParameter("staffType"));
+        
         if (!password.equals(confirmPassword)) {
             request.setAttribute("errMsg", "Passwords do not match.");
             RequestDispatcher view = request.getRequestDispatcher("AddNormalWorkshopStaff.jsp");
@@ -53,13 +56,28 @@ public class AddEmployeeServlet extends HttpServlet {
             String token = user.getToken();
             int wsId = user.getShopId();
             WebUserDAO uDAO = new WebUserDAO();
-            boolean isSuccess = uDAO.addNormalWorkshopStaff(staffId, token, wsStaffName, wsStaffEmail, wsStaffHpNo, wsId, password);
-            if (isSuccess) {
+            String errorMsg = "";
+            //check user and stafftype before calling respective add methods
+            //if usertype == admin, check if stafftype for admin is super/master user, then we can add fixir staff. Normal fixir staff 
+            //cannot add other fixir staff
+            //if usertype == workshop, check if stafftype is master workshop or normal employee
+            //if normal employee, it cannot add other employee.  
+            if (userType.equals("Workshop")) {
+                if (staffType == 1) {
+                    errorMsg = uDAO.addNormalWorkshopStaff(staffId, token, staffName, staffEmail, staffHpNo, wsId, password);
+                }
+            }
+            if (userType.equals("Admin")) {
+                if (staffType == 1 || staffType == 2 ) {
+                    errorMsg = uDAO.addNormalAdmin(staffId, token, staffName, staffEmail,staffHpNo, password);
+                }
+            }
+            if (errorMsg.isEmpty()) {
                 response.sendRedirect("ViewEmployees.jsp");
             } else {
                 request.setAttribute("workshopId", wsId);    
-                request.setAttribute("errMsg", "Failed");
-                RequestDispatcher view = request.getRequestDispatcher("AddNormalWorkshopStaff.jsp");
+                request.setAttribute("errMsg", errorMsg);
+                RequestDispatcher view = request.getRequestDispatcher("AddEmployee.jsp");
                 view.forward(request, response);
             }
         }

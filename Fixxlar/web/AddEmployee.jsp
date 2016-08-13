@@ -4,7 +4,8 @@
     Author     : Joshymantou
 --%>
 
-
+<%@page import="entity.WebUser"%>
+<%@page import="dao.WebUserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,12 @@
                 <div class="mask"><div id="loader"></div></div>
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-                    <jsp:include page="include/topbar.jsp"/>
+                    <%
+                        WebUser user = (WebUser) session.getAttribute("loggedInUser");
+                        String userType = (String) session.getAttribute("loggedInUserType");
+                        int staffType = user.getStaffType();
+                    %>
+                    <%@include file="include/topbar.jsp"%>
 
                     <!-- page header -->
                     <div class="pageheader">
@@ -47,21 +53,29 @@
 
                                         <!-- /tile body -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form" action="AddNormalWorkshopStaff" method="POST">
+                                            <%
+                                                String errMsg = (String) request.getAttribute("errMsg");
+                                                if (errMsg != null) {
+                                                    out.println(errMsg + "<br/>");
+                                                }
+                                            %>
+
+
+                                            <form class="form-horizontal" role="form" action="AddEmployee" method="POST">
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Name</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input01" name="staffName">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="input02" class="col-sm-4 control-label">Email</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input02" name="staffEmail">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-4 control-label">Phone Number</label>
                                                     <div class="col-sm-8">
@@ -75,13 +89,27 @@
                                                         <input type="password" class="form-control" id="input04" name="password">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="input05" class="col-sm-4 control-label">Confirm Password</label>
                                                     <div class="col-sm-8">
                                                         <input type="password" class="form-control" id="input05" name="confirmPassword">
                                                     </div>
                                                 </div>
+                                                <!-- Hidden fields for servlet to verify user and staff type -->
+                                                <div class="form-group hidden">
+                                                    
+                                                    <div class="col-sm-8">
+                                                        <input type="hidden" class="form-control" id="input06" name="userType" value="<%= userType%>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group hidden">
+                                                    
+                                                    <div class="col-sm-8">
+                                                        <input type="hidden" class="form-control" id="input06" name="staffType" value="<%= staffType %>">
+                                                    </div>
+                                                </div>
+                                                <!-- hidden fields-->
                                                 
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
@@ -92,6 +120,7 @@
                                                 </div>
                                                 <!--end form footer-->
                                             </form>
+
                                         </div>
                                         <!--end tile body-->
 
@@ -113,7 +142,7 @@
         </div>
         <!--End page wrap-->
         <%-- scripts --%>
-    
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
