@@ -45,7 +45,7 @@ import util.ConnectionManager;
  */
 public class WorkshopDAO {
 
-    private final String USER_AGENT = "Mozilla/5.0";
+    private static final String USER_AGENT = "Mozilla/5.0";
 
     public Workshop retrieveWorkshop(String givenEmail, int staffId, String token) throws UnsupportedEncodingException, IOException {
         Workshop ws = null;
@@ -668,8 +668,44 @@ public class WorkshopDAO {
         return null;
     }
 
-    public static void main(String[] args) throws IOException {
-        String website = "https://www.example.com";
-        System.out.println(website.substring(website.indexOf("/")+2));
+    public static String deleteWorkshop(int staffId, String token, int id) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/workshop/delete_shop";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("id", id + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
     }
+    /*public static void main(String[] args) throws IOException {
+        System.out.println(deleteWorkshop(1, "be2d10f856cece23d68126cebe371907dc66d1eee8bb8f026a49f218d1af08796e54529b8dfe2a6d7494c7254b8da1f89c53e905a17e005225608765e46de12ef4d7eb2f6dfad4d0fdf26d3ecd67daa59ffa1c157df79106de8368e0366725d0815dd446a15b7427779d6b5a8f6eab7cbeeeddb43880804ed6f6d38362f2b2b0f12efa2d9c5b7477edb8de280116bd9aff4477c551bcc20acbec85e8d171e41c6a7270c993db1b568eda33b00ea32c443003cd600336b3d6d57e0e649fe9ed5720fe38635aa9cb82ea890c044f6d8060711515a9a33cb79e97e4716d7d3a7a6bf8d9df59b5ac05162dd719f682501a4b68d7db08a3e0398a07ce6cd60f5179b1d1d5defc2881c80e824338bd3ec56ebbdbd8e2734e1975414c8ff77d37516fcbe424078740c408c29e90634e3174c1fd886463cb1f053f8e686ce5e9be65018f732253ea284fd6b436e1eb8af78cc75194570aede63c0e712f5b3ed9846e09a2b9e5eb7b4cb9dd5d9bb85c9952795e01c449a7b0bb5f2c790e2dea668331a46aa1e920101224e948a46d7276540c856dc7616e5809c01efb3e152d5d882a3610749ac27333a091f3769bc3a3dcba064eefa53bab2a755490e77697538f623fe7d6aabe644dffc4318d7729858cc89f02ade151fb70a2b41b34390e8a4754512161d904a7e53eb08894c9be0ef1106212912ff1edf69fe7fbae05dcc51ccc0614", 5));
+    }*/
 }

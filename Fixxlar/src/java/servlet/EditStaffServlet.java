@@ -69,7 +69,7 @@ public class EditStaffServlet extends HttpServlet {
         } else if (editUserType == 2) {
             //Super Fixir Admin
             if (editUserStaffType == 1) {
-                
+                errMsg = uDAO.updateSuperAdmin(staffId, token, name, email, handphone, id);
             //Master Fixir Admin
             } else if (editUserStaffType == 2) {
                 errMsg = uDAO.updateMasterAdmin(staffId, token, name, email, handphone, id);

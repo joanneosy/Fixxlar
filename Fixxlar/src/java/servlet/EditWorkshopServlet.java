@@ -48,7 +48,12 @@ public class EditWorkshopServlet extends HttpServlet {
         String email = request.getParameter("email");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
-        String website = "https://" + request.getParameter("website");
+        
+        String website = request.getParameter("website");
+        if (!website.contains("http://") && !website.contains("https://")) {
+            website = "http://" + website;
+        }
+        
         String openingHour = request.getParameter("openingHour");
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
