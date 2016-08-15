@@ -128,7 +128,7 @@
                                         </div>
                                         <!-- /tile header -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form" action="EditWorkshop">
+                                            <form class="form-horizontal" role="form" action="EditWorkshop" method="POST">
 
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Workshop Name</label>
@@ -138,7 +138,7 @@
 
                                                     <label for="input03" class="col-sm-2 control-label">Contact Number</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control"value="<%=contact%>" name="contact">
+                                                        <input type="text" class="form-control" value="<%=contact%>" name="contact">
                                                     </div>
                                                 </div>
                                                 s

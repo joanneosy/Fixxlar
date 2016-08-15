@@ -53,9 +53,15 @@
                             <div class="col-md-12">
                                 <!-- tile -->
                                 <section class="tile color transparent-black">
+
+
                                     <div class="tile-body color transparent-black rounded-corners">
+                                        <div class="col-md-12 col-md-offset-10">
+                                            <a href="AddWorkshop.jsp" class="btn btn-primary btn-sm" role="button">Add Workshop</a>
+                                        </div>
                                         <div class="table-responsive">
                                             <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
+
                                                 <thead>
                                                     <tr>
                                                         <th class="sortable">ID</th>
@@ -73,7 +79,7 @@
                                                 <tbody>
                                                     <%
                                                         for (Workshop ws : allWorkshops) {
-                                                            int id = ws.getId();
+                                                            int idToDelete = ws.getId();
                                                             String name = ws.getName();
                                                             String wsAddress = ws.getAddress();
                                                             String address = wsAddress.substring(0, wsAddress.length() - 6);
@@ -84,7 +90,7 @@
                                                             String category = ws.getCategory();
                                                     %>
                                                     <tr>
-                                                        <td><%=id%></td>
+                                                        <td><%=idToDelete%></td>
                                                         <td><%=name%></td>
                                                         <td><%=address%></td>
                                                         <td><%=postal%></td>
@@ -93,8 +99,10 @@
                                                         <td><%=contact2%></td>
                                                         <td><%=category%></td>
                                                         <td>
-                                                            <a href="EditWorkshop.jsp?id=<%=id%>" type="button" class="btn btn-primary btn-xs">Edit</a>
-                                                            <a type="button" class="btn btn-primary btn-xs">Remove</a>
+                                                            <a href="EditWorkshop.jsp?id=<%=idToDelete%>" class="btn btn-primary btn-xs" role="button">Edit</a>
+                                                            <form class="form-horizontal" role="form" action="DeleteWorkshop" method="POST">
+                                                                <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete</button>
+                                                            </form> 
                                                         </td>
                                                     </tr>
 

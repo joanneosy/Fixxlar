@@ -51,6 +51,13 @@
                                         </div>
                                         <!-- /tile header -->
                                         <div class="tile-body">
+                                            <%
+                                                ArrayList<String> errMsg = (ArrayList<String>)request.getAttribute("errMsg");
+                                                for (String error: errMsg) {
+                                                    out.println(error + " ");
+                                                }
+                                                
+                                            %>
                                             <form class="form-horizontal" role="form" action="AddWorkshop" method="POST">
 
                                                 <div class="form-group">
@@ -85,7 +92,7 @@
 
                                                     <label for="input06" class="col-sm-2 control-label">Website</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="" name="website">
+                                                        <input type="text" class="form-control" id="input06" name="website">
                                                     </div>
                                                 </div>
 
@@ -180,7 +187,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
 
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="" name="specialize">
                                                             <%
                                                                 WorkshopDAO wsDAO = new WorkshopDAO();
                                                                 Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
@@ -193,7 +200,7 @@
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="" name="category">
                                                             <option>Maintenence1</option>
                                                             <option>Car Grooming1</option>
                                                             <option>Tyre/Wheel Service1</option>
@@ -205,7 +212,8 @@
                                                     </div>
                                                 </div>  
 
-                                                <%                                                    ArrayList<String> days = new ArrayList<String>();
+                                                <%                                                    
+                                                    ArrayList<String> days = new ArrayList<String>();
                                                     days.add("Monday");
                                                     days.add("Tuesday");
                                                     days.add("Wednesday");
@@ -217,8 +225,8 @@
                                                     days.add("Holiday Eve");
 
                                                     ArrayList<String> paramList = new ArrayList<String>();
-//                                                    paramList.add("mondayOpen");
-//                                                    paramList.add("mondayClose");
+                                                    paramList.add("mondayOpen");
+                                                    paramList.add("mondayClose");
                                                     paramList.add("tuesdayOpen");
                                                     paramList.add("tuesdayClose");
                                                     paramList.add("wednesdayOpen");
@@ -233,8 +241,8 @@
                                                     paramList.add("sundayClose");
                                                     paramList.add("phOpen");
                                                     paramList.add("phClose");
-                                                    paramList.add("phOpen");
-                                                    paramList.add("phClose");
+                                                    paramList.add("phEveOpen");
+                                                    paramList.add("phEveClose");
                                                     int z = 0;
                                                     for (int i = 1; i < days.size(); i++) {
                                                 %>

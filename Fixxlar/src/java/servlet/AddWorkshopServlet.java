@@ -67,6 +67,8 @@ public class AddWorkshopServlet extends HttpServlet {
         String sundayClose = request.getParameter("sundayClose");
         String phOpen = request.getParameter("phOpen");
         String phClose = request.getParameter("phClose");
+        String phEveOpen = request.getParameter("phEveOpen");
+        String phEveClose = request.getParameter("phEveClose");
         
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
@@ -88,7 +90,8 @@ public class AddWorkshopServlet extends HttpServlet {
                 + "Friday-" + fridayOpen + "-" + fridayClose + ","
                 + "Saturday-" + saturdayOpen + "-" + saturdayClose + ","
                 + "Sunday-" + sundayOpen + "-" + sundayClose + ","
-                + "Ph-" + phOpen + "-" + phClose;
+                + "Ph-" + phOpen + "-" + phClose + ","
+                + "PhEve-" + phEveOpen + "-" + phEveClose;
         
         String specialize = "";
         if (specializeArr == null) {

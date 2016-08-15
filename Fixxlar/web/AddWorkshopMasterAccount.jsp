@@ -1,4 +1,5 @@
 
+<%@page import="entity.WebUser"%>
 <%-- 
     Document   : AdminSettings
     Created on : 3 Aug, 2016, 12:26:26 PM
@@ -13,6 +14,11 @@
     <body class="bg-3">
         <!-- Wrap all page content here -->
         <div id="wrap">
+            <%
+                WebUser user = (WebUser) session.getAttribute("loggedInUser");
+                String userType = (String) session.getAttribute("loggedInUserType");
+            %>
+
             <!-- Make page fluid -->
             <div class="row">
                 <div class="mask"><div id="loader"></div></div>
@@ -28,6 +34,7 @@
                     <!-- /page header -->
 
                     <!-- content main container -->
+
                     <div class="main">
                         <div class="row">
                             <!-- col 12 -->

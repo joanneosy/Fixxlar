@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
@@ -23,9 +24,9 @@
         <%            WebUserDAO webUserDAO = new WebUserDAO();
             HashMap<Integer, WebUser> webUserMap = new HashMap<>();
             HashMap<Integer, WebUser> adminUserMap = new HashMap<>();
-            
+
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
-            String userType = (String)session.getAttribute("loggedInUserType");
+            String userType = (String) session.getAttribute("loggedInUserType");
             if (userType.equals("Admin")) {
                 // Retrieve the master work shop staffs + Fixir staff
                 int staffType = user.getStaffType();
@@ -37,7 +38,7 @@
                     //normal fixir admin can only view master worshop
                     webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
                 }
-                
+
             } else {//workshop 
 
                 webUserMap = webUserDAO.retrieveNormalWorkshopStaff(user.getStaffId(), user.getToken(), user.getShopId());
@@ -71,7 +72,8 @@
                                     <div class="tile-header">
                                         <div class="col-md-12">
                                             <div class="col-md-offset-11">
-                                                <a href ="AddEmployee.jsp" type="button" class="btn btn-primary">Add Employee</a>
+                                                <!--<a href ="AddEmployee.jsp" type="button" class="btn btn-primary">Add Employee</a>-->
+                                                <a href="AddEmployee.jsp" class="btn btn-primary btn-xs" role="button">Add Employee</a>
                                             </div>
                                         </div>
                                     </div>
@@ -87,30 +89,50 @@
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
+                                                    <th>Delete Employee</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <%
+                                                   
                                                     Iterator it = webUserMap.entrySet().iterator();
+                                                    //counter for delete id
+                                                    int deleteCounter = 0;
                                                     while (it.hasNext()) {
                                                         Map.Entry pair = (Map.Entry) it.next();
                                                         WebUser staff = (WebUser) pair.getValue();
                                                         String email = staff.getEmail();
-                                                        int staffId = staff.getStaffId();
+                                                        int idToDelete = staff.getStaffId();
                                                         String name = staff.getName();
                                                         String hp = staff.getHandphone();
 
 
                                                 %>
                                                 <tr>
-                                                    <td><%=staffId%></td>
+                                                    <td><%=idToDelete%></td>
                                                     <td><%=name%></td>
                                                     <td><%=email%></td>
-                                                    <td><%=hp%></td>
+                                                    <td><%=hp%></td>                                                
+                                                    <!--<td id="01"> <a href="#" class="btn btn-p1rimary btn-xs" role="button">Delete</a></td>-->
+
+                                                    <!--<td><button onclick="remove(staffId)" class="btn btn-primary btn-xs" role="button">Delete</button></td>-->
+                                                    <td>
+                                                        <% 
+                                                        if (user.getStaffId() != idToDelete) {
+                                                            
+                                                         %>
+                                                        <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
+
+                                                            <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete Employee</button>
+                                                        </form>
+                                                        <% } %>
+                                                        
+                                                    </td>
                                                 </tr>
 
 
                                                 <%
+                                                        deleteCounter++;
                                                     }
 
                                                     //print admin staff if webUser is admin
@@ -120,15 +142,20 @@
                                                             Map.Entry pair = (Map.Entry) it2.next();
                                                             WebUser adminStaff = (WebUser) pair.getValue();
                                                             String email = adminStaff.getEmail();
-                                                            int staffId = adminStaff.getStaffId();
+                                                            int idToDelete = adminStaff.getStaffId();
                                                             String name = adminStaff.getName();
                                                             String hp = adminStaff.getHandphone();
                                                 %>
                                                 <tr>
-                                                    <td><%=staffId%></td>
+                                                    <td><%=idToDelete%></td>
                                                     <td><%=name%></td>
                                                     <td><%=email%></td>
                                                     <td><%=hp%></td>
+                                                    <td>
+                                                        <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
+                                                            <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete Employee</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 <%
                                                         }
@@ -278,6 +305,11 @@
 
             })
 
+            function remove(staffId) {
+                $.post("url", function (data, status) {
+                    alert(data + " " + status);
+                });
+            }
 
         </script>
     </body>
