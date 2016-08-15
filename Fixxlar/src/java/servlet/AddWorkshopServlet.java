@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joanne
  */
-@WebServlet(name = "AddWorkshop", urlPatterns = {"/AddWorkshop"})
+@WebServlet(name = "AddWorkshopServlet", urlPatterns = {"/AddWorkshop"})
 public class AddWorkshopServlet extends HttpServlet {
 
     /**
@@ -49,7 +49,11 @@ public class AddWorkshopServlet extends HttpServlet {
         String email = request.getParameter("email");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
-        String website = "https://" + request.getParameter("website");
+        
+        String website = request.getParameter("website");
+        if (!website.contains("http://") && !website.contains("https://")) {
+            website = "http://" + website;
+        }
         
         String mondayOpen = request.getParameter("mondayOpen");
         String mondayClose = request.getParameter("mondayClose");
