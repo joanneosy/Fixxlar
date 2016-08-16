@@ -50,9 +50,14 @@
                                         <div class="tile-header">
                                             <h1><strong>Edit</strong> Workshop Profile</h1>
                                         </div>
-                                        <%                                            WorkshopDAO wsDAO = new WorkshopDAO();
-                                            Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
+                                        <%
+                                            WorkshopDAO wsDAO = new WorkshopDAO();
+                                            int wsId = user.getShopId();
+                                            int staffId = user.getStaffId();
+                                            String token = user.getToken();
+                                            Workshop ws = wsDAO.retrieveWorkshop(wsId, staffId, token);
                                             String wsName = ws.getName();
+                                            String email = ws.getEmail();
                                             String address = ws.getAddress();
                                             String wsAddress = address.substring(0, address.length() - 6);
                                             String wsPostal = address.substring(address.length() - 6);
@@ -64,7 +69,7 @@
                                             String wsDescription = ws.getDescription();
                                             String wsSpecialize = ws.getSpecialize();
                                             String wsOpenHr = ws.getOpeningHour();
-                                            String[] wsOpeningHr = wsOpenHr.split(",");
+                                            String[] daysAndTime = wsOpenHr.split(",");
                                             String wsCategory = ws.getCategory();
                                             String wsRemark = ws.getRemark();
 
@@ -125,11 +130,6 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-2 control-label">Description</label>
-                                                    <div class="col-sm-4">
-                                                        <textarea class="form-control" rows="3" name="description"><%=wsDescription%></textarea>
-                                                    </div>
-
                                                     <label for="input03" class="col-sm-2 control-label">Location</label>
                                                     <div class="col-sm-4">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="location">
@@ -166,17 +166,30 @@
                                                             %> 
                                                         </select>
                                                     </div>
+                                                    <label for="input03" class="col-sm-2 control-label">Email</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" value="<%=email%>" name="email">
+                                                    </div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label for="input05" class="col-sm-2 control-label">Description</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea class="form-control" rows="5" name="description"><%=wsDescription%></textarea>
+                                                    </div>
+
+                                                </div>
                                                 <div class="form-group">
                                                     <h3><label class="col-sm-6">Operating Hours (Open - Close)</label></h3>
                                                     <h3><label class="col-sm-3">Specialize</label></h3>
                                                     <h3><label class="col-sm-3">Category</label></h3>
                                                 </div>   
 
+                                                <input type="hidden" class="form-control" value="<%=wsId%>" name="id">
                                                 <%                                                    //create hours arraylist
                                                     //iterate through every day for operating hours fields
                                                     ArrayList<String> hours = new ArrayList<String>();
+                                                    hours.add("Closed");
                                                     hours.add("0000");
                                                     hours.add("0100");
                                                     hours.add("0200");
@@ -208,11 +221,15 @@
                                                     <label for="input03" class="col-sm-2 control-label">Monday</label>
                                                     <div class="col-sm-2">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
-                                                            <%                                                                
-                                                            for (int i = 0; i < hours.size(); i++) {
-                                                            %>
-                                                            <option><%= hours.get(i)%></option>
-                                                            <%
+                                                            <%    //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                String[] openCloseTimings = daysAndTime[0].split("-");
+                                                                for (int i = 0; i < hours.size(); i++) {
+                                                                    String hour = hours.get(i);
+                                                                    if (openCloseTimings[1].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
                                                                 }
                                                             %>
                                                         </select>
@@ -221,11 +238,15 @@
                                                     <div class="col-sm-2">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayClose">
                                                             <%
-                                                                for (int j = 0; j < hours.size(); j++) {
-
+                                                                for (int i = 0; i < hours.size(); i++) {
+                                                                    String hour = hours.get(i);
+                                                                    if (openCloseTimings[2].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
+                                                                }
                                                             %>
-                                                            <option><%= hours.get(j)%></option>
-                                                            <% } %>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-3">
@@ -295,7 +316,7 @@
                                                     </div>
                                                 </div>  
 
-                                                <%                                                    
+                                                <%
                                                     ArrayList<String> days = new ArrayList<String>();
                                                     days.add("Monday");
                                                     days.add("Tuesday");
@@ -306,7 +327,6 @@
                                                     days.add("Sunday");
                                                     days.add("Holiday");
                                                     days.add("Holiday Eve");
-
 
                                                     ArrayList<String> paramList = new ArrayList<String>();
 //                                                    paramList.add("mondayOpen");
@@ -325,8 +345,8 @@
                                                     paramList.add("sundayClose");
                                                     paramList.add("phOpen");
                                                     paramList.add("phClose");
-                                                    paramList.add("phOpen");
-                                                    paramList.add("phClose");
+                                                    paramList.add("phEveOpen");
+                                                    paramList.add("phEveClose");
                                                     int z = 0;
                                                     for (int i = 1; i < days.size(); i++) {
                                                 %>
@@ -336,11 +356,16 @@
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
+                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                openCloseTimings = daysAndTime[i].split("-");
                                                                 for (int j = 0; j < hours.size(); j++) {
-
-                                                            %>
-                                                            <option><%=hours.get(j)%></option>
-                                                            <%                                                                } //end hours loop
+                                                                    String hour = hours.get(j);
+                                                                    if (openCloseTimings[1].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
+                                                                }
                                                             %>
                                                         </select>
                                                     </div>
@@ -349,9 +374,12 @@
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
-                                                            %>
-                                                            <option><%=hours.get(j)%></option>
-                                                            <%
+                                                                    String hour = hours.get(j);
+                                                                    if (openCloseTimings[2].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
                                                                 }
                                                             %>
                                                         </select>
@@ -364,7 +392,7 @@
 
                                                 <%
                                                     }//end of for loop for operating days
-%>
+                                                %>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

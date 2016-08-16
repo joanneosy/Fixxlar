@@ -48,12 +48,12 @@ public class EditWorkshopServlet extends HttpServlet {
         String email = request.getParameter("email");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
-        
+
         String website = request.getParameter("website");
         if (!website.contains("http://") && !website.contains("https://")) {
             website = "http://" + website;
         }
-        
+
         String mondayOpen = request.getParameter("mondayOpen");
         String mondayClose = request.getParameter("mondayClose");
         String tuesdayOpen = request.getParameter("tuesdayOpen");
@@ -72,7 +72,7 @@ public class EditWorkshopServlet extends HttpServlet {
         String phClose = request.getParameter("phClose");
         String phEveOpen = request.getParameter("phEveOpen");
         String phEveClose = request.getParameter("phEveClose");
-        
+
         String openingHour = "";
         openingHour = "Monday-" + mondayOpen + "-" + mondayClose + ","
                 + "Tuesday-" + tuesdayOpen + "-" + tuesdayClose + ","
@@ -83,7 +83,7 @@ public class EditWorkshopServlet extends HttpServlet {
                 + "Sunday-" + sundayOpen + "-" + sundayClose + ","
                 + "Ph-" + phOpen + "-" + phClose + ","
                 + "PhEve-" + phEveOpen + "-" + phEveClose;
-        
+        System.out.println(openingHour);
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
         double longitude = 0.0;
@@ -129,10 +129,12 @@ public class EditWorkshopServlet extends HttpServlet {
             latitude = Double.parseDouble(latLong[0]);
             longitude = Double.parseDouble(latLong[1]);
         }
-
+        HttpSession session = request.getSession(true);
+        String userType = (String) session.getAttribute("loggedInUserType");
         if (errMsg.size() == 0) {
-            HttpSession session = request.getSession(true);
+
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
+
             int staffId = user.getStaffId();
             String token = user.getToken();
             ArrayList<String> addErrMsg = wDAO.updateWorkshop(id, email, name, description, website, address + " " + postalCode, openingHour, openingHourFormat,
@@ -143,13 +145,24 @@ public class EditWorkshopServlet extends HttpServlet {
                 view.forward(request, response);
             } else {
                 request.setAttribute("errMsg", addErrMsg);
-                RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + id);
-                view.forward(request, response);
+                if (userType.equals("Admin")) {
+                    RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + id);
+                    view.forward(request, response);
+                } else if (userType.equals("Workshop")) {
+                    RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
+                    view.forward(request, response);
+                }
+
             }
         } else {
             request.setAttribute("errMsg", errMsg);
-            RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + id);
-            view.forward(request, response);
+            if (userType.equals("Admin")) {
+                RequestDispatcher view = request.getRequestDispatcher("EditWorkshop.jsp?id=" + id);
+                view.forward(request, response);
+            } else if (userType.equals("Workshop")) {
+                RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
+                view.forward(request, response);
+            }
         }
     }
 
