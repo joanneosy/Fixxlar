@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Settings</title>
+        <title>Add Workshop</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -176,7 +176,7 @@
 
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayClose">
+                                                        <select class="chosen-select chosen-transparent form-control" id="input12" name="mondayClose">
                                                             <%
                                                                 for (int j = 0; j < hours.size(); j++) {
 
@@ -187,7 +187,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
 
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="" name="specialize">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input13" name="specialize">
                                                             <%
                                                                 WorkshopDAO wsDAO = new WorkshopDAO();
                                                                 Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
@@ -200,7 +200,7 @@
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="" name="category">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input14" name="category">
                                                             <option>Maintenence1</option>
                                                             <option>Car Grooming1</option>
                                                             <option>Tyre/Wheel Service1</option>
@@ -249,7 +249,7 @@
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label"><%=days.get(i)%></label>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="" name="<%=paramList.get(z)%>">
+                                                        <select class="chosen-select chosen-transparent form-control" id="input15" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
@@ -261,7 +261,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="" name="<%=paramList.get(z)%>">
+                                                        <select class="chosen-select chosen-transparent form-control" id="input16" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
@@ -434,7 +434,7 @@
                     $(this).parents(".input-group").css("border-bottom-color", e.color);
                 });
 
-            })
+            });
 
 
         </script>

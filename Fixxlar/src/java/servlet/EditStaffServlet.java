@@ -43,8 +43,6 @@ public class EditStaffServlet extends HttpServlet {
         String handphone = request.getParameter("handphone").trim();
         
         WebUserDAO uDAO = new WebUserDAO();
-        
-        
                 
         HttpSession session = request.getSession(true);
         WebUser loggedInUser = (WebUser) session.getAttribute("loggedInUser");
@@ -81,11 +79,11 @@ public class EditStaffServlet extends HttpServlet {
         
         if (errMsg.equals("")) {
                 request.setAttribute("errMsg", "Employee successfully edited!");
-                RequestDispatcher view = request.getRequestDispatcher("EditStaff.jsp?id=" + id);
+                RequestDispatcher view = request.getRequestDispatcher("ViewEmployees.jsp?id=" + id);
                 view.forward(request, response);
             } else {
                 request.setAttribute("errMsg", errMsg);
-                RequestDispatcher view = request.getRequestDispatcher("EditStaff.jsp?id=" + id);
+                RequestDispatcher view = request.getRequestDispatcher("EditEmployee.jsp?id=" + id);
                 view.forward(request, response);
             }
     }

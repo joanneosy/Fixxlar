@@ -24,9 +24,10 @@
         <%            WebUserDAO webUserDAO = new WebUserDAO();
             HashMap<Integer, WebUser> webUserMap = new HashMap<>();
             HashMap<Integer, WebUser> adminUserMap = new HashMap<>();
-
+            
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             String userType = (String) session.getAttribute("loggedInUserType");
+            int workshopStaffType = user.getStaffType();
             if (userType.equals("Admin")) {
                 // Retrieve the master work shop staffs + Fixir staff
                 int staffType = user.getStaffType();
@@ -71,10 +72,12 @@
                                     <!-- tile header -->
                                     <div class="tile-header">
                                         <div class="col-md-12">
+                                            <% if (workshopStaffType == 1) { %>
                                             <div class="col-md-offset-11">
                                                 <!--<a href ="AddEmployee.jsp" type="button" class="btn btn-primary">Add Employee</a>-->
                                                 <a href="AddEmployee.jsp" class="btn btn-primary btn-xs" role="button">Add Employee</a>
                                             </div>
+                                            <% } %>
                                         </div>
                                     </div>
                                     <!-- /tile header -->
@@ -105,7 +108,7 @@
                                                         int idToDelete = staff.getStaffId();
                                                         String name = staff.getName();
                                                         String hp = staff.getHandphone();
-
+                                                        
 
                                                 %>
                                                 <tr>
@@ -118,18 +121,20 @@
                                                     <!--<td><button onclick="remove(staffId)" class="btn btn-primary btn-xs" role="button">Delete</button></td>-->
                                                     <td>
                                                         <% 
-                                                        if (user.getStaffId() != idToDelete) {
-                                                            
+                                                        //check only master workshop can edit/delete staff
+                                                        
+                                                        if (user.getStaffId() != idToDelete && workshopStaffType == 1) {
+                                                            //if (userType.equals("Admin")) { 
                                                         %>
-                                                        <a href="EditEmployee.jsp?<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit Employee</a>
                                                         
                                                         <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
-
-                                                            <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete Employee</button>
+                                                            <a href="EditEmployee.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
+                                                            <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete</button>
                                                         </form>
-                                                        <% } %>
+                                                        <% }  %>
                                                         
                                                     </td>
+                                                    
                                                 </tr>
 
 
@@ -147,21 +152,38 @@
                                                             int idToDelete = adminStaff.getStaffId();
                                                             String name = adminStaff.getName();
                                                             String hp = adminStaff.getHandphone();
+                                                            
+                                                            int currentStaffType = adminStaff.getStaffType();
                                                 %>
                                                 <tr>
-                                                    <td><%=idToDelete%></td>
+                                                    <td><%=idToDelete%> <%=currentStaffType%></td>
                                                     <td><%=name%></td>
                                                     <td><%=email%></td>
                                                     <td><%=hp%></td>
+                                                    
+                                                        <%
+                                                        int staffType = user.getStaffType(); 
+                                                        //super and master admin can edit/delete normal admin
+                                                        if ((staffType == 1 || staffType == 2)&& currentStaffType ==3) {
+                                                            
+                                                        
+                                                        %>
                                                     <td>
                                                         <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
-                                                            <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete Employee</button>
+                                                            <a href="EditEmployee2.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
+                                                            <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete</button>
                                                         </form>
+                                                    </td>
+                                                        <% } else { %>
+                                                    <td>
+                                                        <button type="button" disabled class="btn btn-primaryb btn-xs">Edit</button>
+                                                        <button type="button" disabled class="btn btn-primaryb btn-xs">Delete </button>
                                                     </td>
                                                 </tr>
                                                 <%
                                                         }
                                                     }
+                                                }
 
                                                 %>
                                             </tbody>
