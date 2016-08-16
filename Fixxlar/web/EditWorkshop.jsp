@@ -141,7 +141,7 @@
                                                         <input type="text" class="form-control" value="<%=contact%>" name="contact">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Alt. Contact</label>
                                                     <div class="col-sm-4">
@@ -177,7 +177,7 @@
                                                         <input type="text" class="form-control" value="<%=remark%>" name="remark">
                                                     </div>
                                                 </div>
-                                                    
+
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Location</label>
                                                     <div class="col-sm-4">
@@ -213,21 +213,21 @@
                                                                     out.println("<option value=\"East\">East</option>");
                                                                 }
                                                             %> 
-                                                            
+
                                                         </select>
                                                     </div> 
-                                                        <label for="input03" class="col-sm-2 control-label">Email</label>
-                                                        <div class="col-sm-4">
-                                                            <input type="text" class="form-control" value="<%=email%>" name="email">
-                                                        </div>
+                                                    <label for="input03" class="col-sm-2 control-label">Email</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" value="<%=email%>" name="email">
+                                                    </div>
                                                 </div>
-                                                            
+
                                                 <div class="form-group">
                                                     <label for="input05" class="col-sm-2 control-label">Description</label>
                                                     <div class="col-sm-10">
                                                         <textarea class="form-control" rows="5" name="description"><%=description%></textarea>
                                                     </div>
-                                                    
+
                                                 </div>
 
                                                 <div class="form-group">
@@ -235,7 +235,7 @@
                                                     <h3><label class="col-sm-3">Specialize</label></h3>
                                                     <h3><label class="col-sm-3">Category</label></h3>
                                                 </div>   
-                                                    
+
                                                 <input type="hidden" class="form-control" value="<%=wsId%>" name="id">
 
                                                 <%                                                    //create hours arraylist
@@ -273,10 +273,16 @@
                                                     <label for="input03" class="col-sm-2 control-label">Monday</label>
                                                     <div class="col-sm-2">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
-                                                            <%                                                                for (int i = 0; i < hours.size(); i++) {
-                                                            %>
-                                                            <option><%= hours.get(i)%></option>
-                                                            <%
+                                                            <%                                             
+                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                String[] openCloseTimings = daysAndTime[0].split("-");
+                                                                for (int i = 0; i < hours.size(); i++) {
+                                                                    String hour = hours.get(i);
+                                                                    if (openCloseTimings[1].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
                                                                 }
                                                             %>
                                                         </select>
@@ -285,11 +291,17 @@
                                                     <div class="col-sm-2">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayClose">
                                                             <%
-                                                                for (int j = 0; j < hours.size(); j++) {
-
+                                                                for (int i = 0; i < hours.size(); i++) {
+                                                                    String hour = hours.get(i);
+                                                                    if (openCloseTimings[2].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
+                                                                }
                                                             %>
-                                                            <option><%= hours.get(j)%></option>
-                                                            <% } %>
+
+
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-3">
@@ -313,37 +325,44 @@
 
                                                             <%
                                                                 String[] categories = category.split(",");
-                                                                if (Arrays.asList(categories).contains("Maintenance")) {
+
+                                                                if (Arrays.asList(categories)
+                                                                        .contains("Maintenance")) {
                                                                     out.println("<option selected>Maintenance</option>");
                                                                 } else {
                                                                     out.println("<option>Maintenance</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Car Grooming")) {
+                                                                if (Arrays.asList(categories)
+                                                                        .contains("Car Grooming")) {
                                                                     out.println("<option selected>Car Grooming1</option>");
                                                                 } else {
                                                                     out.println("<option>Car Grooming</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Tyre/Wheel Service")) {
+                                                                if (Arrays.asList(categories)
+                                                                        .contains("Tyre/Wheel Service")) {
                                                                     out.println("<option selected>Tyre/Wheel Service</option>");
                                                                 } else {
                                                                     out.println("<option>Tyre/Wheel Service</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Air Conditioning")) {
+                                                                if (Arrays.asList(categories)
+                                                                        .contains("Air Conditioning")) {
                                                                     out.println("<option selected>Air Conditioning</option>");
                                                                 } else {
                                                                     out.println("<option>Air Conditioning</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Battery")) {
+                                                                if (Arrays.asList(categories)
+                                                                        .contains("Battery")) {
                                                                     out.println("<option selected>Battery</option>");
                                                                 } else {
                                                                     out.println("<option>Battery</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Others")) {
+                                                                if (Arrays.asList(categories)
+                                                                        .contains("Others")) {
                                                                     out.println("<option selected>Others/option>");
                                                                 } else {
                                                                     out.println("<option>Others</option>");
@@ -360,37 +379,66 @@
                                                 </div>  
 
                                                 <%                                                    ArrayList<String> days = new ArrayList<String>();
-                                                    days.add("Monday");
-                                                    days.add("Tuesday");
-                                                    days.add("Wednesday");
-                                                    days.add("Thursday");
-                                                    days.add("Friday");
-                                                    days.add("Saturday");
-                                                    days.add("Sunday");
-                                                    days.add("Holiday");
-                                                    days.add("Holiday Eve");
+
+                                                    days.add(
+                                                            "Monday");
+                                                    days.add(
+                                                            "Tuesday");
+                                                    days.add(
+                                                            "Wednesday");
+                                                    days.add(
+                                                            "Thursday");
+                                                    days.add(
+                                                            "Friday");
+                                                    days.add(
+                                                            "Saturday");
+                                                    days.add(
+                                                            "Sunday");
+                                                    days.add(
+                                                            "Holiday");
+                                                    days.add(
+                                                            "Holiday Eve");
 
                                                     ArrayList<String> paramList = new ArrayList<String>();
 //                                                    paramList.add("mondayOpen");
 //                                                    paramList.add("mondayClose");
-                                                    paramList.add("tuesdayOpen");
-                                                    paramList.add("tuesdayClose");
-                                                    paramList.add("wednesdayOpen");
-                                                    paramList.add("wednesdayClose");
-                                                    paramList.add("thursdayOpen");
-                                                    paramList.add("thursdayClose");
-                                                    paramList.add("fridayOpen");
-                                                    paramList.add("fridayClose");
-                                                    paramList.add("saturdayOpen");
-                                                    paramList.add("saturdayClose");
-                                                    paramList.add("sundayOpen");
-                                                    paramList.add("sundayClose");
-                                                    paramList.add("phOpen");
-                                                    paramList.add("phClose");
-                                                    paramList.add("phEveOpen");
-                                                    paramList.add("phEveClose");
+
+                                                    paramList.add(
+                                                            "tuesdayOpen");
+                                                    paramList.add(
+                                                            "tuesdayClose");
+                                                    paramList.add(
+                                                            "wednesdayOpen");
+                                                    paramList.add(
+                                                            "wednesdayClose");
+                                                    paramList.add(
+                                                            "thursdayOpen");
+                                                    paramList.add(
+                                                            "thursdayClose");
+                                                    paramList.add(
+                                                            "fridayOpen");
+                                                    paramList.add(
+                                                            "fridayClose");
+                                                    paramList.add(
+                                                            "saturdayOpen");
+                                                    paramList.add(
+                                                            "saturdayClose");
+                                                    paramList.add(
+                                                            "sundayOpen");
+                                                    paramList.add(
+                                                            "sundayClose");
+                                                    paramList.add(
+                                                            "phOpen");
+                                                    paramList.add(
+                                                            "phClose");
+                                                    paramList.add(
+                                                            "phEveOpen");
+                                                    paramList.add(
+                                                            "phEveClose");
                                                     int z = 0;
-                                                    for (int i = 1; i < days.size(); i++) {
+                                                    for (int i = 1;
+                                                            i < days.size();
+                                                            i++) {
                                                 %>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label"><%=days.get(i)%></label>
@@ -398,12 +446,17 @@
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
+                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                openCloseTimings = daysAndTime[i].split("-");
                                                                 for (int j = 0; j < hours.size(); j++) {
-
+                                                                    String hour = hours.get(j);
+                                                                    if (openCloseTimings[1].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
+                                                                }
                                                             %>
-                                                            <option><%=hours.get(j)%></option>
-                                                            <%                                                                } //end hours loop
-%>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -411,9 +464,12 @@
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
-                                                            %>
-                                                            <option><%=hours.get(j)%></option>
-                                                            <%
+                                                                    String hour = hours.get(j);
+                                                                    if (openCloseTimings[2].equals(hour)) {
+                                                                        out.println("<option selected>" + hour + "</option>");
+                                                                    } else {
+                                                                        out.println("<option>" + hour + "</option>");
+                                                                    }
                                                                 }
                                                             %>
                                                         </select>

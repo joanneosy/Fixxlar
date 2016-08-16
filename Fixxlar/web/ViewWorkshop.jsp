@@ -94,10 +94,93 @@
                                                         <td><%=name%></td>
                                                         <td><%=address%></td>
                                                         <td><%=postal%></td>
-                                                        <td><%=openingHr%></td>
+                                                        <td>
+
+                                                            <%
+                                                                ArrayList<String> compiled = new ArrayList<String>();
+                                                                //Monday-0900-1800
+                                                                String[] daysAndTime = openingHr.split(",");
+                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                String[] openCloseTimings = daysAndTime[0].split("-");
+                                                                String dayToCompare = openCloseTimings[0];
+                                                                String openToCompare = openCloseTimings[1];
+                                                                String closeToCompare = openCloseTimings[2];
+                                                                String toAdd = dayToCompare + "-" + dayToCompare + "-" + openToCompare + "-" + closeToCompare;
+
+                                                                for (int i = 1; i < daysAndTime.length - 2; i++) {
+                                                                    openCloseTimings = daysAndTime[i].split("-");
+                                                                    if (openCloseTimings[1].equals(openToCompare) && openCloseTimings[2].equals(closeToCompare)) {
+                                                                        String[] toAddArr = toAdd.split("-");
+                                                                        toAdd = toAddArr[0] + "-" + openCloseTimings[0] + "-" + openToCompare + "-" + closeToCompare;
+                                                                    } else {
+                                                                        String[] toAddArr = toAdd.split("-");
+                                                                        //Closed-Closed
+                                                                        if (toAddArr[2].equals("Closed")) {
+                                                                            //Saturday-Saturday
+                                                                            if (toAddArr[0].equals(toAddArr[1])) {
+                                                                                toAdd = toAddArr[0] + ": Closed";
+                                                                            } else {
+                                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": Closed";
+                                                                            }
+                                                                        } else //Saturday-Saturday
+                                                                         if (toAddArr[0].equals(toAddArr[1])) {
+                                                                                toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                                            } else {
+                                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                                            }
+                                                                        compiled.add(toAdd);
+                                                                        dayToCompare = openCloseTimings[0];
+                                                                        openToCompare = openCloseTimings[1];
+                                                                        closeToCompare = openCloseTimings[2];
+                                                                        toAdd = dayToCompare + "-" + dayToCompare + "-" + openToCompare + "-" + closeToCompare;
+                                                                    }
+
+                                                                    if (i == daysAndTime.length - 3) {
+                                                                        String[] toAddArr = toAdd.split("-");
+                                                                        //Closed-Closed
+                                                                        if (toAddArr[2].equals("Closed")) {
+                                                                            //Saturday-Saturday
+                                                                            if (toAddArr[0].equals(toAddArr[1])) {
+                                                                                toAdd = toAddArr[0] + ": Closed";
+                                                                            } else {
+                                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": Closed";
+                                                                            }
+                                                                        } else //Saturday-Saturday
+                                                                         if (toAddArr[0].equals(toAddArr[1])) {
+                                                                                toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                                            } else {
+                                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                                            }
+                                                                        compiled.add(toAdd);
+                                                                    }
+                                                                }
+
+                                                                for (int i = 7; i < 9; i++) {
+                                                                    openCloseTimings = daysAndTime[i].split("-");
+                                                                    //Closed-Closed
+                                                                    if (openCloseTimings[2].equals("Closed")) {
+                                                                        toAdd = openCloseTimings[0] + ": Closed";
+                                                                    } else {
+                                                                        toAdd = openCloseTimings[0] +  ": " + openCloseTimings[1] + " - " + openCloseTimings[2];
+                                                                    }
+                                                                    compiled.add(toAdd);
+                                                                }
+                                                                for (String x : compiled) {
+                                                                    out.println(x + "<br/>");
+                                                                }
+                                                            %>
+
+                                                        </td>
                                                         <td><%=contact%></td>
                                                         <td><%=contact2%></td>
-                                                        <td><%=category%></td>
+                                                        <td>
+                                                            <%
+                                                                String[] categoryArr = category.split(",");
+                                                                for (String s: categoryArr) {
+                                                                    out.println(s + "<br/>");
+                                                                }
+                                                            %>
+                                                        </td>
                                                         <td>
                                                             <a href="EditWorkshop.jsp?id=<%=idToDelete%>" class="btn btn-primary btn-xs" role="button">Edit</a>
                                                             <form class="form-horizontal" role="form" action="DeleteWorkshop" method="POST">
@@ -160,8 +243,7 @@
                 $("#basicDataTable tbody tr").click(function (e) {
                     if ($(this).hasClass('row_selected')) {
                         $(this).removeClass('row_selected');
-                    }
-                    else {
+                    } else {
                         oTable01.$('tr.row_selected').removeClass('row_selected');
                         $(this).addClass('row_selected');
                     }
@@ -317,13 +399,11 @@
                         restoreRow(oTable02, nEditing);
                         editRow(oTable02, nRow);
                         nEditing = nRow;
-                    }
-                    else if (nEditing == nRow && this.innerHTML == "Save") {
+                    } else if (nEditing == nRow && this.innerHTML == "Save") {
                         /* This row is being edited and should be saved */
                         saveRow(oTable02, nEditing);
                         nEditing = null;
-                    }
-                    else {
+                    } else {
                         /* No row currently being edited */
                         editRow(oTable02, nRow);
                         nEditing = nRow;
@@ -381,8 +461,7 @@
                         var nDetailsRow = oTable03.fnOpen(nTr, fnFormatDetails(oTable03, nTr), 'details');
                         $('div.innerDetails', nDetailsRow).slideDown();
                         anOpen.push(nTr);
-                    }
-                    else {
+                    } else {
                         $('i', this).removeClass().addClass('fa fa-plus');
                         $(this).parent().removeClass('drilled');
                         $('div.innerDetails', $(nTr).next()[0]).slideUp(function () {
