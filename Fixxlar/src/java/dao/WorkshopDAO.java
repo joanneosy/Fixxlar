@@ -560,6 +560,7 @@ public class WorkshopDAO {
         }
 
         String str = result.toString();
+        System.out.print(str);
         JsonParser jsonParser = new JsonParser();
         JsonElement element = jsonParser.parse(str);
         JsonObject jobj = element.getAsJsonObject();

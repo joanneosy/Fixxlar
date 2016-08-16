@@ -89,7 +89,7 @@
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
-                                                    <th>Delete Employee</th>
+                                                    <th>Edit/Delete</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -120,7 +120,9 @@
                                                         <% 
                                                         if (user.getStaffId() != idToDelete) {
                                                             
-                                                         %>
+                                                        %>
+                                                        <a href="EditEmployee.jsp?<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit Employee</a>
+                                                        
                                                         <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
 
                                                             <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete Employee</button>

@@ -54,7 +54,36 @@ public class EditWorkshopServlet extends HttpServlet {
             website = "http://" + website;
         }
         
-        String openingHour = request.getParameter("openingHour");
+        String mondayOpen = request.getParameter("mondayOpen");
+        String mondayClose = request.getParameter("mondayClose");
+        String tuesdayOpen = request.getParameter("tuesdayOpen");
+        String tuesdayClose = request.getParameter("tuesdayClose");
+        String wednesdayOpen = request.getParameter("wednesdayOpen");
+        String wednesdayClose = request.getParameter("wednesdayClose");
+        String thursdayOpen = request.getParameter("thursdayOpen");
+        String thursdayClose = request.getParameter("thursdayClose");
+        String fridayOpen = request.getParameter("fridayOpen");
+        String fridayClose = request.getParameter("fridayClose");
+        String saturdayOpen = request.getParameter("saturdayOpen");
+        String saturdayClose = request.getParameter("saturdayClose");
+        String sundayOpen = request.getParameter("sundayOpen");
+        String sundayClose = request.getParameter("sundayClose");
+        String phOpen = request.getParameter("phOpen");
+        String phClose = request.getParameter("phClose");
+        String phEveOpen = request.getParameter("phEveOpen");
+        String phEveClose = request.getParameter("phEveClose");
+        
+        String openingHour = "";
+        openingHour = "Monday-" + mondayOpen + "-" + mondayClose + ","
+                + "Tuesday-" + tuesdayOpen + "-" + tuesdayClose + ","
+                + "Wednesday-" + wednesdayOpen + "-" + wednesdayClose + ","
+                + "Thursday-" + thursdayOpen + "-" + thursdayClose + ","
+                + "Friday-" + fridayOpen + "-" + fridayClose + ","
+                + "Saturday-" + saturdayOpen + "-" + saturdayClose + ","
+                + "Sunday-" + sundayOpen + "-" + sundayClose + ","
+                + "Ph-" + phOpen + "-" + phClose + ","
+                + "PhEve-" + phEveOpen + "-" + phEveClose;
+        
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
         double longitude = 0.0;

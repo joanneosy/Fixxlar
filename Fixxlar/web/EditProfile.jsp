@@ -127,7 +127,7 @@
                                                 <div class="form-group">
                                                     <label for="input05" class="col-sm-2 control-label">Description</label>
                                                     <div class="col-sm-4">
-                                                        <textarea class="form-control" rows="3" value="<%=wsDescription%>" name="description"></textarea>
+                                                        <textarea class="form-control" rows="3" name="description"><%=wsDescription%></textarea>
                                                     </div>
 
                                                     <label for="input03" class="col-sm-2 control-label">Location</label>
@@ -208,7 +208,8 @@
                                                     <label for="input03" class="col-sm-2 control-label">Monday</label>
                                                     <div class="col-sm-2">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
-                                                            <%                                                                for (int i = 0; i < hours.size(); i++) {
+                                                            <%                                                                
+                                                            for (int i = 0; i < hours.size(); i++) {
                                                             %>
                                                             <option><%= hours.get(i)%></option>
                                                             <%
@@ -229,7 +230,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
 
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input08">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input08" name="specialize">
                                                             <%
                                                                 for (String s : carBrands) {
                                                                     if (Arrays.asList(carBrandsID).contains(s)) {
@@ -244,44 +245,44 @@
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input08">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="input08" name="category">
 
                                                             <%
                                                                 String[] categories = wsCategory.split(",");
-                                                                if (Arrays.asList(categories).contains("Maintenance1")) {
-                                                                    out.println("<option selected>Maintenance1</option>");
+                                                                if (Arrays.asList(categories).contains("Maintenance")) {
+                                                                    out.println("<option selected>Maintenance</option>");
                                                                 } else {
-                                                                    out.println("<option>Maintenance1</option>");
+                                                                    out.println("<option>Maintenance</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Car Grooming1")) {
-                                                                    out.println("<option selected>Car Grooming1</option>");
+                                                                if (Arrays.asList(categories).contains("Car Grooming")) {
+                                                                    out.println("<option selected>Car Grooming</option>");
                                                                 } else {
-                                                                    out.println("<option>Car Grooming1</option>");
+                                                                    out.println("<option>Car Grooming</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Tyre/Wheel Service1")) {
-                                                                    out.println("<option selected>Tyre/Wheel Service1</option>");
+                                                                if (Arrays.asList(categories).contains("Tyre/Wheel Service")) {
+                                                                    out.println("<option selected>Tyre/Wheel Service</option>");
                                                                 } else {
-                                                                    out.println("<option>Tyre/Wheel Service1</option>");
+                                                                    out.println("<option>Tyre/Wheel Service</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Air Conditioning1")) {
-                                                                    out.println("<option selected>Air Conditioning1</option>");
+                                                                if (Arrays.asList(categories).contains("Air Conditioning")) {
+                                                                    out.println("<option selected>Air Conditioning</option>");
                                                                 } else {
-                                                                    out.println("<option>Air Conditioning1</option>");
+                                                                    out.println("<option>Air Conditioning</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Battery1")) {
-                                                                    out.println("<option selected>Battery1</option>");
+                                                                if (Arrays.asList(categories).contains("Battery")) {
+                                                                    out.println("<option selected>Battery</option>");
                                                                 } else {
-                                                                    out.println("<option>Battery1</option>");
+                                                                    out.println("<option>Battery</option>");
                                                                 }
 
-                                                                if (Arrays.asList(categories).contains("Others1")) {
-                                                                    out.println("<option selected>Others1</option>");
+                                                                if (Arrays.asList(categories).contains("Others")) {
+                                                                    out.println("<option selected>Others</option>");
                                                                 } else {
-                                                                    out.println("<option>Others1</option>");
+                                                                    out.println("<option>Others</option>");
                                                                 }
                                                             %>
                                                             <option>Maintenence</option>
@@ -294,7 +295,8 @@
                                                     </div>
                                                 </div>  
 
-                                                <%                                                    ArrayList<String> days = new ArrayList<String>();
+                                                <%                                                    
+                                                    ArrayList<String> days = new ArrayList<String>();
                                                     days.add("Monday");
                                                     days.add("Tuesday");
                                                     days.add("Wednesday");

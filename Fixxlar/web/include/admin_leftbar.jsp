@@ -12,7 +12,7 @@
         <ul class="menu"> 
 
             <li>
-                <a href="Admin.jsp">
+                <a href="Admin_New_Request.jsp">
                     <i class="fa fa-list"></i> Dashboard
                 </a>
             </li>

@@ -4,9 +4,10 @@
     Author     : Joanne
 --%>
 
+<%@page import="entity.WebUser"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectWorkshop.jsp"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -18,12 +19,14 @@
         <h1>Edit Staff</h1>
 
         <%
+            WebUser user = (WebUser) session.getAttribute("loggedInUser");
+          
             String errMsg = (String) request.getAttribute("errMsg");
             if (errMsg != null) {
                 out.println(errMsg);
             }
 
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("idToDelete"));
             WebUserDAO uDAO = new WebUserDAO();
             WebUser userToEdit = uDAO.retrieveUser(user.getStaffId(), user.getToken(), id);
 
