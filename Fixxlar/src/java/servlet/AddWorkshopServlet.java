@@ -49,12 +49,12 @@ public class AddWorkshopServlet extends HttpServlet {
         String email = request.getParameter("email");
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description");
-        
+
         String website = request.getParameter("website");
         if (!website.contains("http://") && !website.contains("https://")) {
             website = "http://" + website;
         }
-        
+
         String mondayOpen = request.getParameter("mondayOpen");
         String mondayClose = request.getParameter("mondayClose");
         String tuesdayOpen = request.getParameter("tuesdayOpen");
@@ -73,7 +73,7 @@ public class AddWorkshopServlet extends HttpServlet {
         String phClose = request.getParameter("phClose");
         String phEveOpen = request.getParameter("phEveOpen");
         String phEveClose = request.getParameter("phEveClose");
-        
+
         String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
         double longitude = 0.0;
@@ -85,7 +85,7 @@ public class AddWorkshopServlet extends HttpServlet {
         String remark = request.getParameter("remark");
 
         ArrayList<String> errMsg = new ArrayList<String>();
-        
+
         String openingHour = "";
         openingHour = "Monday-" + mondayOpen + "-" + mondayClose + ","
                 + "Tuesday-" + tuesdayOpen + "-" + tuesdayClose + ","
@@ -96,7 +96,7 @@ public class AddWorkshopServlet extends HttpServlet {
                 + "Sunday-" + sundayOpen + "-" + sundayClose + ","
                 + "Ph-" + phOpen + "-" + phClose + ","
                 + "PhEve-" + phEveOpen + "-" + phEveClose;
-        
+
         String specialize = "";
         if (specializeArr == null) {
             errMsg.add("No car brands selected.");
@@ -127,7 +127,6 @@ public class AddWorkshopServlet extends HttpServlet {
             longitude = Double.parseDouble(latLong[1]);
         }
 
-
         if (errMsg.size() == 0) {
             HttpSession session = request.getSession(true);
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
@@ -138,16 +137,79 @@ public class AddWorkshopServlet extends HttpServlet {
             if (addErrMsg.size() == 0) {
                 Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());
                 int wsId = ws.getId();
-                request.setAttribute("workshopId", wsId);
-                RequestDispatcher view = request.getRequestDispatcher("AddMasterWorkshopStaff.jsp");
-                view.forward(request, response);
+                session.setAttribute("workshopId", wsId);
+//                RequestDispatcher view = request.getRequestDispatcher("AddMasterWorkshopStaff.jsp");
+//                view.forward(request, response);
+                response.sendRedirect("AddWorkshopMasterAccount.jsp");
             } else {
                 request.setAttribute("errMsg", addErrMsg);
+                request.setAttribute("name", name);
+                request.setAttribute("address", address);
+                request.setAttribute("postalCode", postalCode);
+                request.setAttribute("email", email);
+                request.setAttribute("specializeArr", specializeArr);
+                request.setAttribute("description", description);
+                request.setAttribute("website", website);
+                request.setAttribute("mondayOpen", mondayOpen);
+                request.setAttribute("mondayClose", mondayClose);
+                request.setAttribute("tuesdayOpen", tuesdayOpen);
+                request.setAttribute("tuesdayClose", tuesdayClose);
+                request.setAttribute("wednesdayOpen", wednesdayOpen);
+                request.setAttribute("wednesdayClose", wednesdayClose);
+                request.setAttribute("thursdayOpen", thursdayOpen);
+                request.setAttribute("thursdayClose", thursdayClose);
+                request.setAttribute("fridayOpen", fridayOpen);
+                request.setAttribute("fridayClose", fridayClose);
+                request.setAttribute("saturdayOpen", saturdayOpen);
+                request.setAttribute("saturdayClose", saturdayClose);
+                request.setAttribute("sundayOpen", sundayOpen);
+                request.setAttribute("sundayClose", sundayClose);
+                request.setAttribute("phOpen", phOpen);
+                request.setAttribute("phClose", phClose);
+                request.setAttribute("phEveOpen", phEveOpen);
+                request.setAttribute("phEveClose", phEveClose);
+                request.setAttribute("contact", contact);
+                request.setAttribute("contact2", contact2);
+                request.setAttribute("location", location);
+                request.setAttribute("brandsCarried", brandsCarried);
+                request.setAttribute("categoryArr", categoryArr);
+                request.setAttribute("remark", remark);
                 RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
                 view.forward(request, response);
             }
         } else {
             request.setAttribute("errMsg", errMsg);
+            request.setAttribute("name", name);
+            request.setAttribute("address", address);
+            request.setAttribute("postalCode", postalCode);
+            request.setAttribute("email", email);
+            request.setAttribute("specializeArr", specializeArr);
+            request.setAttribute("description", description);
+            request.setAttribute("website", website);
+            request.setAttribute("mondayOpen", mondayOpen);
+            request.setAttribute("mondayClose", mondayClose);
+            request.setAttribute("tuesdayOpen", tuesdayOpen);
+            request.setAttribute("tuesdayClose", tuesdayClose);
+            request.setAttribute("wednesdayOpen", wednesdayOpen);
+            request.setAttribute("wednesdayClose", wednesdayClose);
+            request.setAttribute("thursdayOpen", thursdayOpen);
+            request.setAttribute("thursdayClose", thursdayClose);
+            request.setAttribute("fridayOpen", fridayOpen);
+            request.setAttribute("fridayClose", fridayClose);
+            request.setAttribute("saturdayOpen", saturdayOpen);
+            request.setAttribute("saturdayClose", saturdayClose);
+            request.setAttribute("sundayOpen", sundayOpen);
+            request.setAttribute("sundayClose", sundayClose);
+            request.setAttribute("phOpen", phOpen);
+            request.setAttribute("phClose", phClose);
+            request.setAttribute("phEveOpen", phEveOpen);
+            request.setAttribute("phEveClose", phEveClose);
+            request.setAttribute("contact", contact);
+            request.setAttribute("contact2", contact2);
+            request.setAttribute("location", location);
+            request.setAttribute("brandsCarried", brandsCarried);
+            request.setAttribute("categoryArr", categoryArr);
+            request.setAttribute("remark", remark);
             RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
             view.forward(request, response);
         }

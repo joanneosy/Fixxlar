@@ -20,7 +20,7 @@ public class Vehicle {
     private String colour;
     private String control;
     
-    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String color, String control) {
+    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control) {
         this.id = id;
         this.make = make;
         this.model = model;
@@ -28,6 +28,7 @@ public class Vehicle {
         this.plateNumber = plateNumber;
         this.customerID = customerID;
         this.colour = colour;
+        this.control = control;
     }
     
     public int getId() {

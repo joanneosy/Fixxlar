@@ -17,6 +17,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="dao.QuotationRequestDAO"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectWorkshop.jsp"%>

@@ -13,55 +13,43 @@
 
             <li>
                 <a href="Admin_New_Request.jsp">
-                    <i class="fa fa-list"></i> Dashboard
+                    <i class="fa fa-tachometer"></i> Dashboard
                 </a>
             </li>
             
             <li>
                 <a href="ViewWorkshop.jsp">
-                    <i class="fa fa-list"></i> Workshops
+                    <i class="fa fa-gear"></i> Workshops
                 </a>
             </li>
             
             <li>
                 <a href="ViewEmployees.jsp">
-                    <i class="fa fa-list"></i> Fixir Staff
+                    <i class="fa fa-user"></i> Fixir Staff
                 </a>
             </li>
             
             <li>
-                <a href="page404.jsp">
-                    <i class="fa fa-list"></i> Fixir App Customers
+                <a href="PageOffline.jsp">
+                    <i class="fa fa-users"></i> Fixir App Customers
                 </a>
             </li>
             
             <li>
-                <a href="ViewQuotationRequest.jsp">
-                    <i class="fa fa-list"></i> Quotations
+                <a href="PageOffline.jsp">
+                    <i class="fa fa-comments"></i> Chat
                 </a>
             </li>
             
             <li>
-                <a href="ManageValet.jsp">
-                    <i class="fa fa-list"></i> Valet
+                <a href="PageOffline.jsp">
+                    <i class="fa fa-shopping-cart"></i> Payment
                 </a>
             </li>
             
             <li>
-                <a href="page404.jsp">
-                    <i class="fa fa-list"></i> Chat
-                </a>
-            </li>
-            
-            <li>
-                <a href="page404.jsp">
-                    <i class="fa fa-list"></i> Payment
-                </a>
-            </li>
-            
-            <li>
-                <a href="page404.jsp">
-                    <i class="fa fa-list"></i> Analytics
+                <a href="PageOffline.jsp">
+                    <i class="fa fa-bar-chart-o"></i> Analytics
                 </a>
             </li>
             

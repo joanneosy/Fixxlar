@@ -4,8 +4,12 @@
     Author     : Joshymantou
 --%>
 
-
+<%@page import="dao.WebUserDAO"%>
+<%@page import="entity.WebUser"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>

@@ -4,8 +4,9 @@
     int newSize = statusSize.get(0);
     int sendFinalSize = statusSize.get(1);
     int finalAcceptSize = statusSize.get(2);
-    int newServiceSize = statusSize.get(2);
-    int ongoingServiceSize = statusSize.get(3);
+    int newServiceSize = statusSize.get(2) - statusSize.get(3);
+    int ongoingServiceSize = statusSize.get(4);
+//    int rejectedSize = statusSize.get(4);
 %>
 <div class="row">
     <div class="col-lg-6 col-sm-18 col-sm-36"><h4>REQUEST</h4></div>
@@ -13,6 +14,7 @@
     <div class="col-lg-2 col-sm-6 col-sm-12">4</div>-->
     <div class="col-lg-4 col-sm-12 col-sm-24"><h4>SERVICE</h4></div>
     <!--<div class="col-lg-2 col-sm-6 col-sm-12"><h4>RATING</h4></div>-->
+    <!--<div class="col-lg-2 col-sm-6 col-sm-12"><h4>REJECTED</h4></div>-->
     
 </div>
 <div class="row cards">
@@ -23,7 +25,7 @@
 
                 <div class="media">        
                     <span class="pull-left">
-                        <i class="fa fa-usd media-object"></i>
+                        <i class="fa fa-list media-object"></i>
                     </span>
 
                     <div class="media-body">
@@ -51,7 +53,7 @@
 
                 <div class="media">                  
                     <span class="pull-left">
-                        <i class="fa fa-usd media-object"></i>
+                        <i class="fa fa-list media-object"></i>
                     </span>
 
                     <div class="media-body">
@@ -78,7 +80,7 @@
 
                 <div class="media">
                     <span class="pull-left">
-                        <i class="fa fa-usd media-object"></i>
+                        <i class="fa fa-list media-object"></i>
                     </span>
 
                     <div class="media-body">
@@ -105,7 +107,7 @@
 
                 <div class="media">
                     <span class="pull-left">
-                        <i class="fa fa-tasks media-object"></i>
+                        <i class="fa fa-gear media-object"></i>
                     </span>
 
                     <div class="media-body">
@@ -132,7 +134,7 @@
 
                 <div class="media">
                     <span class="pull-left">
-                        <i class="fa fa-tasks media-object"></i>
+                        <i class="fa fa-gear media-object"></i>
                     </span>
 
                     <div class="media-body">
@@ -152,6 +154,33 @@
             </div>
         </div>
     </div>
+                    
+<!--    <div class="card-container col-lg-2 col-sm-6 col-sm-12" onclick="location.href='Rejected_Request.jsp'">
+        <div class="card card-redbrown hover">
+            <div class="front">        
+
+                <div class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-trash-o media-object"></i>
+                    </span>
+
+                    <div class="media-body">
+                        Rejected Request
+                        <h2 class="media-heading animate-number" data-value="<%//=rejectedSize%>" data-animation-duration="1500">0</h2>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="back">
+                <a href="Rejected_Request.jsp">
+                    <i class="fa fa-bar-chart-o fa-4x"></i>
+                    <span>More Information</span>
+                </a>
+            </div>
+        </div>
+    </div>-->
 
 <!--    <div class="card-container col-lg-2 col-sm-6 col-xs-12">
         <div class="card1 card-slategray hover">

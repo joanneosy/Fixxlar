@@ -70,11 +70,14 @@ body {
 }
 
 /*DateTimeForm*/
+.date{
+    color: black;
+}
 [class^="tile"][class*="transparent-"] .dt{
     background-color: transparent;
     border: 1px solid #e2e2e2;
     border-radius: 4px;
-    color: black;
+    color: white;
 }
 [class^="tile"][class*="transparent-"] .dt:focus{
     background-color: rgba(255, 235, 59, 0.3);
@@ -115,7 +118,7 @@ ul.inbox {
 }
 
 .navbar-nav.side-nav > li.navigation .menu > li > a {
-    color: black;
+    color: white;
     font-size: 1.2rem;
 }
 
@@ -290,7 +293,40 @@ button.accordion.active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 /*Accordion*/
+/*Modal*/
+.md-modal.md-slategray.colorize-overlay.md-show ~ .md-overlay1 { background: #3f4e62; filter: alpha(opacity=50); opacity: 0.5; }
 
+.md-overlay1 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    opacity: 0;
+    background: rgba(0,0,0,0.8);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay1 {
+    opacity: 1;
+    visibility: visible;
+}
+.md-chat{
+    max-width: none;
+    width: 95%;
+}
+/*Modal*/
+
+/*Chat*/
+.chat-content .chat-list{
+    /*    max-height: 400px;
+        overflow: scroll;*/
+}
+/*Chat*/
 
 /*@media screen and (max-width: 1190px){
     .desktopOnly {

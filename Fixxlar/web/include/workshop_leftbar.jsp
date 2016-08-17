@@ -12,43 +12,21 @@
 
         <ul class="menu"> 
 
-            <!--<li class="dropdown">-->
-<!--                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-list"></i> Profile <b class="fa fa-plus dropdown-plus"></b>
-                </a>-->
-<!--                <ul class="dropdown-menu">
-                    <li>
-                        <a href="Calendar.jsp">
-                            <i class="fa fa-caret-right"></i> Calendar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Inbox.jsp">
-                            <i class="fa fa-caret-right"></i> Inbox
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Personalise.jsp">
-                            <i class="fa fa-caret-right"></i> Personalise
-                        </a>
-                    </li>
-                </ul>-->
-            <!--</li>-->
-            <li>
+<!--            <li>
                 <a href="New_Request.jsp">
-                    <i class="fa fa-list"></i> Dashboard
+                    <i class="fa fa-tachometer"></i> Dashboard
                 </a>
-            </li>
+            </li>-->
             
             <li>
                 <a href="Profile.jsp">
-                    <i class="fa fa-list"></i> Profile
+                    <i class="fa fa-user"></i> Profile
                 </a>
             </li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-pencil"></i> Request <b class="fa fa-plus dropdown-plus"></b>
+                    <i class="fa fa-usd"></i> Request <b class="fa fa-plus dropdown-plus"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
@@ -80,14 +58,14 @@
             </li>
             
             <li>
-                <a href="ViewEmployees.jsp">
-                    <i class="fa fa-pencil"></i> Employees
+                <a href="ManageValet.jsp">
+                    <i class="fa fa-usd"></i> Valet
                 </a>
             </li>
             
             <li>
-                <a href="ManageValet.jsp">
-                    <i class="fa fa-pencil"></i> Valet
+                <a href="ViewEmployees.jsp">
+                    <i class="fa fa-users"></i> Employees
                 </a>
             </li>
             
@@ -96,44 +74,15 @@
                     <i class="fa fa-pencil"></i> Register Stripe Account
                 </a>
             </li>
-            
+
             <li>
-                <a href="Chat.jsp">
-                    <i class="fa fa-pencil"></i> Valet
-                </a>
-            </li>
-<!--            
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-pencil"></i> Manage Service <b class="fa fa-plus dropdown-plus"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="ManageService.jsp#Ongoing_Service">
-                            <i class="fa fa-caret-right"></i> Ongoing Service
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ManageService.jsp#Completed_Service">
-                            <i class="fa fa-caret-right"></i> Completed Service
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ManageService.jsp#All">
-                            <i class="fa fa-caret-right"></i> View All Requests
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            -->
-            <li>
-                <a href="page404.jsp">
-                    <i class="fa fa-tint"></i> Payment
+                <a href="PageOffline.jsp">
+                    <i class="fa fa-shopping-cart"></i> Payment
                 </a>
             </li>
             <li>
-                <a href="page404.jsp">
-                    <i class="fa fa-th"></i> Analytics
+                <a href="PageOffline.jsp">
+                    <i class="fa fa-bar-chart-o"></i> Analytics
                 </a>
             </li>
 

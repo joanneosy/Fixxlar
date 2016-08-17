@@ -19,6 +19,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="dao.QuotationRequestDAO"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectWorkshop.jsp"%>
@@ -37,11 +39,14 @@
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
             QuotationRequestDAO qDAO = new QuotationRequestDAO();
+            int shopID = user.getShopId();
+            String token = user.getToken();
+            int staffID = user.getStaffId();
+            String chatToken = user.getChatToken();
 //            HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
 //            int newSize = statusSize.get(0);
 //            int sendFinalSize = statusSize.get(1);
 //            int finalAcceptSize = statusSize.get(2);
-
 
         %>
 
@@ -93,164 +98,6 @@
 
                                         <!-- cards -->
                                         <%@include file="include/flipcard.jsp"%>
-                                        <!--                                        <div class="row cards">
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-redbrown hover">
-                                                                                            <div class="front"> 
-                                        
-                                                                                                <div class="media">        
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-users media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        New Requests
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=newSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div> 
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="New_Request.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>  
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                        
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-redbrown hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">                  
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-shopping-cart media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Send Final Quote
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=sendFinalSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div> 
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="Send_Final_Quote.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                        
-                                        
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-redbrown hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Final Quote Accepted
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div>
-                                        
-                                        
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="Final_Quote_Accepted.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-greensea hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        New Service
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div>
-                                        
-                                        
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="New_Service.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-greensea hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Completed Service
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div>
-                                        
-                                        
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="Ongoing_Service.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-xs-12">
-                                                                                        <div class="card1 card-slategray hover">
-                                                                                            <div class="front"> 
-                                        
-                                                                                                <div class="media">                   
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-eye media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Average Rating
-                                                                                                        <h2 class="media-heading animate-number" data-value="4.2" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div> 
-                                                                                            </div>
-                                                                                                                                                <div class="back">
-                                                                                                                                                    <a href="#">
-                                                                                                                                                        <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                                                                        <span>Check Summary</span>
-                                                                                                                                                    </a>
-                                                                                                                                                </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>-->
                                         <!-- /cards -->
                                     </div>
                                     <!-- /tile body -->
@@ -356,7 +203,8 @@
                                         <!-- tile body -->
                                         <div class="tile-body no-vpadding">
                                             <div class="tab-content">
-                                                <%
+                                                <%                                                    Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
+                                                    int wsID = ws.getId();
                                                     int i = 1;
                                                     qDAO = new QuotationRequestDAO();
                                                     HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "requested_datetime", "desc");
@@ -376,7 +224,7 @@
                                                                     <th class="sortable">No. Plate</th>
                                                                     <th class="sortable">Car Model</th>
                                                                     <th class="sortable">Services</th>
-                                                                    <th>More Info</th>
+                                                                    <!--<th>More Info</th>-->
                                                                     <th>Start Service</th>
                                                                 </tr>
                                                             </thead>
@@ -406,6 +254,7 @@
                                                                         String custName = cust.getName();
                                                                         String custEmail = cust.getEmail();
                                                                         String custPhone = cust.getHandphone();
+                                                                        int userID = cust.getId();
 
                                                                         Vehicle vehicle = qr.getVehicle();
                                                                         String carPlate = vehicle.getPlateNumber();
@@ -416,7 +265,8 @@
                                                                         String carControl = vehicle.getControl();
 
                                                                         Offer offer = qr.getOffer();
-                                                                        double finalPrice = offer.getFinalPrice();
+                                                                        double afinalPrice = offer.getFinalPrice();
+                                                                        String finalPrice = afinalPrice + "0";
                                                                         int serviceStatus = offer.getStatus();
                                                                         int offerId = offer.getId();
                                                                         int status = offer.getStatus();
@@ -430,90 +280,143 @@
                                                                     <td><% out.print(carModel);%></td>
                                                                     <td><% out.print(serviceName);%></td>
                                                                     <!--Picture Attachment-->
-                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
+                                                                    <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
+                                                                    <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>Start</span></button></td>
                                                                     <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">New Service - <% out.print(custName);%></h4>
-                                                                                </div>
-                                                                                <div class="col-xs-6 text-right">
-                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                </div>
-                                                                            </div>
+                                                            <div class="md-modal md-effect-13 md-slategray colorize-overlay md-chat" id="<% out.print("myModal" + i);%>">
+                                                                <div class="md-content">
+                                                                    <!--<div>-->
+                                                                    <div class="col-xs-6">
+                                                                        <h4 class="modal-title">New Service - <% out.print(custName);%></h4>
+                                                                    </div>
+                                                                    <div class="col-xs-6 text-right">
+                                                                        <h4 class="modal-title"><%=dateTime%></h4>
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                    <!--<div>-->
+                                                                    <div class="col-xs-6">
+                                                                        <div class="col-xs-12">
+                                                                            <h3>Service Details</h3>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <!--                                                                            <div class="text-center">
-                                                                                                                                                            <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                                                                                                        </div>-->
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Service Details</h4>
+                                                                        <div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                                </div>
-
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                            </div>      
+                                                                        </div>
+                                                                        <!--</div>-->
+                                                                        <div>
+                                                                            <div class="col-xs-12">
+                                                                                <h3>Car Details</h3>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
                                                                             </div>
                                                                             <p></p>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-12">
-                                                                                    <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Car Details</h4>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                            </div> 
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="text-left">Agreed Amount: $<%=finalPrice%></div>
-                                                                            <div>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
+                                                                        <div class="col-xs-12">
+                                                                            <!--Agreed Amount: $<%=finalPrice%>-->
+                                                                            <div><h4>Estimated Completion(YYYY-MM-DD HH:MM):</h4></div>
+                                                                            <div class="form-group">
+                                                                                <div class='input-group date' id='<%="datetimepicker" + i%>'>
+                                                                                    <form id='<%="dt" + offerId%>' action="AddEstimatedCompletionTime" role="form">
+                                                                                        <input type='text' name="dateTime" class="form-control dt" />
+                                                                                        <input type="hidden" id="<%="hidden" + offerId%>" name="id" value="">
+                                                                                    </form>
+                                                                                    <span class="input-group-addon">
+                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                    </span>
+                                                                                </div>
                                                                             </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+
+                                                                            <button type="button" class="btn btn-primary" id='<%="submitdt" + offerId%>' onClick="submitdt(this.id, <%=offerId%>)">Start Service</button>
                                                                         </div>
                                                                     </div>
+
+                                                                    <div class="col-xs-6">
+                                                                        <!--                                                                <button type="button" class="btn btn-default">Chat</button>-->
+
+                                                                        <section class="tile transparent">
+
+
+                                                                            <!-- tile header -->
+                                                                            <div class="tile-header color bg-transparent-black-5 rounded-corners">
+                                                                                <!--                                                                        <ul class="chat-nav side-nav inline" id="chatHead">
+                                                                                                                                                            <li><h5><strong><%=custName%></strong></h5></li>
+                                                                                                                                                        </ul>-->
+                                                                                <h5>Chat</h5>
+                                                                                <div class="hidden ct" id=""></div>
+                                                                            </div>
+                                                                            <!-- /tile header -->
+
+
+                                                                            <!-- tile body -->
+                                                                            <div class="tile-body transparent nopadding">
+
+                                                                                <div class="chat-content" id="chat-content">
+
+                                                                                    <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- /tile body -->
+
+
+
+
+                                                                            <!-- tile footer -->
+                                                                            <div class="tile-footer transparent nopadding">
+
+                                                                                <div class="chat-reply" id="chat-reply">
+                                                                                    <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
+                                                                                    <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=serviceId%>" onfocus="clearElement('#msgInput')"></textarea>
+                                                                                    <div class="btn-group btn-group-sm">
+                                                                                        <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
+                                                                                        <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
+                                                                                        <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
+                                                                                        <!--                                                <div class="checkbox check-transparent pull-right">
+                                                                                                                                            <input type="checkbox" value="1" id="send-by-enter">
+                                                                                                                                            <label for="send-by-enter">Press Enter to send</label>
+                                                                                                                                        </div>-->
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <!-- /tile footer -->
+
+
+                                                                        </section>
+                                                                    </div>
+                                                                    <div class="col-xs-12">
+                                                                        <button class="md-close btn btn-default">Close</button>
+                                                                    </div>
+                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                                 </div><!-- /.modal-content -->
                                                             </div><!-- /.modal -->
                                                             <% i++; %>
                                                             <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Start</span></button></td>
+                                                            <!--<td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Start</span></button></td>-->
 
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -556,7 +459,7 @@
                                                                     }
                                                                 }
                                                             %>
-
+                                                            <div class="md-overlay"></div>
                                                             </tbody>
 
                                                         </table>
@@ -892,6 +795,10 @@
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
     <script type="text/javascript" src="js/moment.js"></script> 
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
+    <script type="text/javascript" src="js/classie.js"></script> 
+    <script type="text/javascript" src="js/modalEffects.js"></script> 
+    <script data-require="realtime-framework@2.1.0" data-semver="2.1.0" src="//messaging-public.realtime.co/js/2.1.0/ortc.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script> 
 
 
 
@@ -985,6 +892,22 @@
                                                                                     });
 
 
+    </script>
+    <script>
+        //initialize datepicker
+        $('#datepicker').datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down"
+            }
+        });
+
+        $("#datepicker").on("dp.show", function (e) {
+            var newtop = $('.bootstrap-datetimepicker-widget').position().top - 45;
+            $('.bootstrap-datetimepicker-widget').css('top', newtop + 'px');
+        });
     </script>
     <!--        <script>
                 $(function () {
@@ -1224,4 +1147,110 @@
         }
     </script>
     <!--DATETIME-->
+    <script>
+        function subscribe(requestID, wsID, userID, custName, chatToken, log) {
+//                event.preventDefault();
+            $("#" + log).html("");
+//                $(this).parent().siblings().children().removeClass("active").remove;
+//                $(this).addClass("active").removeClass("unread");
+//                var uid = this.id;
+//                var arr = uid.split("-");
+//                var topicId = arr[0];
+//                var userId = arr[1];
+//                var userName = arr[2];
+//                var shopID = arr[3];
+//                $("#chatHead li h3").html(userName);
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/chat/retrive_chat_history',
+                crossDomain: true,
+                data: {
+                    "type_of_message": "2",
+                    "no_of_message_display": "20",
+                    "driver_id": userID,
+                    "token": "<%=token%>",
+                    "staff_id": "<%=staffID%>",
+                    "service_id": requestID
+                },
+                dataType: 'json',
+                success: function (data) {
+//                        $.each(data.items, function(i,item)){
+//                            console.log(i + ": " + item);
+//                        }
+                    console.log(data);
+                    if (data.is_success == true) {
+                        var msg = data.payload.chat_message;
+                        for (i = msg.length - 1; i >= 0; i--) {
+                            console.log(msg[i].message);
+                            if (msg[i].type == "0") {
+                                var time = msg[i].modified.substring(0, msg[i].modified.lastIndexOf(":"));
+                                $("#" + log).html($("#" + log).html() + '<li class="message sent" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
+                            } else {
+                                $("#" + log).html($("#" + log).html() + '<li class="message receive" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + custName + '</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
+                            }
+                        }
+                        if (msg.length > 0 && msg[0].topic_id != 0) {
+                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
+                        } else {
+                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
+                        }
+                    }
+                    subscribeChat(requestID, wsID, custName, chatToken, log);
+                },
+                error: function () {
+                    alert("fail");
+                }
+            });
+        }
+//            if (sender != "Web") {
+//                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//            } else {
+//                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//
+//            }
+    </script>
+    <script>
+        $(function () {
+            $(".msgInput").keypress(function (e) {
+                if (e.which == 13) {
+                    prepareMsg();
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+    <script>
+//        $(".sendMsg").click(function () {
+//            prepareMsg();
+//        });
+    </script>
+    <script>
+        function prepareMsg() {
+            var ele = $(".md-show").find(".sendMsg");
+            var msgDetails = ele[0].id;
+//            var elem = ele.prevObject[0].context;
+//            var msgDetails = ele[0].id;
+            var detailsArr = msgDetails.split("-");
+            var serviceId = detailsArr[0];
+            var wsName = detailsArr[1];
+            var wsId = detailsArr[2];
+            var staffId = detailsArr[3];
+            var token = detailsArr[4];
+            var firstMsg = true;
+            var topicID = 0;
+            var chatTopic = $(".md-show").find(".chatTopic");
+            topicID = chatTopic[0].id;
+            console.log(topicID);
+            var chat = $(".md-show").find(".chat-list > li");
+            var msg = $(".md-show").find(".msgInput");
+            var msgInput = msg[0].id;
+            if (chat.length > 0) {
+                firstMsg = false;
+//                var topic = chat[0];
+//                topicID = topic.id;
+            }
+            sendMsg(serviceId, wsName, wsId, staffId, token, topicID, firstMsg, msgInput);
+        }
+    </script>
 </html>

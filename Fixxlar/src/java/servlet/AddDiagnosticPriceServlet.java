@@ -51,7 +51,7 @@ public class AddDiagnosticPriceServlet extends HttpServlet {
         boolean isSuccess = qrDAO.addDiagnosticPrice(staffId, token, quotationRequestId, workshopId, price, description);
         //Error message? success message?
         if (isSuccess) {
-            session.setAttribute("isSuccess", "Diagnostic Price: $" + price + " for ID: " + quotationRequestId);
+            session.setAttribute("isSuccess", "Diagnostic Price: $" + price + "0 for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp?id=" + quotationRequestId);
 //            view.forward(request, response);
             response.sendRedirect("New_Request.jsp");

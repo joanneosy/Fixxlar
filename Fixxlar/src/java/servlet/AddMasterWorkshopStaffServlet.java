@@ -43,11 +43,13 @@ public class AddMasterWorkshopStaffServlet extends HttpServlet {
         String wsStaffEmail = request.getParameter("staffEmail");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+        String test = request.getParameter("workshopId");
         int wsId = Integer.parseInt(request.getParameter("workshopId"));
 
         if (!password.equals(confirmPassword)) {
+            request.setAttribute("workshopId", wsId);
             request.setAttribute("errMsg", "Passwords do not match.");
-            RequestDispatcher view = request.getRequestDispatcher("AddMasterWorkshopStaff.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
             view.forward(request, response);
         } else {
             HttpSession session = request.getSession(true);
@@ -63,7 +65,7 @@ public class AddMasterWorkshopStaffServlet extends HttpServlet {
             } else {
                 request.setAttribute("workshopId", wsId);
                 request.setAttribute("errMsg", "Failed");
-                RequestDispatcher view = request.getRequestDispatcher("AddMasterWorkshopStaff.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
                 view.forward(request, response);
             }
         }

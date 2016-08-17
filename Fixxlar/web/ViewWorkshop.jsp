@@ -4,8 +4,8 @@
     Author     : Joshymantou
 --%>
 
-<%@page import="entity.Workshop"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entity.Workshop"%>
 <%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectAdmin.jsp"%>
@@ -82,8 +82,8 @@
                                                             int idToDelete = ws.getId();
                                                             String name = ws.getName();
                                                             String wsAddress = ws.getAddress();
-                                                            String address = wsAddress.substring(0, wsAddress.length() - 6);
-                                                            String postal = wsAddress.substring(wsAddress.length() - 6);
+                                                            String address = wsAddress.substring(0, wsAddress.lastIndexOf(" "));
+                                                            String postal = wsAddress.substring(wsAddress.lastIndexOf(" ") + 1);
                                                             String openingHr = ws.getOpeningHour();
                                                             String contact = ws.getContact();
                                                             String contact2 = ws.getContact2();

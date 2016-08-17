@@ -23,79 +23,6 @@
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
-        <%            int wsId = Integer.parseInt(request.getParameter("id"));
-            WorkshopDAO wDAO = new WorkshopDAO();
-            Workshop ws = wDAO.retrieveWorkshop(wsId, user.getStaffId(), user.getToken());
-            String email = ws.getEmail();
-            if (email.equals("null")) {
-                email = "";
-            }
-            String name = ws.getName();
-            if (name.equals("null")) {
-                name = "";
-            }
-
-            String address = ws.getAddress();
-            String postalCode = "";
-            if (address.equals("null")) {
-                address = "";
-            } else {
-                postalCode = address.substring(address.lastIndexOf(" ") + 1);
-                address = address.substring(0, address.lastIndexOf(" ", address.lastIndexOf(" ") - 1));
-            }
-
-            String website = ws.getWebsite();
-            if (website.equals("null")) {
-                website = "";
-            }
-
-            String description = ws.getDescription();
-            if (description.equals("null")) {
-                description = "";
-            }
-            String openingHour = ws.getOpeningHour();
-            String[] daysAndTime = null;
-
-            if (openingHour.equals("null")) {
-                openingHour = "";
-            } else {
-                //Each string in this format: Monday-0900-1800
-                daysAndTime = openingHour.split(",");
-            }
-            String openingHourFormat = ws.getOpeningHourFormat();
-            if (openingHourFormat.equals("null")) {
-                openingHourFormat = "";
-            }
-            String contact = ws.getContact();
-            if (contact.equals("null")) {
-                contact = "";
-            }
-            String contact2 = ws.getContact2();
-            if (contact2.equals("null")) {
-                contact2 = "";
-            }
-            String location = ws.getLocation();
-            if (location.equals("null")) {
-                location = "";
-            }
-            String brandsCarried = ws.getBrandsCarried();
-            if (brandsCarried.equals("null")) {
-                brandsCarried = "";
-            }
-            String category = ws.getCategory();
-            if (category.equals("null")) {
-                category = "";
-            }
-            String remark = ws.getRemark();
-            if (remark.equals("null")) {
-                remark = "";
-            }
-            int status = ws.getStatus();
-            String[] carBrandsID = ws.getSpecialize().split(",");
-            ArrayList<String> carBrands = wDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
-
-        %>
-
         <!-- Wrap all page content here -->
         <div id="wrap">
             <!-- Make page fluid -->
@@ -115,6 +42,78 @@
 
                     <!-- content main container -->
                     <div class="main">
+                        <%
+                            int wsId = Integer.parseInt(request.getParameter("id"));
+                            Workshop ws = wsDAO.retrieveWorkshop(wsId, user.getStaffId(), user.getToken());
+                            String email = ws.getEmail();
+                            if (email.equals("null")) {
+                                email = "";
+                            }
+                            String name = ws.getName();
+                            if (name.equals("null")) {
+                                name = "";
+                            }
+
+                            String address = ws.getAddress();
+                            String postalCode = "";
+                            if (address.equals("null")) {
+                                address = "";
+                            } else {
+                                postalCode = address.substring(address.lastIndexOf(" ") + 1);
+                                address = address.substring(0, address.lastIndexOf(" "));
+                            }
+
+                            String website = ws.getWebsite();
+                            if (website.equals("null")) {
+                                website = "";
+                            }
+
+                            String description = ws.getDescription();
+                            if (description.equals("null")) {
+                                description = "";
+                            }
+                            String openingHour = ws.getOpeningHour();
+                            String[] daysAndTime = null;
+
+                            if (openingHour.equals("null")) {
+                                openingHour = "";
+                            } else {
+                                //Each string in this format: Monday-0900-1800
+                                daysAndTime = openingHour.split(",");
+                            }
+                            String openingHourFormat = ws.getOpeningHourFormat();
+                            if (openingHourFormat.equals("null")) {
+                                openingHourFormat = "";
+                            }
+                            String contact = ws.getContact();
+                            if (contact.equals("null")) {
+                                contact = "";
+                            }
+                            String contact2 = ws.getContact2();
+                            if (contact2.equals("null")) {
+                                contact2 = "";
+                            }
+                            String location = ws.getLocation();
+                            if (location.equals("null")) {
+                                location = "";
+                            }
+                            String brandsCarried = ws.getBrandsCarried();
+                            if (brandsCarried.equals("null")) {
+                                brandsCarried = "";
+                            }
+                            String category = ws.getCategory();
+                            if (category.equals("null")) {
+                                category = "";
+                            }
+                            String remark = ws.getRemark();
+                            if (remark.equals("null")) {
+                                remark = "";
+                            }
+                            int status = ws.getStatus();
+                            String[] carBrandsID = ws.getSpecialize().split(",");
+                            ArrayList<String> carBrands = wsDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
+
+                        %>
                         <div class="row">
 
                             <!-- col 12 -->
@@ -273,8 +272,7 @@
                                                     <label for="input03" class="col-sm-2 control-label">Monday</label>
                                                     <div class="col-sm-2">
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
-                                                            <%                                             
-                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                            <%                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
                                                                 String[] openCloseTimings = daysAndTime[0].split("-");
                                                                 for (int i = 0; i < hours.size(); i++) {
                                                                     String hour = hours.get(i);
@@ -368,11 +366,6 @@
                                                                     out.println("<option>Others</option>");
                                                                 }
                                                             %>
-                                                            <option>Maintenence</option>
-                                                            <option>Car Grooming</option>
-                                                            <option>Air Conditioning</option>
-                                                            <option>Battery</option>
-                                                            <option>Others</option>
                                                         </select>
 
                                                     </div>
@@ -482,7 +475,7 @@
 
                                                 <%
                                                     }//end of for loop for operating days
-                                                %>
+%>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

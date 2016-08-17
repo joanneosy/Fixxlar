@@ -18,6 +18,8 @@
 <%@page import="entity.QuotationRequest"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.WebUserDAO"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,8 +39,11 @@
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
             QuotationRequestDAO qDAO = new QuotationRequestDAO();
+            int shopID = user.getShopId();
+            String token = user.getToken();
+            int staffID = user.getStaffId();
+            String chatToken = user.getChatToken();
             
-
 
         %>
 
@@ -90,164 +95,6 @@
 
                                         <!-- cards -->
                                         <%@include file="include/flipcard.jsp"%>
-<!--                                        <div class="row cards">
-
-                                            <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                <div class="card card-redbrown hover">
-                                                    <div class="front"> 
-
-                                                        <div class="media">        
-                                                                                                                        <span class="pull-left">
-                                                                                                                            <i class="fa fa-users media-object"></i>
-                                                                                                                        </span>
-
-                                                            <div class="media-body">
-                                                                New Requests
-                                                                <h2 class="media-heading animate-number" data-value="<%//=newSize%>" data-animation-duration="1500">0</h2>
-                                                            </div>
-                                                        </div> 
-
-                                                    </div>
-                                                    <div class="back">
-                                                        <a href="New_Request.jsp">
-                                                            <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                            <span>More Information</span>
-                                                        </a>  
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                <div class="card card-redbrown hover">
-                                                    <div class="front">        
-
-                                                        <div class="media">                  
-                                                                                                                        <span class="pull-left">
-                                                                                                                            <i class="fa fa-shopping-cart media-object"></i>
-                                                                                                                        </span>
-
-                                                            <div class="media-body">
-                                                                Send Final Quote
-                                                                <h2 class="media-heading animate-number" data-value="<%//=sendFinalSize%>" data-animation-duration="1500">0</h2>
-                                                            </div>
-                                                        </div> 
-
-                                                    </div>
-                                                    <div class="back">
-                                                        <a href="Send_Final_Quote.jsp">
-                                                            <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                            <span>More Information</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                <div class="card card-redbrown hover">
-                                                    <div class="front">        
-
-                                                        <div class="media">
-                                                                                                                        <span class="pull-left">
-                                                                                                                            <i class="fa fa-usd media-object"></i>
-                                                                                                                        </span>
-
-                                                            <div class="media-body">
-                                                                Final Quote Accepted
-                                                                <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                    <div class="back">
-                                                        <a href="Final_Quote_Accepted.jsp">
-                                                            <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                            <span>More Information</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                <div class="card card-greensea hover">
-                                                    <div class="front">        
-
-                                                        <div class="media">
-                                                                                                                        <span class="pull-left">
-                                                                                                                            <i class="fa fa-usd media-object"></i>
-                                                                                                                        </span>
-
-                                                            <div class="media-body">
-                                                                New Service
-                                                                <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                    <div class="back">
-                                                        <a href="New_Service.jsp">
-                                                            <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                            <span>More Information</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                <div class="card card-greensea hover">
-                                                    <div class="front">        
-
-                                                        <div class="media">
-                                                                                                                        <span class="pull-left">
-                                                                                                                            <i class="fa fa-usd media-object"></i>
-                                                                                                                        </span>
-
-                                                            <div class="media-body">
-                                                                Completed Service
-                                                                <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                    <div class="back">
-                                                        <a href="Completed_Service.jsp">
-                                                            <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                            <span>More Information</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card-container col-lg-2 col-sm-6 col-xs-12">
-                                                <div class="card1 card-slategray hover">
-                                                    <div class="front"> 
-
-                                                        <div class="media">                   
-                                                                                                                        <span class="pull-left">
-                                                                                                                            <i class="fa fa-eye media-object"></i>
-                                                                                                                        </span>
-
-                                                            <div class="media-body">
-                                                                Average Rating
-                                                                <h2 class="media-heading animate-number" data-value="4.2" data-animation-duration="1500">0</h2>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                                                                        <div class="back">
-                                                                                                            <a href="#">
-                                                                                                                <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                                <span>Check Summary</span>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                </div>
-                                            </div>
-                                        </div>-->
                                         <!-- /cards -->
                                     </div>
                                     <!-- /tile body -->
@@ -297,31 +144,7 @@
                                         <div class="tile-widget bg-transparent-white-2">
                                             <div class="row">
 
-                                                <!--                                            <div class="col-sm-2 col-xs-3">
-                                                                                                <div class="search" id="requestSearch">
-                                                                                                    <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
-                                                                                                </div>
-                                                                                                                                                <div class="input-group table-options">
-                                                                                                                                                    <select class="chosen-select form-control">
-                                                                                                                                                        <option>Bulk Action</option>
-                                                                                                                                                        <option>Delete Selected</option>
-                                                                                                                                                        <option>Copy Selected</option>
-                                                                                                                                                        <option>Archive Selected</option>
-                                                                                                                                                    </select>
-                                                                                                                                                    <span class="input-group-btn">
-                                                                                                                                                        <button class="btn btn-default" type="button">Apply</button>
-                                                                                                                                                    </span>
-                                                                                                                                                </div>
-                                                                                            </div>-->
-
                                                 <div class="col-sm-12 col-xs-12 text-right">
-
-                                                    <!--                                                <div class="btn-group btn-group-xs table-options">
-                                                                                                        <button type="button active" class="btn btn-default" href="#New">New</button>
-                                                                                                        <button type="button" class="btn btn-default" href="#Ongoing">Ongoing</button>
-                                                                                                        <button type="button" class="btn btn-default" href="#Completed">Completed</button>
-                                                                                                        <button type="button" class="btn btn-default" href="#All">All</button>
-                                                                                                    </div>-->
 
 
                                                     <div class="btn-group btn-group-xs table-options desktopOnly">
@@ -353,7 +176,10 @@
                                         <!-- tile body -->
                                         <div class="tile-body no-vpadding">
                                             <div class="tab-content">
-                                                <%
+                                                <%               
+                                                    
+                                                    Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
+                                                    int wsID = ws.getId();
                                                     int i = 1;
                                                     qDAO = new QuotationRequestDAO();
                                                     HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 6, "requested_datetime", "desc");
@@ -371,7 +197,7 @@
                                                                     <th class="sortable">No. Plate</th>
                                                                     <th class="sortable">Car Model</th>
                                                                     <th class="sortable">Services</th>
-                                                                    <th>Attachment</th>
+                                                                    <!--                                                                    <th>Attachment</th>-->
                                                                     <th>Complete Service</th>
                                                                 </tr>
                                                             </thead>
@@ -403,6 +229,7 @@
                                                                         String custName = cust.getName();
                                                                         String custEmail = cust.getEmail();
                                                                         String custPhone = cust.getHandphone();
+                                                                        int userID = cust.getId();
 
                                                                         Vehicle vehicle = qr.getVehicle();
                                                                         String carPlate = vehicle.getPlateNumber();
@@ -413,7 +240,8 @@
                                                                         String carControl = vehicle.getControl();
 
                                                                         Offer offer = qr.getOffer();
-                                                                        double finalPrice = offer.getFinalPrice();
+                                                                        double afinalPrice = offer.getFinalPrice();
+                                                                        String finalPrice = afinalPrice + "0";
                                                                         Timestamp dt = offer.getEstCompletionTime();
                                                                         String estTime = "01-01-1990 00:00:00";
                                                                         if (timeStamp != null) {
@@ -430,7 +258,7 @@
                                                                     <td><% out.print(carModel);%></td>
                                                                     <td><% out.print(serviceName);%></td>
                                                                     <!--Picture Attachment-->
-                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                                    <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
 
                                                                     <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -450,101 +278,131 @@
                                                                     </div> <!--/.modal-content--> 
                                                                 </div><!-- /.modal-dialog -->
                                                             </div><!-- /.modal -->
-                                                            <% i++; %>
+                                                            <% i++;%>
+
                                                             <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Complete</span></button></td>
+                                                            <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>
+
 
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">Ongoing Service - <% out.print(custName);%></h4>
-                                                                                </div>
-                                                                                <div class="col-xs-6 text-right">
-                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="text-center">
-                                                                                <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Service Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                                </div>
+                                                            <div class="md-modal md-effect-13 md-slategray colorize-overlay md-chat" id="<% out.print("myModal" + i);%>">
 
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                                </div>
+                                                                <div class="md-content">
+                                                                    <!--<div>-->
+                                                                    <div class="col-xs-6">
+                                                                        <h4 class="modal-title">Ongoing Service - <% out.print(custName);%></h4>
+                                                                    </div>
+                                                                    <div class="col-xs-6 text-right">
+                                                                        <h4 class="modal-title"><%=dateTime%></h4>
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                    <!--<div>-->
+                                                                    <div class='col-xs-6'>
+
+                                                                        <div class="col-xs-12">
+                                                                            <h3>Service Details</h3>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                            </div>      
+                                                                        </div>
+                                                                        <!--</div>-->
+                                                                        <div>
+                                                                            <div class="col-xs-12">
+                                                                                <h3>Car Details</h3>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
                                                                             </div>
                                                                             <p></p>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-12">
-                                                                                    <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Car Details</h4>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                            </div> 
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="text-left">Quoted Amount: $<%=finalPrice%></div>
-                                                                            <div class="text-left">Est. Completion Time: <%=estTime%></div>
-                                                                            <div>
-                                                                                <form action="CompleteService">
-                                                                                    <input type="hidden" name="id" value="<%=offerId%>"/>
-                                                                                    <input type="submit" class="btn btn-primary" value="Complete Service"></button>
-                                                                                </form>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
-                                                                            </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                        <div class="col-xs-6">
+                                                                            <form action="CompleteService">
+                                                                                <input type="hidden" name="id" value="<%=offerId%>"/>
+                                                                                <input type="submit" class="btn btn-primary" value="Complete Service"></button>
+                                                                            </form>
                                                                         </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <section class="tile transparent">
+                                                                            <!-- tile header -->
+                                                                            <div class="tile-header color bg-transparent-black-5 rounded-corners">
+                                                                                <h5>Chat</h5>
+                                                                                <div class="hidden ct" id=""></div>
+                                                                            </div>
+                                                                            <!-- /tile header -->
+                                                                            <!-- tile body -->
+                                                                            <div class="tile-body transparent nopadding">
+
+                                                                                <div class="chat-content" id="chat-content">
+
+                                                                                    <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- /tile body -->
+
+
+
+
+                                                                            <!-- tile footer -->
+                                                                            <div class="tile-footer transparent nopadding">
+
+                                                                                <div class="chat-reply" id="chat-reply">
+                                                                                    <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
+                                                                                    <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
+                                                                                    <div class="btn-group btn-group-sm">
+                                                                                        <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
+                                                                                        <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
+                                                                                        <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
+                                                                                        <!--                                                <div class="checkbox check-transparent pull-right">
+                                                                                                                                            <input type="checkbox" value="1" id="send-by-enter">
+                                                                                                                                            <label for="send-by-enter">Press Enter to send</label>
+                                                                                                                                        </div>-->
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <!-- /tile footer -->
+
+
+                                                                        </section>
+                                                                    </div>
+                                                                    <div class="col-xs-12">
+                                                                        <button class="md-close btn btn-default">Close</button>
+                                                                    </div>
+                                                                </div> <!--/.modal-content -->
+                                                            </div> <!--/.modal -->
                                                             </tr>
 
                                                             <%
                                                                     i++;
                                                                 }
                                                             %>
-
+                                                            <div class="md-overlay"></div>
                                                             </tbody>
 
                                                         </table>
@@ -562,7 +420,7 @@
                                                                     <th class="sortable">Services</th>
                                                                     <!--<th class="sortable">Email</th>-->
                                                                     <th class="sortable">Phone</th>
-                                                                    <th>Attachment</th>
+                                                                    <!--<th>Attachment</th>-->
                                                                     <th>More Info</th>
                                                                 </tr>
                                                             </thead>
@@ -595,6 +453,7 @@
                                                                         String custName = cust.getName();
                                                                         String custEmail = cust.getEmail();
                                                                         String custPhone = cust.getHandphone();
+                                                                        int userID = cust.getId();
 
                                                                         Vehicle vehicle = qr.getVehicle();
                                                                         String carPlate = vehicle.getPlateNumber();
@@ -616,7 +475,7 @@
                                                                     <td><% out.print(serviceName);%></td>
                                                                     <td><% out.print(custPhone);%></td>
                                                                     <!--Picture Attachment-->
-                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                                    <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
 
                                                                     <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -638,97 +497,80 @@
                                                             </div><!-- /.modal -->
                                                             <% i++; %>
                                                             <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
+                                                            <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>Quote</span></button></td>
 
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">Completed Service - <% out.print(custName);%></h4>
-                                                                                </div>
-                                                                                <div class="col-xs-6 text-right">
-                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="text-center">
-                                                                                <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Service Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                                </div>
+                                                            <div class="md-modal md-effect-13 md-slategray colorize-overlay " id="<% out.print("myModal" + i);%>">
 
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                                </div>
+                                                                <div class="md-content">
+                                                                    <!--<div>-->
+                                                                    <div class="col-xs-6">
+                                                                        <h4 class="modal-title">Completed Service - <% out.print(custName);%></h4>
+                                                                    </div>
+                                                                    <div class="col-xs-6 text-right">
+                                                                        <h4 class="modal-title"><%=dateTime%></h4>
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                    <!--<div>-->
+                                                                    <div class='col-xs-12'>
+
+                                                                        <div class="col-xs-12">
+                                                                            <h3>Service Details</h3>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                            </div>      
+                                                                        </div>
+                                                                        <!--</div>-->
+                                                                        <div>
+                                                                            <div class="col-xs-12">
+                                                                                <h3>Car Details</h3>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
                                                                             </div>
                                                                             <p></p>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-12">
-                                                                                    <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Car Details</h4>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                            </div> 
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
                                                                             </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                                </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <div>
-                                                                                <div class="quotation text-left">
-                                                                                    Agreed Amount: $<%=finalPrice%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
-                                                                            </div>
+                                                                        <div class="col-xs-12">
+                                                                            Agreed Amount: $<%=finalPrice%>
                                                                         </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
+                                                                    </div>
+                                                                    <div class='col-xs-6'></div>
+                                                                    <div class="col-xs-12">
+                                                                        <button class="md-close btn btn-default">Close</button> 
+                                                                    </div>
+
+                                                                </div> <!--/.modal-content -->
+                                                            </div> <!--/.modal -->
                                                             </tr>
 
                                                             <%
                                                                     i++;
                                                                 }
                                                             %>
-
+                                                            <div class="md-overlay1"></div>
                                                             </tbody>
 
                                                         </table>
@@ -870,100 +712,85 @@
     <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+    <script type="text/javascript" src="js/classie.js"></script> 
+    <script type="text/javascript" src="js/modalEffects.js"></script> 
+    <script data-require="realtime-framework@2.1.0" data-semver="2.1.0" src="//messaging-public.realtime.co/js/2.1.0/ortc.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script> 
 
 
 
     <script>
-        $(function () {
-            // Initialize card flip
-            $('.card.hover').hover(function () {
-                $(this).addClass('flip');
-            }, function () {
-                $(this).removeClass('flip');
-            });
+                                                                        $(function () {
+                                                                        // Initialize card flip
+                                                                        $('.card.hover').hover(function () {
+                                                                        $(this).addClass('flip');
+                                                                        }, function () {
+                                                                        $(this).removeClass('flip');
+                                                                        });
+                                                                                //         sortable table
+                                                                                $('.table.table-sortable th.sortable').click(function () {
+                                                                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                                $(this).addClass(o);
+                                                                        });
+                                                                                //todo's
+                                                                                $('#todolist li label').click(function () {
+                                                                        $(this).toggleClass('done');
+                                                                        });
+                                                                        });
+                                                                        $(function () {
 
-            //         sortable table
-            $('.table.table-sortable th.sortable').click(function () {
-                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                $(this).addClass(o);
-            });
-
-            //todo's
-            $('#todolist li label').click(function () {
-                $(this).toggleClass('done');
-            });
-
-
-        });
-
-        $(function () {
-
-            var contentHeight = $('#content').height();
-            var chatInboxHeight = contentHeight - 178;
-            var chatContentHeight = contentHeight - 178 - 200;
-
-            var setChatHeight = function () {
-                $('#chat-inbox').css('height', chatInboxHeight);
-                $('#chat-content').css('height', chatContentHeight);
-            };
-
-            setChatHeight();
-
-            $(window).resize(function () {
-                contentHeight = $('#content').height();
-                chatInboxHeight = contentHeight - 178;
-                chatContentHeight = contentHeight - 178 - 200;
-
-                setChatHeight();
-            });
-
-            $("#chat-inbox").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $("#chat-content").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $('#chat-inbox .chat-actions > span').tooltip({
-                placement: 'top',
-                trigger: 'hover',
-                html: true,
-                container: 'body'
-            });
-
-            $('#initialize-search').click(function () {
-                $('#chat-search').toggleClass('active').focus();
-            });
-
-            $(document).click(function (e) {
-                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                    $('#chat-search').removeClass('active');
-                }
-            });
-
-            $(window).mouseover(function () {
-                $("#chat-inbox").getNiceScroll().resize();
-                $("#chat-content").getNiceScroll().resize();
-            });
-
-        });
-
-
-    </script>
+                                                                        var contentHeight = $('#content').height();
+                                                                                var chatInboxHeight = contentHeight - 178;
+                                                                                var chatContentHeight = contentHeight - 178 - 200;
+                                                                                var setChatHeight = function () {
+                                                                                $('#chat-inbox').css('height', chatInboxHeight);
+                                                                                        $('#chat-content').css('height', chatContentHeight);
+                                                                                };
+                                                                                setChatHeight();
+                                                                                $(window).resize(function () {
+                                                                        contentHeight = $('#content').height();
+                                                                                chatInboxHeight = contentHeight - 178;
+                                                                                chatContentHeight = contentHeight - 178 - 200;
+                                                                                setChatHeight();
+                                                                        });
+                                                                                $("#chat-inbox").niceScroll({
+                                                                        cursorcolor: '#000000',
+                                                                                zindex: 999999,
+                                                                                bouncescroll: true,
+                                                                                cursoropacitymax: 0.4,
+                                                                                cursorborder: '',
+                                                                                cursorborderradius: 0,
+                                                                                cursorwidth: '5px'
+                                                                        });
+                                                                                $("#chat-content").niceScroll({
+                                                                        cursorcolor: '#000000',
+                                                                                zindex: 999999,
+                                                                                bouncescroll: true,
+                                                                                cursoropacitymax: 0.4,
+                                                                                cursorborder: '',
+                                                                                cursorborderradius: 0,
+                                                                                cursorwidth: '5px'
+                                                                        });
+                                                                                $('#chat-inbox .chat-actions > span').tooltip({
+                                                                        placement: 'top',
+                                                                                trigger: 'hover',
+                                                                                html: true,
+                                                                                container: 'body'
+                                                                        });
+                                                                                $('#initialize-search').click(function () {
+                                                                        $('#chat-search').toggleClass('active').focus();
+                                                                        });
+                                                                                $(document).click(function (e) {
+                                                                        if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                                                                        $('#chat-search').removeClass('active');
+                                                                        }
+                                                                        });
+                                                                                $(window).mouseover(function () {
+                                                                        $("#chat-inbox").getNiceScroll().resize();
+                                                                                $("#chat-content").getNiceScroll().resize();
+                                                                        });
+                                                                        });</script>
     <!--        <script>
                 $(function () {
     
@@ -990,142 +817,128 @@
     
             </script>-->
     <script>
-        //        $(function(){
-        //            $('.table.table-sortable1 th.sortable').click(function () {
-        //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-        //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-        //                $(this).addClass(o);
-        //            });
-        //        });
+                //        $(function(){
+                //            $('.table.table-sortable1 th.sortable').click(function () {
+                //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                //                $(this).addClass(o);
+                //            });
+                //        });
 
 
     </script>
     <script>
-        $(document).ready(function ()
+                $(document).ready(function ()
         {
-            //        $("#myTable1").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable2").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable3").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable4").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable5").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable1").tablesorter();
-            //        $("#myTable2").tablesorter();
-            //        $("#myTable3").tablesorter();
-            //        $("#myTable4").tablesorter();
-            //        $("#myTable5").tablesorter();
+        //        $("#myTable1").tablesorter({
+        //            sortList: [[0,0],[1,0]]
+        //        });
+        //        $("#myTable2").tablesorter({
+        //            sortList: [[0,0],[1,0]]
+        //        });
+        //        $("#myTable3").tablesorter({
+        //            sortList: [[0,0],[1,0]]
+        //        });
+        //        $("#myTable4").tablesorter({
+        //            sortList: [[0,0],[1,0]]
+        //        });
+        //        $("#myTable5").tablesorter({
+        //            sortList: [[0,0],[1,0]]
+        //        });
+        //        $("#myTable1").tablesorter();
+        //        $("#myTable2").tablesorter();
+        //        $("#myTable3").tablesorter();
+        //        $("#myTable4").tablesorter();
+        //        $("#myTable5").tablesorter();
         }
-        );
-    </script>
-    <script>
-        //Script to load tab and data based on the href #
-        $(window).load(function () {
-            var url = document.URL;
-            if (url.includes('#')) {
-                url = url.substring(url.indexOf('#'));
+        );</script>
+    <script>         //Script to load tab and data based on the href #
+                $(window).load(function () {
+        var url = document.URL;
+                if (url.includes('#')) {
+        url = url.substring(url.indexOf('#'));
                 console.log(url);
-            }
-            $('.nav-pills li a').each(function () {
-                var link = $(this).attr("href");
+        }
+        $('.nav-pills li a').each(function () {
+        var link = $(this).attr("href");
                 console.log(link);
                 if (link === url) {
-                    $(this).parent().siblings().removeClass('active');
-                    $(this).parent().addClass('active');
-                }
-            });
-            url = url.substring(1);
-            console.log(url);
-
-            $(".tab-pane").each(function () {
-                var tab = $(this).attr('id');
+        $(this).parent().siblings().removeClass('active');
+                $(this).parent().addClass('active');
+        }
+        });
+                url = url.substring(1);
+                console.log(url);
+                $(".tab-pane").each(function () {
+        var tab = $(this).attr('id');
                 if (tab === url) {
-                    $(this).siblings().removeClass('active in');
-                    $(this).addClass('active in');
-                }
-            });
+        $(this).siblings().removeClass('active in');
+                $(this).addClass('active in');
+        }
         });
-
-
-    </script>
+        });</script>
     <script>
-        $('.dropdown-menu li').on('click', function () {
-            $(this).siblings().removeClass('active');
-            var link = $(this).text();
-            document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
-        });
-
-    </script>
+                $('.dropdown-menu li').on('click', function () {
+        $(this).siblings().removeClass('active');
+                var link = $(this).text();
+                document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
+        });</script>
     <script>
-        (function (document) {
-            'use strict';
+                (function (document) {
+                'use strict';
+                        var LightTableFilter = (function (Arr) {
 
-            var LightTableFilter = (function (Arr) {
+                        var _input;
+                                function _onInputEvent(e) {
+                                _input = e.target;
+                                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                                        Arr.forEach.call(tables, function (table) {
+                                        Arr.forEach.call(table.tBodies, function (tbody) {
+                                        Arr.forEach.call(tbody.rows, _filter);
+                                        });
+                                        }); }
 
-                var _input;
+                        function _filter(row) {
+                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                                row.style.display = text.indexOf(val) === - 1 ? 'none' : 'table-row';
+                        }
 
-                function _onInputEvent(e) {
-                    _input = e.target;
-                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                    Arr.forEach.call(tables, function (table) {
-                        Arr.forEach.call(table.tBodies, function (tbody) {
-                            Arr.forEach.call(tbody.rows, _filter);
-                        });
-                    });
-                }
-
-                function _filter(row) {
-                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                }
-
-                return {
-                    init: function () {
+                        return {
+                        init: function () {
                         var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function (input) {
-                            input.oninput = _onInputEvent;
+                                Arr.forEach.call(inputs, function (input) {
+                                input.oninput = _onInputEvent;
+                                });
+                        }
+                        };
+                        })(Array.prototype);
+                        document.addEventListener('readystatechange', function () {
+                        if (document.readyState === 'complete') {
+                        LightTableFilter.init();
+                        }
                         });
-                    }
-                };
-            })(Array.prototype);
-
-            document.addEventListener('readystatechange', function () {
-                if (document.readyState === 'complete') {
-                    LightTableFilter.init();
-                }
-            });
-
-        })(document);
-    </script>
+                })(document);</script>
     <script>
-        //    var acc = document.getElementsByClassName("accordion");
-        //    var i;
-        //
-        //    for (i = 0; i < acc.length; i++) {
-        //        acc[i].onclick = function () {
-        //            this.classList.toggle("active");
-        //            this.nextElementSibling.classList.toggle("show");
-        //        }
-        //    }
+                //    var acc = document.getElementsByClassName("accordion");
+                        //    var i;
+                                //
+                                        //    for (i = 0; i < acc.length; i++) {
+                                                //        acc[i].onclick = function () {
+                                                        //            this.classList.toggle("active");
+                                                                //        this.nextElementSibling.classList.toggle("show");
+                                                                        //        }
+                                                                                //    }
     </script>
     <script type="text/javascript">
-        function displaymsg() {
-            var msg = '<%=session.getAttribute("isSuccess")%>';
-            if (msg != "null") {
-                //                function alertName(msg) {
-                alert(msg);
-                //                }
-            }
+                                                                                        function displaymsg() {
+                                                                                        var msg = '<%=session.getAttribute("isSuccess")%>';
+                                                                                                if (msg != "null") {
+                                                                                        //                function alertName(msg) {
+                                                                                        alert(msg);
+                                                                                                //            }
+                                                                                        }
         <%session.setAttribute("isSuccess", "null");%>
-        }
+                                                                                        }
     </script> 
     <!--<script type="text/javascript"> window.onload = alertName;</script>-->
     <script type="text/JavaScript">
@@ -1135,49 +948,151 @@
         //    window.onload = timedRefresh(300000);
     </script>
     <script>
-        function start() {
-            timedRefresh(300000);
-            displaymsg();
+                                                                                function start() {
+                                                                                timedRefresh(300000);
+                                                                                        displaymsg();
+                                                                                }
+                                                                                window.onload = start;</script>
+    <script>
+                                                                                        $("#accordion > li > span").click(function () {
+                                                                                $(this).toggleClass("active").next('div').slideToggle(250)
+                                                                                        .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
+                                                                                });</script>
+    <script>
+                                                                                        //    $(document).ready(function () {
+                                                                                        //        $(".tabpager").tabpager({
+                                                                                        ////  maximum visible items
+                                                                                        //            items: 5,
+                                                                                        //// CSS class for tabbed content
+                                                                                        //            contents: 'contents',
+                                                                                        //// transition speed
+                                                                                        //            time: 300,
+                                                                                        //// text for previous button
+                                                                                        //            previous: '&laquo;Prev',
+                                                                                        //// text for next button
+                                                                                        //            next: 'Next&raquo;',
+                                                                                        //// initial tab
+                                                                                        //            start: 1,
+                                                                                        //// top or bottom
+                                                                                        //            position: 'bottom',
+                                                                                        //// scrollable
+                                                                                        //            scroll: true
+                                                                                        //        });
+                                                                                        //    });
+
+    </script>
+    <script>
+                                                                                        $(document).ready(function () {
+                                                                                $('#example').DataTable();
+                                                                                        $('#example2').DataTable();
+                                                                                        $('#example3').DataTable();
+                                                                                        $('#example4').DataTable();
+                                                                                        $('#example5').DataTable();
+                                                                                });</script>
+    <script>
+        function subscribe(requestID, wsID, userID, custName, chatToken, log) {
+//                event.preventDefault();
+            $("#" + log).html("");
+//                $(this).parent().siblings().children().removeClass("active").remove;
+//                $(this).addClass("active").removeClass("unread");
+//                var uid = this.id;
+//                var arr = uid.split("-");
+//                var topicId = arr[0];
+//                var userId = arr[1];
+//                var userName = arr[2];
+//                var shopID = arr[3];
+//                $("#chatHead li h3").html(userName);
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/chat/retrive_chat_history',
+                crossDomain: true,
+                data: {
+                    "type_of_message": "2",
+                    "no_of_message_display": "20",
+                    "driver_id": userID,
+                    "token": "<%=token%>",
+                    "staff_id": "<%=staffID%>",
+                    "service_id": requestID
+                },
+                dataType: 'json',
+                success: function (data) {
+//                        $.each(data.items, function(i,item)){
+//                            console.log(i + ": " + item);
+//                        }
+                    console.log(data);
+                    if (data.is_success == true) {
+                        var msg = data.payload.chat_message;
+                        for (i = msg.length - 1; i >= 0; i--) {
+                            console.log(msg[i].message);
+                            if (msg[i].type == "0") {
+                                var time = msg[i].modified.substring(0, msg[i].modified.lastIndexOf(":"));
+                                $("#" + log).html($("#" + log).html() + '<li class="message sent" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
+                            } else {
+                                $("#" + log).html($("#" + log).html() + '<li class="message receive" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + custName + '</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
+                            }
+                        }
+                        if (msg.length > 0 && msg[0].topic_id != 0) {
+                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
+                        } else {
+                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
+                        }
+                    }
+                    subscribeChat(requestID, wsID, custName, chatToken, log);
+                },
+                error: function () {
+                    alert("fail");
+                }
+            });
         }
-        window.onload = start;
+//            if (sender != "Web") {
+//                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//            } else {
+//                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//
+//            }
     </script>
     <script>
-        $("#accordion > li > span").click(function () {
-            $(this).toggleClass("active").next('div').slideToggle(250)
-                    .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
+        $(function () {
+            $(".msgInput").keypress(function (e) {
+                if (e.which == 13) {
+                    prepareMsg();
+                    e.preventDefault();
+                }
+            });
         });
 
     </script>
     <script>
-        //    $(document).ready(function () {
-        //        $(".tabpager").tabpager({
-        ////  maximum visible items
-        //            items: 5,
-        //// CSS class for tabbed content
-        //            contents: 'contents',
-        //// transition speed
-        //            time: 300,
-        //// text for previous button
-        //            previous: '&laquo;Prev',
-        //// text for next button
-        //            next: 'Next&raquo;',
-        //// initial tab
-        //            start: 1,
-        //// top or bottom
-        //            position: 'bottom',
-        //// scrollable
-        //            scroll: true
-        //        });
-        //    });
-
+//        $(".sendMsg").click(function () {
+//            prepareMsg();
+//        });
     </script>
     <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-            $('#example2').DataTable();
-            $('#example3').DataTable();
-            $('#example4').DataTable();
-            $('#example5').DataTable();
-        });
+        function prepareMsg() {
+            var ele = $(".md-show").find(".sendMsg");
+            var msgDetails = ele[0].id;
+//            var elem = ele.prevObject[0].context;
+//            var msgDetails = ele[0].id;
+            var detailsArr = msgDetails.split("-");
+            var serviceId = detailsArr[0];
+            var wsName = detailsArr[1];
+            var wsId = detailsArr[2];
+            var staffId = detailsArr[3];
+            var token = detailsArr[4];
+            var firstMsg = true;
+            var topicID = 0;
+            var chatTopic = $(".md-show").find(".chatTopic");
+            topicID = chatTopic[0].id;
+            console.log(topicID);
+            var chat = $(".md-show").find(".chat-list > li");
+            var msg = $(".md-show").find(".msgInput");
+            var msgInput = msg[0].id;
+            if (chat.length > 0) {
+                firstMsg = false;
+//                var topic = chat[0];
+//                topicID = topic.id;
+            }
+            sendMsg(serviceId, wsName, wsId, staffId, token, topicID, firstMsg, msgInput);
+        }
     </script>
 </html>

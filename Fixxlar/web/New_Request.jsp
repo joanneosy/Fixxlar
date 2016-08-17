@@ -20,6 +20,8 @@
 <%@page import="dao.WebUserDAO"%>
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.WebUser"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="ProtectWorkshop.jsp"%>
 <!DOCTYPE html>
@@ -29,7 +31,8 @@
         <meta charset="UTF-8" />
         <title>Request</title>
         <jsp:include page="include/head.jsp"/>
-        <style>
+    </head>
+    <style>
         #accordion {
             list-style: none;
             padding: 2px;
@@ -80,9 +83,10 @@
             content: "\2796"; /* Unicode character for "minus" sign (-) */
         }
 
+
+
     </style>
-    </head>
-    
+
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
         <%            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
@@ -96,7 +100,10 @@
 //            int finalAcceptSize = statusSize.get(2);
 //            int newService = statusSize.get(2);
 //            int completedService = statusSize.get(3);
-
+            int shopID = user.getShopId();
+            String token = user.getToken();
+            int staffID = user.getStaffId();
+            String chatToken = user.getChatToken();
 
         %>
 
@@ -109,8 +116,10 @@
             <!-- Make page fluid -->
             <div class="row">
                 <!-- Top and leftbar -->
-                <%--<jsp:include file="include/topbar.jsp"/>--%>
                 <%@include file="include/topbar.jsp"%>
+                <%--<jsp:include page="include/topbar.jsp"/>--%>
+
+
                 <!-- Top and leftbar end -->
 
                 <!-- Page content -->
@@ -127,16 +136,186 @@
                     <div class="main">
                         <!-- row -->
                         <div class="row">
+
                             <!-- col 12 -->
                             <div class="col-md-12">
 
                                 <section class="tile transparent">
-                                    <!-- ***tile header removed*** -->
-                                    
+                                    <%--
+                                    <!-- tile header -->
+                                    <div class="tile-header transparent">
+                                        <h1><strong>Today</strong> at a glance</h1>
+                                        <div class="controls">
+                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+                                            <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- /tile header -->
+                                    --%>
                                     <!-- tile body -->
                                     <div class="tile-body color transparent-black rounded-corners">
+
                                         <!-- cards -->
-                                        <%@include file="include/flipcard.jsp"%>                                     
+                                        <%@include file="include/flipcard.jsp"%>
+                                        <!--                                        <div class="row cards">
+                                        
+                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
+                                                                                        <div class="card card-redbrown hover">
+                                                                                            <div class="front"> 
+                                        
+                                                                                                <div class="media">        
+                                                                                                                                                                <span class="pull-left">
+                                                                                                                                                                    <i class="fa fa-users media-object"></i>
+                                                                                                                                                                </span>
+                                        
+                                                                                                    <div class="media-body">
+                                                                                                        New Requests
+                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=newSize%>" data-animation-duration="1500">0</h2>
+                                                                                                    </div>
+                                                                                                </div> 
+                                        
+                                                                                            </div>
+                                                                                            <div class="back">
+                                                                                                <a href="New_Request.jsp">
+                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                    <span>More Information</span>
+                                                                                                </a>  
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                        
+                                        
+                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
+                                                                                        <div class="card card-redbrown hover">
+                                                                                            <div class="front">        
+                                        
+                                                                                                <div class="media">                  
+                                                                                                                                                                <span class="pull-left">
+                                                                                                                                                                    <i class="fa fa-shopping-cart media-object"></i>
+                                                                                                                                                                </span>
+                                        
+                                                                                                    <div class="media-body">
+                                                                                                        Send Final Quote
+                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=sendFinalSize%>" data-animation-duration="1500">0</h2>
+                                                                                                    </div>
+                                                                                                </div> 
+                                        
+                                                                                            </div>
+                                                                                            <div class="back">
+                                                                                                <a href="Send_Final_Quote.jsp">
+                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                    <span>More Information</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                        
+                                        
+                                        
+                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
+                                                                                        <div class="card card-redbrown hover">
+                                                                                            <div class="front">        
+                                        
+                                                                                                <div class="media">
+                                                                                                                                                                <span class="pull-left">
+                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
+                                                                                                                                                                </span>
+                                        
+                                                                                                    <div class="media-body">
+                                                                                                        Final Quote Accepted
+                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
+                                                                                                    </div>
+                                                                                                </div>
+                                        
+                                        
+                                        
+                                                                                            </div>
+                                                                                            <div class="back">
+                                                                                                <a href="Final_Quote_Accepted.jsp">
+                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                    <span>More Information</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
+                                                                                        <div class="card card-greensea hover">
+                                                                                            <div class="front">        
+                                        
+                                                                                                <div class="media">
+                                                                                                                                                                <span class="pull-left">
+                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
+                                                                                                                                                                </span>
+                                        
+                                                                                                    <div class="media-body">
+                                                                                                        New Service
+                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=newService%>" data-animation-duration="1500">0</h2>
+                                                                                                    </div>
+                                                                                                </div>
+                                        
+                                        
+                                        
+                                                                                            </div>
+                                                                                            <div class="back">
+                                                                                                <a href="New_Service.jsp">
+                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                    <span>More Information</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
+                                                                                        <div class="card card-greensea hover">
+                                                                                            <div class="front">        
+                                        
+                                                                                                <div class="media">
+                                                                                                                                                                <span class="pull-left">
+                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
+                                                                                                                                                                </span>
+                                        
+                                                                                                    <div class="media-body">
+                                                                                                        Completed Service
+                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=completedService%>" data-animation-duration="1500">0</h2>
+                                                                                                    </div>
+                                                                                                </div>
+                                        
+                                        
+                                        
+                                                                                            </div>
+                                                                                            <div class="back">
+                                                                                                <a href="Completed_Service.jsp">
+                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                    <span>More Information</span>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                        
+                                                                                    <div class="card-container col-lg-2 col-sm-6 col-xs-12">
+                                                                                        <div class="card1 card-slategray hover">
+                                                                                            <div class="front"> 
+                                        
+                                                                                                <div class="media">                   
+                                                                                                                                                                <span class="pull-left">
+                                                                                                                                                                    <i class="fa fa-eye media-object"></i>
+                                                                                                                                                                </span>
+                                        
+                                                                                                    <div class="media-body">
+                                                                                                        Average Rating
+                                                                                                        <h2 class="media-heading animate-number" data-value="4.2" data-animation-duration="1500">0</h2>
+                                                                                                    </div>
+                                                                                                </div> 
+                                                                                            </div>
+                                                                                                                                                <div class="back">
+                                                                                                                                                    <a href="#">
+                                                                                                                                                        <i class="fa fa-bar-chart-o fa-4x"></i>
+                                                                                                                                                        <span>Check Summary</span>
+                                                                                                                                                    </a>
+                                                                                                                                                </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>-->
+                                        <!-- /cards -->
                                     </div>
                                     <!-- /tile body -->
                                 </section>
@@ -146,17 +325,38 @@
                         </div>
                         <!-- /row -->
 
+
+
+
+
+
                         <!-- content main container -->
                         <div class="main">
+
+
+
+
                             <!-- row -->
                             <div class="row">
+
                                 <!-- col 12 -->
                                 <div class="col-md-12">
                                     <!-- tile -->
                                     <section class="tile color transparent-white">
+
+
+
                                         <!-- tile header -->
                                         <div class="tile-header">
                                             <h1><strong>View Request</strong></h1>
+                                            <!--                                        <div class="search">
+                                                                                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
+                                                                                    </div>-->
+                                            <!--                                            <div class="controls">
+                                                                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+                                                                                            <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+                                                                                            <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                                                                                        </div>-->
                                         </div>
                                         <!-- /tile header -->
 
@@ -226,7 +426,9 @@
                                         <!-- tile body -->
                                         <div class="tile-body no-vpadding" id="pageRefresh">
                                             <div class="tab-content">
-                                                <%                                                
+                                                <%      
+                                                    Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
+                                                    int wsID = ws.getId();
                                                     int i = 1;
                                                     qDAO = new QuotationRequestDAO();
                                                     HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 1, "requested_datetime", "desc");
@@ -279,6 +481,7 @@
                                                                         String custName = cust.getName();
                                                                         String custEmail = cust.getEmail();
                                                                         String custPhone = cust.getHandphone();
+                                                                        int userID = cust.getId();
 
                                                                         Vehicle vehicle = qr.getVehicle();
                                                                         String carPlate = vehicle.getPlateNumber();
@@ -302,423 +505,483 @@
 
                                                                     <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog-img">
-                                                                    <div class="modal-content">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <img class="img-responsive"src="<%//="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div> <!--/.modal-content -->
-                                                                </div> <!--/.modal-dialog -->
-                                                            </div> <!--/.modal -->
+                                                                <!--<div class="modal-dialog-img">-->
+                                                                <div class="modal-content">
+                                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>-->
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <img class="img-responsive"src="<%//="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div> <!--/.modal-content -->
+                                                            </div> <!--/.modal-dialog -->
+                                                    </div> <!--/.modal -->
 
-                                                            <% i++; %>
-                                                            <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Quote</span></button></td>
+                                                    <% i++; %>
+                                                    <!--Quote-->
+                                                    <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>Quote</span></button></td>
 
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
-                                                                                </div>
-                                                                                <div class="col-xs-6 text-right">
-                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <!--                                                                                                                                                        <div class="text-center">
-                                                                                                                                                                                                        <img class="img-thumbnail-small"src="<%//="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                                                                                                                                                        </div>-->
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Service Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                                </div>
+                                                    <!-- Modal -->
+                                                    <div class="md-modal md-effect-13 md-slategray colorize-overlay " id="<% out.print("myModal" + i);%>">
 
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p></p>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-12">
-                                                                                    <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Car Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div>
-                                                                                <div class="text-left border-bottom">
-                                                                                    <ul id="accordion">
-                                                                                        <li><span><b>Quotation Amount</b></span>
-                                                                                            <div class="panel">
-                                                                                                <form action="AddInitialQuotation" method="post">
-                                                                                                    <div>
-                                                                                                        Min Price: $ <input type="number" name="minPrice" required/>
-                                                                                                    </div>
-                                                                                                    <div>
-                                                                                                        Max Price: $ <input type="number" name="maxPrice" required/>
-                                                                                                    </div>
+                                                        <div class="md-content">
+                                                            <!--<div>-->
+                                                            <div class="col-xs-6">
+                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                            </div>
+                                                            <div class="col-xs-6 text-right">
+                                                                <h4 class="modal-title"><%=dateTime%></h4>
+                                                            </div>
+                                                            <!--</div>-->
+                                                            <!--<div>-->
+                                                            <div class='col-xs-12'>
 
-                                                                                                    <input type="hidden" name="id" value="<%=id%>">
-                                                                                                    <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                                </form>
-                                                                                            </div>
-                                                                                        </li>
-                                                                                        <li><span><b>Diagnostic Price</b></span>
-                                                                                            <div class="panel">
-                                                                                                <form action = "AddDiagnosticPrice" method= "post">
-                                                                                                    <div>Price: <input type="number" name="price" required/></div>
-                                                                                                    <input type="hidden" name="id" value="<%=id%>">
-                                                                                                    <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
-                                                                                                </form>
-                                                                                            </div>
-                                                                                        </li>
-                                                                                    </ul>
+                                                                <div class="col-xs-12">
+                                                                    <h3>Service Details</h3>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                    </div>      
+                                                                </div>
+                                                                <!--</div>-->
+                                                                <div>
+                                                                    <div class="col-xs-12">
+                                                                        <h3>Car Details</h3>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
+                                                                    </div>
+                                                                    <p></p>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                    </div> 
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <ul id="accordion">
+                                                                        <li><span><b>Quotation Amount</b></span>
+                                                                            <div class="panel">
+                                                                                <form action="AddInitialQuotation" method="post">
+                                                                                    <div class="col-xs-12">
+                                                                                        Min Price: $ <input type="number" name="minPrice" required/>
+                                                                                    </div>
+                                                                                    <div class="col-xs-12">
+                                                                                        Max Price: $ <input type="number" name="maxPrice" required/>
+                                                                                    </div>
 
-                                                                                </div>
+                                                                                    <input type="hidden" name="id" value="<%=id%>">
+                                                                                    <button type="submit" class="btn btn-primary">Submit Quote</button>
+                                                                                </form>
                                                                             </div>
-                                                                            <!--                                                                        <form name="quote" action="quote">
-                                                                                                                                                        Quotation Amount: <input type="text"/>
-                                                                                                                                                        <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                                                                                    </form>-->
-                                                                            <div>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
+                                                                        </li>
+                                                                        <li><span><b>Diagnostic Price</b></span>
+                                                                            <div class="panel">
+                                                                                <form action = "AddDiagnosticPrice" method= "post">
+                                                                                    <div class="col-xs-12">Price: <input type="number" name="price" required/></div>
+                                                                                    <input type="hidden" name="id" value="<%=id%>">
+                                                                                    <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
+                                                                                </form>
                                                                             </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                                        </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class='col-xs-6'></div>
+                                                            <!--                                                            <div class="col-xs-6">
+                                                                                                                                                                                            <button type="button" class="btn btn-default">Chat</button>
+                                                            
+                                                                                                                            <section class="tile transparent">
+                                                            
+                                                            
+                                                                                                                                 tile header 
+                                                                                                                                <div class="tile-header color bg-transparent-black-5 rounded-corners">
+                                                                                                                                                                                                        <ul class="chat-nav side-nav inline" id="chatHead">
+                                                                                                                                                                                                        <li><h5><strong><%=custName%></strong></h5></li>
+                                                                                                                                                                                                        </ul>
+                                                                                                                                    <h5>Chat</h5>
+                                                                                                                                </div>
+                                                                                                                                 /tile header 
+                                                            
+                                                            
+                                                                                                                                 tile body 
+                                                                                                                                <div class="tile-body transparent nopadding">
+                                                            
+                                                                                                                                    <div class="chat-content" id="chat-content">
+                                                            
+                                                                                                                                        <ul class="chat-list" id="log<%=i%>"></ul> Chat Message Enters Here
+                                                            
+                                                            
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                 /tile body 
+                                                            
+                                                            
+                                                            
+                                                            
+                                                                                                                                 tile footer 
+                                                                                                                                <div class="tile-footer transparent nopadding">
+                                                            
+                                                                                                                                    <div class="chat-reply" id="chat-reply">
+                                                                                                                                        <textarea placeholder="Post a reply..." class="form-control"></textarea>
+                                                                                                                                        <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
+                                                                                                                                        <div class="btn-group btn-group-sm">
+                                                                                                                                            <button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>
+                                                                                                                                            <button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>
+                                                                                                                                            <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
+                                                                                                                                                                                            <div class="checkbox check-transparent pull-right">
+                                                                                                                                                                                                <input type="checkbox" value="1" id="send-by-enter">
+                                                                                                                                                                                                <label for="send-by-enter">Press Enter to send</label>
+                                                                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                            
+                                                                                                                                </div>
+                                                                                                                                 /tile footer 
+                                                            
+                                                            
+                                                                                                                            </section>
+                                                                                                                        </div>-->
+                                                            <div class="col-xs-12">
+                                                                <button class="md-close btn btn-default">Close</button>
+                                                            </div>
+
+                                                        </div> <!--/.modal-content -->
+                                                    </div> <!--/.modal -->
+                                                    </tr>
+
+                                                    <%
+                                                            i++;
+                                                        }
+                                                    %>
+
+                                                    <div class="md-overlay"></div>
+                                                    </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div><!--New-->
+
+
+
+                                            <div class="tab-pane fade " id="Waiting_for_Response" >
+                                                <div class="table-responsive">
+                                                    <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">    
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="sortable">ID</th>
+                                                                <th class="sortable">DateTime</th>
+                                                                <th class="sortable">Name</th>
+                                                                <th class="sortable">No. Plate</th>
+                                                                <th class="sortable">Car Model</th>
+                                                                <th class="sortable">Services</th>
+                                                                <!--<th>Attachment</th>-->
+                                                                <th>Details</th>
                                                             </tr>
-
+                                                        </thead>
+                                                        <tbody>
+                                                            <!--Loop per new request-->
                                                             <%
-                                                                    i++;
-                                                                }
+                                                                qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 2, "requested_datetime", "desc");
+                                                                it = qList.entrySet().iterator();
+                                                                while (it.hasNext()) {
+                                                                    Map.Entry pair = (Map.Entry) it.next();
+                                                                    QuotationRequest qr = (QuotationRequest) pair.getValue();
+                                                                    int id = qr.getId();
+                                                                    Timestamp timeStamp = qr.getRequestedDate();
+                                                                    String dateTime = "01-01-1990 00:00:00";
+                                                                    if (timeStamp != null) {
+                                                                        dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                                    }
+                                                                    String serviceName = qr.getName();
+
+                                                                    String address = qr.getAddress();
+                                                                    String serviceAmenities = qr.getAmenities();
+                                                                    String serviceDescription = qr.getDescription();
+                                                                    String serviceDetails = qr.getDetails();
+                                                                    int serviceId = qr.getId();
+                                                                    String serviceMileage = qr.getMileage();
+                                                                    String carPhoto = qr.getPhotos();
+                                                                    int serviceStatus = qr.getOffer().getStatus();
+                                                                    String serviceUrgency = qr.getUrgency();
+
+                                                                    Customer cust = qr.getCustomer();
+                                                                    String custName = cust.getName();
+                                                                    String custEmail = cust.getEmail();
+                                                                    String custPhone = cust.getHandphone();
+                                                                    int userID = cust.getId();
+
+                                                                    Vehicle vehicle = qr.getVehicle();
+                                                                    String carPlate = vehicle.getPlateNumber();
+                                                                    String carModel = vehicle.getModel();
+                                                                    String carMake = vehicle.getMake();
+                                                                    int carYear = vehicle.getYear();
+                                                                    String carColor = vehicle.getColour();
+                                                                    String carControl = vehicle.getControl();
+
+                                                                    Offer offer = qr.getOffer();
+                                                                    double minPrice = offer.getInitialMinPrice();
+                                                                    String min = minPrice + "0";
+                                                                    double maxPrice = offer.getInitialMaxPrice();
+                                                                    String max = maxPrice + "0";
+                                                                    int offerId = offer.getId();
+                                                                    double diagnosticPrice = offer.getDiagnosticPrice();
+                                                                    String diagnostic = diagnosticPrice + "0";
+
                                                             %>
+                                                            <tr>
+                                                                <td><% out.print(serviceId);%></td>
+                                                                <td><% out.print(dateTime);%></td>
+                                                                <td><% out.print(custName);%></td>
+                                                                <td><% out.print(carPlate);%></td>
+                                                                <td><% out.print(carModel);%></td>
+                                                                <td><% out.print(serviceName);%></td>
+                                                                <!--Picture Attachment-->
+                                                                <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
 
-                                                            </tbody>
+                                                                <!-- Modal -->
+                                                        <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog-img">
+                                                                <div class="modal-content">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                    </div>
+                                                                </div> <!--/.modal-content--> 
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
+                                                        <% i++; %>
+                                                        <!--Quote-->
+                                                        <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>
 
-                                                        </table>
-                                                    </div>
-                                                </div><!--New-->
 
+                                                        <!-- Modal -->
+                                                        <div class="md-modal md-effect-13 md-slategray colorize-overlay md-chat" id="<% out.print("myModal" + i);%>">
 
+                                                            <div class="md-content">
+                                                                <!--<div>-->
+                                                                <div class="col-xs-6">
+                                                                    <h4 class="modal-title">Waiting For Response - <% out.print(custName);%></h4>
+                                                                </div>
+                                                                <div class="col-xs-6 text-right">
+                                                                    <h4 class="modal-title"><%=dateTime%></h4>
+                                                                </div>
+                                                                <!--</div>-->
+                                                                <!--<div>-->
+                                                                <div class='col-xs-6'>
 
-                                                <div class="tab-pane fade " id="Waiting_for_Response" >
-                                                    <div class="table-responsive">
-                                                        <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">    
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="sortable">ID</th>
-                                                                    <th class="sortable">DateTime</th>
-                                                                    <th class="sortable">Name</th>
-                                                                    <th class="sortable">No. Plate</th>
-                                                                    <th class="sortable">Car Model</th>
-                                                                    <th class="sortable">Services</th>
-                                                                    <!--<th>Attachment</th>-->
-                                                                    <th>Details</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <!--Loop per new request-->
-                                                                <%
-                                                                    qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 2, "requested_datetime", "desc");
-                                                                    it = qList.entrySet().iterator();
-                                                                    while (it.hasNext()) {
-                                                                        Map.Entry pair = (Map.Entry) it.next();
-                                                                        QuotationRequest qr = (QuotationRequest) pair.getValue();
-                                                                        int id = qr.getId();
-                                                                        Timestamp timeStamp = qr.getRequestedDate();
-                                                                        String dateTime = "01-01-1990 00:00:00";
-                                                                        if (timeStamp != null) {
-                                                                            dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
-                                                                        }
-                                                                        String serviceName = qr.getName();
-
-                                                                        String address = qr.getAddress();
-                                                                        String serviceAmenities = qr.getAmenities();
-                                                                        String serviceDescription = qr.getDescription();
-                                                                        String serviceDetails = qr.getDetails();
-                                                                        int serviceId = qr.getId();
-                                                                        String serviceMileage = qr.getMileage();
-                                                                        String carPhoto = qr.getPhotos();
-                                                                        int serviceStatus = qr.getOffer().getStatus();
-                                                                        String serviceUrgency = qr.getUrgency();
-
-                                                                        Customer cust = qr.getCustomer();
-                                                                        String custName = cust.getName();
-                                                                        String custEmail = cust.getEmail();
-                                                                        String custPhone = cust.getHandphone();
-
-                                                                        Vehicle vehicle = qr.getVehicle();
-                                                                        String carPlate = vehicle.getPlateNumber();
-                                                                        String carModel = vehicle.getModel();
-                                                                        String carMake = vehicle.getMake();
-                                                                        int carYear = vehicle.getYear();
-                                                                        String carColor = vehicle.getColour();
-                                                                        String carControl = vehicle.getControl();
-
-                                                                        Offer offer = qr.getOffer();
-                                                                        double min = offer.getInitialMinPrice();
-                                                                        double max = offer.getInitialMaxPrice();
-                                                                        int offerId = offer.getId();
-                                                                        double diagnostic = offer.getDiagnosticPrice();
-
-                                                                %>
-                                                                <tr>
-                                                                    <td><% out.print(serviceId);%></td>
-                                                                    <td><% out.print(dateTime);%></td>
-                                                                    <td><% out.print(custName);%></td>
-                                                                    <td><% out.print(carPlate);%></td>
-                                                                    <td><% out.print(carModel);%></td>
-                                                                    <td><% out.print(serviceName);%></td>
-                                                                    <!--Picture Attachment-->
-                                                                    <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
-
-                                                                    <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog-img">
-                                                                    <div class="modal-content">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
+                                                                    <div class="col-xs-12">
+                                                                        <h3>Service Details</h3>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                        </div>      
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                    <div>
+                                                                        <div class="col-xs-12">
+                                                                            <h3>Car Details</h3>
                                                                         </div>
-                                                                    </div> <!--/.modal-content--> 
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-                                                            <% i++; %>
-                                                            <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                        </div>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
+                                                                        </div>
+                                                                        <p></p>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                        </div>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                        </div> 
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
+                                                                        </div>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <%
+                                                                            if (diagnosticPrice > 0) {
+                                                                        %>
+                                                                        <div class="text-left">Diagnostic Amount: $<%=diagnostic%></div>
+                                                                        <%
+                                                                        } else {
+                                                                        %>
+                                                                        <div class="text-left">Quoted Amount: $<%=min%> - $<%=max%></div>
+                                                                        <%
+                                                                            }
+                                                                        %>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <section class="tile transparent">
+                                                                        <!-- tile header -->
+                                                                        <div class="tile-header color bg-transparent-black-5 rounded-corners">
+                                                                            <h5>Chat</h5>
+                                                                            <div class="hidden ct" id=""></div>
+                                                                        </div>
+                                                                        <!-- /tile header -->
+                                                                        <!-- tile body -->
+                                                                        <div class="tile-body transparent nopadding">
 
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">Waiting For Response - <% out.print(custName);%></h4>
-                                                                                </div>
-                                                                                <div class="col-xs-6 text-right">
-                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <!--                                                                            <div class="text-center">
-                                                                                                                                                            <img class="img-thumbnail-small"src="<%//="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                                                                                                        </div>-->
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Service Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                                </div>
+                                                                            <div class="chat-content" id="chat-content">
 
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p></p>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-12">
-                                                                                    <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Car Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                                </div>
+                                                                                <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
+
+
                                                                             </div>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <%
-                                                                                if (diagnostic > 0) {
-                                                                            %>
-                                                                            <div class="text-left">Diagnostic Amount: $<%=diagnostic%></div>
-                                                                            <%
-                                                                            } else {
-                                                                            %>
-                                                                            <div class="text-left">Quoted Amount: $<%=min%> - $<%=max%></div>
-                                                                            <%
-                                                                                }
-                                                                            %>
-                                                                            <div>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
+                                                                        <!-- /tile body -->
+
+
+
+
+                                                                        <!-- tile footer -->
+                                                                        <div class="tile-footer transparent nopadding">
+
+                                                                            <div class="chat-reply" id="chat-reply">
+                                                                                <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
+                                                                                <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
+                                                                                <div class="btn-group btn-group-sm">
+                                                                                    <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
+                                                                                    <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
+                                                                                    <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
+                                                                                    <!--                                                <div class="checkbox check-transparent pull-right">
+                                                                                                                                        <input type="checkbox" value="1" id="send-by-enter">
+                                                                                                                                        <label for="send-by-enter">Press Enter to send</label>
+                                                                                                                                    </div>-->
+                                                                                </div>
                                                                             </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+
                                                                         </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-                                                            </tr>
-
-                                                            <%
-                                                                    i++;
-                                                                }
-                                                            %>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                </div><!--Waiting_for_Response-->
+                                                                        <!-- /tile footer -->
 
 
+                                                                    </section>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <button class="md-close btn btn-default">Close</button>
+                                                                </div>
+                                                            </div> <!--/.modal-content -->
+                                                        </div> <!--/.modal -->
+                                                        </tr>
 
-                                            </div>
-                                            <!--tab-content-->
+                                                        <%
+                                                                i++;
+                                                            }
+                                                        %>
+                                                        <div class="md-overlay1"></div>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div><!--Waiting_for_Response-->
+
 
 
                                         </div>
-                                        <!-- /tile body -->
-
-
-                                        <!-- tile footer -->
-                                        <div class="tile-footer bg-transparent-white-2 rounded-bottom-corners">
-                                            <div class="row">  
-
-                                                <div class="col-sm-4">
-                                                    <!--                                                <div class="input-group table-options">
-                                                                                                        <select class="chosen-select form-control">
-                                                                                                            <option>Bulk Action</option>
-                                                                                                            <option>Delete Selected</option>
-                                                                                                            <option>Copy Selected</option>
-                                                                                                            <option>Archive Selected</option>
-                                                                                                        </select>
-                                                                                                        <span class="input-group-btn">
-                                                                                                            <button class="btn btn-default" type="button">Apply</button>
-                                                                                                        </span>
-                                                                                                    </div>-->
-                                                </div>
-
-                                                <div class="col-sm-4 text-center">
-                                                    <!--                                    <small class="inline table-options paging-info">showing 1-3 of 24 items</small>-->
-                                                </div>
-
-                                                <div class="col-sm-4 text-right sm-center" id="paginationTab" style="display:none">
-                                                    <ul class="pagination pagination-xs nomargin pagination-custom">
-                                                        <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                                        <li class="active"><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                        <li><a href="#">5</a></li>
-                                                        <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- /tile footer -->
-
-
-
-
-                                    </section>
-                                    <!-- /tile -->
-
-
-
-
+                                        <!--tab-content-->
 
 
                                 </div>
-                                <!-- /col 12 -->
+                                <!-- /tile body -->
+
+
+                                <!-- tile footer -->
+                                <div class="tile-footer bg-transparent-white-2 rounded-bottom-corners">
+                                    <div class="row">  
+
+                                        <div class="col-sm-4">
+                                            <!--                                                <div class="input-group table-options">
+                                                                                                <select class="chosen-select form-control">
+                                                                                                    <option>Bulk Action</option>
+                                                                                                    <option>Delete Selected</option>
+                                                                                                    <option>Copy Selected</option>
+                                                                                                    <option>Archive Selected</option>
+                                                                                                </select>
+                                                                                                <span class="input-group-btn">
+                                                                                                    <button class="btn btn-default" type="button">Apply</button>
+                                                                                                </span>
+                                                                                            </div>-->
+                                        </div>
+
+                                        <div class="col-sm-4 text-center">
+                                            <!--                                    <small class="inline table-options paging-info">showing 1-3 of 24 items</small>-->
+                                        </div>
+
+                                        <div class="col-sm-4 text-right sm-center" id="paginationTab" style="display:none">
+                                            <ul class="pagination pagination-xs nomargin pagination-custom">
+                                                <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- /tile footer -->
+
+
+
+
+                                </section>
+                                <!-- /tile -->
+
+
+
 
 
 
                             </div>
-                            <!-- /row -->
-
-
-
+                            <!-- /col 12 -->
 
 
 
                         </div>
-                        <!-- /content container -->
+                        <!-- /row -->
 
 
 
@@ -726,14 +989,7 @@
 
 
                     </div>
-                    <!-- Page content end -->
-
-
-
-
-                    <!-- Right slider bar -->
-                    <%--<jsp:include page="include/rightbar.jsp"/>--%>
-                    <!-- Right slider bar -->
+                    <!-- /content container -->
 
 
 
@@ -741,17 +997,32 @@
 
 
                 </div>
-                <!-- Make page fluid-->
+                <!-- Page content end -->
+
+
+
+
+                <!-- Right slider bar -->
+                <%--<jsp:include page="include/rightbar.jsp"/>--%>
+                <!-- Right slider bar -->
+
+
 
 
 
 
             </div>
-            <!-- Wrap all page content end -->
+            <!-- Make page fluid-->
 
 
 
-            <section class="videocontent" id="video"></section>
+
+        </div>
+        <!-- Wrap all page content end -->
+
+
+
+        <section class="videocontent" id="video"></section>
 
     </body>
 
@@ -778,97 +1049,106 @@
     <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+    <script type="text/javascript" src="js/classie.js"></script> 
+    <script type="text/javascript" src="js/modalEffects.js"></script> 
+    <script data-require="realtime-framework@2.1.0" data-semver="2.1.0" src="//messaging-public.realtime.co/js/2.1.0/ortc.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script> 
+
+
+    <!--<script type="text/javascript" src="js/modalEffects.js"></script>--> 
+    <!--    <script type="text/javascript" src="js/cssParser.js"></script> 
+        <script type="text/javascript" src="js/css-filters-polyfill.js"></script> -->
 
 
 
     <script>
-        $(function () {
-            // Initialize card flip
-            $('.card.hover').hover(function () {
-                $(this).addClass('flip');
-            }, function () {
-                $(this).removeClass('flip');
-            });
+                                                                                        $(function () {
+                                                                                            // Initialize card flip
+                                                                                            $('.card.hover').hover(function () {
+                                                                                                $(this).addClass('flip');
+                                                                                            }, function () {
+                                                                                                $(this).removeClass('flip');
+                                                                                            });
 
-            //         sortable table
-            $('.table.table-sortable th.sortable').click(function () {
-                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                $(this).addClass(o);
-            });
+                                                                                            //         sortable table
+                                                                                            $('.table.table-sortable th.sortable').click(function () {
+                                                                                                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                                                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                                                $(this).addClass(o);
+                                                                                            });
 
-            //todo's
-            $('#todolist li label').click(function () {
-                $(this).toggleClass('done');
-            });
+                                                                                            //todo's
+                                                                                            $('#todolist li label').click(function () {
+                                                                                                $(this).toggleClass('done');
+                                                                                            });
 
 
-        });
+                                                                                        });
 
-        $(function () {
+                                                                                        $(function () {
 
-            var contentHeight = $('#content').height();
-            var chatInboxHeight = contentHeight - 178;
-            var chatContentHeight = contentHeight - 178 - 200;
+                                                                                            var contentHeight = $('#content').height();
+                                                                                            var chatInboxHeight = contentHeight - 178;
+                                                                                            var chatContentHeight = contentHeight - 178 - 200;
 
-            var setChatHeight = function () {
-                $('#chat-inbox').css('height', chatInboxHeight);
-                $('#chat-content').css('height', chatContentHeight);
-            };
+                                                                                            var setChatHeight = function () {
+                                                                                                $('#chat-inbox').css('height', chatInboxHeight);
+                                                                                                $('#chat-content').css('height', chatContentHeight);
+                                                                                            };
 
-            setChatHeight();
+                                                                                            setChatHeight();
 
-            $(window).resize(function () {
-                contentHeight = $('#content').height();
-                chatInboxHeight = contentHeight - 178;
-                chatContentHeight = contentHeight - 178 - 200;
+                                                                                            $(window).resize(function () {
+                                                                                                contentHeight = $('#content').height();
+                                                                                                chatInboxHeight = contentHeight - 178;
+                                                                                                chatContentHeight = contentHeight - 178 - 200;
 
-                setChatHeight();
-            });
+                                                                                                setChatHeight();
+                                                                                            });
 
-            $("#chat-inbox").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
+                                                                                            $("#chat-inbox").niceScroll({
+                                                                                                cursorcolor: '#000000',
+                                                                                                zindex: 999999,
+                                                                                                bouncescroll: true,
+                                                                                                cursoropacitymax: 0.4,
+                                                                                                cursorborder: '',
+                                                                                                cursorborderradius: 0,
+                                                                                                cursorwidth: '5px'
+                                                                                            });
 
-            $("#chat-content").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
+                                                                                            $("#chat-content").niceScroll({
+                                                                                                cursorcolor: '#000000',
+                                                                                                zindex: 999999,
+                                                                                                bouncescroll: true,
+                                                                                                cursoropacitymax: 0.4,
+                                                                                                cursorborder: '',
+                                                                                                cursorborderradius: 0,
+                                                                                                cursorwidth: '5px'
+                                                                                            });
 
-            $('#chat-inbox .chat-actions > span').tooltip({
-                placement: 'top',
-                trigger: 'hover',
-                html: true,
-                container: 'body'
-            });
+                                                                                            $('#chat-inbox .chat-actions > span').tooltip({
+                                                                                                placement: 'top',
+                                                                                                trigger: 'hover',
+                                                                                                html: true,
+                                                                                                container: 'body'
+                                                                                            });
 
-            $('#initialize-search').click(function () {
-                $('#chat-search').toggleClass('active').focus();
-            });
+                                                                                            $('#initialize-search').click(function () {
+                                                                                                $('#chat-search').toggleClass('active').focus();
+                                                                                            });
 
-            $(document).click(function (e) {
-                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                    $('#chat-search').removeClass('active');
-                }
-            });
+                                                                                            $(document).click(function (e) {
+                                                                                                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                                                                                                    $('#chat-search').removeClass('active');
+                                                                                                }
+                                                                                            });
 
-            $(window).mouseover(function () {
-                $("#chat-inbox").getNiceScroll().resize();
-                $("#chat-content").getNiceScroll().resize();
-            });
+                                                                                            $(window).mouseover(function () {
+                                                                                                $("#chat-inbox").getNiceScroll().resize();
+                                                                                                $("#chat-content").getNiceScroll().resize();
+                                                                                            });
 
-        });
+                                                                                        });
 
 
     </script>
@@ -1088,4 +1368,111 @@
             $('#example5').DataTable();
         });
     </script>
+    <script>
+        function subscribe(requestID, wsID, userID, custName, chatToken, log) {
+//                event.preventDefault();
+            $("#" + log).html("");
+//                $(this).parent().siblings().children().removeClass("active").remove;
+//                $(this).addClass("active").removeClass("unread");
+//                var uid = this.id;
+//                var arr = uid.split("-");
+//                var topicId = arr[0];
+//                var userId = arr[1];
+//                var userName = arr[2];
+//                var shopID = arr[3];
+//                $("#chatHead li h3").html(userName);
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/chat/retrive_chat_history',
+                crossDomain: true,
+                data: {
+                    "type_of_message": "2",
+                    "no_of_message_display": "20",
+                    "driver_id": userID,
+                    "token": "<%=token%>",
+                    "staff_id": "<%=staffID%>",
+                    "service_id": requestID
+                },
+                dataType: 'json',
+                success: function (data) {
+//                        $.each(data.items, function(i,item)){
+//                            console.log(i + ": " + item);
+//                        }
+                    console.log(data);
+                    if (data.is_success == true) {
+                        var msg = data.payload.chat_message;
+                        for (i = msg.length - 1; i >= 0; i--) {
+                            console.log(msg[i].message);
+                            if (msg[i].type == "0") {
+                                var time = msg[i].modified.substring(0, msg[i].modified.lastIndexOf(":"));
+                                $("#" + log).html($("#" + log).html() + '<li class="message sent" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
+                            } else {
+                                $("#" + log).html($("#" + log).html() + '<li class="message receive" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + custName + '</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
+                            }
+                        }
+                        if (msg.length > 0 && msg[0].topic_id != 0) {
+                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
+                        } else {
+                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
+                        }
+                    }
+                    subscribeChat(requestID, wsID, custName, chatToken, log);
+                },
+                error: function () {
+                    alert("fail");
+                }
+            });
+        }
+//            if (sender != "Web") {
+//                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//            } else {
+//                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+//
+//            }
+    </script>
+    <script>
+        $(function () {
+            $(".msgInput").keypress(function (e) {
+                if (e.which == 13) {
+                    prepareMsg();
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+    <script>
+//        $(".sendMsg").click(function () {
+//            prepareMsg();
+//        });
+    </script>
+    <script>
+        function prepareMsg() {
+            var ele = $(".md-show").find(".sendMsg");
+            var msgDetails = ele[0].id;
+//            var elem = ele.prevObject[0].context;
+//            var msgDetails = ele[0].id;
+            var detailsArr = msgDetails.split("-");
+            var serviceId = detailsArr[0];
+            var wsName = detailsArr[1];
+            var wsId = detailsArr[2];
+            var staffId = detailsArr[3];
+            var token = detailsArr[4];
+            var firstMsg = true;
+            var topicID = 0;
+            var chatTopic = $(".md-show").find(".chatTopic");
+            topicID = chatTopic[0].id;
+            console.log(topicID);
+            var chat = $(".md-show").find(".chat-list > li");
+            var msg = $(".md-show").find(".msgInput");
+            var msgInput = msg[0].id;
+            if (chat.length > 0) {
+                firstMsg = false;
+//                var topic = chat[0];
+//                topicID = topic.id;
+            }
+            sendMsg(serviceId, wsName, wsId, staffId, token, topicID, firstMsg, msgInput);
+        }
+    </script>
+
 </html>

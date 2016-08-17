@@ -51,16 +51,14 @@
                                             <h1><strong>Edit</strong> Workshop Profile</h1>
                                         </div>
                                         <%
-                                            WorkshopDAO wsDAO = new WorkshopDAO();
+                                            Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
                                             int wsId = user.getShopId();
                                             int staffId = user.getStaffId();
                                             String token = user.getToken();
-                                            Workshop ws = wsDAO.retrieveWorkshop(wsId, staffId, token);
-                                            String wsName = ws.getName();
                                             String email = ws.getEmail();
                                             String address = ws.getAddress();
-                                            String wsAddress = address.substring(0, address.length() - 6);
-                                            String wsPostal = address.substring(address.length() - 6);
+                                            String wsAddress = address.substring(0, address.lastIndexOf(" "));
+                                            String wsPostal = address.substring(address.lastIndexOf(" ") + 1);
                                             String wsLocation = ws.getLocation();
                                             String wsWebsite = ws.getWebsite();
                                             String wsContact = ws.getContact();
@@ -306,11 +304,6 @@
                                                                     out.println("<option>Others</option>");
                                                                 }
                                                             %>
-                                                            <option>Maintenence</option>
-                                                            <option>Car Grooming</option>
-                                                            <option>Air Conditioning</option>
-                                                            <option>Battery</option>
-                                                            <option>Others</option>
                                                         </select>
 
                                                     </div>
@@ -392,7 +385,7 @@
 
                                                 <%
                                                     }//end of for loop for operating days
-                                                %>
+%>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

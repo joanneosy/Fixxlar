@@ -217,7 +217,12 @@ public class WebUserDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 staffType = attElement.getAsInt();
             }
-            webUser = new WebUser(staffId, email, userType, refStaffId, token, shopId, name, handphone, staffType);
+            String chatToken = "";
+            attElement = user.get("chat_token");
+            if (attElement != null && !attElement.isJsonNull()) {
+                chatToken = attElement.getAsString();
+            }
+            webUser = new WebUser(staffId, email, userType, refStaffId, token, shopId, name, handphone, staffType, chatToken);
         }
         return webUser;
     }

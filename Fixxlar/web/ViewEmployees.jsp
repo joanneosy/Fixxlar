@@ -10,6 +10,8 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="entity.WebUser"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,8 +24,8 @@
     <body class="bg-3">
 
         <%            WebUserDAO webUserDAO = new WebUserDAO();
-            HashMap<Integer, WebUser> webUserMap = new HashMap<>();
-            HashMap<Integer, WebUser> adminUserMap = new HashMap<>();
+            HashMap<Integer, WebUser> webUserMap = new HashMap<Integer, WebUser>();
+            HashMap<Integer, WebUser> adminUserMap = new HashMap<Integer, WebUser>();
             
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             String userType = (String) session.getAttribute("loggedInUserType");
@@ -156,7 +158,7 @@
                                                             int currentStaffType = adminStaff.getStaffType();
                                                 %>
                                                 <tr>
-                                                    <td><%=idToDelete%> <%=currentStaffType%></td>
+                                                    <td><%=idToDelete%></td>
                                                     <td><%=name%></td>
                                                     <td><%=email%></td>
                                                     <td><%=hp%></td>
@@ -170,7 +172,7 @@
                                                         %>
                                                     <td>
                                                         <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
-                                                            <a href="EditEmployee2.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
+                                                            <a href="EditEmployee.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
                                                             <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-xs">Delete</button>
                                                         </form>
                                                     </td>

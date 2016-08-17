@@ -1,5 +1,4 @@
 
-<%@page import="entity.WebUser"%>
 <%-- 
     Document   : AdminSettings
     Created on : 3 Aug, 2016, 12:26:26 PM
@@ -7,16 +6,24 @@
 --%>
 
 
+<%@page import="entity.WebUser"%>
+<%@page import="entity.Workshop"%>
+<%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="include/head.jsp"/>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Add Master Account</title>
+        <jsp:include page="include/head.jsp"/>
+    </head>
     <body class="bg-3">
         <!-- Wrap all page content here -->
         <div id="wrap">
             <%
                 WebUser user = (WebUser) session.getAttribute("loggedInUser");
                 String userType = (String) session.getAttribute("loggedInUserType");
+                int wsId = (Integer) session.getAttribute("workshopId");
             %>
 
             <!-- Make page fluid -->
@@ -91,6 +98,7 @@
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
+                                                        <input type="hidden" name="workshopId" value="<%=wsId%>"/>
                                                         <button type="submit" class="btn btn-primary">Create User</button>
                                                         <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>

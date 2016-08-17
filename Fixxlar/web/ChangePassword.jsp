@@ -6,7 +6,7 @@
 
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectWebUsers.jsp"%>
+<%--<%@include file="ProtectWebUsers.jsp"%>--%>
 
 <!DOCTYPE html>
 <html>
@@ -36,11 +36,12 @@
                         <img src="images/Logo.png" alt class="logo">
                         <h1>Change Password</h1>
 
-                        <%
-                            String errMsg = (String) request.getAttribute("errMsg");
+                        <%                            String errMsg = (String) request.getAttribute("errMsg");
                             if (errMsg != null) {
                                 out.println(errMsg);
                             }
+                            WebUser user = (WebUser) session.getAttribute("loggedInUser");
+                            String userType = (String) session.getAttribute("loggedInUserType");
                         %>
                         <!--<a href = "ForgotPassword.jsp">Forgot Password</a><br/><br/>
                         <form action = "Authenticate.jsp" method= "post">
@@ -66,7 +67,14 @@
                                 </div>
                             </section>
                             <section class="log-in">
-                                <a href="<%=(String)session.getAttribute("loggedInUserType") + ".jsp"%>" class="btn btn-greensea">Home</a>
+
+                                <% if (userType.equals("Admin")) { %>
+                                <a href="Admin_New_Request.jsp" class="btn btn-greensea">Home</a>
+                                </a>
+                                <% } else { %>
+                                <a href="New_Request.jsp" class="btn btn-greensea">Home</a>
+                                </a>
+                                <% }%>
                                 <input type="submit" class="btn btn-greensea" value="Reset Password"/>
                             </section>
                         </form>

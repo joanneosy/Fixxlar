@@ -51,8 +51,8 @@ public class QuotationRequestDAO {
     public HashMap<Integer, Integer> retrieveStatusSize(int staffId, String token, int givenWsId, int givenStatus,
             String givenCarModel, String orderBy, String order) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
         HashMap<Integer, Integer> statusSize = new HashMap<Integer, Integer>();
-        int statusArr[] = {1, 3, 5, 6};
-        for (int i = 0; i < 4; i++) {
+        int statusArr[] = {1, 3, 5, 9, 6};
+        for (int i = 0; i < 5; i++) {
             int sta = statusArr[i];
             String url = "http://119.81.43.85/erp/quotation_request/get_quotation_request_info";
 

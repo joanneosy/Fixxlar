@@ -58,8 +58,7 @@
                     <%@include file="include/topbar.jsp"%>
                     <!-- page header -->
                     <div class="pageheader">
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>All Workshops</h2>
-
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Edit Employee</h2>
                     </div>
                     <!-- /page header -->
 
@@ -84,7 +83,7 @@
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Name</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01" name="name">
+                                                        <input type="text" class="form-control" id="input01" name="name" value="<%=name%>">
                                                     </div>
                                                 </div>
 
@@ -92,14 +91,14 @@
                                                 <div class="form-group">
                                                     <label for="input02" class="col-sm-4 control-label">Email</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="email">
+                                                        <input type="text" class="form-control" id="input02" name="email" value="<%=email%>">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-4 control-label">Handphone</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="handphone">
+                                                        <input type="text" class="form-control" id="input03" name="handphone" value="<%=handphone%>">
                                                     </div>
                                                 </div>
 

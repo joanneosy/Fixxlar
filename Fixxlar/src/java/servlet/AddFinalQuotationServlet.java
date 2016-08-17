@@ -51,7 +51,7 @@ public class AddFinalQuotationServlet extends HttpServlet {
         boolean isSuccess = qrDAO.addFinalQuotation(staffId, token, offerId, price);
         //Error message? success message?
         if (isSuccess) {
-            session.setAttribute("isSuccess", "$" + price + " quoted as the final amount for ID: " + quotationRequestId);
+            session.setAttribute("isSuccess", "$" + price + "0 quoted as the final amount for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp?id=" + quotationRequestId);
 //            view.forward(request, response);
             response.sendRedirect("Send_Final_Quote.jsp");

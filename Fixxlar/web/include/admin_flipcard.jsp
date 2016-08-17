@@ -1,11 +1,17 @@
 <%--<%@page import="java.util.HashMap"%>--%>
 <%
     HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
-    int newSize = statusSize.get(0);
-    int sendFinalSize = statusSize.get(1);
+//    int newSize = statusSize.get(0);
+//    int sendFinalSize = statusSize.get(1);
     int finalAcceptSize = statusSize.get(2);
     int newServiceSize = statusSize.get(2);
     int ongoingServiceSize = statusSize.get(3);
+    
+    HashMap<Integer, QuotationRequest> qzise = qDAO.retrieveQuotationRequestsWithoutOffer(user.getStaffId(), user.getToken());
+    int newSize = qzise.size();
+    HashMap<Integer, QuotationRequest> zsize = qDAO.retrieveCompletedQuotationRequests(user.getStaffId(), user.getToken());
+    int sendFinalSize = zsize.size();
+    
 %>
 <div class="row">
     <div class="col-lg-6 col-sm-18 col-sm-36"><h4>REQUEST</h4></div>
@@ -34,7 +40,7 @@
 
             </div>
             <div class="back">
-                <a href="New_Request.jsp">
+                <a href="Admin_New_Request.jsp">
                     <!--                                        <span class="pull-left">
                                                             </span>-->
                     <!--<i class="fa fa-info-circle"></i>-->
@@ -62,7 +68,7 @@
 
             </div>
             <div class="back">
-                <a href="Send_Final_Quote.jsp">
+                <a href="Admin_Final_Quote_Accepted.jsp">
                     <!--<i class="fa fa-bar-chart-o fa-4x"></i>-->
                     <span>More Information</span>
                 </a>
@@ -118,7 +124,7 @@
 
             </div>
             <div class="back">
-                <a href="ManageValet.jsp">
+                <a href="Admin_New_Valet.jsp">
                     <!--<i class="fa fa-bar-chart-o fa-4x"></i>-->
                     <span>More Information</span>
                 </a>

@@ -6,6 +6,8 @@
 
 <%@page import="entity.WebUser"%>
 <%@page import="dao.WebUserDAO"%>
+<%@page import="dao.WorkshopDAO"%>
+<%@page import="entity.Workshop"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

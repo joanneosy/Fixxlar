@@ -38,12 +38,12 @@
                         <a href="EditProfile.jsp" type="button" class="btn btn-primary margin-bottom-20 col-md-offset-8">Edit Profile</a>
                     </div>
                     <!-- /page header -->
-                    <%                        WorkshopDAO wsDAO = new WorkshopDAO();
+                    <%                  
+                        
                         Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
-                        String wsName = ws.getName();
                         String address = ws.getAddress();
-                        String wsAddress = address.substring(0, address.length() - 6);
-                        String wsPostal = address.substring(address.length() - 6);
+                        String wsAddress = address.substring(0, address.lastIndexOf(" "));
+                        String wsPostal = address.substring(address.lastIndexOf(" ") + 1);
                         String wsLocation = ws.getLocation();
                         String wsWebsite = ws.getWebsite();
                         String wsContact = ws.getContact();
@@ -166,7 +166,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-offset-5">
-                                                <a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>
+                                                <!--<a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>-->
 
                                             </div>
                                         </div>
@@ -216,11 +216,11 @@
                                                                 toAdd = toAddArr[0] + " to " + toAddArr[1] + ": Closed";
                                                             }
                                                         } else //Saturday-Saturday
-                                                         if (toAddArr[0].equals(toAddArr[1])) {
-                                                                toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                            } else {
-                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                            }
+                                                        if (toAddArr[0].equals(toAddArr[1])) {
+                                                            toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                        } else {
+                                                            toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                        }
                                                         compiled.add(toAdd);
                                                         dayToCompare = openCloseTimings[0];
                                                         openToCompare = openCloseTimings[1];
@@ -239,11 +239,11 @@
                                                                 toAdd = toAddArr[0] + " to " + toAddArr[1] + ": Closed";
                                                             }
                                                         } else //Saturday-Saturday
-                                                         if (toAddArr[0].equals(toAddArr[1])) {
-                                                                toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                            } else {
-                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                            }
+                                                        if (toAddArr[0].equals(toAddArr[1])) {
+                                                            toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                        } else {
+                                                            toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
+                                                        }
                                                         compiled.add(toAdd);
                                                     }
                                                 }
@@ -258,7 +258,7 @@
                                                     }
                                                     compiled.add(toAdd);
                                                 }
-                                                
+
                                                 for (String x : compiled) {
                                                     out.println(x + "<br/>");
                                                 }

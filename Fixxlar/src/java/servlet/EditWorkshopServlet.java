@@ -142,6 +142,9 @@ public class EditWorkshopServlet extends HttpServlet {
             if (addErrMsg.size() == 0) {
                 request.setAttribute("successMsg", "Workshop successfully edited!");
                 RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
+                if (userType.equals("Workshop")) {
+                    view = request.getRequestDispatcher("Profile.jsp");
+                }
                 view.forward(request, response);
             } else {
                 request.setAttribute("errMsg", addErrMsg);
